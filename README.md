@@ -5,6 +5,8 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Downloads](https://img.shields.io/pypi/dm/twmarketdata)](https://pypi.org/project/twmarketdata/)
 
+**English** · [繁體中文](README.zh-TW.md) · [简体中文](README.zh-CN.md)
+
 Official Python client for the **[TW Market Data](https://twmarketdata.com)** API —
 TWSE / TPEx prices, financial statements, institutional flows, valuation and factor
 data, and 80+ datasets, returned as pandas DataFrames. **Five sample tickers work
