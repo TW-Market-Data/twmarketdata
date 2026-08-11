@@ -203,12 +203,20 @@ class Meta:
 | mode | 支數 | 行為 |
 |---|---|---|
 | `server` | 16 | 透傳 `as_of` / `as_of_date`,由 server 過濾 |
-| `client` | 53 | server 沒有 as_of,但 `knowledge_time_field` 存在於已發布 schema → 取回後在本地依該欄過濾 |
+| `client` | 45 | server 沒有 as_of,但 `point_in_time_safe=true` 且 `knowledge_time_field` 存在於已發布 schema → 取回後在本地依該欄過濾 |
+| `client_unsafe` | 8 | 有宣告 knowledge 欄位,但 `point_in_time_safe=false` → **預設拒絕**,需明確 `as_of_policy="declared_field"` 才放行 |
 | `client_unverified` | 5 | 宣告了 knowledge 欄位,但該欄位不在已發布 schema → **執行期檢查**:回應列裡真有該欄就照 client 模式過濾,沒有就 `PointInTimeUnavailable` |
 | `unsupported` | 8 | 整表無時間軸,或官方 describe 明講 as_of 不成立 → **直接 raise `PointInTimeUnavailable`** |
 
-- `unsupported`(8):`company_industry_exposures`、`company_peer_groups`、`day_trading_suspension`、`margin_short_cover_date`、`margin_short_total`、`price_enhanced`、`stock_split_par_value_events`、`subsidiary_investment`
+- `client_unsafe`(8):`attention_disposal_events`、`company_news`、`corporate_actions`、`dividends`、`industry_chain`、`macro_worldbank`、`monthly_revenue`、`stock_delisting_lifecycle`
 - `client_unverified`(5):`industry_index`、`market_index`、`mops_major_event`、`security_master`、`valuation_data`
+- `unsupported`(8):`company_industry_exposures`、`company_peer_groups`、`day_trading_suspension`、`margin_short_cover_date`、`margin_short_total`、`price_enhanced`、`stock_split_par_value_events`、`subsidiary_investment`
+
+**`client_unsafe` 是這份設計裡最重要的一格。** 舉例:`monthly_revenue` 宣告的 knowledge 欄位是 `as_of_date`,但 describe 明講「`as_of_date` 為**所屬期別非公告日**,回測請以公告日對齊」。若照一般規則在本地用 `as_of_date <= as_of` 過濾,等於用「營收所屬月份」當知識軸 —— **那正是 as_of 本來要防的未來函數**(六月營收在六月底就被當成已知,實際上要到七月十日前才公告)。同理 `attention_disposal_events` / `corporate_actions` 的 `event_date` 是生效日、`industry_chain` 的 `capture_date` 是我方觀察日、`macro_worldbank` 會被來源回溯修訂。
+
+因此規則是機械化的、不是個案:**`point_in_time_safe=false` 的資料集,一律不准在本地默默做 as_of**。呼叫端要嘛不帶 as_of 自行對齊公告日,要嘛明確 opt-in 並承擔風險。
+
+這 8 支裡有 3 支(`company_news`、`dividends`、`stock_delisting_lifecycle`)的宣告欄位看起來確實是真的揭露時點(`published_at` / `announcement_date`),很可能可以升級成 `client`。但**上游標的是 `point_in_time_safe=false`,在拿測試 key 逐列驗證前不自行升級** —— 保守的那一邊才是誠實的那一邊。
 
 **語義優先於參數清單**:`subsidiary_investment` 的 route **接受** `as_of_date` 參數,但 describe 明講它是「每家公司一筆的季更屬性、fact date 是所屬期別而非揭露日」,`knowledge_time_field` 為 null 且 `point_in_time_safe=false`。接受這個參數會讓呼叫端誤以為真的做了回放 —— 因此 SDK **拒絕**,並在錯誤訊息裡說明原因。這條規則寫在 `tools/build_mapping.py`,不是個案硬編。
 

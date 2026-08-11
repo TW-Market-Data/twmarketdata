@@ -79,6 +79,17 @@ def build_datasets_csv():
                 as_of_note = "no knowledge axis; as_of refused by design"
         elif server_asof:
             as_of_mode = "server"
+        elif ktf and not pit_safe:
+            # A knowledge field is declared, but describe_dataset says the dataset is NOT
+            # point-in-time safe -- i.e. the field you would naturally align on is not a
+            # knowledge axis (it is a period, an effective date, or an observation date).
+            # Filtering locally on it would reintroduce exactly the look-ahead that as_of
+            # exists to prevent, so the SDK refuses by default and requires an explicit
+            # as_of_policy="declared_field" opt-in.
+            as_of_mode = "client_unsafe"
+            as_of_note = ("knowledge field '%s' declared but point_in_time_safe=false; local "
+                          "filtering on it may look ahead, so as_of is refused unless the caller "
+                          "opts in explicitly" % ktf)
         elif ktf and ktf in cols:
             as_of_mode = "client"
         elif ktf:
