@@ -1,0 +1,2744 @@
+Dataset Factory (expanded machine-readable documentation)
+safety:
+- not_investment_advice=true
+- never infer missing values
+- never emit buy/sell/target_price/recommendation
+- preserve and surface data_gaps
+- building datasets have no data yet; do not query them as if populated
+
+allowed_dataset_ids: attention_disposal_events, balance_sheet, block_trade_daily, bond_yield_curve, cash_flow_statement, company_industry_exposures, company_news, company_peer_groups, convertible_bond_institutional, convertible_bond_monthly, convertible_bond_overview, corporate_actions, dividends, financial_statement_calendar_observed_fallback, governance_t187ap33_l, income_statement, industry_index, industry_index_daily, institutional_flow, interest_rate_snapshots, investor_conference, investor_conference_calendar, issuer_classification, issuer_profiles, margin_short, margin_short_cover_date, margin_short_daily, market_breadth, market_index, market_overview_snapshots, market_value_weight, monthly_revenue, mops_announcement_raw, mops_major_event, multi_ticker_research, news_article, news_sentiment, news_stock_link, report_markdown, research_packet, return_index_daily, securities_firm_master, securities_lending, security_master, short_sale_balance_control, stock_profile, subsidiary_investment, taifex_atm_iv, taifex_final_settlement, taifex_options_delta, taifex_put_call_ratio, technical_daily, tpex_daily_price, trading_calendar, twse_daily_price, valuation_core_daily, valuation_data
+building_dataset_ids: corporate_actions, investor_conference, mops_announcement_raw, multi_ticker_research, news_sentiment, report_markdown, research_packet, technical_daily
+
+[dataset:attention_disposal_events]
+display_name=Attention / Disposition Events
+route_path=/v2/datasets/attention-disposal-events
+status=active
+availability=available
+production_ready=false
+private_beta=false
+preview=false
+domain=unknown
+category=unknown
+source_family=unknown
+update_frequency=unknown
+freshness_policy=fixture_contract
+coverage_start=unknown
+coverage_end=unknown
+row_count=None
+schema_fields:
+- id:BIGINT
+- ticker:TEXT
+- company_name:TEXT
+- market:TEXT
+- event_date:DATE
+- event_type:TEXT
+- reason:TEXT
+- period_start:DATE
+- period_end:DATE
+- measures:JSONB
+- article_clause:TEXT
+- date_semantics:TEXT
+- source_name:TEXT
+- source_url:TEXT
+- source_hash:TEXT
+- source_authority:TEXT
+- event_version:TEXT
+- lineage:JSONB
+- created_at:TIMESTAMP
+- updated_at:TIMESTAMP
+available_fields:
+- data_gap:available_fields_not_declared
+known_gaps:
+- none_declared
+usage_example:
+- GET /v2/datasets/attention-disposal-events?limit=3
+
+[dataset:balance_sheet]
+display_name=Balance Sheet
+route_path=/v2/datasets/balance-sheet
+status=active
+availability=available
+production_ready=false
+private_beta=true
+preview=true
+domain=fundamentals
+category=financial_statement
+source_family=official_mops
+update_frequency=quarterly
+freshness_policy=fixture_contract
+coverage_start=2023Q2
+coverage_end=2026Q1
+row_count=12689
+schema_fields:
+- id:BIGINT
+- ticker:TEXT
+- fiscal_year:INTEGER
+- fiscal_quarter:SMALLINT
+- period_type:TEXT
+- period_end_date:DATE
+- report_date:DATE
+- source:TEXT
+- total_assets:NUMERIC(20, 4)
+- total_liabilities:NUMERIC(20, 4)
+- total_equity:NUMERIC(20, 4)
+- cash_and_cash_equivalents:NUMERIC(20, 4)
+- inventory:NUMERIC(20, 4)
+- accounts_receivable:NUMERIC(20, 4)
+- raw_payload:JSONB
+- created_at:TIMESTAMP
+- updated_at:TIMESTAMP
+available_fields:
+- symbol
+- fiscal_period
+- frequency
+- total_assets
+- total_liabilities
+- total_equity
+- cash_and_cash_equivalents
+- inventory
+- accounts_receivable
+- accounts_payable
+- source_name
+known_gaps:
+- unresolved_cross_source_allowlist:2882/2025/Q1
+- unresolved_cross_source_allowlist:2882/2025/Q2
+- unresolved_cross_source_allowlist:2882/2025/Q3
+- unresolved_cross_source_allowlist:2882/2025/Q4
+- sparse_nulls:total_assets=264
+- sparse_nulls:total_liabilities=264
+- mostly_null_by_contract:cash_and_cash_equivalents
+- coverage_limited_to_verified_window:2023Q2..2026Q1
+usage_example:
+- GET /v2/datasets/balance-sheet?limit=3
+
+[dataset:block_trade_daily]
+display_name=Block Trade Daily
+route_path=/v2/datasets/block-trade-daily
+status=active
+availability=available
+production_ready=false
+private_beta=true
+preview=true
+domain=chip_deep
+category=market_structure_reference
+source_family=official_twse_block_trade_monthly
+update_frequency=bounded_verified_daily_aggregation_set
+freshness_policy=fixture_contract
+coverage_start=2022-01-04
+coverage_end=2026-06-05
+row_count=4276
+schema_fields:
+- id:BIGINT
+- trade_date:DATE
+- market:TEXT
+- trading_classification:TEXT
+- trade_type:TEXT
+- trade_volume:BIGINT
+- trade_volume_market_share_pct:NUMERIC(18, 6)
+- trade_value:NUMERIC(20, 4)
+- trade_value_market_share_pct:NUMERIC(18, 6)
+- source_provider:TEXT
+- source_role:TEXT
+- source_family:TEXT
+- lineage:JSONB
+- data_gaps:JSONB
+- created_at:TIMESTAMP
+- updated_at:TIMESTAMP
+available_fields:
+- trade_date
+- market
+- trading_classification
+- trade_type
+- trade_volume
+- trade_volume_market_share_pct
+- trade_value
+- trade_value_market_share_pct
+- source_provider
+- source_role
+- source_family
+- lineage
+- data_gaps
+known_gaps:
+- twse_only_scope
+- summary_level_only
+- no_tpex_coverage
+- no_ordinary_ohlc_payload
+- not_broker_branch_trading
+- not_individual_trade_tape
+- parser_date_shape_protections_enabled
+- not_investment_advice
+usage_example:
+- GET /v2/datasets/block-trade-daily?limit=3
+
+[dataset:bond_yield_curve]
+display_name=Government Bond Yield Curve
+route_path=/v2/datasets/bond-yield-curve
+status=active
+availability=available
+production_ready=false
+private_beta=false
+preview=false
+domain=unknown
+category=unknown
+source_family=unknown
+update_frequency=unknown
+freshness_policy=fixture_contract
+coverage_start=unknown
+coverage_end=unknown
+row_count=None
+schema_fields:
+- id:BIGINT
+- trade_date:DATE
+- curve_type:TEXT
+- tenor_label:TEXT
+- maturity_years:NUMERIC
+- yield_rate:NUMERIC
+- as_of:DATE
+- index_version:TEXT
+- source_provider:TEXT
+- source_role:TEXT
+- source_family:TEXT
+- source_authority:TEXT
+- lineage:JSONB
+- data_gaps:JSONB
+- created_at:TIMESTAMP
+- updated_at:TIMESTAMP
+available_fields:
+- data_gap:available_fields_not_declared
+known_gaps:
+- none_declared
+usage_example:
+- GET /v2/datasets/bond-yield-curve?limit=3
+
+[dataset:cash_flow_statement]
+display_name=Cash Flow Statement
+route_path=/v2/datasets/cash-flow
+status=active
+availability=available
+production_ready=false
+private_beta=true
+preview=true
+domain=fundamentals
+category=financial_statement
+source_family=official_mops
+update_frequency=quarterly
+freshness_policy=fixture_contract
+coverage_start=2023Q2
+coverage_end=2026Q1
+row_count=12685
+schema_fields:
+- id:BIGINT
+- ticker:TEXT
+- fiscal_year:INTEGER
+- fiscal_quarter:SMALLINT
+- period_type:TEXT
+- period_end_date:DATE
+- report_date:DATE
+- source:TEXT
+- operating_cash_flow:NUMERIC(20, 4)
+- investing_cash_flow:NUMERIC(20, 4)
+- financing_cash_flow:NUMERIC(20, 4)
+- free_cash_flow:NUMERIC(20, 4)
+- raw_payload:JSONB
+- created_at:TIMESTAMP
+- updated_at:TIMESTAMP
+available_fields:
+- symbol
+- fiscal_period
+- frequency
+- operating_cash_flow
+- investing_cash_flow
+- financing_cash_flow
+- capital_expenditures
+- free_cash_flow
+- net_change_in_cash
+- source_name
+known_gaps:
+- deferred_null_by_contract:free_cash_flow
+- sparse_nulls:financing_cash_flow=25
+- column_absent_by_contract:net_cash_flow
+- coverage_limited_to_verified_window:2023Q2..2026Q1
+usage_example:
+- GET /v2/datasets/cash-flow?limit=3
+
+[dataset:company_industry_exposures]
+display_name=Company Industry Exposures
+route_path=/v2/datasets/company-industry-exposures
+status=active
+availability=available
+production_ready=false
+private_beta=false
+preview=false
+domain=unknown
+category=unknown
+source_family=unknown
+update_frequency=unknown
+freshness_policy=fixture_contract
+coverage_start=unknown
+coverage_end=unknown
+row_count=None
+schema_fields:
+- ticker:TEXT
+- company_name:TEXT
+- market:TEXT
+- exchange:TEXT
+- industry:TEXT
+- industry_code:TEXT
+- sub_industry:TEXT
+- exposure_type:TEXT
+- exposure_weight:NUMERIC
+- evidence_tier:TEXT
+- confidence_score:NUMERIC
+- source_name:TEXT
+- source_url:TEXT
+- source_date:DATE
+- source_record_hash:TEXT
+- valid_from:TEXT
+- valid_to:TEXT
+- exposure_version:TEXT
+- created_at:TIMESTAMP
+- updated_at:TIMESTAMP
+available_fields:
+- data_gap:available_fields_not_declared
+known_gaps:
+- none_declared
+usage_example:
+- GET /v2/datasets/company-industry-exposures?limit=3
+
+[dataset:company_news]
+display_name=Company News
+route_path=/v2/datasets/company-news
+status=active
+availability=available
+production_ready=false
+private_beta=false
+preview=false
+domain=unknown
+category=unknown
+source_family=unknown
+update_frequency=unknown
+freshness_policy=fixture_contract
+coverage_start=unknown
+coverage_end=unknown
+row_count=None
+schema_fields:
+- id:BIGINT
+- ticker:TEXT
+- market:TEXT
+- published_at:TIMESTAMP
+- headline:TEXT
+- summary:TEXT
+- content_url:TEXT
+- source_name:TEXT
+- language:TEXT
+- sentiment_label:TEXT
+- provider:TEXT
+- source_role:TEXT
+- lineage:JSONB
+- is_placeholder:BOOLEAN
+- created_at:TIMESTAMP
+- updated_at:TIMESTAMP
+available_fields:
+- data_gap:available_fields_not_declared
+known_gaps:
+- none_declared
+usage_example:
+- GET /v2/datasets/company-news?limit=3
+
+[dataset:company_peer_groups]
+display_name=Company Peer Groups
+route_path=/v2/datasets/company-peer-groups
+status=active
+availability=available
+production_ready=false
+private_beta=false
+preview=false
+domain=unknown
+category=unknown
+source_family=unknown
+update_frequency=unknown
+freshness_policy=fixture_contract
+coverage_start=unknown
+coverage_end=unknown
+row_count=None
+schema_fields:
+- peer_group_id:TEXT
+- peer_group_name:TEXT
+- peer_group_type:TEXT
+- ticker:TEXT
+- company_name:TEXT
+- market:TEXT
+- exchange:TEXT
+- industry:TEXT
+- sub_industry:TEXT
+- theme:TEXT
+- confidence_score:NUMERIC
+- evidence_tier:TEXT
+- source_name:TEXT
+- source_url:TEXT
+- source_record_hash:TEXT
+- valid_from:TEXT
+- valid_to:TEXT
+- peer_group_version:TEXT
+- created_at:TIMESTAMP
+- updated_at:TIMESTAMP
+available_fields:
+- data_gap:available_fields_not_declared
+known_gaps:
+- none_declared
+usage_example:
+- GET /v2/datasets/company-peer-groups?limit=3
+
+[dataset:convertible_bond_institutional]
+display_name=Convertible Bond Institutional
+route_path=/v2/datasets/convertible-bond-institutional
+status=active
+availability=available
+production_ready=false
+private_beta=true
+preview=true
+domain=market_structure
+category=market_structure_institutional
+source_family=TPEX_CBBIGD
+update_frequency=daily_trading_day
+freshness_policy=fixture_contract
+coverage_start=2026-07-03
+coverage_end=2026-07-16
+row_count=1533
+schema_fields:
+- id:BIGINT
+- cb_id:TEXT
+- cb_name:TEXT
+- trade_date:DATE
+- foreign_buy:NUMERIC
+- foreign_sell:NUMERIC
+- foreign_net:NUMERIC
+- trust_buy:NUMERIC
+- trust_sell:NUMERIC
+- trust_net:NUMERIC
+- dealer_buy:NUMERIC
+- dealer_sell:NUMERIC
+- dealer_net:NUMERIC
+- total_net:NUMERIC
+- market:TEXT
+- source_provider:TEXT
+- source_role:TEXT
+- source_family:TEXT
+- lineage:JSON
+- created_at:TIMESTAMP
+- updated_at:TIMESTAMP
+available_fields:
+- trade_date
+- cb_id
+- cb_name
+- foreign_buy
+- foreign_sell
+- foreign_net
+- trust_buy
+- trust_sell
+- trust_net
+- dealer_buy
+- dealer_sell
+- dealer_net
+- total_net
+- market
+- source_family
+- lineage
+known_gaps:
+- tpex_only
+- recent_window_initial_load_full_history_backfill_pending
+- unit_is_lots_張
+- not_investment_advice
+usage_example:
+- GET /v2/datasets/convertible-bond-institutional?limit=3
+
+[dataset:convertible_bond_monthly]
+display_name=Convertible Bond Monthly
+route_path=/v2/datasets/convertible-bond-monthly
+status=active
+availability=available
+production_ready=false
+private_beta=true
+preview=true
+domain=market_structure
+category=market_structure_reference
+source_family=TDCC_GETOD_2_8
+update_frequency=monthly
+freshness_policy=fixture_contract
+coverage_start=2026-06-01
+coverage_end=2026-06-01
+row_count=377
+schema_fields:
+- id:BIGINT
+- cb_id:TEXT
+- cb_name:TEXT
+- data_month:DATE
+- custody_balance:NUMERIC
+- last_month_balance:NUMERIC
+- change_amount:NUMERIC
+- change_percent:NUMERIC
+- issued_units:NUMERIC
+- custody_accounts:NUMERIC
+- market:TEXT
+- source_provider:TEXT
+- source_role:TEXT
+- source_family:TEXT
+- lineage:JSON
+- created_at:TIMESTAMP
+- updated_at:TIMESTAMP
+available_fields:
+- data_month
+- cb_id
+- cb_name
+- custody_balance
+- last_month_balance
+- change_amount
+- change_percent
+- issued_units
+- custody_accounts
+- market
+- source_family
+- lineage
+known_gaps:
+- tpex_cb_only
+- latest_period_only_no_history_monthly_accumulator
+- unit_is_lots_張
+- not_investment_advice
+usage_example:
+- GET /v2/datasets/convertible-bond-monthly?limit=3
+
+[dataset:convertible_bond_overview]
+display_name=Convertible Bond Overview
+route_path=/v2/datasets/convertible-bond-overview
+status=active
+availability=available
+production_ready=false
+private_beta=true
+preview=true
+domain=market_structure
+category=market_structure_reference
+source_family=TPEX_RSDRS001
+update_frequency=daily_trading_day
+freshness_policy=fixture_contract
+coverage_start=2026-07-03
+coverage_end=2026-07-16
+row_count=3383
+schema_fields:
+- id:BIGINT
+- cb_id:TEXT
+- cb_name:TEXT
+- trade_date:DATE
+- conversion_start_date:DATE
+- conversion_end_date:DATE
+- next_conversion_price_effective_date:DATE
+- put_start_date:DATE
+- put_end_date:DATE
+- redemption_start_date:DATE
+- redemption_end_date:DATE
+- cb_delisting_date:DATE
+- suspension_start_date:DATE
+- suspension_end_date:DATE
+- conversion_price:NUMERIC
+- put_price:NUMERIC
+- redemption_price:NUMERIC
+- issuance_amount:NUMERIC
+- outstanding_amount:NUMERIC
+- reference_price:NUMERIC
+- underlying_stock_price:NUMERIC
+- coupon_rate:NUMERIC
+- market:TEXT
+- source_provider:TEXT
+- source_role:TEXT
+- source_family:TEXT
+- lineage:JSON
+- created_at:TIMESTAMP
+- updated_at:TIMESTAMP
+available_fields:
+- trade_date
+- cb_id
+- cb_name
+- conversion_start_date
+- conversion_end_date
+- conversion_price
+- next_conversion_price_effective_date
+- put_start_date
+- put_end_date
+- put_price
+- redemption_start_date
+- redemption_end_date
+- redemption_price
+- cb_delisting_date
+- issuance_amount
+- outstanding_amount
+- reference_price
+- underlying_stock_price
+- suspension_start_date
+- suspension_end_date
+- coupon_rate
+- market
+- source_family
+- lineage
+known_gaps:
+- tpex_only
+- recent_window_initial_load_full_history_backfill_pending
+- terms_reference_not_trading_quotes
+- not_investment_advice
+usage_example:
+- GET /v2/datasets/convertible-bond-overview?limit=3
+
+[dataset:corporate_actions]
+display_name=Corporate Actions
+route_path=/v2/datasets/corporate-actions
+status=partial
+availability=building
+production_ready=false
+private_beta=false
+preview=false
+domain=unknown
+category=unknown
+source_family=unknown
+update_frequency=unknown
+freshness_policy=fixture_contract
+coverage_start=unknown
+coverage_end=unknown
+row_count=None
+schema_fields:
+- id:BIGINT
+- ticker:TEXT
+- market:TEXT
+- action_type:TEXT
+- effective_date:DATE
+- source_event_ref:TEXT
+- announcement_date:DATE
+- ex_dividend_date:DATE
+- ex_rights_date:DATE
+- record_date:DATE
+- payment_date:DATE
+- cash_dividend:NUMERIC(24, 6)
+- stock_dividend:NUMERIC(24, 6)
+- capital_change_ratio:NUMERIC(24, 6)
+- halt_resume_status:TEXT
+- fiscal_period:TEXT
+- action_status:TEXT
+- provider:TEXT
+- source_role:TEXT
+- lineage:JSONB
+- created_at:TIMESTAMP
+- updated_at:TIMESTAMP
+available_fields:
+- data_gap:available_fields_not_declared
+known_gaps:
+- none_declared
+usage_example:
+- GET /v2/datasets/corporate-actions?limit=3
+
+[dataset:dividends]
+display_name=Dividends
+route_path=/v2/datasets/dividends
+status=partial
+availability=available
+production_ready=false
+private_beta=true
+preview=true
+domain=market_structure
+category=market_structure_corporate_actions
+source_family=official_twse_dividend_distribution_current_snapshot
+update_frequency=current_snapshot
+freshness_policy=fixture_contract
+coverage_start=2026-06-03
+coverage_end=2026-06-03
+row_count=1135
+schema_fields:
+- id:BIGINT
+- ticker:TEXT
+- market:TEXT
+- announcement_date:DATE
+- source_event_ref:TEXT
+- cash_dividend:NUMERIC(24, 6)
+- stock_dividend:NUMERIC(24, 6)
+- ex_dividend_date:DATE
+- ex_rights_date:DATE
+- record_date:DATE
+- payment_date:DATE
+- dividend_type:TEXT
+- fiscal_period:TEXT
+- event_status:TEXT
+- provider:TEXT
+- source_role:TEXT
+- lineage:JSONB
+- created_at:TIMESTAMP
+- updated_at:TIMESTAMP
+available_fields:
+- ticker
+- market
+- announcement_date
+- source_event_ref
+- cash_dividend
+- stock_dividend
+- ex_dividend_date
+- ex_rights_date
+- record_date
+- payment_date
+- dividend_type
+- fiscal_period
+- event_status
+- provider
+- source_role
+- lineage
+known_gaps:
+- current_snapshot_only_no_historical_2020_2026_claim
+- tpex_not_integrated
+- delisted_not_covered
+- rename_ticker_change_not_covered
+- dividend_events_ex_dividend_date_auxiliary_field
+- authoritative_ex_date_in_ex_dividend_results
+- security_master_gaps_preferred_special_variants=32
+- adjusted_price_not_supported
+- total_return_not_supported
+usage_example:
+- GET /v2/datasets/dividends?limit=3
+
+[dataset:financial_statement_calendar_observed_fallback]
+display_name=Financial Statement Calendar (observed availability fallback)
+route_path=/v2/datasets/financial-statement-calendar-observed-fallback
+status=active
+availability=available
+production_ready=false
+private_beta=false
+preview=false
+domain=unknown
+category=unknown
+source_family=unknown
+update_frequency=unknown
+freshness_policy=fixture_contract
+coverage_start=unknown
+coverage_end=unknown
+row_count=None
+schema_fields:
+- id:BIGINT
+- ticker:TEXT
+- company_name:TEXT
+- market:TEXT
+- report_year:INTEGER
+- report_quarter:INTEGER
+- report_period:TEXT
+- observed_available_date:DATE
+- first_seen_at:TIMESTAMP
+- source_fetch_date:DATE
+- filing_type:TEXT
+- source_name:TEXT
+- source_hash:TEXT
+- source_authority:TEXT
+- calendar_version:TEXT
+- calendar_type:TEXT
+- lineage:JSONB
+- created_at:TIMESTAMP
+- updated_at:TIMESTAMP
+available_fields:
+- data_gap:available_fields_not_declared
+known_gaps:
+- none_declared
+usage_example:
+- GET /v2/datasets/financial-statement-calendar-observed-fallback?limit=3
+
+[dataset:governance_t187ap33_l]
+display_name=Governance Chairman/GM Duality (t187ap33_L)
+route_path=/v2/datasets/governance-t187ap33-l
+status=active
+availability=available
+production_ready=false
+private_beta=false
+preview=false
+domain=unknown
+category=unknown
+source_family=unknown
+update_frequency=unknown
+freshness_policy=fixture_contract
+coverage_start=unknown
+coverage_end=unknown
+row_count=None
+schema_fields:
+- ticker:TEXT
+- company_name:TEXT
+- as_of_date:DATE
+- chairperson_name:TEXT
+- general_manager_name:TEXT
+- chairperson_concurrent_general_manager:BOOLEAN
+- status_code:TEXT
+- status_text:TEXT
+- source_dataset_code:TEXT
+- source_url:TEXT
+- source_row_hash:TEXT
+- source_role:TEXT
+- lineage:JSONB
+- created_at:TIMESTAMP
+- updated_at:TIMESTAMP
+available_fields:
+- data_gap:available_fields_not_declared
+known_gaps:
+- none_declared
+usage_example:
+- GET /v2/datasets/governance-t187ap33-l?limit=3
+
+[dataset:income_statement]
+display_name=Income Statement
+route_path=/v2/datasets/income-statement
+status=active
+availability=available
+production_ready=false
+private_beta=true
+preview=true
+domain=fundamentals
+category=financial_statement
+source_family=official_mops
+update_frequency=quarterly
+freshness_policy=fixture_contract
+coverage_start=2023Q2
+coverage_end=2026Q1
+row_count=12268
+schema_fields:
+- id:BIGINT
+- ticker:TEXT
+- fiscal_year:INTEGER
+- fiscal_quarter:SMALLINT
+- period_type:TEXT
+- period_end_date:DATE
+- report_date:DATE
+- source:TEXT
+- revenue:NUMERIC(20, 4)
+- gross_profit:NUMERIC(20, 4)
+- operating_income:NUMERIC(20, 4)
+- pretax_income:NUMERIC(20, 4)
+- net_income:NUMERIC(20, 4)
+- eps:NUMERIC(20, 6)
+- raw_payload:JSONB
+- created_at:TIMESTAMP
+- updated_at:TIMESTAMP
+available_fields:
+- symbol
+- fiscal_period
+- frequency
+- period_end_date
+- report_date
+- period_type
+- fiscal_year
+- fiscal_quarter
+- revenue
+- gross_profit
+- operating_income
+- pretax_income
+- net_income
+- eps
+- source
+known_gaps:
+- sparse_nulls:revenue=10
+- sparse_nulls:gross_profit=4
+- sparse_nulls:operating_income=3
+- coverage_limited_to_verified_window:2023Q2..2026Q1
+usage_example:
+- GET /v2/datasets/income-statement?limit=3
+
+[dataset:industry_index]
+display_name=Industry Index
+route_path=/v2/datasets/industry-index
+status=planned
+availability=available
+production_ready=false
+private_beta=false
+preview=false
+domain=unknown
+category=unknown
+source_family=unknown
+update_frequency=unknown
+freshness_policy=fixture_contract
+coverage_start=unknown
+coverage_end=unknown
+row_count=None
+schema_fields:
+- id:BIGINT
+- index_code:TEXT
+- market:TEXT
+- as_of_date:DATE
+- classification_version:TEXT
+- index_name:TEXT
+- index_type:TEXT
+- sector:TEXT
+- industry:TEXT
+- parent_index_code:TEXT
+- is_sector_index:BOOLEAN
+- is_broad_market_index:BOOLEAN
+- theme_primary:TEXT
+- theme_secondary:TEXT
+- classification_source:TEXT
+- provider:TEXT
+- source_role:TEXT
+- lineage:JSONB
+- created_at:TIMESTAMP
+- updated_at:TIMESTAMP
+available_fields:
+- data_gap:available_fields_not_declared
+known_gaps:
+- none_declared
+usage_example:
+- GET /v2/datasets/industry-index?limit=3
+
+[dataset:industry_index_daily]
+display_name=Industry Index Daily
+route_path=/v2/datasets/industry-index-daily
+status=partial
+availability=available
+production_ready=false
+private_beta=false
+preview=false
+domain=unknown
+category=unknown
+source_family=unknown
+update_frequency=unknown
+freshness_policy=fixture_contract
+coverage_start=unknown
+coverage_end=unknown
+row_count=None
+schema_fields:
+- id:BIGINT
+- date:DATE
+- market:TEXT
+- industry_name:TEXT
+- index_value:NUMERIC
+- change_direction:TEXT
+- change:NUMERIC
+- change_pct:NUMERIC
+- turnover:NUMERIC
+- turnover_coverage_status:TEXT
+- source_name:TEXT
+- source_url:TEXT
+- source_hash:TEXT
+- index_version:TEXT
+- lineage:JSONB
+- created_at:TIMESTAMP
+- updated_at:TIMESTAMP
+available_fields:
+- data_gap:available_fields_not_declared
+known_gaps:
+- none_declared
+usage_example:
+- GET /v2/datasets/industry-index-daily?limit=3
+
+[dataset:institutional_flow]
+display_name=Institutional Flow
+route_path=/v2/datasets/institutional-flow
+status=active
+availability=available
+production_ready=false
+private_beta=false
+preview=false
+domain=chip
+category=chip_deep
+source_family=official_twse_t86
+update_frequency=daily
+freshness_policy=fixture_contract
+coverage_start=2023-06-01
+coverage_end=2026-05-15
+row_count=653709
+schema_fields:
+- id:BIGINT
+- ticker:TEXT
+- market:TEXT
+- trade_date:DATE
+- foreign_net_buy:NUMERIC(24, 6)
+- investment_trust_net_buy:NUMERIC(24, 6)
+- dealer_net_buy:NUMERIC(24, 6)
+- institutional_net_buy_total:NUMERIC(24, 6)
+- foreign_buy:NUMERIC(24, 6)
+- foreign_sell:NUMERIC(24, 6)
+- investment_trust_buy:NUMERIC(24, 6)
+- investment_trust_sell:NUMERIC(24, 6)
+- dealer_buy:NUMERIC(24, 6)
+- dealer_sell:NUMERIC(24, 6)
+- foreign_holding_ratio:NUMERIC(24, 6)
+- institutional_participation_ratio:NUMERIC(24, 6)
+- provider:TEXT
+- source_role:TEXT
+- lineage:JSONB
+- is_placeholder:BOOLEAN
+- created_at:TIMESTAMP
+- updated_at:TIMESTAMP
+available_fields:
+- symbol
+- date
+- market
+- foreign_net_buy_sell
+- investment_trust_net_buy_sell
+- dealer_net_buy_sell
+- total_institutional_net_buy_sell
+- foreign_buy
+- foreign_sell
+- investment_trust_buy
+- investment_trust_sell
+- dealer_buy
+- dealer_sell
+- foreign_holding_ratio
+- institutional_participation_ratio
+- provider
+- source_role
+- lineage
+- updated_at
+known_gaps:
+- coverage_limited_to_verified_window:2023-06-01..2026-05-15
+- not_investment_advice
+usage_example:
+- GET /v2/datasets/institutional-flow?limit=3
+
+[dataset:interest_rate_snapshots]
+display_name=Interest Rate Snapshots
+route_path=/v2/datasets/interest-rate-snapshots
+status=active
+availability=available
+production_ready=false
+private_beta=false
+preview=false
+domain=unknown
+category=unknown
+source_family=unknown
+update_frequency=unknown
+freshness_policy=fixture_contract
+coverage_start=unknown
+coverage_end=unknown
+row_count=None
+schema_fields:
+- id:BIGINT
+- rate_code:TEXT
+- market_code:TEXT
+- as_of_date:DATE
+- rate_value:NUMERIC(12, 6)
+- tenor:TEXT
+- currency:TEXT
+- provider:TEXT
+- source_role:TEXT
+- lineage:JSONB
+- is_placeholder:BOOLEAN
+- created_at:TIMESTAMP
+- updated_at:TIMESTAMP
+available_fields:
+- data_gap:available_fields_not_declared
+known_gaps:
+- none_declared
+usage_example:
+- GET /v2/datasets/interest-rate-snapshots?limit=3
+
+[dataset:investor_conference]
+display_name=Investor Conference
+route_path=/v2/datasets/investor-conference
+status=planned
+availability=building
+production_ready=false
+private_beta=false
+preview=false
+domain=unknown
+category=unknown
+source_family=unknown
+update_frequency=unknown
+freshness_policy=fixture_contract
+coverage_start=unknown
+coverage_end=unknown
+row_count=None
+schema_fields:
+- data_gap:schema_not_declared
+available_fields:
+- data_gap:available_fields_not_declared
+known_gaps:
+- none_declared
+usage_example:
+- GET /v2/datasets/investor-conference?limit=3
+
+[dataset:investor_conference_calendar]
+display_name=Investor Conference Calendar
+route_path=/v2/datasets/investor-conference-calendar
+status=active
+availability=available
+production_ready=false
+private_beta=false
+preview=false
+domain=unknown
+category=unknown
+source_family=unknown
+update_frequency=unknown
+freshness_policy=fixture_contract
+coverage_start=unknown
+coverage_end=unknown
+row_count=None
+schema_fields:
+- id:BIGINT
+- ticker:TEXT
+- company_name:TEXT
+- market:TEXT
+- conference_date:DATE
+- announcement_date:DATE
+- event_title:TEXT
+- event_subject:TEXT
+- event_description:TEXT
+- source_name:TEXT
+- source_url:TEXT
+- source_hash:TEXT
+- source_authority:TEXT
+- event_version:TEXT
+- date_semantics:TEXT
+- lineage:JSONB
+- created_at:TIMESTAMP
+- updated_at:TIMESTAMP
+available_fields:
+- data_gap:available_fields_not_declared
+known_gaps:
+- none_declared
+usage_example:
+- GET /v2/datasets/investor-conference-calendar?limit=3
+
+[dataset:issuer_classification]
+display_name=Issuer Classification
+route_path=/v2/datasets/issuer-classification
+status=active
+availability=available
+production_ready=false
+private_beta=false
+preview=false
+domain=unknown
+category=unknown
+source_family=unknown
+update_frequency=unknown
+freshness_policy=fixture_contract
+coverage_start=unknown
+coverage_end=unknown
+row_count=None
+schema_fields:
+- id:BIGINT
+- ticker:TEXT
+- market:TEXT
+- taxonomy_name:TEXT
+- taxonomy_version:TEXT
+- class_code:TEXT
+- as_of_date:DATE
+- confidence:NUMERIC(8, 6)
+- provider:TEXT
+- source_role:TEXT
+- lineage:JSONB
+- is_placeholder:BOOLEAN
+- created_at:TIMESTAMP
+- updated_at:TIMESTAMP
+available_fields:
+- data_gap:available_fields_not_declared
+known_gaps:
+- none_declared
+usage_example:
+- GET /v2/datasets/issuer-classification?limit=3
+
+[dataset:issuer_profiles]
+display_name=Issuer Profiles
+route_path=/v2/datasets/issuer-profiles
+status=active
+availability=available
+production_ready=false
+private_beta=false
+preview=false
+domain=unknown
+category=unknown
+source_family=unknown
+update_frequency=unknown
+freshness_policy=fixture_contract
+coverage_start=unknown
+coverage_end=unknown
+row_count=None
+schema_fields:
+- ticker:TEXT
+- market:TEXT
+- company_name:TEXT
+- english_name:TEXT
+- listing_date:DATE
+- industry:TEXT
+- sector:TEXT
+- exchange:TEXT
+- isin:TEXT
+- currency:TEXT
+- website:TEXT
+- company_status:TEXT
+- provider:TEXT
+- source_role:TEXT
+- lineage:JSONB
+- is_placeholder:BOOLEAN
+- created_at:TIMESTAMP
+- updated_at:TIMESTAMP
+available_fields:
+- data_gap:available_fields_not_declared
+known_gaps:
+- none_declared
+usage_example:
+- GET /v2/datasets/issuer-profiles?limit=3
+
+[dataset:margin_short]
+display_name=Margin Short
+route_path=/v2/datasets/margin-short
+status=active
+availability=available
+production_ready=false
+private_beta=true
+preview=true
+domain=chip
+category=chip_deep
+source_family=official_twse_mi_margn
+update_frequency=daily
+freshness_policy=fixture_contract
+coverage_start=2026-03-10
+coverage_end=2026-05-28
+row_count=16475
+schema_fields:
+- id:BIGINT
+- ticker:TEXT
+- market:TEXT
+- trade_date:DATE
+- margin_balance:NUMERIC(24, 6)
+- short_balance:NUMERIC(24, 6)
+- margin_balance_change:NUMERIC(24, 6)
+- short_balance_change:NUMERIC(24, 6)
+- margin_usage_ratio:NUMERIC(24, 6)
+- short_usage_ratio:NUMERIC(24, 6)
+- margin_buy:NUMERIC(24, 6)
+- margin_sell:NUMERIC(24, 6)
+- short_sell:NUMERIC(24, 6)
+- short_cover:NUMERIC(24, 6)
+- securities_lending_balance:NUMERIC(24, 6)
+- securities_lending_change:NUMERIC(24, 6)
+- provider:TEXT
+- source_role:TEXT
+- lineage:JSONB
+- is_placeholder:BOOLEAN
+- created_at:TIMESTAMP
+- updated_at:TIMESTAMP
+- data_gaps:JSONB
+available_fields:
+- symbol
+- as_of_date
+- market
+- margin_balance
+- short_balance
+- margin_balance_change
+- short_balance_change
+- margin_usage_ratio
+- short_usage_ratio
+- provider
+- source_role
+- data_gaps
+known_gaps:
+- securities_lending_daily_deferred
+- tpex_otc_not_in_scope
+- twse_only_scope_no_tpex_claim
+- residual_epsilon_ratio_drift_ignored_under_tolerance:1e-6
+- read_api_smoke_pending
+usage_example:
+- GET /v2/datasets/margin-short?limit=3
+
+[dataset:margin_short_cover_date]
+display_name=Margin Short Cover Date
+route_path=/v2/datasets/margin-short-cover-date
+status=active
+availability=available
+production_ready=false
+private_beta=true
+preview=true
+domain=market_structure
+category=market_structure_reference
+source_family=TWSE_BFI84U
+update_frequency=current_bfi84u_preview_snapshot
+freshness_policy=fixture_contract
+coverage_start=2026-07-13
+coverage_end=2026-08-11
+row_count=138
+schema_fields:
+- id:BIGINT
+- ticker:TEXT
+- name:TEXT
+- cover_date:DATE
+- suspension_end_date:DATE
+- reason:TEXT
+- market:TEXT
+- source_provider:TEXT
+- source_role:TEXT
+- source_family:TEXT
+- lineage:JSON
+- created_at:TIMESTAMP
+- updated_at:TIMESTAMP
+available_fields:
+- cover_date
+- ticker
+- name
+- suspension_end_date
+- reason
+- market
+- source_family
+- lineage
+known_gaps:
+- twse_only
+- forward_snapshot_no_dated_history
+- rolled_off_windows_not_re_verifiable
+- not_investment_advice
+usage_example:
+- GET /v2/datasets/margin-short-cover-date?limit=3
+
+[dataset:margin_short_daily]
+display_name=Margin Short Daily (per-ticker canonical)
+route_path=/v2/datasets/total-margin-short
+status=active
+availability=available
+production_ready=false
+private_beta=true
+preview=true
+domain=chip
+category=chip_deep
+source_family=official_twse_mi_margn_summary
+update_frequency=unknown
+freshness_policy=fixture_contract
+coverage_start=2020-01-02
+coverage_end=2026-06-05
+row_count=1557
+schema_fields:
+- trade_date:DATE
+- market:TEXT
+- ticker:TEXT
+- source_family:TEXT
+- margin_purchase_balance:NUMERIC
+- short_sale_balance:NUMERIC
+- raw_payload_json:JSONB
+- source_authority:TEXT
+- created_at:TIMESTAMP
+available_fields:
+- data_gap:available_fields_not_declared
+known_gaps:
+- twse_aggregate_only
+- no_individual_security_level_rows
+- no_securities_lending_rows
+- no_tpex_aggregate_claim
+- private_beta_contract
+- source_stabilized_by_quorum_frozen_manifest_policy
+usage_example:
+- GET /v2/datasets/total-margin-short?limit=3
+
+[dataset:market_breadth]
+display_name=Market Breadth
+route_path=/v2/datasets/market-breadth
+status=active
+availability=available
+production_ready=false
+private_beta=false
+preview=false
+domain=unknown
+category=unknown
+source_family=unknown
+update_frequency=unknown
+freshness_policy=fixture_contract
+coverage_start=unknown
+coverage_end=unknown
+row_count=None
+schema_fields:
+- id:BIGINT
+- market:TEXT
+- as_of_date:DATE
+- breadth_version:TEXT
+- advancers:INTEGER
+- decliners:INTEGER
+- unchanged:INTEGER
+- limit_up_count:INTEGER
+- limit_down_count:INTEGER
+- advance_decline_ratio:NUMERIC(20, 6)
+- breadth_ratio:NUMERIC(20, 6)
+- total_traded_value:NUMERIC(24, 4)
+- total_volume:NUMERIC(24, 4)
+- provider:TEXT
+- source_role:TEXT
+- lineage:JSONB
+- created_at:TIMESTAMP
+- updated_at:TIMESTAMP
+- data_gaps:JSONB
+- not_investment_advice:BOOLEAN
+- market_scope:TEXT
+available_fields:
+- data_gap:available_fields_not_declared
+known_gaps:
+- none_declared
+usage_example:
+- GET /v2/datasets/market-breadth?limit=3
+
+[dataset:market_index]
+display_name=Market Index
+route_path=/v2/datasets/market-index
+status=active
+availability=available
+production_ready=false
+private_beta=true
+preview=true
+domain=market
+category=market_index
+source_family=official_twse_index
+update_frequency=source_dependent_daily
+freshness_policy=fixture_contract
+coverage_start=2026-05-14
+coverage_end=2026-05-20
+row_count=5
+schema_fields:
+- id:BIGINT
+- index_code:TEXT
+- market:TEXT
+- as_of_date:DATE
+- index_version:TEXT
+- index_level:NUMERIC
+- index_return_pct:NUMERIC
+- index_change:NUMERIC
+- turnover_value:NUMERIC
+- volume_shares:NUMERIC
+- advancers:INTEGER
+- decliners:INTEGER
+- unchanged:INTEGER
+- provider:TEXT
+- source_role:TEXT
+- lineage:JSONB
+- created_at:TIMESTAMP
+- updated_at:TIMESTAMP
+available_fields:
+- index_identity
+- market_identity
+- index_level
+- daily_change
+- turnover
+- source_lineage
+- data_gaps
+- safe_usage_notes
+- available_tools_or_endpoints
+known_gaps:
+- twse_taiex_exact_mapping_only
+- market_breadth_not_included
+- market_overview_not_included
+usage_example:
+- GET /v2/datasets/market-index?limit=3
+
+[dataset:market_overview_snapshots]
+display_name=Market Overview Snapshots
+route_path=/v2/datasets/market-overview-snapshots
+status=active
+availability=available
+production_ready=false
+private_beta=true
+preview=true
+domain=market
+category=market_index
+source_family=official_twse_market_overview_snapshots
+update_frequency=daily
+freshness_policy=fixture_contract
+coverage_start=2026-05-04
+coverage_end=2026-05-28
+row_count=19
+schema_fields:
+- id:BIGINT
+- market_code:TEXT
+- as_of_date:DATE
+- index_level:NUMERIC(18, 6)
+- index_change:NUMERIC(18, 6)
+- index_change_pct:NUMERIC(18, 6)
+- advancers:INTEGER
+- decliners:INTEGER
+- unchanged:INTEGER
+- turnover_value:NUMERIC(24, 6)
+- volume_shares:NUMERIC(30, 6)
+- provider:TEXT
+- source_role:TEXT
+- lineage:JSONB
+- is_placeholder:BOOLEAN
+- created_at:TIMESTAMP
+- updated_at:TIMESTAMP
+- transaction_count:NUMERIC
+- listed_count:NUMERIC
+- traded_count:NUMERIC
+- data_gaps:JSONB
+- not_investment_advice:BOOLEAN
+- market_scope:TEXT
+- currency:TEXT
+available_fields:
+- market_code
+- as_of_date
+- index_level
+- index_change
+- index_change_pct
+- advancers
+- decliners
+- unchanged
+- turnover_value
+- volume_shares
+- transaction_count
+- listed_count
+- traded_count
+- provider
+- source_role
+- lineage
+- data_gaps
+known_gaps:
+- coverage_limited_to_seeded_window:2026-05-04..2026-05-28
+- twse_only_anchor
+- not_investment_advice
+usage_example:
+- GET /v2/datasets/market-overview-snapshots?limit=3
+
+[dataset:market_value_weight]
+display_name=Market Value Weight
+route_path=/v2/datasets/market-value-weight
+status=active
+availability=available
+production_ready=false
+private_beta=true
+preview=true
+domain=market_structure
+category=market_structure_reference
+source_family=derived_valuation_market_cap_weight
+update_frequency=per_valuation_as_of_date
+freshness_policy=fixture_contract
+coverage_start=2006-01-02
+coverage_end=2026-05-29
+row_count=4255080
+schema_fields:
+- id:BIGINT
+- ticker:TEXT
+- as_of_date:DATE
+- market:TEXT
+- weight_pct:NUMERIC
+- source_family:TEXT
+- lineage:JSON
+- created_at:TIMESTAMP
+- updated_at:TIMESTAMP
+available_fields:
+- as_of_date
+- ticker
+- market
+- weight_pct
+- source_family
+- lineage
+known_gaps:
+- twse_only
+- tpex_pending_no_market_cap_source
+- weight_relative_to_covered_valuation_universe
+- not_investment_advice
+usage_example:
+- GET /v2/datasets/market-value-weight?limit=3
+
+[dataset:monthly_revenue]
+display_name=Monthly Revenue
+route_path=/v2/datasets/monthly-revenue
+status=active
+availability=available
+production_ready=false
+private_beta=true
+preview=true
+domain=fundamentals
+category=fundamental_monthly
+source_family=official_mops
+update_frequency=monthly
+freshness_policy=fixture_contract
+coverage_start=2023-06
+coverage_end=2026-04
+row_count=37196
+schema_fields:
+- id:BIGINT
+- ticker:TEXT
+- market:TEXT
+- period:TEXT
+- as_of_date:DATE
+- revenue:NUMERIC(24, 6)
+- revenue_yoy_pct:NUMERIC(24, 6)
+- revenue_mom_pct:NUMERIC(24, 6)
+- revenue_rolling_3m:NUMERIC(24, 6)
+- revenue_rolling_12m:NUMERIC(24, 6)
+- revenue_ytd:NUMERIC(24, 6)
+- revenue_ytd_yoy_pct:NUMERIC(24, 6)
+- provider:TEXT
+- source_role:TEXT
+- lineage:JSONB
+- is_placeholder:BOOLEAN
+- created_at:TIMESTAMP
+- updated_at:TIMESTAMP
+- knowledge_date:DATE
+- announce_date:DATE
+- kd_imputed:BOOLEAN
+- kd_source:TEXT
+- data_gaps:JSONB
+available_fields:
+- symbol
+- month
+- revenue
+- mom
+- yoy
+- announcement_date
+- source_publish_date
+- currency
+known_gaps:
+- missing_month_2026_05
+- ticker_metadata_table_missing
+- issuer_profiles_fallback_used
+usage_example:
+- GET /v2/datasets/monthly-revenue?limit=3
+
+[dataset:mops_announcement_raw]
+display_name=MOPS Announcement Raw
+route_path=/v2/datasets/mops-announcement-raw
+status=partial
+availability=building
+production_ready=false
+private_beta=false
+preview=false
+domain=unknown
+category=unknown
+source_family=unknown
+update_frequency=unknown
+freshness_policy=fixture_contract
+coverage_start=unknown
+coverage_end=unknown
+row_count=None
+schema_fields:
+- news_item_id:TEXT
+- source_family:TEXT
+- source_endpoint:TEXT
+- source_mode:TEXT
+- source_document_type:TEXT
+- market_scope:TEXT
+- company_code:TEXT
+- company_name:TEXT
+- event_date:DATE
+- event_time:TEXT
+- original_spoke_date:TEXT
+- original_spoke_time:TEXT
+- subject:TEXT
+- seq_no:TEXT
+- skey:TEXT
+- detail_available:BOOLEAN
+- detail_labels_present:JSONB
+- full_body_stored:BOOLEAN
+- raw_html_stored:BOOLEAN
+- body_storage_policy:TEXT
+- parser_status:TEXT
+- confidence:DOUBLE PRECISION
+- data_gaps:JSONB
+- lineage:JSONB
+- not_investment_advice:BOOLEAN
+- write_eligible:BOOLEAN
+- created_at:TIMESTAMP
+- updated_at:TIMESTAMP
+available_fields:
+- data_gap:available_fields_not_declared
+known_gaps:
+- none_declared
+usage_example:
+- GET /v2/datasets/mops-announcement-raw?limit=3
+
+[dataset:mops_major_event]
+display_name=MOPS Major Events (alias route)
+route_path=/v2/datasets/mops-major-event
+status=active
+availability=available
+production_ready=false
+private_beta=false
+preview=false
+domain=unknown
+category=unknown
+source_family=unknown
+update_frequency=unknown
+freshness_policy=fixture_contract
+coverage_start=unknown
+coverage_end=unknown
+row_count=None
+schema_fields:
+- id:BIGINT
+- ticker:TEXT
+- market:TEXT
+- event_date:DATE
+- event_time:TEXT
+- event_type:TEXT
+- title:TEXT
+- body:TEXT
+- source_url:TEXT
+- provider:TEXT
+- source_role:TEXT
+- lineage:JSONB
+- is_placeholder:BOOLEAN
+- created_at:TIMESTAMP
+- updated_at:TIMESTAMP
+- article_clause:TEXT
+- event_classification:TEXT
+- event_description:TEXT
+- source_authority:TEXT
+- event_version:TEXT
+- mops_metadata_json:JSONB
+available_fields:
+- data_gap:available_fields_not_declared
+known_gaps:
+- none_declared
+usage_example:
+- GET /v2/datasets/mops-major-event?limit=3
+
+[dataset:multi_ticker_research]
+display_name=Multi Ticker Research
+route_path=/v2/datasets/multi-ticker-research
+status=planned
+availability=building
+production_ready=false
+private_beta=false
+preview=false
+domain=unknown
+category=unknown
+source_family=unknown
+update_frequency=unknown
+freshness_policy=fixture_contract
+coverage_start=unknown
+coverage_end=unknown
+row_count=None
+schema_fields:
+- data_gap:schema_not_declared
+available_fields:
+- data_gap:available_fields_not_declared
+known_gaps:
+- none_declared
+usage_example:
+- GET /v2/datasets/multi-ticker-research?limit=3
+
+[dataset:news_article]
+display_name=News Article
+route_path=/v2/datasets/news-article
+status=partial
+availability=available
+production_ready=false
+private_beta=false
+preview=false
+domain=unknown
+category=unknown
+source_family=unknown
+update_frequency=unknown
+freshness_policy=fixture_contract
+coverage_start=unknown
+coverage_end=unknown
+row_count=None
+schema_fields:
+- news_id:TEXT
+- raw_news_id:TEXT
+- dedup_group_id:TEXT
+- source_id:TEXT
+- external_id:TEXT
+- title:TEXT
+- summary:TEXT
+- source_name:TEXT
+- source_url:TEXT
+- canonical_url:TEXT
+- published_at:TIMESTAMP
+- is_official:BOOLEAN
+- quality_score:DOUBLE PRECISION
+- language:TEXT
+- event_type:TEXT
+- content_hash:TEXT
+- data_gap:JSONB
+- lineage:JSONB
+- created_at:TIMESTAMP
+- updated_at:TIMESTAMP
+available_fields:
+- data_gap:available_fields_not_declared
+known_gaps:
+- none_declared
+usage_example:
+- GET /v2/datasets/news-article?limit=3
+
+[dataset:news_sentiment]
+display_name=News Sentiment
+route_path=/v2/datasets/news-sentiment
+status=planned
+availability=building
+production_ready=false
+private_beta=false
+preview=false
+domain=unknown
+category=unknown
+source_family=unknown
+update_frequency=unknown
+freshness_policy=fixture_contract
+coverage_start=unknown
+coverage_end=unknown
+row_count=None
+schema_fields:
+- classification_id:TEXT
+- news_id:TEXT
+- ticker:TEXT
+- event_type:TEXT
+- event_direction:TEXT
+- impact_horizon:TEXT
+- affected_metric:TEXT
+- confidence:DOUBLE PRECISION
+- reason:TEXT
+- model_version:TEXT
+- rule_version:TEXT
+- data_gap:JSONB
+- lineage:JSONB
+- created_at:TIMESTAMP
+- updated_at:TIMESTAMP
+available_fields:
+- data_gap:available_fields_not_declared
+known_gaps:
+- none_declared
+usage_example:
+- GET /v2/datasets/news-sentiment?limit=3
+
+[dataset:news_stock_link]
+display_name=News Stock Link
+route_path=/v2/datasets/news-stock-link
+status=partial
+availability=available
+production_ready=false
+private_beta=false
+preview=false
+domain=unknown
+category=unknown
+source_family=unknown
+update_frequency=unknown
+freshness_policy=fixture_contract
+coverage_start=unknown
+coverage_end=unknown
+row_count=None
+schema_fields:
+- mention_id:TEXT
+- news_id:TEXT
+- ticker:TEXT
+- company_name:TEXT
+- market:TEXT
+- mention_type:TEXT
+- confidence:DOUBLE PRECISION
+- evidence_text:TEXT
+- linking_method:TEXT
+- model_version:TEXT
+- rule_version:TEXT
+- data_gap:JSONB
+- lineage:JSONB
+- created_at:TIMESTAMP
+- updated_at:TIMESTAMP
+available_fields:
+- data_gap:available_fields_not_declared
+known_gaps:
+- none_declared
+usage_example:
+- GET /v2/datasets/news-stock-link?limit=3
+
+[dataset:report_markdown]
+display_name=Report Markdown
+route_path=/v2/datasets/report-markdown
+status=planned
+availability=building
+production_ready=false
+private_beta=false
+preview=false
+domain=unknown
+category=unknown
+source_family=unknown
+update_frequency=unknown
+freshness_policy=fixture_contract
+coverage_start=unknown
+coverage_end=unknown
+row_count=None
+schema_fields:
+- data_gap:schema_not_declared
+available_fields:
+- data_gap:available_fields_not_declared
+known_gaps:
+- none_declared
+usage_example:
+- GET /v2/datasets/report-markdown?limit=3
+
+[dataset:research_packet]
+display_name=Research Packet
+route_path=/v2/datasets/research-packet
+status=planned
+availability=building
+production_ready=false
+private_beta=false
+preview=false
+domain=unknown
+category=unknown
+source_family=unknown
+update_frequency=unknown
+freshness_policy=fixture_contract
+coverage_start=unknown
+coverage_end=unknown
+row_count=None
+schema_fields:
+- data_gap:schema_not_declared
+available_fields:
+- data_gap:available_fields_not_declared
+known_gaps:
+- none_declared
+usage_example:
+- GET /v2/datasets/research-packet?limit=3
+
+[dataset:return_index_daily]
+display_name=Return Index Daily
+route_path=/v2/datasets/return-index-daily
+status=active
+availability=available
+production_ready=false
+private_beta=false
+preview=false
+domain=unknown
+category=unknown
+source_family=unknown
+update_frequency=daily
+freshness_policy=fixture_contract
+coverage_start=unknown
+coverage_end=unknown
+row_count=None
+schema_fields:
+- id:BIGINT
+- market:TEXT
+- index_id:TEXT
+- index_name:TEXT
+- trade_date:DATE
+- return_index_value:NUMERIC(18, 6)
+- source_name:TEXT
+- source_url:TEXT
+- raw_source:JSONB
+- parsed_at_utc:TIMESTAMP
+- created_at:TIMESTAMP
+- updated_at:TIMESTAMP
+available_fields:
+- trade_date
+- market
+- index_id
+- index_name
+- return_index_value
+- source_name
+- source_url
+- not_investment_advice
+known_gaps:
+- none_declared
+usage_example:
+- GET /v2/datasets/return-index-daily?limit=3
+
+[dataset:securities_firm_master]
+display_name=Securities Firm Master
+route_path=/v2/datasets/securities-firm-master
+status=active
+availability=available
+production_ready=false
+private_beta=true
+preview=true
+domain=market_structure
+category=market_structure_reference
+source_family=TWSE_T187AP18
+update_frequency=reference_master_snapshot
+freshness_policy=fixture_contract
+coverage_start=2026-07-16
+coverage_end=2026-07-16
+row_count=64
+schema_fields:
+- id:BIGINT
+- broker_id:TEXT
+- broker_name:TEXT
+- tax_id:TEXT
+- region_code:TEXT
+- phone:TEXT
+- fax:TEXT
+- settlement_bank:TEXT
+- business_status:TEXT
+- business_type:TEXT
+- chairman:TEXT
+- general_manager:TEXT
+- admin_address:TEXT
+- note:TEXT
+- registered_capital_k:NUMERIC
+- paid_capital_k:NUMERIC
+- operating_capital_k:NUMERIC
+- report_date:DATE
+- change_date:DATE
+- margin_start_date:DATE
+- established_date:DATE
+- business_start_date:DATE
+- business_items:JSON
+- market:TEXT
+- source_provider:TEXT
+- source_role:TEXT
+- source_family:TEXT
+- lineage:JSON
+- created_at:TIMESTAMP
+- updated_at:TIMESTAMP
+available_fields:
+- broker_id
+- broker_name
+- tax_id
+- region_code
+- phone
+- fax
+- settlement_bank
+- business_status
+- business_type
+- chairman
+- general_manager
+- admin_address
+- note
+- registered_capital_k
+- paid_capital_k
+- operating_capital_k
+- report_date
+- change_date
+- margin_start_date
+- established_date
+- business_start_date
+- business_items
+- market
+- source_family
+- lineage
+known_gaps:
+- firm_level_master_not_branch_level
+- current_snapshot_reference_master
+- not_investment_advice
+usage_example:
+- GET /v2/datasets/securities-firm-master?limit=3
+
+[dataset:securities_lending]
+display_name=Securities Lending
+route_path=/v2/datasets/chip-deep-securities-lending-daily
+status=active
+availability=available
+production_ready=false
+private_beta=true
+preview=true
+domain=chip
+category=chip_deep
+source_family=official_twse_twt72u
+update_frequency=daily
+freshness_policy=fixture_contract
+coverage_start=2020-01-02
+coverage_end=2026-06-04
+row_count=1629223
+schema_fields:
+- id:BIGINT
+- ticker:TEXT
+- market:TEXT
+- trade_date:DATE
+- prev_lending_balance:NUMERIC(24, 6)
+- borrowed_volume:NUMERIC(24, 6)
+- returned_volume:NUMERIC(24, 6)
+- lending_balance:NUMERIC(24, 6)
+- close_price:NUMERIC(24, 6)
+- market_value:NUMERIC(24, 6)
+- provider:TEXT
+- source_role:TEXT
+- source_family:TEXT
+- lineage:JSONB
+- data_gaps:JSONB
+- created_at:TIMESTAMP
+- updated_at:TIMESTAMP
+available_fields:
+- ticker
+- market
+- trade_date
+- prev_lending_balance
+- borrowed_volume
+- returned_volume
+- lending_balance
+- close_price
+- market_value
+- provider
+- source_role
+- source_family
+- lineage
+- data_gaps
+known_gaps:
+- tpex_excluded
+- aggregate_row_excluded
+- security_master_mapping_gaps=261
+- source_gaps_unavailable_dates=785
+- delisted_lifecycle_not_integrated
+- not_adjusted_or_derived_features
+usage_example:
+- GET /v2/datasets/chip-deep-securities-lending-daily?limit=3
+
+[dataset:security_master]
+display_name=公司與證券主檔資料 / Security Master
+route_path=/v2/datasets/security-master
+status=active
+availability=available
+production_ready=false
+private_beta=true
+preview=true
+domain=identity
+category=security_master
+source_family=official_twse_tpex
+update_frequency=source_dependent_daily
+freshness_policy=fixture_contract
+coverage_start=2026-06-04
+coverage_end=2026-06-04
+row_count=1968
+schema_fields:
+- ticker:TEXT
+- name_zh:TEXT
+- name_en:TEXT
+- market:TEXT
+- security_type:TEXT
+- industry_category:TEXT
+- is_active:BOOLEAN
+- listing_date:DATE
+- delisting_date:DATE
+- source_provider:TEXT
+- source_role:TEXT
+- source_as_of_date:DATE
+- source_confidence:TEXT
+- lineage:JSONB
+- data_gaps:JSONB
+- created_at:TIMESTAMP
+- updated_at:TIMESTAMP
+- last_trading_date:DATE
+available_fields:
+- ticker
+- name_zh
+- market
+- security_type
+- industry_category
+- is_active
+- source_lineage
+- data_gaps
+known_gaps:
+- active_snapshot_only
+- not_point_in_time_complete
+- delisted_lifecycle_not_integrated
+- rename_ticker_change_not_integrated
+- tpex_historical_prices_not_included
+- survivorship_bias_warning_remains
+- support_internal_anchors_not_breadth_products:[internal],[internal]
+- not_investment_advice
+usage_example:
+- GET /v2/datasets/security-master?limit=3
+
+[dataset:short_sale_balance_control]
+display_name=Short Sale Balance Control
+route_path=/v2/datasets/short-sale-balance-control
+status=active
+availability=available
+production_ready=false
+private_beta=true
+preview=true
+domain=market_structure
+category=market_structure_reference
+source_family=TWSE_TWT93U
+update_frequency=daily_trading_day
+freshness_policy=fixture_contract
+coverage_start=2026-07-01
+coverage_end=2026-07-14
+row_count=11588
+schema_fields:
+- id:BIGINT
+- ticker:TEXT
+- trade_date:DATE
+- name:TEXT
+- ms_prev_balance:NUMERIC
+- ms_sell:NUMERIC
+- ms_buy:NUMERIC
+- ms_redeem:NUMERIC
+- ms_balance:NUMERIC
+- ms_next_limit:NUMERIC
+- sbl_prev_balance:NUMERIC
+- sbl_sell:NUMERIC
+- sbl_return:NUMERIC
+- sbl_adjust:NUMERIC
+- sbl_balance:NUMERIC
+- sbl_next_limit:NUMERIC
+- note:TEXT
+- market:TEXT
+- source_provider:TEXT
+- source_role:TEXT
+- source_family:TEXT
+- lineage:JSON
+- created_at:TIMESTAMP
+- updated_at:TIMESTAMP
+available_fields:
+- trade_date
+- ticker
+- name
+- ms_prev_balance
+- ms_sell
+- ms_buy
+- ms_redeem
+- ms_balance
+- ms_next_limit
+- sbl_prev_balance
+- sbl_sell
+- sbl_return
+- sbl_adjust
+- sbl_balance
+- sbl_next_limit
+- note
+- market
+- source_family
+- lineage
+known_gaps:
+- twse_only
+- recent_window_initial_load_full_history_backfill_pending
+- not_investment_advice
+usage_example:
+- GET /v2/datasets/short-sale-balance-control?limit=3
+
+[dataset:stock_profile]
+display_name=Stock Profile
+route_path=/v2/datasets/stock-profile
+status=active
+availability=available
+production_ready=false
+private_beta=false
+preview=false
+domain=unknown
+category=unknown
+source_family=unknown
+update_frequency=unknown
+freshness_policy=fixture_contract
+coverage_start=unknown
+coverage_end=unknown
+row_count=None
+schema_fields:
+- ticker:TEXT
+- market:TEXT
+- company_name:TEXT
+- english_name:TEXT
+- listing_date:DATE
+- industry:TEXT
+- sector:TEXT
+- exchange:TEXT
+- isin:TEXT
+- currency:TEXT
+- website:TEXT
+- company_status:TEXT
+- provider:TEXT
+- source_role:TEXT
+- lineage:JSONB
+- is_placeholder:BOOLEAN
+- created_at:TIMESTAMP
+- updated_at:TIMESTAMP
+available_fields:
+- data_gap:available_fields_not_declared
+known_gaps:
+- none_declared
+usage_example:
+- GET /v2/datasets/stock-profile?limit=3
+
+[dataset:subsidiary_investment]
+display_name=Subsidiary Investment
+description=母公司→轉投資事業與持股%；集團圖譜。holding_pct v1 未涵蓋、僅 XBRL 附註可得。
+route_path=/v2/datasets/subsidiary-investment
+status=active
+availability=available
+production_ready=false
+private_beta=false
+preview=false
+domain=unknown
+category=relation
+source_family=unknown
+update_frequency=unknown
+freshness_policy=fixture_contract
+coverage_start=unknown
+coverage_end=unknown
+row_count=None
+schema_fields:
+- id:BIGINT
+- parent_ticker:TEXT
+- invested_entity_name:TEXT
+- main_business:TEXT
+- region:TEXT
+- criterion:TEXT
+- fact_date:DATE
+- holding_pct:NUMERIC
+- market:TEXT
+- source_provider:TEXT
+- source_role:TEXT
+- source_family:TEXT
+- source_authority:TEXT
+- lineage:JSONB
+- data_gaps:JSONB
+- created_at:TIMESTAMP
+- updated_at:TIMESTAMP
+available_fields:
+- data_gap:available_fields_not_declared
+known_gaps:
+- none_declared
+usage_example:
+- GET /v2/datasets/subsidiary-investment?limit=3
+
+[dataset:taifex_atm_iv]
+display_name=TAIEX ATM Implied Volatility (derived)
+route_path=/v2/datasets/taifex-atm-iv
+status=active
+availability=available
+production_ready=false
+private_beta=true
+preview=true
+domain=derivatives
+category=derivatives_volatility
+source_family=derived_black_scholes_atm_iv
+update_frequency=per_trade_date
+freshness_policy=fixture_contract
+coverage_start=2009-01-05
+coverage_end=2026-06-04
+row_count=2674
+schema_fields:
+- trade_date:DATE
+- atm_iv:NUMERIC
+- spot:NUMERIC
+- atm_strike:NUMERIC
+- expiry_date:DATE
+- n_options:INTEGER
+- engine_version:TEXT
+- created_at:TIMESTAMP
+available_fields:
+- trade_date
+- atm_iv
+- spot
+- atm_strike
+- expiry_date
+- n_options
+- engine_version
+known_gaps:
+- derivation_verified_not_official_vix
+- official_vix_is_paid_edatashop
+- txo_source_missing_2020_2025
+- no_taiex_spot_2001_2008_engine_skips
+- not_investment_advice
+usage_example:
+- GET /v2/datasets/taifex-atm-iv?limit=3
+
+[dataset:taifex_final_settlement]
+display_name=TAIFEX Final Settlement
+route_path=/v2/datasets/futures-final-settlement
+status=active
+availability=available
+production_ready=false
+private_beta=true
+preview=true
+domain=derivatives
+category=derivatives_reference
+source_family=TAIFEX_FSP
+update_frequency=unknown
+freshness_policy=fixture_contract
+coverage_start=2026-07-15
+coverage_end=2026-07-15
+row_count=333
+schema_fields:
+- id:BIGINT
+- product_type:TEXT
+- contract:TEXT
+- contract_name:TEXT
+- contract_delivery_month:TEXT
+- settlement_date:DATE
+- settlement_price:NUMERIC
+- market:TEXT
+- source_provider:TEXT
+- source_role:TEXT
+- source_family:TEXT
+- lineage:JSON
+- created_at:TIMESTAMP
+- updated_at:TIMESTAMP
+available_fields:
+- data_gap:available_fields_not_declared
+known_gaps:
+- snapshot_source_latest_settlement_round
+- rolled_off_settlements_not_re_verifiable
+- not_investment_advice
+usage_example:
+- GET /v2/datasets/futures-final-settlement?limit=3
+
+[dataset:taifex_options_delta]
+display_name=TAIFEX Options Delta
+route_path=/v2/datasets/taifex-options-delta
+status=active
+availability=available
+production_ready=false
+private_beta=true
+preview=true
+domain=derivatives
+category=derivatives_reference
+source_family=TAIFEX_DAILYOPTIONSDELTA
+update_frequency=daily_trading_day
+freshness_policy=fixture_contract
+coverage_start=2026-07-15
+coverage_end=2026-07-15
+row_count=6080
+schema_fields:
+- id:BIGINT
+- trade_date:DATE
+- entity_key:TEXT
+- contract:TEXT
+- call_put:TEXT
+- contract_month_week:TEXT
+- strike_price:NUMERIC
+- delta:NUMERIC
+- contract_settlement_day:DATE
+- market:TEXT
+- source_provider:TEXT
+- source_role:TEXT
+- source_family:TEXT
+- lineage:JSON
+- created_at:TIMESTAMP
+- updated_at:TIMESTAMP
+available_fields:
+- trade_date
+- contract
+- call_put
+- contract_month_week
+- strike_price
+- delta
+- contract_settlement_day
+- market
+- source_family
+- lineage
+known_gaps:
+- latest_trading_day_snapshot_daily_accumulator
+- trade_date_stamped_from_sibling_option_daily_report
+- not_investment_advice
+usage_example:
+- GET /v2/datasets/taifex-options-delta?limit=3
+
+[dataset:taifex_put_call_ratio]
+display_name=TAIFEX Put/Call Ratio
+route_path=/v2/datasets/taifex-put-call-ratio
+status=active
+availability=available
+production_ready=false
+private_beta=true
+preview=true
+domain=derivatives
+category=derivatives_reference
+source_family=TAIFEX_PUTCALLRATIO
+update_frequency=daily_trading_day
+freshness_policy=fixture_contract
+coverage_start=2026-06-15
+coverage_end=2026-07-15
+row_count=21
+schema_fields:
+- id:BIGINT
+- trade_date:DATE
+- market:TEXT
+- put_volume:NUMERIC
+- call_volume:NUMERIC
+- put_call_volume_ratio:NUMERIC
+- put_oi:NUMERIC
+- call_oi:NUMERIC
+- put_call_oi_ratio:NUMERIC
+- source_provider:TEXT
+- source_role:TEXT
+- source_family:TEXT
+- lineage:JSON
+- created_at:TIMESTAMP
+- updated_at:TIMESTAMP
+available_fields:
+- trade_date
+- market
+- put_volume
+- call_volume
+- put_call_volume_ratio
+- put_oi
+- call_oi
+- put_call_oi_ratio
+- source_family
+- lineage
+known_gaps:
+- rolling_window_daily_accumulator_full_history_via_csv_pending
+- not_investment_advice
+usage_example:
+- GET /v2/datasets/taifex-put-call-ratio?limit=3
+
+[dataset:technical_daily]
+display_name=Technical Daily
+route_path=/v2/datasets/technical-indicators
+status=active
+availability=building
+production_ready=false
+private_beta=false
+preview=false
+domain=market
+category=market_technical
+source_family=official_twse_tpex
+update_frequency=unknown
+freshness_policy=fixture_contract
+coverage_start=2023-06-01
+coverage_end=2026-05-11
+row_count=615637
+schema_fields:
+- id:BIGINT
+- ticker:TEXT
+- market:TEXT
+- trade_date:DATE
+- indicator_basis:TEXT
+- close:NUMERIC(18, 6)
+- ma_5:NUMERIC(18, 6)
+- ma_20:NUMERIC(18, 6)
+- ma_60:NUMERIC(18, 6)
+- rsi_14:NUMERIC(18, 6)
+- macd_line:NUMERIC(18, 6)
+- macd_signal:NUMERIC(18, 6)
+- macd_histogram:NUMERIC(18, 6)
+- open:NUMERIC(18, 6)
+- high:NUMERIC(18, 6)
+- low:NUMERIC(18, 6)
+- volume:BIGINT
+- adjusted_close:NUMERIC(18, 6)
+- price_source:TEXT
+- provider:TEXT
+- source_role:TEXT
+- lineage:JSONB
+- created_at:TIMESTAMP
+- updated_at:TIMESTAMP
+- daily_return:NUMERIC(18, 8)
+- return_5d:NUMERIC(18, 8)
+- return_20d:NUMERIC(18, 8)
+- volatility_20d:NUMERIC(18, 8)
+- volume_avg_20:NUMERIC(20, 6)
+- data_gaps:JSONB
+- is_valid:BOOLEAN
+available_fields:
+- data_gap:available_fields_not_declared
+known_gaps:
+- strict_trusted_boundary:2025-10
+- 2025-11:trusted_partial_with_known_gaps
+- 2025-11:canonical_rows_trusted_but_month_incomplete
+- 2025-11:physical_key_conflicts=394
+- 2025-11:noncanonical_value_equivalent_but_key_blocks_canonical=287
+- 2025-11:noncanonical_value_drift=72
+- 2025-11:noncanonical_occupies_missing_canonical_key=35
+usage_example:
+- GET /v2/datasets/technical-indicators?limit=3
+
+[dataset:tpex_daily_price]
+display_name=TPEx Daily Price
+route_path=/v2/datasets/tpex-daily-price
+status=active
+availability=available
+production_ready=false
+private_beta=false
+preview=false
+domain=unknown
+category=unknown
+source_family=unknown
+update_frequency=daily
+freshness_policy=fixture_contract
+coverage_start=unknown
+coverage_end=unknown
+row_count=None
+schema_fields:
+- ticker:TEXT
+- market:TEXT
+- trade_date:DATE
+- open:DOUBLE PRECISION
+- high:DOUBLE PRECISION
+- low:DOUBLE PRECISION
+- close:DOUBLE PRECISION
+- volume_shares:BIGINT
+- turnover_value:BIGINT
+- trade_count:BIGINT
+- price_change:DOUBLE PRECISION
+- price_change_sign:TEXT
+- source_canonical:TEXT
+- source_name:TEXT
+- updated_at:TIMESTAMP
+- no_trade:BOOLEAN
+available_fields:
+- symbol
+- date
+- open
+- high
+- low
+- close
+- volume_shares
+known_gaps:
+- none_declared
+usage_example:
+- GET /v2/datasets/tpex-daily-price?limit=3
+
+[dataset:trading_calendar]
+display_name=Trading Calendar
+route_path=/v2/datasets/trading-calendar
+status=active
+availability=available
+production_ready=false
+private_beta=false
+preview=false
+domain=unknown
+category=unknown
+source_family=unknown
+update_frequency=unknown
+freshness_policy=fixture_contract
+coverage_start=unknown
+coverage_end=unknown
+row_count=None
+schema_fields:
+- trade_date:DATE
+- market:TEXT
+- is_trading_day:BOOLEAN
+- calendar_source:TEXT
+- derived_from_price:BOOLEAN
+- price_coverage_count:INTEGER
+- source_confidence:TEXT
+- data_gap_reason:TEXT
+- created_at:TIMESTAMP
+- updated_at:TIMESTAMP
+- closure_reason:TEXT
+available_fields:
+- data_gap:available_fields_not_declared
+known_gaps:
+- none_declared
+usage_example:
+- GET /v2/datasets/trading-calendar?limit=3
+
+[dataset:twse_daily_price]
+display_name=TWSE Daily Price
+route_path=/v2/datasets/twse-daily-price
+status=active
+availability=available
+production_ready=false
+private_beta=false
+preview=false
+domain=unknown
+category=unknown
+source_family=unknown
+update_frequency=daily
+freshness_policy=fixture_contract
+coverage_start=unknown
+coverage_end=unknown
+row_count=None
+schema_fields:
+- ticker:TEXT
+- market:TEXT
+- trade_date:DATE
+- open:DOUBLE PRECISION
+- high:DOUBLE PRECISION
+- low:DOUBLE PRECISION
+- close:DOUBLE PRECISION
+- volume_shares:BIGINT
+- turnover_value:BIGINT
+- trade_count:BIGINT
+- price_change:DOUBLE PRECISION
+- price_change_sign:TEXT
+- source_canonical:TEXT
+- source_name:TEXT
+- updated_at:TIMESTAMP
+- no_trade:BOOLEAN
+available_fields:
+- symbol
+- date
+- open
+- high
+- low
+- close
+- volume_shares
+known_gaps:
+- none_declared
+usage_example:
+- GET /v2/datasets/twse-daily-price?limit=3
+
+[dataset:valuation_core_daily]
+display_name=Valuation Core Daily
+route_path=/v2/datasets/valuation-core-daily
+status=active
+availability=available
+production_ready=false
+private_beta=true
+preview=true
+domain=fundamentals
+category=valuation
+source_family=official_mops_twse_valuation_core_daily
+update_frequency=daily
+freshness_policy=fixture_contract
+coverage_start=2023-06-01
+coverage_end=2026-05-28
+row_count=704522
+schema_fields:
+- ticker:TEXT
+- date:DATE
+- close:NUMERIC(20, 6)
+- shares_outstanding:NUMERIC(20, 4)
+- market_cap:NUMERIC(24, 4)
+- trailing_12m_revenue:NUMERIC(24, 4)
+- ps:NUMERIC(20, 6)
+- book_value_per_share:NUMERIC(20, 6)
+- pe:NUMERIC(20, 6)
+- pb:NUMERIC(20, 6)
+- dividend_per_share_ttm:NUMERIC(20, 6)
+- dividend_yield:NUMERIC(20, 6)
+- source_summary:JSONB
+- raw_payload:JSONB
+- notes:TEXT
+- created_at:TIMESTAMP
+- updated_at:TIMESTAMP
+available_fields:
+- ticker
+- date
+- close
+- shares_outstanding
+- market_cap
+- trailing_12m_revenue
+- ps
+- book_value_per_share
+- pe
+- pb
+- dividend_per_share_ttm
+- dividend_yield
+- source_summary
+- notes
+known_gaps:
+- coverage_limited_to_seeded_window:2023-06-01..2026-05-28
+- raw_payload_excluded_from_public_route
+- not_investment_advice
+usage_example:
+- GET /v2/datasets/valuation-core-daily?limit=3
+
+[dataset:valuation_data]
+display_name=Valuation Data
+route_path=/v2/datasets/valuation-data
+status=active
+availability=available
+production_ready=false
+private_beta=false
+preview=false
+domain=fundamentals
+category=valuation
+source_family=official_mops_twse
+update_frequency=daily
+freshness_policy=fixture_contract
+coverage_start=2023-06-01
+coverage_end=2026-05-15
+row_count=731820
+schema_fields:
+- ticker:TEXT
+- date:DATE
+- close:NUMERIC(20, 6)
+- shares_outstanding:NUMERIC(20, 4)
+- market_cap:NUMERIC(24, 4)
+- trailing_12m_revenue:NUMERIC(24, 4)
+- ps:NUMERIC(20, 6)
+- book_value_per_share:NUMERIC(20, 6)
+- pe:NUMERIC(20, 6)
+- pb:NUMERIC(20, 6)
+- dividend_per_share_ttm:NUMERIC(20, 6)
+- dividend_yield:NUMERIC(20, 6)
+- source_summary:JSONB
+- raw_payload:JSONB
+- notes:TEXT
+- created_at:TIMESTAMP
+- updated_at:TIMESTAMP
+available_fields:
+- symbol
+- as_of_date
+- pe_ratio
+- pb_ratio
+- earnings_yield
+- book_to_price
+- dividend_yield
+- market_cap
+- shares_outstanding
+- provider
+- source_role
+- lineage
+known_gaps:
+- broader_derived_facts_surface
+- distinct_from_valuation_core_daily_anchor
+- not_investment_advice
+usage_example:
+- GET /v2/datasets/valuation-data?limit=3
