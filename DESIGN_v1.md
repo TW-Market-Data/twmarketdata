@@ -96,7 +96,22 @@ route 不等於 key 的 6 支(SDK 用 `dataset_key` 當方法名,route 由 regis
 
 `403 temporarily_blocked` 是本次探測**自己觸發**出來的(4 併發掃 82 支即中),而且封鎖持續數十分鐘未解。因此 SDK **必須**內建預設併發上限與退避,否則使用者第一次跑批次就會被擋,還會誤以為是沒有權限。
 
-**這件事也限制了本文件的一項證據**:免 key 探測 82 支的結果,只有 22 支是可信的(3 支回 200 且有列、2 支回 200 空、17 支回乾淨的 401 missing_api_key),其餘 **60 支在被封鎖期間探測,結果不可用**。`datasets_82.csv` 的 `free_tier_probe_2026_08_12` 欄把這 60 支標為 `unknown_rate_limited` —— **沒有拿 403 當成「需要 key」來充數**。這欄要等冷卻後以低速率重跑才能補齊,是實作前的第一件事。
+第一輪探測有 60 支落在封鎖期間,結果不可用;**已於冷卻後以每 4 秒一發重跑補齊,零封鎖、82 支全數取得可信結果**(過程中沒有拿 403 當成「需要 key」充數)。
+
+### 2.6 免 key 實際可跑的是哪些(82 支全測)
+
+| 結果 | 支數 |
+|---|---|
+| 免 key 且回到資料 | **16** |
+| 免 key 回 200 但空集合 | 3 |
+| 需要 key(乾淨 401) | 63 |
+
+免 key 有資料的 16 支全部是 `tier=free`,README 範例只能綁在這 16 支上:
+`security_master`、`trading_calendar`、`monthly_revenue`、`twse_daily_price`、`index_constituents`、`trading_rules_reference`、`bond_convertible_reference`、`broker_branch_reference`、`warrants_reference`、`company_industry_exposures`、`company_peer_groups`、`securities_firm_master`、`fund_etf_metadata`、`issuer_classification`、`stock_delisting_lifecycle`、`stock_split_par_value_events`。
+
+回 200 空集合的 3 支,空是**正確的**不是缺口:`tpex_daily_price`(2330 在上市不在上櫃)、`market_index`(要 `index_code` 不吃 `symbol`)、`investor_conference_calendar`(2330 在該滾動視窗內無場次)。SDK 不會把這種空當成 gap 回報。
+
+**另有 3 支標示 `tier=free` 卻回 401**:`valuation_data`、`issuer_profiles`(兩者皆 active)、`industry_index`(registry_status=planned)。已列入 `api_inconsistencies.md` 第 K 項。
 
 ---
 

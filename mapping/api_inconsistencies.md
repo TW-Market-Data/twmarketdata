@@ -137,3 +137,45 @@
 **影響**:PIT 對齊在這幾支上目前無法真正執行。
 
 **SDK 對策**:執行期檢查該欄是否存在且非全 null,否則發 `PITDataMissingWarning` / raise `PointInTimeUnavailable`,不假裝通過。
+
+---
+
+## K. 三支標示 `tier=free` 的資料集實際回 401
+
+82 支全數以免 key、每 4 秒一發的低速率探測(2026-08-12,零封鎖):19 支回 200、63 支回 401。其中**標示為 free 卻回 401** 的有三支:
+
+| dataset_key | registry_status | 探測結果 |
+|---|---|---|
+| `valuation_data` | active | 401 missing_api_key |
+| `issuer_profiles` | active | 401 missing_api_key |
+| `industry_index` | planned | 401 missing_api_key |
+
+`industry_index` 是 `planned`,401 合理。另兩支是 `active` + `free`,tier 宣告與實際門檻對不上。
+
+**影響**:`tier` 欄位無法單獨用來判斷「這支免 key 能不能跑」,SDK 的免費層範例只能以實測結果為準。
+
+**SDK 對策**:`datasets_82.csv` 另立 `free_tier_probe_2026_08_12` 欄記錄實測,README 範例只綁實測可跑的 16 支;`tier` 僅作為錯誤訊息裡的「需要哪個方案」提示。
+
+---
+
+## L. 已退役的 gateway 仍是既有 0.1.0 SDK 的預設 base_url
+
+`packages/python-sdk` 的 0.1.0 預設 `base_url="https://twmarketdata.com"`,該路徑現已回:
+
+```
+HTTP/2 410
+{"error":{"code":"endpoint_retired","message":"This gateway is retired. Call the TW Market Data API
+directly at https://api.twmarketdata.com/v2/datasets/... with your sk_live_ key in the X-API-Key
+header. Keys issued in the dashboard authenticate there, never here."}}
+```
+
+**注意兩個 host 的錯誤體形狀不同**:
+
+| host | 錯誤形狀 |
+|---|---|
+| `twmarketdata.com`(已退役) | `{"error": {"code": ..., "message": ...}}` — error 是物件 |
+| `api.twmarketdata.com`(現行) | `{"error": "missing_api_key", "message": ...}` — error 是字串 |
+
+0.1.0 的錯誤解析是照**前者**寫的,打現行 API 時 `_extract_error_code` / `_extract_error_message` 一律回 `None`,錯誤訊息會退化成 `Request failed with status 401.`,遺失 server 給的中文說明。
+
+**建議**:現行 API 的錯誤體改為與 gateway 一致的巢狀形狀(或反過來統一成扁平),二選一即可,重點是**同一個產品只有一種錯誤形狀**。
