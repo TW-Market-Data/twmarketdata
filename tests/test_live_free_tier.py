@@ -81,26 +81,44 @@ def test_declared_free_but_actually_gated_dataset_still_401s(client):
         client.dataset("valuation_data", ticker="2330", limit=1)
 
 
-def test_monthly_revenue_knowledge_columns_reflect_production(client):
-    """Tracks WORKORDER_API_expose_knowledge_date rollout.
+def test_monthly_revenue_knowledge_date_is_live_and_imputed(client):
+    """WORKORDER_API_expose_knowledge_date phase 1, as deployed for this dataset.
 
-    Before Phase 1 ships, the response has no knowledge_date and the SDK must
-    refuse as_of by default. After it ships, knowledge_date appears and as_of
-    starts working with an imputed-date warning. Either way the SDK is honest;
-    this test records which world we are in.
+    Shipped for monthly_revenue on 2026-08-12. If knowledge_date ever disappears
+    from this response, this fails loudly rather than quietly reverting to the
+    refusal path -- a rollback on the API side is something we want to hear about.
     """
-    rows = client.dataset("monthly_revenue", ticker="2330", limit=3, raw=True)
     from twmd.envelope import extract_rows
-    extracted, _ = extract_rows(rows)
+    extracted, _ = extract_rows(
+        client.dataset("monthly_revenue", ticker="2330", limit=3, raw=True))
     assert extracted, "no rows returned for 2330"
+    assert all("knowledge_date" in r for r in extracted), \
+        "knowledge_date vanished from monthly_revenue; the API rolled back"
+    assert all(r.get("kd_source") == "statutory_deadline" for r in extracted)
 
-    has_kd = any("knowledge_date" in r for r in extracted)
-    if not has_kd:
-        with pytest.raises(twmd.PointInTimeUnavailable):
-            client.dataset("monthly_revenue", ticker="2330", as_of="2026-06-30")
-    else:
-        with pytest.warns(twmd.ImputedKnowledgeDateWarning):
-            client.dataset("monthly_revenue", ticker="2330", as_of="2026-06-30")
+
+def test_monthly_revenue_as_of_filters_via_server_knowledge_date(client):
+    """The registry calls this dataset unsafe; the server's column overrides that.
+
+    June revenue carries knowledge_date 2026-07-10, so an as_of of 2026-06-30
+    must drop it. That single row is the look-ahead the mechanism exists for.
+    """
+    with pytest.warns(twmd.ImputedKnowledgeDateWarning):
+        df = client.dataset("monthly_revenue", ticker="2330", as_of="2026-06-30")
+
+    meta = client.last_meta
+    assert meta.as_of_applied is True
+    assert meta.as_of_field == "knowledge_date"
+    # Every row the API returned was imputed, and at least one was filtered out.
+    assert meta.knowledge_date_imputed_rows > len(df)
+    assert meta.knowledge_date_sources == ["statutory_deadline"]
+    assert len(df) > 0
+    assert max(df["knowledge_date"]) <= "2026-06-30"
+
+
+def test_a_dataset_with_no_knowledge_axis_still_refuses_without_a_request(client):
+    with pytest.raises(twmd.PointInTimeUnavailable):
+        client.dataset("company_peer_groups", as_of="2026-06-30")
 
 
 @pytest.mark.skipif(not os.environ.get("TWMD_LIVE_ALL"),

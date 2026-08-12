@@ -63,14 +63,15 @@ twmd.capabilities("monthly_revenue")
 ```python
 c.balance_sheet(ticker="2330", as_of="2023-06-30")   # server-side replay
 
-c.monthly_revenue(ticker="2330", as_of="2023-06-30")
+c.company_peer_groups(as_of="2023-06-30")
 # raises PointInTimeUnavailable:
-#   knowledge field 'as_of_date' declared but point_in_time_safe=false; local
-#   filtering on it may look ahead, so as_of is refused unless the caller opts
-#   in explicitly
+#   this dataset declares no knowledge-time axis, so there is no honest way to
+#   replay it to a past date
 ```
 
-That refusal is the feature. `monthly_revenue.as_of_date` is the revenue **period**, not the announcement date — June revenue is disclosed in July. Filtering on it would mark June revenue as known on June 30, which is precisely the look-ahead bias `as_of` exists to prevent. Rather than hand back a frame that looks like a replay, the SDK stops.
+That refusal is the feature. Take `monthly_revenue`: its declared `as_of_date` is the revenue **period**, not the announcement date — June revenue is disclosed in July. Filtering on it would mark June revenue as known on June 30, which is precisely the look-ahead `as_of` exists to prevent. So the SDK will not filter on that column.
+
+It does not refuse blindly, though. The registry is a snapshot and the API is not, so for these datasets the SDK makes the request and looks: if the response carries a real server-supplied `knowledge_date`, that outranks the classification and the query is answered. `monthly_revenue` returns one as of 2026-08-12, so `as_of="2026-06-30"` now correctly drops the June figure (knowledge date 2026-07-10) and keeps May. When no such column comes back, the call raises — and says it checked.
 
 Five states, one per dataset, all visible in `capabilities()`:
 

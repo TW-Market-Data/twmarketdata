@@ -25,21 +25,35 @@ if len(df):
 
 print()
 print("=" * 72)
-print("2. A dataset where it is NOT honest -- and the SDK says so")
+print("2. A dataset the registry calls unsafe -- decided on the response")
 print("=" * 72)
 caps = twmd.capabilities("monthly_revenue")
 print("monthly_revenue   as_of=%s  point_in_time_safe=%s  knowledge field=%s"
       % (caps["as_of"], caps["point_in_time_safe"], caps["knowledge_time_field"]))
-try:
-    c.monthly_revenue(ticker="2330", as_of="2026-06-30")
-except PointInTimeUnavailable as exc:
-    print("\nrefused:\n  %s" % exc)
+with warnings.catch_warnings(record=True) as caught:
+    warnings.simplefilter("always")
+    try:
+        df = c.monthly_revenue(ticker="2330", as_of="2026-06-30")
+        print("rows knowable on 2026-06-30: %d" % len(df))
+        print("field used: %s" % c.last_meta.as_of_field)
+        print("latest knowledge_date kept: %s" % max(df["knowledge_date"]))
+        for w in caught:
+            if "Imputed" in w.category.__name__:
+                print("\n  %s: %s" % (w.category.__name__, str(w.message)[:180]))
+    except PointInTimeUnavailable as exc:
+        print("\nrefused:\n  %s" % exc)
 
 print("""
-Why: as_of_date is the revenue PERIOD, not the announcement date. June revenue
-is not disclosed until July. Filtering on it would mark June revenue as known on
-June 30 -- the exact look-ahead as_of exists to prevent. So the SDK refuses
-rather than returning a frame that merely looks replayed.""")
+Why this dataset is special: its DECLARED knowledge field, as_of_date, is the
+revenue PERIOD, not the announcement date. June revenue is not disclosed until
+July, so filtering on the period would mark it known on June 30 -- the exact
+look-ahead as_of exists to prevent. The SDK will not filter on that column.
+
+But the API now supplies a real knowledge_date for this dataset, and a
+server-supplied knowledge date outranks the static classification. So the SDK
+makes the request, finds it, and answers -- dropping the June figure, whose
+knowledge date is 2026-07-10. If the column were absent it would raise instead,
+and say that it checked.""")
 
 print("=" * 72)
 print("3. Opting in anyway, with eyes open")

@@ -226,7 +226,7 @@ class Meta:
 |---|---|---|
 | `server` | 16 | 透傳 `as_of` / `as_of_date`,由 server 過濾 |
 | `client` | 45 | server 沒有 as_of,但 `point_in_time_safe=true` 且 `knowledge_time_field` 存在於已發布 schema → 取回後在本地依該欄過濾 |
-| `client_unsafe` | 8 | 有宣告 knowledge 欄位,但 `point_in_time_safe=false` → **預設拒絕**,需明確 `as_of_policy="declared_field"` 才放行 |
+| `client_unsafe` | 8 | 有宣告 knowledge 欄位,但 `point_in_time_safe=false` → **先送請求再決定**:回應帶 server `knowledge_date` 就用它過濾(並發 imputed 警告);沒有才拒絕。`as_of_policy="declared_field"` 可強制用宣告欄位 |
 | `client_unverified` | 5 | 宣告了 knowledge 欄位,但該欄位不在已發布 schema → **執行期檢查**:回應列裡真有該欄就照 client 模式過濾,沒有就 `PointInTimeUnavailable` |
 | `unsupported` | 8 | 整表無時間軸,或官方 describe 明講 as_of 不成立 → **直接 raise `PointInTimeUnavailable`** |
 

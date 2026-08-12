@@ -36,15 +36,50 @@ def test_as_of_refused_on_a_route_that_accepts_it_but_cannot_mean_it():
         resolve_mode(info, None)
 
 
-def test_monthly_revenue_as_of_refused_by_default():
-    # as_of_date is the revenue PERIOD, not the announcement date. Filtering on
-    # it would treat June revenue as known on June 30 when it is disclosed in July.
+def test_client_unsafe_probes_instead_of_refusing_outright():
+    """The registry is a snapshot; the API is not.
+
+    knowledge_date is rolling out dataset by dataset, so refusing before looking
+    would make the refusal message's own promise permanently false. The decision
+    moves to the response.
+    """
+    assert resolve_mode(twmd.get("monthly_revenue"), None) == "client_unsafe_probe"
+
+
+def test_probe_refuses_when_the_response_has_no_knowledge_date(session):
+    from conftest import FakeResponse, rows_envelope
+    c = twmd.Client(session=session)
+    session.queue = [FakeResponse(rows_envelope([{"month": "2026-06", "revenue": 1}]))]
     with pytest.raises(PointInTimeUnavailable) as exc:
-        resolve_mode(twmd.get("monthly_revenue"), None)
+        c.monthly_revenue(ticker="2330", as_of="2026-06-30")
+    assert "carries none" in str(exc.value)
     assert "declared_field" in str(exc.value)
+    # The refusal must not promise something it did not check.
+    assert "restriction lifts" not in str(exc.value)
 
 
-def test_unsafe_as_of_available_only_via_explicit_opt_in():
+def test_probe_filters_when_the_server_supplies_knowledge_date(session):
+    """Phase 1 shipped for monthly_revenue on 2026-08-12; verified live.
+
+    June revenue carries knowledge_date 2026-07-10, so an as_of of 2026-06-30
+    must drop it -- that row is the look-ahead the whole mechanism exists for.
+    """
+    from conftest import FakeResponse, rows_envelope
+    c = twmd.Client(session=session)
+    session.queue = [FakeResponse(rows_envelope([
+        {"month": "2026-06", "knowledge_date": "2026-07-10",
+         "kd_imputed": True, "kd_source": "statutory_deadline"},
+        {"month": "2026-05", "knowledge_date": "2026-06-10",
+         "kd_imputed": True, "kd_source": "statutory_deadline"},
+    ]))]
+    with pytest.warns(ImputedKnowledgeDateWarning):
+        df = c.monthly_revenue(ticker="2330", as_of="2026-06-30")
+    assert len(df) == 1
+    assert c.last_meta.as_of_applied is True
+    assert c.last_meta.as_of_field == "knowledge_date"
+
+
+def test_opt_in_still_forces_the_declared_field_without_probing():
     assert resolve_mode(twmd.get("monthly_revenue"), "declared_field") == "client_unsafe"
 
 

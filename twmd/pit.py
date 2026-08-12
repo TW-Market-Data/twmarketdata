@@ -8,14 +8,27 @@ the response actually contains:
 ``client_unsafe``     a knowledge column is declared but the dataset is flagged
                       ``point_in_time_safe=false``, meaning that column is a
                       period / effective date / observation date rather than a
-                      disclosure date. Filtering on it would reintroduce exactly
-                      the look-ahead ``as_of`` exists to prevent, so it is
-                      refused unless the caller passes
-                      ``as_of_policy="declared_field"``.
+                      disclosure date. Filtering on *that* column would
+                      reintroduce exactly the look-ahead ``as_of`` exists to
+                      prevent. The request is still made, because a server-side
+                      ``knowledge_date`` outranks the static classification --
+                      see PROBE below. Only if the response has no usable
+                      knowledge_date is the call refused, and
+                      ``as_of_policy="declared_field"`` forces the declared
+                      column anyway.
 ``client_unverified`` a knowledge column is declared but does not appear in the
                       published schema; verified against the returned rows at
                       runtime.
 ``unsupported``       no knowledge axis at all; refused.
+
+PROBE
+    The registry is a snapshot; the API is not. ``knowledge_date`` is being
+    rolled out dataset by dataset, so a dataset the registry calls unsafe may
+    already be answerable. Refusing before looking would make the promise in the
+    refusal message ("if the API now returns a knowledge_date, this restriction
+    lifts") permanently false. So ``client_unsafe`` costs one request before it
+    refuses. ``unsupported`` still refuses without one -- those datasets declare
+    no knowledge axis at all.
 
 Two things override the static mode at runtime:
 
@@ -39,7 +52,8 @@ from .meta import (ImputedKnowledgeDateWarning, Meta, PITDataMissingWarning,
 from .registry import DatasetInfo
 
 __all__ = ["KNOWLEDGE_DATE_FIELD", "KD_IMPUTED_FIELD", "KD_SOURCE_FIELD",
-           "resolve_mode", "apply_as_of", "scan_knowledge_dates"]
+           "resolve_mode", "apply_as_of", "scan_knowledge_dates", "resolve_field",
+           "refuse_or_filter", "unsafe_refusal"]
 
 KNOWLEDGE_DATE_FIELD = "knowledge_date"
 KD_IMPUTED_FIELD = "kd_imputed"
@@ -93,15 +107,34 @@ def resolve_mode(info: DatasetInfo, as_of_policy: Optional[str]) -> str:
                                "is no honest way to replay it to a past date",
         )
     if mode == "client_unsafe" and as_of_policy != _OPT_IN:
-        raise PointInTimeUnavailable(
-            info.key,
-            "%s Query without as_of and align on the disclosure date yourself, or pass "
-            "as_of_policy=%r to filter on the declared field anyway and accept the "
-            "look-ahead risk. If the API now returns a knowledge_date column for this "
-            "dataset, that column is used automatically and this restriction lifts."
-            % (info.as_of_note or "point_in_time_safe=false.", _OPT_IN),
-        )
+        # Do not refuse yet: the response may carry a server-side knowledge_date,
+        # which outranks this classification. Decided in refuse_or_filter().
+        return "client_unsafe_probe"
     return mode
+
+
+def refuse_or_filter(info: DatasetInfo, rows: Sequence[Mapping[str, Any]]) -> bool:
+    """After the request: may a ``client_unsafe`` dataset be filtered after all?
+
+    True when the rows carry a usable server-side ``knowledge_date``. False
+    means the caller gets :class:`PointInTimeUnavailable` -- raised by the
+    client, which has the message context.
+    """
+    kd = scan_knowledge_dates(rows)
+    return bool(kd["present"] and kd["non_null"])
+
+
+def unsafe_refusal(info: DatasetInfo) -> PointInTimeUnavailable:
+    """The refusal used once a probe has shown no knowledge_date is available."""
+    return PointInTimeUnavailable(
+        info.key,
+        "%s The response was checked for a server-supplied knowledge_date column, "
+        "which would have lifted this restriction, and it carries none. Query "
+        "without as_of and align on the disclosure date yourself, or pass "
+        "as_of_policy=%r to filter on the declared field anyway and accept the "
+        "look-ahead risk."
+        % (info.as_of_note or "point_in_time_safe=false.", _OPT_IN),
+    )
 
 
 def scan_knowledge_dates(rows: Sequence[Mapping[str, Any]]) -> Dict[str, Any]:

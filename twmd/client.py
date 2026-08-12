@@ -21,7 +21,8 @@ from .errors import FreeTierSymbolError, TwmdConfigError, UnsupportedParameterEr
 from .frame import to_frame
 from .meta import (DatasetStatusWarning, Gap, ImputedKnowledgeDateWarning, Meta,
                    TruncatedResultWarning)
-from .pit import apply_as_of, resolve_mode, scan_knowledge_dates
+from .pit import (apply_as_of, refuse_or_filter, resolve_mode, scan_knowledge_dates,
+                  unsafe_refusal)
 from .registry import DatasetInfo
 
 __all__ = ["Client", "TWMarketDataClient"]
@@ -190,6 +191,13 @@ class Client(DatasetMethods, LegacyClientMixin):
                     % (requested, use_limit))
             warnings.warn(note, TruncatedResultWarning, stacklevel=4)
             meta.warnings.append(note)
+
+        if as_of and mode == "client_unsafe_probe":
+            # The registry called this dataset unsafe, but a server-supplied
+            # knowledge_date outranks that. Decide on the rows, not the snapshot.
+            if not refuse_or_filter(info, rows):
+                raise unsafe_refusal(info)
+            mode = "client_unsafe"
 
         if as_of and mode and mode != "server":
             rows = apply_as_of(rows, info=info, as_of=as_of, mode=mode,

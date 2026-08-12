@@ -89,7 +89,16 @@ Still working, warning on use: `Client.get_dataset` / `get_all` / `iter_pages` /
   carries `kd_imputed=true` with `kd_source=statutory_deadline`. Not one
   observed announcement timestamp. `as_of` on these datasets now warns even in
   server mode, so nobody running a server-side PIT backtest is the only party
-  not told. `monthly_revenue` still has no knowledge_date, so its refusal stands.
+  not told. Phase 1 then reached `monthly_revenue` as well.
+- **`client_unsafe` datasets are probed, not refused outright.** The registry is
+  a snapshot and the API is not: `knowledge_date` is rolling out dataset by
+  dataset. Refusing before making the request left the refusal message's own
+  promise ("if the API now returns a knowledge_date, this restriction lifts")
+  permanently false. These datasets now cost one request before refusing, and
+  when the response carries a real knowledge_date the query is answered with the
+  imputed-date warning. Verified live on `monthly_revenue`: `as_of=2026-06-30`
+  drops the June figure, whose knowledge date is 2026-07-10. Datasets with no
+  declared knowledge axis at all still refuse without a request.
 - **`report_date` is null on every income-statement row**, confirming the
   upstream writer gap on live paid data — which is why the knowledge date has to
   be imputed in the first place.

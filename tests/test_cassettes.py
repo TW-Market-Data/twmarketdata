@@ -117,12 +117,15 @@ def test_knowledge_date_is_live_and_entirely_imputed(dataset):
     assert scan["sources"] == ["statutory_deadline"]
 
 
-def test_monthly_revenue_still_has_no_knowledge_date():
-    """The other half of phase 1 has not shipped, so the refusal must stand."""
-    from twmd.errors import PointInTimeUnavailable
+def test_monthly_revenue_is_probed_not_refused_outright():
+    """Phase 1 reached monthly_revenue on 2026-08-12.
+
+    The registry still classifies it client_unsafe -- its declared as_of_date is
+    a period, not a disclosure date -- but the server now supplies a real
+    knowledge_date, so the decision belongs to the response.
+    """
     from twmd.pit import resolve_mode
-    with pytest.raises(PointInTimeUnavailable):
-        resolve_mode(twmd.get("monthly_revenue"), None)
+    assert resolve_mode(twmd.get("monthly_revenue"), None) == "client_unsafe_probe"
 
 
 def test_income_statement_report_date_is_empty_as_documented():
