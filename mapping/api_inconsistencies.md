@@ -417,7 +417,7 @@ x-request-id: req_6f95b7d164e248f1
 
 ---
 
-## V. 標示 `developer` 的 key 仍拿不到 `developer` 級資料集
+## V. entitlement 是 per-key 的,tier 標籤無法預測(修訂 2026-08-12)
 
 2026-08-12 核發一把標示為 **developer / 6 datasets** 的 key。對三支 `developer` 級資料集實測:
 
@@ -431,10 +431,20 @@ x-request-id: req_6f95b7d164e248f1
 
 同一把 key 可正常讀取 `company_news`(pro)、`valuation_core_daily`(pro)、`price_move_context`(starter)。
 
-**可能的解釋**(我無法從外部分辨):key 的 tier 標籤與實際 entitlement 清單是兩套資料;或「6 datasets」的清單不含這三支。無論何者,**tier 標籤都不足以預測 entitlement**。
+**後續(同日)**:另一把新鑄的 developer 拋棄金鑰對 `/v2/datasets/etf-holdings` **回 200 + 真資料**。兩件事同時成立,不互相矛盾:
+
+| key | `etf-holdings` |
+|---|---|
+| max(受限測試 key) | 402 `not_entitled_for_dataset` |
+| 標示 developer / 6 datasets 的那把 | 402(重現於 2026-08-12,`x-request-id: req_45c82a1f872e4e3d`) |
+| 新鑄的 developer 拋棄金鑰 | **200 + 真資料** |
+
+所以本項的結論要收斂成:**entitlement 綁在個別 key 上,而 key 上的 tier 標籤不保證對應的 entitlement 已經寫入。** 原先的標題(「developer 級 key 拿不到 developer 級資料集」)講得太廣,已修正 —— 正確描述是「**曾有兩把 key,其中一把標示為 developer,實際 entitlement 不含該 tier 的資料集**」。
 
 **影響**:`twmd.capabilities(...)["tier"]` 只能當提示,不能當「這把 key 能不能讀」的判斷依據 —— 與第 K 項(標 free 卻回 401)是同一個病在付費層的版本。
 
-**SDK 對策**:不從 tier 推論可讀性;`TierRequiredError` 保留 server 原文。
+**SDK 對策**:不從 tier 推論可讀性(這點不因上面的修訂而改變 —— 反而更成立);`TierRequiredError` 保留 server 原文。
+
+**附註**:63 支付費資料集的錄製中**沒有出現任何 403**(52×200、10×402、1×400)。若 catalog 形狀缺陷會以 403 呈現,那條路徑在本次錄製中沒有被觸發。
 
 **建議**:錯誤訊息應指出**這把 key 目前的 entitlement 清單**,而不是重述資料集的 tier 標籤 —— 現在的訊息會讓已經買了 developer 的人以為自己沒買。
