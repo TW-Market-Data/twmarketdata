@@ -17,7 +17,8 @@ from ._http import Response, Transport
 from ._legacy import LegacyClientMixin
 from ._methods import DatasetMethods
 from .envelope import extract_count, extract_gaps, extract_provenance, extract_rows
-from .errors import FreeTierSymbolError, TwmdConfigError, UnsupportedParameterError
+from .errors import (FreeTierSymbolError, TwmdConfigError,
+                     UnsupportedParameterError, ValidationError)
 from .frame import to_frame
 from .meta import (DatasetStatusWarning, Gap, ImputedKnowledgeDateWarning, Meta,
                    TruncatedResultWarning)
@@ -178,8 +179,22 @@ class Client(DatasetMethods, LegacyClientMixin):
         if info.supports_data_gaps:
             params["include_data_gaps"] = "true"
 
-        rows, response, pages, offset_ignored = self._fetch(
-            info, params, use_limit, paginate, offset)
+        try:
+            rows, response, pages, offset_ignored = self._fetch(
+                info, params, use_limit, paginate, offset)
+        except ValidationError as exc:
+            # The server says a filter is missing without naming it. Say which
+            # ones were measured to work rather than leaving the caller guessing.
+            if exc.error_code == "missing_required_filter" and info.required_filters:
+                raise ValidationError(
+                    "%s This dataset requires one of these filters, none of which the "
+                    "API spec declares: %s. Measured %s."
+                    % (exc.message, ", ".join(info.required_filters),
+                       registry.REGISTRY_MEASURED_ON),
+                    status_code=exc.status_code, error_code=exc.error_code,
+                    request_id=exc.request_id, dataset=info.key, details=exc.details,
+                ) from exc
+            raise
         if raw:
             self.last_response = response
             return response.payload

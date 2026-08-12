@@ -360,3 +360,24 @@ def test_the_correction_does_not_loop(session):
         with pytest.raises(twmd.ValidationError):
             c.dataset("margin_system_stats")
     assert len(session.calls) <= 3
+
+
+def test_missing_required_filter_error_names_the_filters_that_work(session):
+    # The server says a filter is missing but not which one, and the OpenAPI
+    # declares none as required. Measured working sets are in the registry.
+    c = twmd.Client(session=session, max_retries=0)
+    session.queue = [FakeResponse({"error": "missing_required_filter",
+                                   "message": "Missing required filter"}, status_code=400)]
+    with pytest.raises(twmd.ValidationError) as exc:
+        c.dataset("interest_rate_snapshots")
+    assert "rate_family" in str(exc.value) and "rate_code" in str(exc.value)
+    assert exc.value.error_code == "missing_required_filter"
+
+
+def test_the_hint_is_not_invented_for_datasets_without_a_known_requirement(session):
+    c = twmd.Client(session=session, max_retries=0)
+    session.queue = [FakeResponse({"error": "missing_required_filter",
+                                   "message": "Missing required filter"}, status_code=400)]
+    with pytest.raises(twmd.ValidationError) as exc:
+        c.dataset("monthly_revenue", ticker="2330")
+    assert "requires one of these filters" not in str(exc.value)

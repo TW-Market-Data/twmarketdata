@@ -94,6 +94,16 @@ class DatasetInfo:
         return int(value) if value else None
 
     @property
+    def required_filters(self) -> List[str]:
+        """Filter sets the server demands but the OpenAPI does not declare.
+
+        These routes answer ``400 missing_required_filter`` without naming the
+        field, so the working combinations were found by probing. Empty for
+        every route that has no such hidden requirement.
+        """
+        return list(self._d.get("required_filters") or [])
+
+    @property
     def supports_offset(self) -> bool:
         return bool(self._d.get("supports_offset"))
 
@@ -225,6 +235,7 @@ def capabilities(dataset: str) -> Dict[str, Any]:
         "data_gaps": "server" if d.supports_data_gaps else "client_derived_or_unknown",
         "pagination": "offset" if d.supports_offset else "limit_only",
         "limit_max": d.limit_max,
+        "required_filters": d.required_filters,
         "filters": d.supported_filters(),
         "entity_param": d.entity_param,
         "entity_is_stock_ticker": d.entity_is_stock_ticker,

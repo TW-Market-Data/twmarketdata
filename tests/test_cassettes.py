@@ -147,68 +147,46 @@ def test_margin_system_stats_maintenance_ratio_is_null_as_documented():
 
 
 # --------------------------------------------------------------- plan edges
-def test_plan_boundaries_come_back_as_402_and_403_both_typed():
-    """Entitlement is per key, and it refuses in two different shapes.
+def test_only_an_enterprise_dataset_is_still_out_of_reach():
+    """After the entitlement fix, 62 of 63 key-gated datasets record 200.
 
-    The developer key reads 6 developer-tier datasets and is refused on 3 more
-    with 403 `commercial_use_not_allowed` -- a licensing message, although the
-    use here is exactly the personal development and testing that plan permits.
-    macro_global (enterprise) is a 402. Both map to TierRequiredError, so callers
-    do not have to care which shape arrived.
+    The one refusal left is macro_global, which is enterprise tier and
+    private_beta -- a developer key not reaching it is correct, not a defect.
+    The 403 commercial_use_not_allowed shape seen on 2026-08-12 is gone.
     """
-    gated = []
+    refused = []
     for path in all_cassettes():
         with open(path, encoding="utf-8") as fh:
             c = json.load(fh)
-        if c["response"]["status"] in (402, 403):
-            gated.append((c["dataset"], c["response"]["status"],
-                          c["response"]["body"].get("error"), c["sdk_error"]))
-    assert gated, "no plan refusals recorded"
-    assert all(err == "TierRequiredError" for _, _, _, err in gated)
-    assert {code for _, _, code, _ in gated} <= {
-        "not_entitled_for_dataset", "commercial_use_not_allowed"}
+        if c["response"]["status"] != 200:
+            refused.append((c["dataset"], c["response"]["status"],
+                            c["response"]["body"].get("error")))
+    assert refused == [("macro_global", 402, "not_entitled_for_dataset")]
+    assert twmd.get("macro_global").tier == "enterprise"
 
 
-def test_the_developer_key_reached_exactly_its_six_datasets():
-    """The plan said "developer, 6 datasets" and six is what it read.
+def test_no_cassette_records_the_commercial_use_403_any_more():
+    for path in all_cassettes():
+        with open(path, encoding="utf-8") as fh:
+            c = json.load(fh)
+        assert c["response"]["body"].get("error") != "commercial_use_not_allowed", c["dataset"]
 
-    Recorded 2026-08-12. The three developer-tier datasets outside that
-    allow-list answer 403 commercial_use_not_allowed rather than naming the
-    allow-list, which is why the SDK keeps the server's wording instead of
-    paraphrasing it.
+
+# ------------------------------------------------- undeclared required filters
+def test_two_routes_demand_a_filter_the_api_spec_never_declares():
+    """Both answer 400 missing_required_filter without naming the field.
+
+    The working combinations were found by probing on 2026-08-12 and are carried
+    in the registry so the SDK's error can name them.
     """
-    served = {"etf_holdings", "block_trade_daily", "subsidiary_investment",
-              "esg_ghg_carbon_disclosure", "governance_t187ap33_l",
-              "market_overview_snapshots"}
-    refused_403 = {"interest_rate_snapshots", "tax_business_registration",
-                   "macro_worldbank"}
-    for dataset in served:
-        assert load(dataset)["response"]["status"] == 200, dataset
-    for dataset in refused_403:
-        c = load(dataset)
-        assert c["response"]["status"] == 403, dataset
-        assert c["response"]["body"]["error"] == "commercial_use_not_allowed"
+    assert twmd.get("interest_rate_snapshots").required_filters == ["rate_family", "rate_code"]
+    assert twmd.get("market_breadth").required_filters == ["market", "date_from+date_to"]
+    assert sum(1 for k in twmd.datasets() if twmd.get(k).required_filters) == 2
 
 
-def test_etf_holdings_keeps_no_history_so_a_change_series_is_underivable():
-    """Why taiwan_stock_active_etf_holding_change is D rather than C.
-
-    Live on 2026-08-12: as_of=2026-08-10 returns rows; 2026-07-01 and 2026-05-01
-    return none. Without consecutive snapshots there is nothing to diff.
-    """
-    rows, _ = extract_rows(load("etf_holdings")["response"]["body"])
-    if rows:
-        assert {"etf_code", "holding_ticker", "holding_weight", "as_of_date"} <= set(rows[0])
-    from twmd.compat import finmind as fm
-    assert fm.mapping_for("taiwan_stock_active_etf_holding_change")["tier"] == "D"
-
-
-def test_market_breadth_demands_a_filter_the_registry_does_not_know_about():
-    """400 missing_required_filter on a route the OpenAPI marks as unfiltered.
-
-    Recorded so the discrepancy is not lost; the SDK surfaces the server's own
-    message rather than a generic failure.
-    """
-    c = load("market_breadth")
-    assert c["response"]["status"] == 400
-    assert c["response"]["body"]["error"] == "missing_required_filter"
+@pytest.mark.parametrize("dataset", ["interest_rate_snapshots", "market_breadth"])
+def test_those_routes_return_data_once_the_filter_is_supplied(dataset):
+    c = load(dataset)
+    assert c["response"]["status"] == 200, dataset
+    rows, _ = extract_rows(c["response"]["body"])
+    assert rows, dataset

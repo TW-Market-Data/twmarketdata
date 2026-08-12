@@ -12,11 +12,285 @@
  },
  "response": {
   "body": {
-   "error": "commercial_use_not_allowed",
-   "message": "Developer 僅限個人開發與測試使用，不可用於商業產品或對外服務。 升級至 Pro 或 Enterprise 以用於商業產品與正式環境。"
+   "api_version": "v2",
+   "data": [
+    {
+     "country_iso": "ABW",
+     "country_name": "Aruba",
+     "indicator_code": "FI.RES.TOTL.CD",
+     "indicator_name": "Total reserves (includes gold, current US$)",
+     "license": "CC-BY",
+     "lineage": {
+      "endpoint": "api.worldbank.org",
+      "source": "worldbank_wdi_v2"
+     },
+     "source_group": "WorldBank",
+     "value": 2231431960.0,
+     "year": 2025
+    },
+    {
+     "country_iso": "ABW",
+     "country_name": "Aruba",
+     "indicator_code": "FI.RES.XGLD.CD",
+     "indicator_name": "Total reserves minus gold (current US$)",
+     "license": "CC-BY",
+     "lineage": {
+      "endpoint": "api.worldbank.org",
+      "source": "worldbank_wdi_v2"
+     },
+     "source_group": "WorldBank",
+     "value": 1794651960.0,
+     "year": 2025
+    },
+    {
+     "country_iso": "ABW",
+     "country_name": "Aruba",
+     "indicator_code": "PA.NUS.FCRF",
+     "indicator_name": "Official exchange rate (LCU per US$, period average)",
+     "license": "CC-BY",
+     "lineage": {
+      "endpoint": "api.worldbank.org",
+      "source": "worldbank_wdi_v2"
+     },
+     "source_group": "WorldBank",
+     "value": 1.79,
+     "year": 2025
+    },
+    {
+     "country_iso": "ABW",
+     "country_name": "Aruba",
+     "indicator_code": "SP.POP.0014.TO.ZS",
+     "indicator_name": "Population ages 0-14 (% of total population)",
+     "license": "CC-BY",
+     "lineage": {
+      "endpoint": "api.worldbank.org",
+      "source": "worldbank_wdi_v2"
+     },
+     "source_group": "WorldBank",
+     "value": 16.5191058508056,
+     "year": 2025
+    },
+    {
+     "country_iso": "ABW",
+     "country_name": "Aruba",
+     "indicator_code": "SP.POP.1564.TO.ZS",
+     "indicator_name": "Population ages 15-64 (% of total population)",
+     "license": "CC-BY",
+     "lineage": {
+      "endpoint": "api.worldbank.org",
+      "source": "worldbank_wdi_v2"
+     },
+     "source_group": "WorldBank",
+     "value": 65.7204281190041,
+     "year": 2025
+    }
+   ],
+   "data_count": 5,
+   "data_gaps": [
+    "worldbank_wdi_annual_panel",
+    "taiwan_absent_worldbank_non_member_use_business_indicator",
+    "not_taiwan_market_data",
+    "some_country_indicator_years_null_at_source",
+    "not_forecast_or_recommendation",
+    "not_investment_advice"
+   ],
+   "dataset": "macro_worldbank",
+   "dataset_id": "macro_worldbank",
+   "endpoint": "/v2/datasets/macro-worldbank",
+   "envelope": {
+    "data": [
+     {
+      "country_iso": "ABW",
+      "country_name": "Aruba",
+      "indicator_code": "FI.RES.TOTL.CD",
+      "indicator_name": "Total reserves (includes gold, current US$)",
+      "license": "CC-BY",
+      "lineage": {
+       "endpoint": "api.worldbank.org",
+       "source": "worldbank_wdi_v2"
+      },
+      "source_group": "WorldBank",
+      "value": 2231431960.0,
+      "year": 2025
+     },
+     {
+      "country_iso": "ABW",
+      "country_name": "Aruba",
+      "indicator_code": "FI.RES.XGLD.CD",
+      "indicator_name": "Total reserves minus gold (current US$)",
+      "license": "CC-BY",
+      "lineage": {
+       "endpoint": "api.worldbank.org",
+       "source": "worldbank_wdi_v2"
+      },
+      "source_group": "WorldBank",
+      "value": 1794651960.0,
+      "year": 2025
+     },
+     {
+      "country_iso": "ABW",
+      "country_name": "Aruba",
+      "indicator_code": "PA.NUS.FCRF",
+      "indicator_name": "Official exchange rate (LCU per US$, period average)",
+      "license": "CC-BY",
+      "lineage": {
+       "endpoint": "api.worldbank.org",
+       "source": "worldbank_wdi_v2"
+      },
+      "source_group": "WorldBank",
+      "value": 1.79,
+      "year": 2025
+     },
+     {
+      "country_iso": "ABW",
+      "country_name": "Aruba",
+      "indicator_code": "SP.POP.0014.TO.ZS",
+      "indicator_name": "Population ages 0-14 (% of total population)",
+      "license": "CC-BY",
+      "lineage": {
+       "endpoint": "api.worldbank.org",
+       "source": "worldbank_wdi_v2"
+      },
+      "source_group": "WorldBank",
+      "value": 16.5191058508056,
+      "year": 2025
+     },
+     {
+      "country_iso": "ABW",
+      "country_name": "Aruba",
+      "indicator_code": "SP.POP.1564.TO.ZS",
+      "indicator_name": "Population ages 15-64 (% of total population)",
+      "license": "CC-BY",
+      "lineage": {
+       "endpoint": "api.worldbank.org",
+       "source": "worldbank_wdi_v2"
+      },
+      "source_group": "WorldBank",
+      "value": 65.7204281190041,
+      "year": 2025
+     }
+    ],
+    "dataset_id": "macro_worldbank",
+    "envelope": {
+     "dataset_id": "macro_worldbank",
+     "row_count": 5,
+     "scope": "worldbank_wdi_country_indicator_panel"
+    },
+    "error": null,
+    "known_gaps": [
+     "worldbank_wdi_annual_panel",
+     "taiwan_absent_worldbank_non_member_use_business_indicator",
+     "not_taiwan_market_data",
+     "some_country_indicator_years_null_at_source",
+     "not_forecast_or_recommendation",
+     "not_investment_advice"
+    ],
+    "lineage": {
+     "license": "CC-BY",
+     "source_families": [
+      "WorldBank_WDI"
+     ],
+     "source_groups": [
+      "WorldBank"
+     ],
+     "source_providers": [
+      "worldbank_open_data"
+     ]
+    },
+    "quality": {
+     "country_count": 1,
+     "indicator_count": 5,
+     "raw_payload_exposed": false,
+     "row_count": 5
+    },
+    "request_context": {
+     "coverage_type": "worldbank_open_data_wdi_ccby",
+     "filters": {
+      "country_iso": null,
+      "indicator_code": null,
+      "indicator_name": null,
+      "limit": 5,
+      "year_from": null,
+      "year_to": null
+     },
+     "max_year": 2025,
+     "min_year": 2025,
+     "scope": "worldbank_wdi_country_indicator_panel"
+    },
+    "warnings": [
+     "not_investment_advice"
+    ]
+   },
+   "error": null,
+   "known_gaps": [
+    "worldbank_wdi_annual_panel",
+    "taiwan_absent_worldbank_non_member_use_business_indicator",
+    "not_taiwan_market_data",
+    "some_country_indicator_years_null_at_source",
+    "not_forecast_or_recommendation",
+    "not_investment_advice"
+   ],
+   "lineage": {
+    "license": "CC-BY",
+    "source_families": [
+     "WorldBank_WDI"
+    ],
+    "source_groups": [
+     "WorldBank"
+    ],
+    "source_providers": [
+     "worldbank_open_data"
+    ]
+   },
+   "meta": {
+    "is_limited": false,
+    "mandatory_contract_fields_present": [
+     "data",
+     "error",
+     "lineage",
+     "quality",
+     "request_context"
+    ],
+    "plan": "developer",
+    "row_limit": 50000,
+    "rows_returned": 5
+   },
+   "plan_id": "developer",
+   "quality": {
+    "country_count": 1,
+    "indicator_count": 5,
+    "raw_payload_exposed": false,
+    "row_count": 5
+   },
+   "query": {
+    "country_iso": null,
+    "indicator_code": null,
+    "indicator_name": null,
+    "limit": 5,
+    "year_from": null,
+    "year_to": null
+   },
+   "request_context": {
+    "coverage_type": "worldbank_open_data_wdi_ccby",
+    "filters": {
+     "country_iso": null,
+     "indicator_code": null,
+     "indicator_name": null,
+     "limit": 5,
+     "year_from": null,
+     "year_to": null
+    },
+    "max_year": 2025,
+    "min_year": 2025,
+    "scope": "worldbank_wdi_country_indicator_panel"
+   },
+   "request_id": "req_8e052da38901",
+   "warnings": [
+    "not_investment_advice"
+   ]
   },
-  "status": 403
+  "status": 200
  },
  "route": "/v2/datasets/macro-worldbank",
- "sdk_error": "TierRequiredError"
+ "sdk_error": null
 }

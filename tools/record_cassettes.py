@@ -48,6 +48,12 @@ SECRET_PATTERNS = [
 DEMO_TICKER = "2330"
 PACE_SECONDS = 3.0
 
+#: A working value for each undeclared-but-required filter (measured 2026-08-12).
+REQUIRED_FILTER_EXAMPLES = {
+    "interest_rate_snapshots": {"rate_family": "policy"},
+    "market_breadth": {"market": "TWSE"},
+}
+
 
 def _redact(blob: str, key: Optional[str]) -> str:
     if key:
@@ -72,6 +78,10 @@ def record_one(client: Any, dataset: str, key: Optional[str]) -> Optional[Dict[s
     kwargs: Dict[str, Any] = {"limit": 5, "raw": True}
     if info.entity_param:
         kwargs["ticker"] = DEMO_TICKER
+    # Two routes demand a filter the OpenAPI does not declare; without it they
+    # answer 400 and the cassette records an error instead of data.
+    for example in REQUIRED_FILTER_EXAMPLES.get(dataset, {}).items():
+        kwargs[example[0]] = example[1]
 
     try:
         payload = client.dataset(dataset, **kwargs)

@@ -12,11 +12,345 @@
  },
  "response": {
   "body": {
-   "error": "commercial_use_not_allowed",
-   "message": "Developer 僅限個人開發與測試使用，不可用於商業產品或對外服務。 升級至 Pro 或 Enterprise 以用於商業產品與正式環境。"
+   "api_version": "v2",
+   "data": [
+    {
+     "business_registration_number": "62202234",
+     "company_id": "62202234",
+     "company_name": "鼎海策營造有限公司",
+     "data_gaps": [],
+     "incorporation_date": "2026-04-30",
+     "lineage": {
+      "official_boundary": "public_company_establishment_registration_reference",
+      "source_dataset_url": "https://data.gov.tw/dataset/6047",
+      "source_file_url": "https://data.gcis.nat.gov.tw/od/file?oid=05D3A71E-0652-4C64-A52D-956699492FFF",
+      "source_row_number": null
+     },
+     "registered_address": "臺中市太平區宜昌路360號1樓",
+     "representative": "陳啓政",
+     "source_as_of_date": "2026-04-30",
+     "source_family": "data_gov_tw_moea_company_establishment_roster_monthly_csv",
+     "source_provider": "moea_business_development_administration",
+     "source_role": "company_establishment_roster_monthly",
+     "status": "核准設立",
+     "tax_id": "62202234"
+    },
+    {
+     "business_registration_number": "62202261",
+     "company_id": "62202261",
+     "company_name": "出賢文教有限公司",
+     "data_gaps": [],
+     "incorporation_date": "2026-04-30",
+     "lineage": {
+      "official_boundary": "public_company_establishment_registration_reference",
+      "source_dataset_url": "https://data.gov.tw/dataset/6047",
+      "source_file_url": "https://data.gcis.nat.gov.tw/od/file?oid=05D3A71E-0652-4C64-A52D-956699492FFF",
+      "source_row_number": null
+     },
+     "registered_address": "臺中市南區西川里柳川東路一段82號1樓",
+     "representative": "許芳瑜",
+     "source_as_of_date": "2026-04-30",
+     "source_family": "data_gov_tw_moea_company_establishment_roster_monthly_csv",
+     "source_provider": "moea_business_development_administration",
+     "source_role": "company_establishment_roster_monthly",
+     "status": "核准設立",
+     "tax_id": "62202261"
+    },
+    {
+     "business_registration_number": "62202277",
+     "company_id": "62202277",
+     "company_name": "安荃餐飲有限公司",
+     "data_gaps": [],
+     "incorporation_date": "2026-04-30",
+     "lineage": {
+      "official_boundary": "public_company_establishment_registration_reference",
+      "source_dataset_url": "https://data.gov.tw/dataset/6047",
+      "source_file_url": "https://data.gcis.nat.gov.tw/od/file?oid=05D3A71E-0652-4C64-A52D-956699492FFF",
+      "source_row_number": null
+     },
+     "registered_address": "臺中市南屯區大業里大進街697號",
+     "representative": "李銘鈺",
+     "source_as_of_date": "2026-04-30",
+     "source_family": "data_gov_tw_moea_company_establishment_roster_monthly_csv",
+     "source_provider": "moea_business_development_administration",
+     "source_role": "company_establishment_roster_monthly",
+     "status": "核准設立",
+     "tax_id": "62202277"
+    },
+    {
+     "business_registration_number": "62202282",
+     "company_id": "62202282",
+     "company_name": "永續合創投資股份有限公司",
+     "data_gaps": [],
+     "incorporation_date": "2026-04-30",
+     "lineage": {
+      "official_boundary": "public_company_establishment_registration_reference",
+      "source_dataset_url": "https://data.gov.tw/dataset/6047",
+      "source_file_url": "https://data.gcis.nat.gov.tw/od/file?oid=05D3A71E-0652-4C64-A52D-956699492FFF",
+      "source_row_number": null
+     },
+     "registered_address": "臺中市北屯區平心里文心路四段669號4樓之3",
+     "representative": "簡志旻",
+     "source_as_of_date": "2026-04-30",
+     "source_family": "data_gov_tw_moea_company_establishment_roster_monthly_csv",
+     "source_provider": "moea_business_development_administration",
+     "source_role": "company_establishment_roster_monthly",
+     "status": "核准設立",
+     "tax_id": "62202282"
+    },
+    {
+     "business_registration_number": "62202298",
+     "company_id": "62202298",
+     "company_name": "康來科技有限公司",
+     "data_gaps": [],
+     "incorporation_date": "2026-04-30",
+     "lineage": {
+      "official_boundary": "public_company_establishment_registration_reference",
+      "source_dataset_url": "https://data.gov.tw/dataset/6047",
+      "source_file_url": "https://data.gcis.nat.gov.tw/od/file?oid=05D3A71E-0652-4C64-A52D-956699492FFF",
+      "source_row_number": null
+     },
+     "registered_address": "臺中市神岡區北庄里中山路955號",
+     "representative": "朱守昱",
+     "source_as_of_date": "2026-04-30",
+     "source_family": "data_gov_tw_moea_company_establishment_roster_monthly_csv",
+     "source_provider": "moea_business_development_administration",
+     "source_role": "company_establishment_roster_monthly",
+     "status": "核准設立",
+     "tax_id": "62202298"
+    }
+   ],
+   "data_count": 5,
+   "data_gaps": [
+    "latest_official_snapshot_only",
+    "no_private_non_public_tax_data",
+    "not_issuer_profile_replacement",
+    "not_full_business_history"
+   ],
+   "dataset": "tax_business_registration",
+   "dataset_id": "tax_business_registration",
+   "endpoint": "/v2/datasets/tax-business-registration",
+   "envelope": {
+    "data": [
+     {
+      "business_registration_number": "62202234",
+      "company_id": "62202234",
+      "company_name": "鼎海策營造有限公司",
+      "data_gaps": [],
+      "incorporation_date": "2026-04-30",
+      "lineage": {
+       "official_boundary": "public_company_establishment_registration_reference",
+       "source_dataset_url": "https://data.gov.tw/dataset/6047",
+       "source_file_url": "https://data.gcis.nat.gov.tw/od/file?oid=05D3A71E-0652-4C64-A52D-956699492FFF",
+       "source_row_number": null
+      },
+      "registered_address": "臺中市太平區宜昌路360號1樓",
+      "representative": "陳啓政",
+      "source_as_of_date": "2026-04-30",
+      "source_family": "data_gov_tw_moea_company_establishment_roster_monthly_csv",
+      "source_provider": "moea_business_development_administration",
+      "source_role": "company_establishment_roster_monthly",
+      "status": "核准設立",
+      "tax_id": "62202234"
+     },
+     {
+      "business_registration_number": "62202261",
+      "company_id": "62202261",
+      "company_name": "出賢文教有限公司",
+      "data_gaps": [],
+      "incorporation_date": "2026-04-30",
+      "lineage": {
+       "official_boundary": "public_company_establishment_registration_reference",
+       "source_dataset_url": "https://data.gov.tw/dataset/6047",
+       "source_file_url": "https://data.gcis.nat.gov.tw/od/file?oid=05D3A71E-0652-4C64-A52D-956699492FFF",
+       "source_row_number": null
+      },
+      "registered_address": "臺中市南區西川里柳川東路一段82號1樓",
+      "representative": "許芳瑜",
+      "source_as_of_date": "2026-04-30",
+      "source_family": "data_gov_tw_moea_company_establishment_roster_monthly_csv",
+      "source_provider": "moea_business_development_administration",
+      "source_role": "company_establishment_roster_monthly",
+      "status": "核准設立",
+      "tax_id": "62202261"
+     },
+     {
+      "business_registration_number": "62202277",
+      "company_id": "62202277",
+      "company_name": "安荃餐飲有限公司",
+      "data_gaps": [],
+      "incorporation_date": "2026-04-30",
+      "lineage": {
+       "official_boundary": "public_company_establishment_registration_reference",
+       "source_dataset_url": "https://data.gov.tw/dataset/6047",
+       "source_file_url": "https://data.gcis.nat.gov.tw/od/file?oid=05D3A71E-0652-4C64-A52D-956699492FFF",
+       "source_row_number": null
+      },
+      "registered_address": "臺中市南屯區大業里大進街697號",
+      "representative": "李銘鈺",
+      "source_as_of_date": "2026-04-30",
+      "source_family": "data_gov_tw_moea_company_establishment_roster_monthly_csv",
+      "source_provider": "moea_business_development_administration",
+      "source_role": "company_establishment_roster_monthly",
+      "status": "核准設立",
+      "tax_id": "62202277"
+     },
+     {
+      "business_registration_number": "62202282",
+      "company_id": "62202282",
+      "company_name": "永續合創投資股份有限公司",
+      "data_gaps": [],
+      "incorporation_date": "2026-04-30",
+      "lineage": {
+       "official_boundary": "public_company_establishment_registration_reference",
+       "source_dataset_url": "https://data.gov.tw/dataset/6047",
+       "source_file_url": "https://data.gcis.nat.gov.tw/od/file?oid=05D3A71E-0652-4C64-A52D-956699492FFF",
+       "source_row_number": null
+      },
+      "registered_address": "臺中市北屯區平心里文心路四段669號4樓之3",
+      "representative": "簡志旻",
+      "source_as_of_date": "2026-04-30",
+      "source_family": "data_gov_tw_moea_company_establishment_roster_monthly_csv",
+      "source_provider": "moea_business_development_administration",
+      "source_role": "company_establishment_roster_monthly",
+      "status": "核准設立",
+      "tax_id": "62202282"
+     },
+     {
+      "business_registration_number": "62202298",
+      "company_id": "62202298",
+      "company_name": "康來科技有限公司",
+      "data_gaps": [],
+      "incorporation_date": "2026-04-30",
+      "lineage": {
+       "official_boundary": "public_company_establishment_registration_reference",
+       "source_dataset_url": "https://data.gov.tw/dataset/6047",
+       "source_file_url": "https://data.gcis.nat.gov.tw/od/file?oid=05D3A71E-0652-4C64-A52D-956699492FFF",
+       "source_row_number": null
+      },
+      "registered_address": "臺中市神岡區北庄里中山路955號",
+      "representative": "朱守昱",
+      "source_as_of_date": "2026-04-30",
+      "source_family": "data_gov_tw_moea_company_establishment_roster_monthly_csv",
+      "source_provider": "moea_business_development_administration",
+      "source_role": "company_establishment_roster_monthly",
+      "status": "核准設立",
+      "tax_id": "62202298"
+     }
+    ],
+    "dataset_id": "tax_business_registration",
+    "envelope": {
+     "dataset_id": "tax_business_registration",
+     "row_count": 5,
+     "scope": "public_business_registration_reference_only"
+    },
+    "error": null,
+    "known_gaps": [
+     "latest_official_snapshot_only",
+     "no_private_non_public_tax_data",
+     "not_issuer_profile_replacement",
+     "not_full_business_history"
+    ],
+    "lineage": {
+     "source_families": [
+      "data_gov_tw_moea_company_establishment_roster_monthly_csv"
+     ],
+     "source_providers": [
+      "moea_business_development_administration"
+     ],
+     "source_roles": [
+      "company_establishment_roster_monthly"
+     ]
+    },
+    "quality": {
+     "public_open_tax_id_only": true,
+     "raw_payload_exposed": false,
+     "row_count": 5
+    },
+    "request_context": {
+     "coverage_type": "latest_monthly_snapshot_only",
+     "filters": {
+      "business_registration_number": null,
+      "company_id": null,
+      "company_name": null,
+      "limit": 5,
+      "source_as_of_date": null,
+      "status": null
+     },
+     "max_source_as_of_date": "2026-04-30",
+     "min_source_as_of_date": "2026-04-30",
+     "scope": "public_business_registration_reference_only"
+    },
+    "warnings": [
+     "not_investment_advice"
+    ]
+   },
+   "error": null,
+   "known_gaps": [
+    "latest_official_snapshot_only",
+    "no_private_non_public_tax_data",
+    "not_issuer_profile_replacement",
+    "not_full_business_history"
+   ],
+   "lineage": {
+    "source_families": [
+     "data_gov_tw_moea_company_establishment_roster_monthly_csv"
+    ],
+    "source_providers": [
+     "moea_business_development_administration"
+    ],
+    "source_roles": [
+     "company_establishment_roster_monthly"
+    ]
+   },
+   "meta": {
+    "is_limited": false,
+    "mandatory_contract_fields_present": [
+     "data",
+     "error",
+     "lineage",
+     "quality",
+     "request_context"
+    ],
+    "plan": "developer",
+    "row_limit": 50000,
+    "rows_returned": 5
+   },
+   "plan_id": "developer",
+   "quality": {
+    "public_open_tax_id_only": true,
+    "raw_payload_exposed": false,
+    "row_count": 5
+   },
+   "query": {
+    "business_registration_number": null,
+    "company_id": null,
+    "company_name": null,
+    "limit": 5,
+    "source_as_of_date": null,
+    "status": null
+   },
+   "request_context": {
+    "coverage_type": "latest_monthly_snapshot_only",
+    "filters": {
+     "business_registration_number": null,
+     "company_id": null,
+     "company_name": null,
+     "limit": 5,
+     "source_as_of_date": null,
+     "status": null
+    },
+    "max_source_as_of_date": "2026-04-30",
+    "min_source_as_of_date": "2026-04-30",
+    "scope": "public_business_registration_reference_only"
+   },
+   "request_id": "req_99f0d741999f",
+   "warnings": [
+    "not_investment_advice"
+   ]
   },
-  "status": 403
+  "status": 200
  },
  "route": "/v2/datasets/tax-business-registration",
- "sdk_error": "TierRequiredError"
+ "sdk_error": null
 }
