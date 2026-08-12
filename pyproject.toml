@@ -1,10 +1,3 @@
-# DO NOT PUBLISH YET -- see PUBLISH_BLOCKERS.md
-#
-# `twmarketdata` 0.1.0 is already on PyPI (uploaded 2026-07-21, MIT licensed)
-# and it also imports as `twmd`. Publishing this file as-is would relicense a
-# live package MIT -> Apache-2.0 and remove the 0.1.0 public API from under
-# anyone who installed it. Owner/director decision required first.
-
 [build-system]
 requires = ["setuptools>=68", "wheel"]
 build-backend = "setuptools.build_meta"

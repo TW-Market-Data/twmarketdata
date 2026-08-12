@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.2.0 — unreleased
+## 0.2.0 — 2026-08-12
 
 First release under Apache-2.0. 0.1.0 remains MIT; the relicence applies from
 0.2.0 onward and was made by the copyright holder.
