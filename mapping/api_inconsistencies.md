@@ -184,6 +184,13 @@ header. Keys issued in the dashboard authenticate there, never here."}}
 | `twmarketdata.com`(已退役) | `{"error": {"code": ..., "message": ...}}` — error 是物件 |
 | `api.twmarketdata.com`(現行) | `{"error": "missing_api_key", "message": ...}` — error 是字串 |
 
-0.1.0 的錯誤解析是照**前者**寫的,打現行 API 時 `_extract_error_code` / `_extract_error_message` 一律回 `None`,錯誤訊息會退化成 `Request failed with status 401.`,遺失 server 給的中文說明。
+website `main` 上的 0.1.0 錯誤解析是照**前者**寫的,打現行 API 時 `_extract_error_code` / `_extract_error_message` 一律回 `None`,錯誤訊息退化成 `Request failed with status 401.`,遺失 server 給的中文說明。
 
-**建議**:現行 API 的錯誤體改為與 gateway 一致的巢狀形狀(或反過來統一成扁平),二選一即可,重點是**同一個產品只有一種錯誤形狀**。
+**但這件事已經有人修了,只是沒合併**:分支 `fix/friction01-sdk-error-contract`(commit `53874b2`,worktree 在 `_wt/friction01-sdk`)已支援扁平 `{error, message}`,並依 FRICTION-01 R2 重新分類:402 `not_entitled_for_dataset` / `dataset_not_entitled` / `commercial_use_not_allowed`、403 改為「已認證但被禁止」(`api_key_not_active`、`mcp_not_in_plan`、`plan_not_entitled`、`dataset_not_allowed`、`api_key_revoked`)、429 併入 `daily_quota_exceeded` / `monthly_quota_exceeded`。
+
+`git branch --contains 53874b2` 顯示**只在該分支上,未進 main**。而且 **base_url 在該分支也沒改**,仍指向已退役的 gateway —— 修好的錯誤解析目前打不到任何活著的端點。
+
+**建議**:
+1. 把 `fix/friction01-sdk-error-contract` 合併(或至少把它的錯誤碼分類搬進新 SDK 當基準,新 SDK 已這麼做)。
+2. 現行 API 與 gateway 統一成同一種錯誤形狀,二選一即可 —— 重點是**同一個產品只有一種錯誤形狀**。
+3. 現行 API 補上 `endpoint_retired` 之外的扁平/巢狀一致性,讓 client 不必兩種都解。
