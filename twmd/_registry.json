@@ -2,6 +2,7 @@
  "schema_version": 1,
  "generated_from": "mapping/datasets_82.csv",
  "measured_on": "2026-08-12",
+ "columns_source": "GET /v2/datasets/{dataset_key}/schema -- the database schema. Appendix M records that the API sometimes projects a column under a different name (twse_daily_price declares trade_date and returns `date`), so treat these as storage columns, not a guarantee of the response keys.",
  "api_base_url": "https://api.twmarketdata.com/v2",
  "sources": [
   "GET https://api.twmarketdata.com/v2/datasets",

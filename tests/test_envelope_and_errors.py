@@ -116,3 +116,39 @@ def test_missing_key_and_404_and_5xx():
     assert isinstance(classify(401, "missing_api_key", "no key"), MissingApiKeyError)
     assert isinstance(classify(404, "dataset_not_found", "nope"), DatasetNotFoundError)
     assert isinstance(classify(503, None, "down"), TwmdServerError)
+
+
+# ------------------------------------------------------- nested row envelopes
+def test_rows_found_one_level_inside_envelope():
+    # Reported on price-enhanced: records sit at envelope.data, not top level.
+    payload = {"dataset_id": "price_enhanced",
+               "envelope": {"dataset_id": "price_enhanced", "data": [{"factor": 1.0}]}}
+    rows, key = extract_rows(payload)
+    assert rows == [{"factor": 1.0}]
+    assert key == "envelope.data"
+
+
+def test_top_level_rows_win_over_nested():
+    payload = {"data": [{"a": 1}], "envelope": {"data": [{"b": 2}]}}
+    rows, key = extract_rows(payload)
+    assert key == "data" and rows == [{"a": 1}]
+
+
+def test_metadata_lists_are_never_mistaken_for_rows():
+    # All three of these were observed alongside real rows on 2026-08-12. A
+    # "descend and take the first list" rule would return them as records.
+    payload = {
+        "dataset_id": "index_constituents",
+        "envelope": {"dataset_id": "index_constituents", "scope": "x", "row_count": 1},
+        "request_context": {"snapshot_dates_in_page": ["2026-08-07"]},
+        "quality": {"indices_present": ["TAIEX"]},
+        "lineage": {"source_families": ["twse_official"]},
+    }
+    rows, key = extract_rows(payload)
+    assert rows == [] and key is None
+
+
+def test_scalar_lists_inside_a_container_are_not_rows():
+    payload = {"envelope": {"data": ["2026-08-07", "2026-08-08"]}}
+    rows, key = extract_rows(payload)
+    assert rows == [] and key is None

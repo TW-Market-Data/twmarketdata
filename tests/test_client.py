@@ -226,3 +226,33 @@ def test_daily_price_keeps_cross_board_duplicates_and_says_so(session):
     rows = c.daily_price("2330", raw=True)
     assert len(rows) == 2                                   # not silently deduped
     assert any("both boards" in w for w in c.last_meta.warnings)
+
+
+# ------------------------------------------------- offset accepted but ignored
+def test_offset_ignored_by_server_stops_instead_of_duplicating(session):
+    # Measured 2026-08-12 on index-constituents: offset=0/3/6 returned the
+    # identical page. Without detection the loop appends the same rows forever
+    # and presents the duplicates as a full history.
+    page = rows_envelope([{"a": 1}, {"a": 2}])
+    c = twmd.Client(session=session, default_limit=2)
+    session.queue = [FakeResponse(dict(page)), FakeResponse(dict(page)),
+                     FakeResponse(dict(page))]
+    with pytest.warns(TruncatedResultWarning, match="does not actually paginate"):
+        c.dataset("index_constituents")
+    assert c.last_meta.row_count == 2          # not 4, not 6
+    assert c.last_meta.offset_ignored is True
+    assert c.last_meta.truncated is True       # incomplete, and says so
+    assert len(session.calls) == 2             # stopped at the repeat
+
+
+def test_genuine_pagination_still_completes(session):
+    c = twmd.Client(session=session, default_limit=2)
+    session.queue = [
+        FakeResponse(rows_envelope([{"a": 1}, {"a": 2}])),
+        FakeResponse(rows_envelope([{"a": 3}, {"a": 4}])),
+        FakeResponse(rows_envelope([{"a": 5}])),
+    ]
+    c.dataset("index_constituents")
+    assert c.last_meta.row_count == 5
+    assert c.last_meta.offset_ignored is False
+    assert c.last_meta.truncated is False

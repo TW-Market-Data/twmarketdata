@@ -14,6 +14,7 @@ from typing import Any, Dict, List, Mapping, Optional, Sequence, Union
 from . import gaps as _gaps
 from . import registry
 from ._http import Response, Transport
+from ._legacy import LegacyClientMixin
 from ._methods import DatasetMethods
 from .envelope import extract_count, extract_gaps, extract_provenance, extract_rows
 from .errors import FreeTierSymbolError, TwmdConfigError, UnsupportedParameterError
@@ -25,10 +26,20 @@ from .registry import DatasetInfo
 __all__ = ["Client", "TWMarketDataClient"]
 
 MAX_LIMIT = 5000
+MAX_PAGES = 100
 _ENV_KEY = "TWMD_API_KEY"
 
 
-class Client(DatasetMethods):
+def _page_fingerprint(rows: Sequence[Mapping[str, Any]]) -> str:
+    """Cheap identity for a page, used to detect a server ignoring `offset`."""
+    import hashlib
+    import json as _json
+    head = rows[:3]
+    blob = _json.dumps(head, sort_keys=True, default=str)
+    return "%d:%s" % (len(rows), hashlib.sha1(blob.encode("utf-8")).hexdigest())
+
+
+class Client(DatasetMethods, LegacyClientMixin):
     """Entry point.
 
     >>> from twmd import Client
@@ -160,12 +171,14 @@ class Client(DatasetMethods):
         if info.supports_data_gaps:
             params["include_data_gaps"] = "true"
 
-        rows, response, pages = self._fetch(info, params, use_limit, paginate, offset)
+        rows, response, pages, offset_ignored = self._fetch(
+            info, params, use_limit, paginate, offset)
         if raw:
             self.last_response = response
             return response.payload
 
-        meta = self._build_meta(info, response, rows, use_limit, pages)
+        meta = self._build_meta(info, response, rows, use_limit, pages,
+                                offset_ignored=offset_ignored)
 
         if as_of and mode and mode != "server":
             rows = apply_as_of(rows, info=info, as_of=as_of, mode=mode,
@@ -299,29 +312,44 @@ class Client(DatasetMethods):
         response = self._transport.get(info.route, params, dataset=info.key)
         rows, _row_key = extract_rows(response.payload)
         pages = 1
+        offset_ignored = False
 
         if paginate and info.supports_offset and len(rows) >= use_limit:
+            seen = {_page_fingerprint(rows)}
             cursor = (offset or 0) + len(rows)
-            while True:
+            while pages < MAX_PAGES:
                 page_params = dict(params, offset=cursor)
                 page = self._transport.get(info.route, page_params, dataset=info.key)
                 page_rows, _ = extract_rows(page.payload)
                 pages += 1
                 if not page_rows:
                     break
+
+                # Some routes accept `offset` and ignore it -- measured on
+                # index-constituents 2026-08-12, where offset=0/3/6 all returned
+                # the identical page. Without this check the loop would append
+                # the same rows forever and call the duplicates a full history.
+                fingerprint = _page_fingerprint(page_rows)
+                if fingerprint in seen:
+                    offset_ignored = True
+                    break
+                seen.add(fingerprint)
+
                 rows.extend(page_rows)
                 cursor += len(page_rows)
                 if len(page_rows) < use_limit:
                     break
-        return rows, response, pages
+        return rows, response, pages, offset_ignored
 
     def _build_meta(self, info: DatasetInfo, response: Response,
                     rows: Sequence[Mapping[str, Any]], use_limit: int,
-                    pages: int) -> Meta:
+                    pages: int, *, offset_ignored: bool = False) -> Meta:
         _, row_key = extract_rows(response.payload)
         provenance = extract_provenance(response.payload)
 
-        truncated = (not info.supports_offset) and len(rows) >= use_limit
+        # Truncated when the limit was hit and we could not page past it --
+            # either the route has no offset, or it has one and ignores it.
+        truncated = len(rows) >= use_limit and (not info.supports_offset or offset_ignored)
         meta = Meta(
             dataset=info.key,
             route=info.route,
@@ -350,7 +378,17 @@ class Client(DatasetMethods):
         meta.row_count = extract_count(response.payload, len(rows)) if pages == 1 else len(rows)
         meta.row_count = len(rows)
 
-        if truncated:
+        meta.offset_ignored = offset_ignored
+        if offset_ignored:
+            note = (
+                "This route accepts `offset` but returned an identical page for a "
+                "different offset, so it does not actually paginate. Pagination stopped "
+                "after %d page(s) rather than appending duplicate rows; the result is "
+                "incomplete. Narrow start/end to fetch the rest." % pages
+            )
+            warnings.warn(note, TruncatedResultWarning, stacklevel=4)
+            meta.warnings.append(note)
+        elif truncated:
             note = (
                 "Hit the row limit of %d and this route has no offset parameter, so the "
                 "result is incomplete. Narrow start/end to fetch the rest." % use_limit

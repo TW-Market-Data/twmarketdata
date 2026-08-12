@@ -217,3 +217,70 @@ GET /v2/datasets/twse-daily-price?symbol=2330&limit=1
 3. 兩種情況都 `as_of_applied=False`,不假裝過濾成功。
 
 **建議**:讓 `/schema` 與 describe 反映**投影後**的欄位名(或在回應中同時保留 `trade_date` 別名)。目前的落差讓「照文件寫」必然出錯。
+
+---
+
+## N. `price-enhanced` 的 contract 宣告 OHLCV,但 schema 與實際回應都是調整因子
+
+由左下實測回報:`price-enhanced` 的 contract 宣告 OHLCV(`close` / `open` / `high` / `low` / `volume` / `return_1d`…),其中 `close` 是 required,但實際服務的是調整因子欄組:
+
+```
+ticker, market, trade_date, event_type, factor, pre_event_close, reference_price
+```
+
+`close` 這個 required 欄位**不會出現**。
+
+**本 repo 的交叉驗證(2026-08-12)**:
+
+| 來源 | 說了什麼 |
+|---|---|
+| `GET /v2/datasets/price_enhanced/schema` | `id, ticker, trade_date, event_type, factor, pre_event_close, reference_price, market, provider, source_role, source_authority, source_family, source_hash, lineage, created_at` —— **調整因子那組,沒有 OHLCV** |
+| `openapi.json` 的 200 response schema | 未定義欄位(`type: object`、`additionalProperties: true`),**沒有宣告任何欄位** |
+| `llms-full.txt` | **沒有** `price_enhanced` 這一筆 |
+| `datasets_82.csv` 的 `columns` 欄 | 與 `/schema` 一致,即調整因子那組 |
+
+也就是說:**`datasets_82.csv` 沒有抄到錯的 OHLCV,不需要修正**。OHLCV 的宣稱不存在於本 repo 引用的任何一份 API 證據裡,因此那份 contract 是另一個獨立來源(dataset contract / 資料集頁 / 內部契約登錄),我這側無法直接驗證(該資料集 tier=starter,免 key 回 401),依左下回報記錄於此。
+
+**與第 M 項的關係(方向相反,同一類病)**:
+
+| | 宣告 | 實際回應 |
+|---|---|---|
+| M | schema / describe 說 `trade_date` | 回 `date` |
+| N | contract 說 OHLCV(含 required `close`) | 回調整因子欄組(schema 也是這組) |
+
+M 是 schema 與投影不一致;N 是 contract 與 schema+投影**兩者都**不一致 —— 亦即 contract 是三者之中唯一錯的那個。
+
+**影響**:任何照 contract 產生型別、做欄位驗證或寫必填檢查的下游,對 `price-enhanced` 都會失敗或誤判。SDK 這側不受影響(欄位取自 `/schema` 而非 contract),但 `close` required 的宣告會讓契約測試假失敗。
+
+**建議**:以實際投影為準修正 contract(或明確標示該 contract 已作廢),並在 API 一致性工單裡把「contract / schema / 實際回應」三者對齊列為一個檢查項 —— 目前三份宣告可以互相矛盾而沒有任何機制會發現。
+
+---
+
+## O. 同一個 envelope 家族裡,`envelope` 有時是 metadata、有時(據報)裝著列
+
+左上回報:`price-enhanced` 的列可能落在 `body["envelope"]["data"]`,不在頂層。
+
+**本 repo 對免 key 可達的同家族資料集實測(2026-08-12)**:
+
+| 資料集 | 列在哪 | `envelope` 這個 key 是什麼 |
+|---|---|---|
+| `index-constituents` | 頂層 `data` | **dict**,內容是 `{dataset_id, scope, row_count}` —— metadata,不是列 |
+| `stock-delisting-lifecycle` | 頂層 `data` | **dict**,同上 |
+| `market-index` | 頂層 `items` | **不存在這個 key** |
+| `price-enhanced` | 據報在 `envelope.data` | 無法自行驗證(tier=starter,免 key 回 401) |
+
+也就是說 **`envelope` 這個名字在同一個家族裡至少有兩種意思**:大多數情況是 metadata 容器,而據報在 `price-enhanced` 是列容器。單看欄名無法判斷。
+
+**這個坑特別惡劣的地方**:同一批回應的 `request_context`、`quality`、`lineage` 底下**都有自己的陣列**——實測分別是 `snapshot_dates_in_page`、`indices_present`、`source_families`。任何「往下找第一個 list 就當成資料」的解析器,會把這些 metadata 陣列當成資料列回給使用者。**回錯資料比回空更糟。**
+
+**SDK 對策(已實作)**:
+
+1. 先試頂層的 `rows` / `items` / `data` / `results` / `records`。
+2. 找不到才往下**一層**,而且只進白名單容器(`envelope` / `payload` / `body` / `response` / `result`),並且只認上述那幾個列 key。
+3. `lineage` / `quality` / `request_context` / `meta` / `error` / `warnings` / `known_gaps` **永不下探**。
+4. 巢狀候選必須**整個陣列都是物件**才採用 —— 純量陣列(日期清單、代號清單)一律拒絕。
+5. 命中巢狀時 `Meta.row_key` 記成 `"envelope.data"`,使用者看得到列是從哪裡取出來的。
+
+`price-enhanced` 本身我無法驗證(需要 key),上述處理是依左下/左上回報做的防禦性實作,拿到測試 key 後要實測確認。
+
+**建議**:同一家族的 envelope 統一 —— `envelope` 要嘛永遠是 metadata、要嘛永遠是列容器,不要兩種都是。這跟第 F 項(列的 key 有三種)是同一件事的延伸:**光是「列在哪裡」目前就有 4 種以上的答案**。

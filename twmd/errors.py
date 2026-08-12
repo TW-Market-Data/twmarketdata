@@ -41,6 +41,7 @@ __all__ = [
     "AuthenticationError",
     "EntitlementError",
     "RateLimitError",
+    "TwmdRateLimitError",
     "UpstreamError",
 ]
 
@@ -261,4 +262,5 @@ TWMarketDataError = TwmdError
 AuthenticationError = TwmdAuthError
 EntitlementError = TierRequiredError
 RateLimitError = RateLimitedError
+TwmdRateLimitError = RateLimitedError   # 0.1.0 spelling
 UpstreamError = TwmdServerError

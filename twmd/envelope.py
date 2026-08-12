@@ -26,17 +26,50 @@ ROW_KEYS: Tuple[str, ...] = ("rows", "items", "data", "results", "records")
 _COUNT_KEYS: Tuple[str, ...] = ("count", "row_count", "data_count", "total")
 _GAP_KEYS: Tuple[str, ...] = ("data_gaps", "known_gaps", "gaps")
 
+#: Wrapper keys worth looking inside when the top level holds no rows. Kept
+#: deliberately short: metadata blocks in these envelopes contain their own
+#: lists -- ``request_context.snapshot_dates_in_page``, ``quality.indices_present``,
+#: ``lineage.source_families`` were all observed on 2026-08-12 -- and a
+#: "descend and take the first list" rule would return those as if they were
+#: data. Returning garbage rows is worse than returning none.
+_CONTAINER_KEYS: Tuple[str, ...] = ("envelope", "payload", "body", "response", "result")
+
+#: Never descended into, whatever they contain.
+_METADATA_KEYS = frozenset({"lineage", "quality", "request_context", "meta",
+                            "error", "warnings", "known_gaps", "data_gaps",
+                            "held_policy"})
+
 
 def extract_rows(payload: Any) -> Tuple[List[Dict[str, Any]], Optional[str]]:
-    """Return ``(rows, row_key)``. ``row_key`` is None when no array was found."""
+    """Return ``(rows, row_key)``. ``row_key`` is None when no array was found.
+
+    Tries the canonical row keys at the top level first, then looks one level
+    inside a short list of wrapper keys, so a nested ``envelope.data`` shape is
+    found instead of silently yielding an empty frame. Nested hits are reported
+    with their path, e.g. ``"envelope.data"``.
+    """
     if isinstance(payload, list):
         return [r for r in payload if isinstance(r, dict)], None
     if not isinstance(payload, Mapping):
         return [], None
+
     for key in ROW_KEYS:
         value = payload.get(key)
         if isinstance(value, list):
             return [r for r in value if isinstance(r, dict)], key
+
+    for container in _CONTAINER_KEYS:
+        if container in _METADATA_KEYS:
+            continue
+        inner = payload.get(container)
+        if not isinstance(inner, Mapping):
+            continue
+        for key in ROW_KEYS:
+            value = inner.get(key)
+            # Rows are objects. Requiring that keeps a list of scalars -- a
+            # scope list, a set of dates -- from being mistaken for records.
+            if isinstance(value, list) and all(isinstance(r, dict) for r in value):
+                return list(value), "%s.%s" % (container, key)
     return [], None
 
 

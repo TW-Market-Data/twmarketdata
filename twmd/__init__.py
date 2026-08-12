@@ -35,8 +35,16 @@ from .errors import (AuthenticationError, DatasetNotFoundError, EndpointRetiredE
                      InvalidApiKeyError, MissingApiKeyError, NotMappedError,
                      PointInTimeUnavailable, RateLimitedError, RateLimitError,
                      TierRequiredError, TWMarketDataError, TwmdAuthError, TwmdConfigError,
+                     TwmdRateLimitError,
                      TwmdError, TwmdRequestError, TwmdServerError,
                      UnsupportedParameterError, UpstreamError)
+from . import access, frames  # noqa: F401  (0.1.0 module layout)
+from ._legacy import (API_KEY_ENV, KEY_REQUIRED, KEY_REQUIRED_DATASETS, OPEN,
+                      OPEN_DATASETS, PRESUMED_KEY_REQUIRED_DATASETS, SAMPLE,
+                      SAMPLE_DATASETS, SAMPLE_TICKERS, TwmdAPIError,
+                      TwmdNotFoundError, TwmdPaymentRequired, TwmdTransportError,
+                      TwmdValidationError, access_tier, concat_frames, explain,
+                      is_key_free, provenance, record_key, server_count, to_dataframe)
 from .frame import TwmdFrame, pandas_available
 from .meta import (CompatSubstitutionWarning, DatasetStatusWarning, Gap,
                    ImputedKnowledgeDateWarning, Meta, PITDataMissingWarning,
@@ -66,7 +74,14 @@ __all__ = [
     "InsufficientCreditsError", "TwmdRequestError", "DatasetNotFoundError",
     "UnsupportedParameterError", "RateLimitedError", "EndpointRetiredError",
     "TwmdServerError", "PointInTimeUnavailable", "NotMappedError",
-    # 0.1.0 aliases
+    # --- 0.1.0 compatibility surface (deprecated, still working) ---
     "TWMarketDataError", "AuthenticationError", "EntitlementError",
     "RateLimitError", "UpstreamError",
+    "TwmdAPIError", "TwmdTransportError", "TwmdNotFoundError", "TwmdRateLimitError",
+    "TwmdValidationError", "TwmdPaymentRequired",
+    "access", "frames", "API_KEY_ENV",
+    "SAMPLE_TICKERS", "OPEN_DATASETS", "SAMPLE_DATASETS", "KEY_REQUIRED_DATASETS",
+    "PRESUMED_KEY_REQUIRED_DATASETS", "OPEN", "SAMPLE", "KEY_REQUIRED",
+    "access_tier", "provenance", "is_key_free", "explain",
+    "to_dataframe", "record_key", "server_count", "concat_frames",
 ]

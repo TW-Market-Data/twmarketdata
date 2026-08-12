@@ -93,6 +93,8 @@ class Meta:
     """True when the row limit was hit on a route with no offset support."""
     limit_used: Optional[int] = None
     supports_offset: bool = False
+    offset_ignored: bool = False
+    """True when the route accepted `offset` but returned the same page anyway."""
 
     # --- plan / status ----------------------------------------------------
     tier_required: Optional[str] = None
