@@ -1,0 +1,11 @@
+# The sdist should carry the documents a reader needs to judge the release.
+include CHANGELOG.md
+include NOTICE
+include DESIGN_v1.md
+include RELEASE_CHECKLIST.md
+include PUBLISH_BLOCKERS.md
+recursive-include mapping *.csv *.md
+recursive-include examples *.py
+recursive-include tests *.py *.json
+recursive-include tools *.py
+prune mapping/sources

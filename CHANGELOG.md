@@ -1,5 +1,38 @@
 # Changelog
 
+## 0.2.1 — 2026-08-12
+
+Recording-only release: the same client, verified against a much wider slice of
+the paid API than 0.2.0 could reach.
+
+### Changed
+
+- **62 of the 63 paid-tier cassettes now record real data**, up from 52. The
+  entitlement fix upstream cleared the `403 commercial_use_not_allowed`
+  responses entirely, so `etf_holdings`, `interest_rate_snapshots`,
+  `tax_business_registration` and `macro_worldbank` are recorded from live rows
+  rather than from a refusal. The one remaining refusal is `macro_global`,
+  which is enterprise tier and private beta — a developer key not reaching it is
+  correct, not a defect.
+- **Two routes require a filter the API spec does not declare**, and their 400
+  does not say which one. The working combinations were measured and are now
+  carried in the registry, so `ValidationError` names them instead of leaving
+  you to guess:
+
+      twmd.capabilities("interest_rate_snapshots")["required_filters"]
+      # ['rate_family', 'rate_code']
+      twmd.capabilities("market_breadth")["required_filters"]
+      # ['market', 'date_from+date_to']
+
+  The two routes want different things, and `date_from`+`date_to` satisfies one
+  but not the other, so there is no rule to infer — only the two measured
+  entries get a hint, and nothing is invented for the other 80.
+
+### Fixed
+
+- Nothing in the client itself. 0.2.0's behaviour is unchanged; this release
+  exists because PyPI does not allow re-uploading a version.
+
 ## 0.2.0 — 2026-08-12
 
 First release under Apache-2.0. 0.1.0 remains MIT; the relicence applies from

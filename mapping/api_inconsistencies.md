@@ -356,14 +356,24 @@ limit=1000 → 200
 
 ---
 
-## R. `422` 與 `400` 先前無型別;`missing_required_filter` 出現在 registry 說無必填的 route 上
+## R. `missing_required_filter`:OpenAPI 沒宣告、訊息不說是哪個(已測出答案)
 
-- `market_breadth` 回 `400 {"error":"missing_required_filter","message":"Missing required filter"}`,但 OpenAPI 對該 route **沒有宣告任何必填參數**,且訊息**沒說缺哪一個**。
-- `422 validation_error` 先前落到通用錯誤類別。
+兩支 route 會回 `400 {"error":"missing_required_filter","message":"Missing required filter"}`,而 OpenAPI 對它們**沒有宣告任何必填參數**,訊息也**沒說缺哪一個**。2026-08-12 逐一試出可用組合:
+
+| 資料集 | 可用的 filter | 無效的(仍 400) |
+|---|---|---|
+| `interest_rate_snapshots` | `rate_family=policy` ✅ / `rate_code=discount_rate` ✅ | `currency`、`market`、`tenor`、`as_of_date`、`date_from`+`date_to` |
+| `market_breadth` | `market=TWSE` ✅ / `date_from`+`date_to` ✅ | `trade_date` |
+
+注意兩支要的東西**完全不同**,而且 `date_from`+`date_to` 在一支有效、另一支無效 —— 沒有規律可循,只能逐支試。
+
+`422 validation_error` 先前也落到通用錯誤類別。
 
 **SDK 對策**:新增 `ValidationError`(400/422/`validation_error`/`missing_required_filter`),並保留 server 原文 —— 因為只有 server 的訊息會點名欄位(如 `limit: Input should be...`)。0.1.0 的 `TwmdValidationError` 現在是它的別名。
 
-**建議**:必填參數要在 OpenAPI 宣告;錯誤訊息要指名缺哪一個。
+**SDK 對策(加強)**:實測出來的可用 filter 存進 registry(`twmd.capabilities(...)["required_filters"]`),收到 `missing_required_filter` 時錯誤訊息會**列出實測可行的組合**,不必讓使用者自己試。只有實測過的兩支有這個提示 —— 沒測過的不會憑空生成。
+
+**建議**:必填參數要在 OpenAPI 宣告;錯誤訊息要指名缺哪一個欄位。這是目前唯一需要「逐支試參數」才能用的地方。
 
 ---
 
@@ -445,7 +455,24 @@ x-request-id: req_6f95b7d164e248f1
 
 **SDK 對策**:不從 tier 推論可讀性(這點不因上面的修訂而改變 —— 反而更成立);`TierRequiredError` 保留 server 原文。
 
-### 第三次量測(新鑄的 developer 拋棄金鑰,plan=developer / 6 datasets / quota 2000 / 24h)
+### 第四次量測(entitlement 修復後,2026-08-12)—— ✅ 403 已消失
+
+owner 修好 entitlement 並核發新的 developer key 後重測:
+
+| 先前 | 現在 |
+|---|---|
+| `etf_holdings` 402 → 403 | **200** |
+| `block_trade_daily` 402 → 200 | **200** |
+| `interest_rate_snapshots` 403 `commercial_use_not_allowed` | **200**(需補上第 R 項的 filter)|
+| `tax_business_registration` 403 | **200** |
+| `macro_worldbank` 403 | **200** |
+| `macro_global` 402 | **402**(enterprise 級 + private_beta,developer key 拿不到是正確的)|
+
+**63 支 cassette 現在 62 支是 200**,唯一的非 200 是合理的方案邊界。`commercial_use_not_allowed` 這個形狀在整份 cassette 裡已經完全不存在。
+
+以下保留修復前的量測紀錄,說明當時的判斷依據。
+
+### 第三次量測(修復前:developer 拋棄金鑰,plan=developer / 6 datasets / quota 2000 / 24h)
 
 重錄先前 10 支回 402 的資料集:
 

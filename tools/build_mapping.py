@@ -48,6 +48,14 @@ END_PARAMS = ["date_to", "end_date", "end_month", "end_period"]
 ASOF_PARAMS = ["as_of", "as_of_date", "source_as_of_date"]
 HOUSEKEEPING = {"limit", "offset", "include_data_gaps", "sort_by", "sort_order"}
 
+# Filters the server demands but the OpenAPI does not declare. Both routes answer
+# 400 missing_required_filter without naming the field, so these were found by
+# probing on 2026-08-12. Each entry lists filter sets that were observed to work.
+REQUIRED_FILTERS = {
+    "interest_rate_snapshots": ["rate_family", "rate_code"],
+    "market_breadth": ["market", "date_from+date_to"],
+}
+
 
 def build_datasets_csv():
     oapi = load("twmd_openapi.json")["paths"]
@@ -141,6 +149,7 @@ def build_datasets_csv():
             "data_gaps_param": "include_data_gaps" if "include_data_gaps" in qp else "",
             "pagination": "offset" if "offset" in qp else "limit_only",
             "limit_max": limit_max or "",
+            "required_filters": "|".join(REQUIRED_FILTERS.get(key, [])),
             "api_entity_param": next((p for p in ENTITY_PARAMS if p in qp), ""),
             "api_start_param": next((p for p in START_PARAMS if p in qp), ""),
             "api_end_param": next((p for p in END_PARAMS if p in qp), ""),
