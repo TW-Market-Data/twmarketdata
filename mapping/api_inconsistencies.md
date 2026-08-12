@@ -42,13 +42,21 @@
 
 ---
 
-## C. `as_of` 只有 17/82 支支援
+## C. `as_of` 只有 17/82 支的 route 有這個參數
 
-且參數名本身分裂為 `as_of`(5)、`as_of_date`(21,含非 82 的 route)、`source_as_of_date`(3)。
+且參數名本身分裂為 `as_of`、`as_of_date`、`source_as_of_date`。
 
 **影響**:point-in-time 是 TWMD 的核心差異化,但目前八成的資料集無法在 server 端做 as_of 過濾。
 
-**SDK 對策**:三態語義(`server` 17 / `client` 53 / `client_unverified` 5 / `unsupported` 7)。client 端過濾遇上 `limit` 截斷時會發 `TruncatedPointInTimeWarning`——這是 client 端補位無法完全消除的正確性風險,**只有 server 端支援 as_of 才能根治**。
+**SDK 對策**:五態語義 —— `server` 16 / `client` 45 / `client_unsafe` 8 / `client_unverified` 5 / `unsupported` 8。
+(17 支有參數但只有 16 支走 `server`:`subsidiary_investment` 的 route 接受 `as_of_date`,而 describe 宣告它無知識軸且 `point_in_time_safe=false`,SDK 依語義拒絕。)
+
+client 端過濾有兩個**無法在 client 側根治**的風險:
+
+1. 先被 `limit` 截斷再本地過濾,會把「其實有資料」誤判成「那天還沒有」→ 發 `TruncatedPointInTimeWarning`。
+2. `point_in_time_safe=false` 的 8 支,宣告的欄位其實是期別/生效日/觀察日,本地過濾等於引入未來函數 → SDK 預設拒絕(`client_unsafe`)。
+
+**兩者都只有 server 端支援 as_of 才能根治。**
 
 **建議優先序**:先補基本面與事件類(`income_statement`、`balance_sheet`、`cash_flow_statement`、`financial_ratios`、`monthly_revenue`、`dividends`、`corporate_actions`),因為這幾支正是回測最容易產生未來函數的地方。
 
