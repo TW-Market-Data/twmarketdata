@@ -71,7 +71,33 @@ print('version consistent:', v)"
 
 ---
 
-## 4. 建置與本機驗證
+## 4. 建置與本機驗證 —— ✅ 已於 2026-08-12 跑過
+
+> 這一節不需要憑證,已代跑完畢,結果如下。發布前建議再跑一次(拿掉 banner 之後),指令原樣保留。
+>
+> ```
+> version consistency   pyproject 0.2.0 == __version__ 0.2.0     ✅
+> python -m build       twmarketdata-0.2.0-py3-none-any.whl (71 KB)
+>                       twmarketdata-0.2.0.tar.gz (85 KB)        ✅
+> twine check           both PASSED                              ✅
+> wheel 內容            27 檔,全部在 twmd/ 與 dist-info 之內      ✅
+>                       py.typed / _registry.json / _methods.pyi /
+>                       compat/_finmind_map.json 都在;無 CSV、無 tests/tools/mapping
+> metadata              License-Expression: Apache-2.0
+>                       License-File: LICENSE, NOTICE
+>                       Requires-Python: >=3.9;Requires-Dist: requests>=2.31.0  ✅
+> sdist                 LICENSE / NOTICE / README.md / pyproject.toml 均在  ✅
+> 乾淨環境冒煙          daily_price('2330') 120 列、compat 可 import、
+>                       0.1.0 alias 可用、PIT 拒絕與過濾都正確      ✅
+> ```
+>
+> **這一節抓到一個真 bug**:`twmd/compat/_finmind_map.json` 原本沒被打包
+> (setuptools 的 package-data key 只涵蓋自己那個 package),安裝後
+> `from twmd.compat import finmind` 會 FileNotFoundError。已修,並加了一條
+> 會走訪 package 的回歸測試。**原始碼樹的測試抓不到這個 —— 這就是發布前
+> 一定要真的 build 的理由。**
+
+
 
 ```bash
 python -m pip install -U build twine
