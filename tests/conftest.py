@@ -52,6 +52,17 @@ class FakeSession:
         pass
 
 
+@pytest.fixture(autouse=True)
+def _no_ambient_api_key(monkeypatch):
+    """Keep a developer's shell out of the test results.
+
+    Several tests assert free-tier behaviour, which silently disappears if
+    TWMD_API_KEY happens to be exported -- as it is while recording cassettes.
+    Tests that want a key pass one explicitly.
+    """
+    monkeypatch.delenv("TWMD_API_KEY", raising=False)
+
+
 @pytest.fixture
 def session() -> FakeSession:
     return FakeSession()

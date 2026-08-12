@@ -52,9 +52,10 @@ MAPPINGS = [
     ("taiwan_stock_price_limit", "TaiwanStockPriceLimit", "A", "stock_price_limit_daily", "medium",
      "tier=max. Field equivalence unverified until the test key lands."),
     ("taiwan_stock_market_value_weight", "TaiwanStockMarketValueWeight", "A", "market_value_weight", "high", ""),
-    ("taiwan_stock_market_value", "TaiwanStockMarketValue", "C", "valuation_core_daily", "low",
-     "Market cap is expected inside valuation_core_daily but is NOT confirmed. Ships as NotMappedError "
-     "until a live row proves the column exists."),
+    ("taiwan_stock_market_value", "TaiwanStockMarketValue", "C", "valuation_core_daily", "high",
+     "Confirmed on live rows 2026-08-12: valuation_core_daily carries market_cap, alongside "
+     "shares_outstanding, close, pe, pb, ps, dividend_yield and book_value_per_share. Market "
+     "cap is served inside a broader daily valuation table rather than as a series of its own."),
     ("taiwan_stock_kbar", "TaiwanStockKBar", "D", "", "high", "Intraday K-bars: no intraday dataset among the 82."),
     ("taiwan_stock_tick", "TaiwanStockPriceTick", "D", "", "high", "Tick data: not in the 82."),
     ("taiwan_stock_tick_snapshot", "taiwan_stock_tick_snapshot", "D", "", "high", "Realtime snapshot: not in the 82."),
@@ -129,9 +130,11 @@ MAPPINGS = [
      "table, AND the series accumulates forward from 2026-08 (the source keeps no archive). Earlier "
      "weeks are unobtainable, not missing. Compat states this in data_gaps."),
     ("taiwan_stock_block_trade", "TaiwanStockBlockTrade", "A", "block_trade_daily", "medium", "tier=developer."),
-    ("taiwan_stock_day_trading", "TaiwanStockDayTrading", "C", "price_move_context", "low",
-     "Only a day_trade_ratio column on large-move days; NOT a full day-trading table. Ships as "
-     "NotMappedError unless the caller opts in explicitly."),
+    ("taiwan_stock_day_trading", "TaiwanStockDayTrading", "D", "", "high",
+     "Withdrawn on evidence 2026-08-12. price_move_context does carry day_trade_ratio, but it only "
+     "has rows on days a stock made a large move (magnitude_bucket, hit_track, threshold_version). "
+     "Serving that for a day-trading query would return a silently biased subset -- big-move days "
+     "only -- which is worse than returning nothing. No unbiased day-trading table exists in the 82."),
     ("taiwan_stock_day_trading_borrowing_fee_rate", "TaiwanStockDayTradingBorrowingFeeRate", "D", "", "high", "Not in the 82."),
     ("taiwan_stock_loan_collateral_balance", "TaiwanStockLoanCollateralBalance", "D", "", "high", "Not in the 82."),
     ("taiwan_stock_government_bank_buy_sell", "TaiwanStockGovernmentBankBuySell", "D", "", "high", "Eight-bank buy/sell: not in the 82."),
@@ -154,8 +157,12 @@ MAPPINGS = [
      "TWMD covers both cash capital increase schedules and capital reduction history."),
     ("taiwan_stock_par_value_change", "TaiwanStockParValueChange", "B", "stock_split_par_value_events", "medium", ""),
     ("taiwan_stock_split_price", "TaiwanStockSplitPrice", "B", "stock_split_par_value_events", "medium", ""),
-    ("taiwan_stock_news", "TaiwanStockNews", "C", "company_news", "low",
-     "Different publisher set and different coverage window; not a like-for-like news feed."),
+    ("taiwan_stock_news", "TaiwanStockNews", "C", "company_news", "high",
+     "Characterised on live rows 2026-08-12: headline + published_at + content_url only. "
+     "metadata_only=true and summary=null, so NO article body is served -- sentiment work on news "
+     "text will find nothing. source_name=mops_official, i.e. MOPS announcements rather than a "
+     "press feed, and source_attribution_required=true. Querying by ticker returned no rows for "
+     "2330 in the sampled window; the feed is not densely ticker-indexed."),
     ("taiwan_stock_industry_chain", "TaiwanStockIndustryChain", "B", "industry_chain", "high",
      "PIT WARNING: capture_date is TWMD's OBSERVATION date, not the disclosure date, and history is "
      "not backfilled; point_in_time_safe=false."),
@@ -166,17 +173,23 @@ MAPPINGS = [
      "TWMD metadata spans funds/ETFs generally rather than active ETFs specifically."),
     ("taiwan_stock_active_etf_holding", "TaiwanStockActiveETFHolding", "C", "etf_holdings", "medium", "tier=developer."),
     ("taiwan_stock_active_etf_holding_change", "TaiwanStockActiveETFHoldingChange", "C", "etf_holdings", "low",
-     "Change series would have to be diffed client-side from consecutive holdings snapshots."),
+     "STILL UNVERIFIED: etf_holdings is developer-tier and returned 402 for both the max key and "
+     "the developer key issued on 2026-08-12, so its columns have never been observed. A change "
+     "series would in any case have to be diffed client-side from consecutive snapshots."),
 
     # ---------------------------------------------------- convertible bonds
     ("taiwan_stock_convertible_bond_info", "TaiwanStockConvertibleBondInfo", "A", "bond_convertible_reference", "high", "Includes matured bonds."),
     ("taiwan_stock_convertible_bond_daily_overview", "TaiwanStockConvertibleBondDailyOverview", "A", "convertible_bond_overview", "high", ""),
     ("taiwan_stock_convertible_bond_institutional_investors", "TaiwanStockConvertibleBondInstitutionalInvestors", "A", "convertible_bond_institutional", "high", ""),
     ("taiwan_stock_convertible_bond_monthly_analysis", "TaiwanStockConvertibleBondMonthlyAnalysis", "B", "convertible_bond_monthly", "medium", "TDCC custody monthly."),
-    ("taiwan_stock_convertible_bond_daily", "TaiwanStockConvertibleBondDaily", "C", "convertible_bond_overview", "low",
-     "Overview carries reference_price, not a full CB OHLC series."),
-    ("taiwan_stock_convertible_bond_put_provision", "TaiwanStockConvertibleBondPutProvision", "C", "convertible_bond_overview", "low",
-     "Put/call provisions appear inside the overview board; extraction unconfirmed."),
+    ("taiwan_stock_convertible_bond_daily", "TaiwanStockConvertibleBondDaily", "D", "", "high",
+     "Withdrawn on evidence 2026-08-12. convertible_bond_overview has no open/high/low/close at "
+     "all -- only reference_price, plus terms. Passing a reference price off as a daily traded "
+     "price is a different quantity and would corrupt any analysis built on it."),
+    ("taiwan_stock_convertible_bond_put_provision", "TaiwanStockConvertibleBondPutProvision", "C", "convertible_bond_overview", "high",
+     "Confirmed on live rows 2026-08-12: put_start_date, put_end_date and put_price are all "
+     "present, along with the redemption_* and conversion_* terms. The provisions live in the "
+     "overview board rather than a table of their own, so filter the columns you need."),
     ("taiwan_asset_swap_fixed_income_daily", "TaiwanAssetSwapFixedIncomeDaily", "D", "", "high", "Not in the 82."),
     ("taiwan_asset_swap_option_daily", "TaiwanAssetSwapOptionDaily", "D", "", "high", "Not in the 82."),
 

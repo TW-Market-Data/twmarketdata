@@ -381,7 +381,7 @@
   "taiwan_stock_active_etf_holding_change": {
    "confidence": "low",
    "dataset_enum": "TaiwanStockActiveETFHoldingChange",
-   "note": "Change series would have to be diffed client-side from consecutive holdings snapshots.",
+   "note": "STILL UNVERIFIED: etf_holdings is developer-tier and returned 402 for both the max key and the developer key issued on 2026-08-12, so its columns have never been observed. A change series would in any case have to be diffed client-side from consecutive snapshots.",
    "tier": "C",
    "twmd": [
     "etf_holdings"
@@ -454,13 +454,11 @@
    "via_get_data_only": false
   },
   "taiwan_stock_convertible_bond_daily": {
-   "confidence": "low",
+   "confidence": "high",
    "dataset_enum": "TaiwanStockConvertibleBondDaily",
-   "note": "Overview carries reference_price, not a full CB OHLC series.",
-   "tier": "C",
-   "twmd": [
-    "convertible_bond_overview"
-   ],
+   "note": "Withdrawn on evidence 2026-08-12. convertible_bond_overview has no open/high/low/close at all -- only reference_price, plus terms. Passing a reference price off as a daily traded price is a different quantity and would corrupt any analysis built on it.",
+   "tier": "D",
+   "twmd": [],
    "verified_by": "method_signature",
    "via_get_data_only": false
   },
@@ -509,9 +507,9 @@
    "via_get_data_only": false
   },
   "taiwan_stock_convertible_bond_put_provision": {
-   "confidence": "low",
+   "confidence": "high",
    "dataset_enum": "TaiwanStockConvertibleBondPutProvision",
-   "note": "Put/call provisions appear inside the overview board; extraction unconfirmed.",
+   "note": "Confirmed on live rows 2026-08-12: put_start_date, put_end_date and put_price are all present, along with the redemption_* and conversion_* terms. The provisions live in the overview board rather than a table of their own, so filter the columns you need.",
    "tier": "C",
    "twmd": [
     "convertible_bond_overview"
@@ -544,13 +542,11 @@
    "via_get_data_only": false
   },
   "taiwan_stock_day_trading": {
-   "confidence": "low",
+   "confidence": "high",
    "dataset_enum": "TaiwanStockDayTrading",
-   "note": "Only a day_trade_ratio column on large-move days; NOT a full day-trading table. Ships as NotMappedError unless the caller opts in explicitly.",
-   "tier": "C",
-   "twmd": [
-    "price_move_context"
-   ],
+   "note": "Withdrawn on evidence 2026-08-12. price_move_context does carry day_trade_ratio, but it only has rows on days a stock made a large move (magnitude_bucket, hit_track, threshold_version). Serving that for a day-trading query would return a silently biased subset -- big-move days only -- which is worse than returning nothing. No unbiased day-trading table exists in the 82.",
+   "tier": "D",
+   "twmd": [],
    "verified_by": "method_signature",
    "via_get_data_only": false
   },
@@ -806,9 +802,9 @@
    "via_get_data_only": false
   },
   "taiwan_stock_market_value": {
-   "confidence": "low",
+   "confidence": "high",
    "dataset_enum": "TaiwanStockMarketValue",
-   "note": "Market cap is expected inside valuation_core_daily but is NOT confirmed. Ships as NotMappedError until a live row proves the column exists.",
+   "note": "Confirmed on live rows 2026-08-12: valuation_core_daily carries market_cap, alongside shares_outstanding, close, pe, pb, ps, dividend_yield and book_value_per_share. Market cap is served inside a broader daily valuation table rather than as a series of its own.",
    "tier": "C",
    "twmd": [
     "valuation_core_daily"
@@ -851,9 +847,9 @@
    "via_get_data_only": false
   },
   "taiwan_stock_news": {
-   "confidence": "low",
+   "confidence": "high",
    "dataset_enum": "TaiwanStockNews",
-   "note": "Different publisher set and different coverage window; not a like-for-like news feed.",
+   "note": "Characterised on live rows 2026-08-12: headline + published_at + content_url only. metadata_only=true and summary=null, so NO article body is served -- sentiment work on news text will find nothing. source_name=mops_official, i.e. MOPS announcements rather than a press feed, and source_attribution_required=true. Querying by ticker returned no rows for 2330 in the sampled window; the feed is not densely ticker-indexed.",
    "tier": "C",
    "twmd": [
     "company_news"

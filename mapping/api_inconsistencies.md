@@ -414,3 +414,27 @@ x-request-id: req_6f95b7d164e248f1
 **SDK 對策**:`TierRequiredError` 保留 server 原文(訊息本身有講需要哪個方案);不自行推論階梯順序。
 
 **建議**:定價頁與 API 文件明確說明 developer/enterprise 不包含在 max 內。
+
+---
+
+## V. 標示 `developer` 的 key 仍拿不到 `developer` 級資料集
+
+2026-08-12 核發一把標示為 **developer / 6 datasets** 的 key。對三支 `developer` 級資料集實測:
+
+| 資料集 | tier | max key | developer key |
+|---|---|---|---|
+| `etf_holdings` | developer | 402 | **402** |
+| `interest_rate_snapshots` | developer | 402 | **402** |
+| `block_trade_daily` | developer | 402 | **402** |
+
+錯誤訊息是 `not_entitled_for_dataset`,內文寫「**developer 方案涵蓋它**」—— 也就是說,**一把標示為 developer 的 key,拿到的錯誤訊息叫它去買 developer 方案**。
+
+同一把 key 可正常讀取 `company_news`(pro)、`valuation_core_daily`(pro)、`price_move_context`(starter)。
+
+**可能的解釋**(我無法從外部分辨):key 的 tier 標籤與實際 entitlement 清單是兩套資料;或「6 datasets」的清單不含這三支。無論何者,**tier 標籤都不足以預測 entitlement**。
+
+**影響**:`twmd.capabilities(...)["tier"]` 只能當提示,不能當「這把 key 能不能讀」的判斷依據 —— 與第 K 項(標 free 卻回 401)是同一個病在付費層的版本。
+
+**SDK 對策**:不從 tier 推論可讀性;`TierRequiredError` 保留 server 原文。
+
+**建議**:錯誤訊息應指出**這把 key 目前的 entitlement 清單**,而不是重述資料集的 tier 標籤 —— 現在的訊息會讓已經買了 developer 的人以為自己沒買。

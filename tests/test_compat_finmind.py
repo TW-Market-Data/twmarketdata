@@ -47,10 +47,42 @@ def test_non_taiwan_calls_refuse():
 
 
 def test_low_confidence_mapping_is_withheld_not_guessed():
+    # etf_holdings is developer-tier and returned 402 to both the max key and
+    # the developer key, so its columns have never been observed.
     with pytest.raises(NotMappedError) as exc:
-        fm.taiwan_stock_market_value(stock_id="2330")
+        fm.taiwan_stock_active_etf_holding_change(stock_id="0050")
     assert "not been verified row by row" in str(exc.value)
-    assert "valuation_core_daily" in str(exc.value)      # candidate is still named
+    assert "etf_holdings" in str(exc.value)              # candidate is still named
+
+
+def test_mapping_verified_against_live_rows_now_serves(session):
+    # taiwan_stock_market_value was withheld until a live row proved
+    # valuation_core_daily carries market_cap. It does.
+    session.queue = [FakeResponse(rows_envelope([{"ticker": "2330", "market_cap": 1.2e13}]))]
+    with pytest.warns(CompatSubstitutionWarning):
+        df = fm.taiwan_stock_market_value(stock_id="2330")
+    assert len(df) == 1
+    assert fm.mapping_for("taiwan_stock_market_value")["confidence"] == "high"
+
+
+@pytest.mark.parametrize("call,reason", [
+    ("taiwan_stock_day_trading", "biased subset"),
+    ("taiwan_stock_convertible_bond_daily", "different quantity"),
+])
+def test_mappings_withdrawn_on_evidence_rather_than_left_uncertain(call, reason):
+    """Two candidates were dropped after seeing real rows.
+
+    price_move_context only has rows on large-move days, so serving it for a
+    day-trading query returns a silently biased sample. convertible_bond_overview
+    has no OHLC at all, only a reference price. In both cases substituting would
+    corrupt the caller's analysis more quietly than refusing does.
+    """
+    entry = fm.mapping_for(call)
+    assert entry["tier"] == "D"
+    assert entry["confidence"] == "high"     # confident that it does NOT map
+    with pytest.raises(NotMappedError) as exc:
+        getattr(fm, call)(stock_id="2330")
+    assert reason in str(exc.value)
 
 
 def test_substitution_warns_about_the_difference(session):

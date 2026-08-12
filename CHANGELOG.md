@@ -103,14 +103,38 @@ Still working, warning on use: `Client.get_dataset` / `get_all` / `iter_pages` /
 - `400` / `422` now raise `ValidationError` instead of a generic error, keeping
   the server's wording — it is the only thing that names the offending field.
 
+### Compat mappings settled against live rows
+
+Seven candidates were checked column by column. Three were promoted, and two
+were **withdrawn** — evidence that a substitution would mislead is as decisive
+as evidence that it works:
+
+- `taiwan_stock_market_value` → `valuation_core_daily` — **promoted**;
+  `market_cap` is there, alongside `shares_outstanding` and the ratios.
+- `taiwan_stock_convertible_bond_put_provision` → `convertible_bond_overview` —
+  **promoted**; `put_start_date` / `put_end_date` / `put_price` all present.
+- `taiwan_stock_news` → `company_news` — **kept, now precisely described**:
+  headline, timestamp and link only. `metadata_only=true` and `summary=null`, so
+  there is no article body to analyse, and the source is MOPS announcements
+  rather than a press feed.
+- `taiwan_stock_day_trading` → **withdrawn to D**. `price_move_context` carries
+  `day_trade_ratio` but only has rows on large-move days, so serving it would
+  return a silently biased sample rather than day-trading statistics.
+- `taiwan_stock_convertible_bond_daily` → **withdrawn to D**.
+  `convertible_bond_overview` has no OHLC at all, only `reference_price` —
+  a different quantity from a traded price.
+
 ### Known limitations
 
 - **Compat column names are TWMD's.** Parameter names are mirrored; response
   column names are not. Mirroring them would require comparing live responses
   from another service, which this project does not do. A `stock_id` alias is
   added where an identifier column exists.
-- **Seven compat mappings are withheld** as unverified. They raise
-  `NotMappedError` naming the candidate dataset rather than shipping a guess.
+- **Two compat mappings remain withheld** as unverified, down from nine. Both
+  are blocked on access rather than on judgement: `etf_holdings` is
+  developer-tier and returned 402 to a max key *and* to a developer key, and
+  `taiwan_stock_10year` has no candidate dataset at all. They raise
+  `NotMappedError` naming what is missing.
 - **B-grade mappings without an implemented reshape refuse** and point at the
   native method, rather than returning the wrong shape.
 - Paid-tier behaviour is covered by 63 recorded cassettes (2026-08-12, restricted
