@@ -1,0 +1,101 @@
+{
+ "dataset": "return_index_daily",
+ "recorded_with": "restricted test key (value never stored)",
+ "request": {
+  "headers": {
+   "X-API-Key": "REDACTED"
+  },
+  "method": "GET",
+  "params": {
+   "limit": 5
+  }
+ },
+ "response": {
+  "body": {
+   "dataset_id": "return_index_daily",
+   "filters": {
+    "end_date": null,
+    "index_id": null,
+    "limit": 5,
+    "market": null,
+    "start_date": null
+   },
+   "generated_at": "2026-08-12T06:27:01Z",
+   "metadata": {
+    "allowed_filters": [
+     "market",
+     "index_id",
+     "start_date",
+     "end_date",
+     "limit"
+    ],
+    "boundary_module": "feature_engine.read_api.return_index_daily_api_boundary",
+    "data_status": "public_api",
+    "default_limit": 100,
+    "max_limit": 500,
+    "planned_route": "/v2/datasets/return-index-daily",
+    "public_exposure": true,
+    "route_public": true
+   },
+   "not_investment_advice": true,
+   "request_context": {
+    "not_investment_advice": true,
+    "public_exposure": true
+   },
+   "row_count": 5,
+   "rows": [
+    {
+     "index_id": "TPEX_RETURN_INDEX",
+     "index_name": "TPEx Return Index",
+     "market": "TPEx",
+     "return_index_value": "726.610000",
+     "source_name": "tpex_roe",
+     "source_url": "https://www.tpex.org.tw/www/zh-tw/indexInfo/ROE?date=2026/08/15",
+     "trade_date": "2026-08-10"
+    },
+    {
+     "index_id": "TPEX_RETURN_INDEX",
+     "index_name": "TPEx Return Index",
+     "market": "TPEx",
+     "return_index_value": "712.800000",
+     "source_name": "tpex_roe",
+     "source_url": "https://www.tpex.org.tw/www/zh-tw/indexInfo/ROE?date=2026/08/15",
+     "trade_date": "2026-08-07"
+    },
+    {
+     "index_id": "TPEX_RETURN_INDEX",
+     "index_name": "TPEx Return Index",
+     "market": "TPEx",
+     "return_index_value": "726.130000",
+     "source_name": "tpex_roe",
+     "source_url": "https://www.tpex.org.tw/www/zh-tw/indexInfo/ROE?date=2026/08/15",
+     "trade_date": "2026-08-06"
+    },
+    {
+     "index_id": "TPEX_RETURN_INDEX",
+     "index_name": "TPEx Return Index",
+     "market": "TPEx",
+     "return_index_value": "711.870000",
+     "source_name": "tpex_roe",
+     "source_url": "https://www.tpex.org.tw/www/zh-tw/indexInfo/ROE?date=2026/08/15",
+     "trade_date": "2026-08-05"
+    },
+    {
+     "index_id": "TPEX_RETURN_INDEX",
+     "index_name": "TPEx Return Index",
+     "market": "TPEx",
+     "return_index_value": "695.580000",
+     "source_name": "tpex_roe",
+     "source_url": "https://www.tpex.org.tw/www/zh-tw/indexInfo/ROE?date=2026/08/15",
+     "trade_date": "2026-08-04"
+    }
+   ],
+   "warnings": [
+    "not_investment_advice"
+   ]
+  },
+  "status": 200
+ },
+ "route": "/v2/datasets/return-index-daily",
+ "sdk_error": null
+}

@@ -1,0 +1,642 @@
+{
+ "balance_sheet": {
+  "http": 401,
+  "error": "missing_api_key",
+  "url": "https://api.twmarketdata.com/v2/datasets/balance-sheet?limit=1&symbol=2330"
+ },
+ "income_statement": {
+  "http": 401,
+  "error": "missing_api_key",
+  "url": "https://api.twmarketdata.com/v2/datasets/income-statement?limit=1&symbol=2330"
+ },
+ "cash_flow_statement": {
+  "http": 401,
+  "error": "missing_api_key",
+  "url": "https://api.twmarketdata.com/v2/datasets/cash-flow-statement?limit=1&symbol=2330"
+ },
+ "financial_ratios": {
+  "http": 401,
+  "error": "missing_api_key",
+  "url": "https://api.twmarketdata.com/v2/datasets/financial-metrics?limit=1&ticker=2330"
+ },
+ "monthly_revenue": {
+  "http": 200,
+  "rows": 1,
+  "envelope": [
+   "count",
+   "dataset"
+  ],
+  "url": "https://api.twmarketdata.com/v2/datasets/monthly-revenue?limit=1&symbol=2330"
+ },
+ "valuation_data": {
+  "http": 401,
+  "error": "missing_api_key",
+  "url": "https://api.twmarketdata.com/v2/datasets/valuation-data?limit=1&symbol=2330"
+ },
+ "valuation_core_daily": {
+  "http": 401,
+  "error": "missing_api_key",
+  "url": "https://api.twmarketdata.com/v2/datasets/valuation-core-daily?limit=1&ticker=2330"
+ },
+ "twse_daily_price": {
+  "http": 200,
+  "rows": 1,
+  "envelope": [
+   "count",
+   "data_as_of",
+   "dataset",
+   "lineage",
+   "meta",
+   "source_role"
+  ],
+  "url": "https://api.twmarketdata.com/v2/datasets/twse-daily-price?limit=1&symbol=2330"
+ },
+ "tpex_daily_price": {
+  "http": 200,
+  "rows": 0,
+  "envelope": [
+   "count",
+   "data_as_of",
+   "dataset",
+   "lineage",
+   "meta",
+   "source_role"
+  ],
+  "url": "https://api.twmarketdata.com/v2/datasets/tpex-daily-price?limit=1&symbol=2330"
+ },
+ "price_enhanced": {
+  "http": 401,
+  "error": "missing_api_key",
+  "url": "https://api.twmarketdata.com/v2/datasets/price-enhanced?limit=1&ticker=2330"
+ },
+ "return_index_daily": {
+  "http": 401,
+  "error": "missing_api_key",
+  "url": "https://api.twmarketdata.com/v2/datasets/return-index-daily?limit=1"
+ },
+ "market_index": {
+  "http": 200,
+  "rows": 0,
+  "envelope": [
+   "dataset_id",
+   "held_policy",
+   "items",
+   "row_count"
+  ],
+  "url": "https://api.twmarketdata.com/v2/datasets/market-index?limit=1"
+ },
+ "industry_index": {
+  "http": 401,
+  "error": "missing_api_key",
+  "url": "https://api.twmarketdata.com/v2/datasets/index-classification?limit=1"
+ },
+ "industry_index_daily": {
+  "http": 401,
+  "error": "missing_api_key",
+  "url": "https://api.twmarketdata.com/v2/datasets/industry-index-daily?limit=1"
+ },
+ "index_constituents": {
+  "http": 200,
+  "rows": 1,
+  "envelope": [
+   "data",
+   "data_count",
+   "dataset_id",
+   "envelope",
+   "error",
+   "known_gaps",
+   "lineage",
+   "quality",
+   "request_context",
+   "warnings"
+  ],
+  "url": "https://api.twmarketdata.com/v2/datasets/index-constituents?limit=1&symbol=2330"
+ },
+ "market_value_weight": {
+  "http": 401,
+  "error": "missing_api_key",
+  "url": "https://api.twmarketdata.com/v2/datasets/market-value-weight?limit=1&ticker=2330"
+ },
+ "market_breadth": {
+  "http": 401,
+  "error": "missing_api_key",
+  "url": "https://api.twmarketdata.com/v2/datasets/market-breadth?limit=1"
+ },
+ "market_overview_snapshots": {
+  "http": 401,
+  "error": "missing_api_key",
+  "url": "https://api.twmarketdata.com/v2/datasets/market-overview-snapshots?limit=1"
+ },
+ "technical_indicators": {
+  "http": 401,
+  "error": "missing_api_key",
+  "url": "https://api.twmarketdata.com/v2/datasets/technical-indicators?limit=1&symbol=2330"
+ },
+ "limit_events": {
+  "http": 401,
+  "error": "missing_api_key",
+  "url": "https://api.twmarketdata.com/v2/datasets/limit-events?limit=1"
+ },
+ "price_move_context": {
+  "http": 401,
+  "error": "missing_api_key",
+  "url": "https://api.twmarketdata.com/v2/datasets/price-move-context?limit=1&symbol=2330"
+ },
+ "stock_price_limit_daily": {
+  "http": 401,
+  "error": "missing_api_key",
+  "url": "https://api.twmarketdata.com/v2/datasets/stock-price-limit-daily?limit=1&ticker=2330"
+ },
+ "institutional_flow": {
+  "http": 401,
+  "error": "missing_api_key",
+  "url": "https://api.twmarketdata.com/v2/datasets/institutional-flow?limit=1&symbol=2330"
+ },
+ "margin_short": {
+  "http": 401,
+  "error": "missing_api_key",
+  "url": "https://api.twmarketdata.com/v2/datasets/margin-short?limit=1&ticker=2330"
+ },
+ "margin_short_total": {
+  "http": 401,
+  "error": "missing_api_key",
+  "url": "https://api.twmarketdata.com/v2/datasets/total-margin-short?limit=1"
+ },
+ "margin_system_stats": {
+  "http": 401,
+  "error": "missing_api_key",
+  "url": "https://api.twmarketdata.com/v2/datasets/margin-system-stats?limit=1"
+ },
+ "securities_lending": {
+  "http": 401,
+  "error": "missing_api_key",
+  "url": "https://api.twmarketdata.com/v2/datasets/securities-lending?limit=1&ticker=2330"
+ },
+ "lending_utilization": {
+  "http": 401,
+  "error": "missing_api_key",
+  "url": "https://api.twmarketdata.com/v2/datasets/lending-utilization?limit=1&ticker=2330"
+ },
+ "short_sale_balance_control": {
+  "http": 401,
+  "error": "missing_api_key",
+  "url": "https://api.twmarketdata.com/v2/datasets/short-sale-balance-control?limit=1&ticker=2330"
+ },
+ "short_restriction_flags": {
+  "http": 401,
+  "error": "missing_api_key",
+  "url": "https://api.twmarketdata.com/v2/datasets/short-restriction-flags?limit=1"
+ },
+ "foreign_holding": {
+  "http": 401,
+  "error": "missing_api_key",
+  "url": "https://api.twmarketdata.com/v2/datasets/foreign-holding?limit=1&ticker=2330"
+ },
+ "shareholding_concentration": {
+  "http": 401,
+  "error": "missing_api_key",
+  "url": "https://api.twmarketdata.com/v2/datasets/shareholding-concentration?limit=1&ticker=2330"
+ },
+ "block_trade_daily": {
+  "http": 401,
+  "error": "missing_api_key",
+  "url": "https://api.twmarketdata.com/v2/datasets/block-trade-daily?limit=1"
+ },
+ "security_master": {
+  "http": 200,
+  "row_key": "items",
+  "rows": 1,
+  "envelope": [
+   "as_of_date",
+   "available_tools_or_endpoints",
+   "dataset_id",
+   "generated_at",
+   "items",
+   "row_count",
+   "safe_usage_notes",
+   "survivorship_bias_warning"
+  ],
+  "url": "https://api.twmarketdata.com/v2/datasets/security-master?limit=1&ticker=2330"
+ },
+ "trading_calendar": {
+  "http": 200,
+  "row_key": "data",
+  "rows": 1,
+  "envelope": [
+   "data",
+   "data_count",
+   "dataset_id",
+   "envelope",
+   "error",
+   "known_gaps",
+   "lineage",
+   "quality",
+   "request_context",
+   "warnings"
+  ],
+  "url": "https://api.twmarketdata.com/v2/datasets/trading-calendar?limit=1"
+ },
+ "securities_firm_master": {
+  "http": 200,
+  "row_key": "data",
+  "rows": 1,
+  "envelope": [
+   "data",
+   "data_count",
+   "dataset_id",
+   "envelope",
+   "error",
+   "known_gaps",
+   "lineage",
+   "quality",
+   "request_context",
+   "warnings"
+  ],
+  "url": "https://api.twmarketdata.com/v2/datasets/securities-firm-master?limit=1"
+ },
+ "broker_branch_reference": {
+  "http": 200,
+  "row_key": "data",
+  "rows": 1,
+  "envelope": [
+   "api_version",
+   "data",
+   "data_as_of",
+   "data_count",
+   "dataset",
+   "dataset_id",
+   "dataset_version",
+   "error",
+   "known_gaps",
+   "lineage",
+   "quality",
+   "release_date",
+   "release_version",
+   "request_context",
+   "warnings"
+  ],
+  "url": "https://api.twmarketdata.com/v2/datasets/broker-branch-reference?limit=1"
+ },
+ "issuer_classification": {
+  "http": 200,
+  "row_key": "data",
+  "rows": 1,
+  "envelope": [
+   "data",
+   "data_count",
+   "dataset_id",
+   "envelope",
+   "error",
+   "known_gaps",
+   "lineage",
+   "quality",
+   "request_context",
+   "warnings"
+  ],
+  "url": "https://api.twmarketdata.com/v2/datasets/issuer-classification?limit=1&ticker=2330"
+ },
+ "issuer_profiles": {
+  "http": 401,
+  "error": "missing_api_key",
+  "url": "https://api.twmarketdata.com/v2/datasets/issuer-profile?limit=1&symbol=2330"
+ },
+ "fund_etf_metadata": {
+  "http": 200,
+  "row_key": "data",
+  "rows": 1,
+  "envelope": [
+   "data",
+   "data_count",
+   "dataset_id",
+   "envelope",
+   "error",
+   "known_gaps",
+   "lineage",
+   "not_investment_advice",
+   "quality",
+   "request_context",
+   "warnings"
+  ],
+  "url": "https://api.twmarketdata.com/v2/datasets/fund-etf-metadata?limit=1"
+ },
+ "etf_holdings": {
+  "http": 401,
+  "error": "missing_api_key",
+  "url": "https://api.twmarketdata.com/v2/datasets/etf-holdings?limit=1"
+ },
+ "warrants_reference": {
+  "http": 200,
+  "row_key": "data",
+  "rows": 1,
+  "envelope": [
+   "data",
+   "data_count",
+   "dataset_id",
+   "envelope",
+   "error",
+   "known_gaps",
+   "lineage",
+   "not_investment_advice",
+   "quality",
+   "request_context",
+   "warnings"
+  ],
+  "url": "https://api.twmarketdata.com/v2/datasets/warrants-reference?limit=1"
+ },
+ "bond_convertible_reference": {
+  "http": 200,
+  "row_key": "data",
+  "rows": 1,
+  "envelope": [
+   "data",
+   "data_count",
+   "dataset_id",
+   "envelope",
+   "error",
+   "known_gaps",
+   "lineage",
+   "not_investment_advice",
+   "quality",
+   "request_context",
+   "warnings"
+  ],
+  "url": "https://api.twmarketdata.com/v2/datasets/bond-convertible-reference?limit=1"
+ },
+ "trading_rules_reference": {
+  "http": 200,
+  "row_key": "data",
+  "rows": 1,
+  "envelope": [
+   "data",
+   "data_count",
+   "dataset_id",
+   "envelope",
+   "error",
+   "known_gaps",
+   "lineage",
+   "quality",
+   "request_context",
+   "warnings"
+  ],
+  "url": "https://api.twmarketdata.com/v2/datasets/trading-rules-reference?limit=1"
+ },
+ "tax_business_registration": {
+  "http": 401,
+  "error": "missing_api_key",
+  "url": "https://api.twmarketdata.com/v2/datasets/tax-business-registration?limit=1"
+ },
+ "governance_t187ap33_l": {
+  "http": 401,
+  "error": "missing_api_key",
+  "url": "https://api.twmarketdata.com/v2/datasets/governance-t187ap33-l?limit=1&ticker=2330"
+ },
+ "esg_ghg_carbon_disclosure": {
+  "http": 401,
+  "error": "missing_api_key",
+  "url": "https://api.twmarketdata.com/v2/datasets/esg-ghg-carbon-disclosure?limit=1&ticker=2330"
+ },
+ "company_industry_exposures": {
+  "http": 200,
+  "row_key": "data",
+  "rows": 1,
+  "envelope": [
+   "data",
+   "data_count",
+   "dataset_id",
+   "envelope",
+   "error",
+   "known_gaps",
+   "lineage",
+   "quality",
+   "request_context",
+   "warnings"
+  ],
+  "url": "https://api.twmarketdata.com/v2/datasets/company-industry-exposures?limit=1&ticker=2330"
+ },
+ "company_peer_groups": {
+  "http": 200,
+  "row_key": "data",
+  "rows": 1,
+  "envelope": [
+   "data",
+   "data_count",
+   "dataset_id",
+   "envelope",
+   "error",
+   "known_gaps",
+   "lineage",
+   "quality",
+   "request_context",
+   "warnings"
+  ],
+  "url": "https://api.twmarketdata.com/v2/datasets/company-peer-groups?limit=1&ticker=2330"
+ },
+ "industry_chain": {
+  "http": 401,
+  "error": "missing_api_key",
+  "url": "https://api.twmarketdata.com/v2/datasets/industry-chain?limit=1"
+ },
+ "subsidiary_investment": {
+  "http": 401,
+  "error": "missing_api_key",
+  "url": "https://api.twmarketdata.com/v2/datasets/subsidiary-investment?limit=1"
+ },
+ "company_news": {
+  "http": 401,
+  "error": "missing_api_key",
+  "url": "https://api.twmarketdata.com/v2/datasets/company-news?limit=1&ticker=2330"
+ },
+ "mops_major_event": {
+  "http": 401,
+  "error": "missing_api_key",
+  "url": "https://api.twmarketdata.com/v2/datasets/mops-major-event?limit=1&ticker=2330"
+ },
+ "major_event_taxonomy": {
+  "http": 401,
+  "error": "missing_api_key",
+  "url": "https://api.twmarketdata.com/v2/datasets/major-event-taxonomy?limit=1"
+ },
+ "attention_disposal_events": {
+  "http": 401,
+  "error": "missing_api_key",
+  "url": "https://api.twmarketdata.com/v2/datasets/attention-disposal-events?limit=1&ticker=2330"
+ },
+ "day_trading_suspension": {
+  "http": 401,
+  "error": "missing_api_key",
+  "url": "https://api.twmarketdata.com/v2/datasets/day-trading-suspension?limit=1&ticker=2330"
+ },
+ "margin_short_cover_date": {
+  "http": 401,
+  "error": "missing_api_key",
+  "url": "https://api.twmarketdata.com/v2/datasets/margin-short-cover-date?limit=1&ticker=2330"
+ },
+ "capital_formation_events": {
+  "http": 401,
+  "error": "missing_api_key",
+  "url": "https://api.twmarketdata.com/v2/datasets/capital-formation-events?limit=1&ticker=2330"
+ },
+ "investor_conference_calendar": {
+  "http": 200,
+  "row_key": "data",
+  "rows": 0,
+  "envelope": [
+   "data",
+   "data_count",
+   "dataset_id",
+   "envelope",
+   "error",
+   "known_gaps",
+   "lineage",
+   "quality",
+   "reason",
+   "request_context",
+   "status",
+   "warnings"
+  ],
+  "url": "https://api.twmarketdata.com/v2/datasets/investor-conference-calendar?limit=1&ticker=2330"
+ },
+ "stock_delisting_lifecycle": {
+  "http": 200,
+  "row_key": "data",
+  "rows": 1,
+  "envelope": [
+   "data",
+   "data_count",
+   "dataset_id",
+   "envelope",
+   "error",
+   "known_gaps",
+   "lineage",
+   "not_investment_advice",
+   "quality",
+   "request_context",
+   "warnings"
+  ],
+  "url": "https://api.twmarketdata.com/v2/datasets/stock-delisting-lifecycle?limit=1"
+ },
+ "stock_split_par_value_events": {
+  "http": 200,
+  "row_key": "data",
+  "rows": 1,
+  "envelope": [
+   "data",
+   "data_count",
+   "dataset_id",
+   "envelope",
+   "error",
+   "known_gaps",
+   "lineage",
+   "not_investment_advice",
+   "quality",
+   "request_context",
+   "warnings"
+  ],
+  "url": "https://api.twmarketdata.com/v2/datasets/stock-split-par-value-events?limit=1"
+ },
+ "corporate_actions": {
+  "http": 401,
+  "error": "missing_api_key",
+  "url": "https://api.twmarketdata.com/v2/datasets/corporate-actions?limit=1&ticker=2330"
+ },
+ "dividends": {
+  "http": 401,
+  "error": "missing_api_key",
+  "url": "https://api.twmarketdata.com/v2/datasets/dividends?limit=1&ticker=2330"
+ },
+ "derivatives_market": {
+  "http": 401,
+  "error": "missing_api_key",
+  "url": "https://api.twmarketdata.com/v2/datasets/derivatives-market?limit=1&symbol=2330"
+ },
+ "futures_daily_context": {
+  "http": 401,
+  "error": "missing_api_key",
+  "url": "https://api.twmarketdata.com/v2/datasets/futures-daily-context?limit=1"
+ },
+ "options_daily_taifex": {
+  "http": 401,
+  "error": "missing_api_key",
+  "url": "https://api.twmarketdata.com/v2/datasets/options-daily-taifex?limit=1"
+ },
+ "taifex_options_settlement_price": {
+  "http": 401,
+  "error": "missing_api_key",
+  "url": "https://api.twmarketdata.com/v2/datasets/taifex-options-settlement-price?limit=1"
+ },
+ "taifex_options_delta": {
+  "http": 401,
+  "error": "missing_api_key",
+  "url": "https://api.twmarketdata.com/v2/datasets/taifex-options-delta?limit=1"
+ },
+ "taifex_put_call_ratio": {
+  "http": 401,
+  "error": "missing_api_key",
+  "url": "https://api.twmarketdata.com/v2/datasets/taifex-put-call-ratio?limit=1"
+ },
+ "taifex_atm_iv": {
+  "http": 401,
+  "error": "missing_api_key",
+  "url": "https://api.twmarketdata.com/v2/datasets/taifex-atm-iv?limit=1"
+ },
+ "taifex_final_settlement": {
+  "http": 401,
+  "error": "missing_api_key",
+  "url": "https://api.twmarketdata.com/v2/datasets/futures-final-settlement?limit=1"
+ },
+ "convertible_bond_overview": {
+  "http": 401,
+  "error": "missing_api_key",
+  "url": "https://api.twmarketdata.com/v2/datasets/convertible-bond-overview?limit=1"
+ },
+ "convertible_bond_institutional": {
+  "http": 401,
+  "error": "missing_api_key",
+  "url": "https://api.twmarketdata.com/v2/datasets/convertible-bond-institutional?limit=1"
+ },
+ "convertible_bond_monthly": {
+  "http": 401,
+  "error": "missing_api_key",
+  "url": "https://api.twmarketdata.com/v2/datasets/convertible-bond-monthly?limit=1"
+ },
+ "bond_yield_curve": {
+  "http": 401,
+  "error": "missing_api_key",
+  "url": "https://api.twmarketdata.com/v2/datasets/bond-yield-curve?limit=1"
+ },
+ "interest_rate_snapshots": {
+  "http": 401,
+  "error": "missing_api_key",
+  "url": "https://api.twmarketdata.com/v2/datasets/interest-rate-snapshot?limit=1"
+ },
+ "competitor_fx": {
+  "http": 401,
+  "error": "missing_api_key",
+  "url": "https://api.twmarketdata.com/v2/datasets/competitor-fx?limit=1"
+ },
+ "customs_trade_monthly": {
+  "http": 401,
+  "error": "missing_api_key",
+  "url": "https://api.twmarketdata.com/v2/datasets/customs-trade-monthly?limit=1"
+ },
+ "export_orders_monthly": {
+  "http": 401,
+  "error": "missing_api_key",
+  "url": "https://api.twmarketdata.com/v2/datasets/export-orders-monthly?limit=1"
+ },
+ "production_value_index_monthly": {
+  "http": 401,
+  "error": "missing_api_key",
+  "url": "https://api.twmarketdata.com/v2/datasets/production-value-index-monthly?limit=1"
+ },
+ "macro_worldbank": {
+  "http": 401,
+  "error": "missing_api_key",
+  "url": "https://api.twmarketdata.com/v2/datasets/macro-worldbank?limit=1"
+ },
+ "macro_global": {
+  "http": 401,
+  "error": "missing_api_key",
+  "url": "https://api.twmarketdata.com/v2/datasets/macro-global?limit=1"
+ }
+}

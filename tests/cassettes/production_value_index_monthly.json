@@ -1,0 +1,141 @@
+{
+ "dataset": "production_value_index_monthly",
+ "recorded_with": "restricted test key (value never stored)",
+ "request": {
+  "headers": {
+   "X-API-Key": "REDACTED"
+  },
+  "method": "GET",
+  "params": {
+   "limit": 5
+  }
+ },
+ "response": {
+  "body": {
+   "data": [
+    {
+     "attribution": "經濟部統計處",
+     "item_code": "08",
+     "item_name": "食品及飼品製造業",
+     "license": "OGDL_v1_ccby40",
+     "period_month": "2026-05-01",
+     "release_date": null,
+     "source_provider": "moea_dos",
+     "source_role": "official_moea_production_index",
+     "source_url": "https://service.moea.gov.tw/EE520/opendata/經濟部統計處_製造業生產價值指數.csv",
+     "stat_item": "生產價值指數",
+     "unit": "110年=100",
+     "value": 107.68
+    },
+    {
+     "attribution": "經濟部統計處",
+     "item_code": "09",
+     "item_name": "飲料製造業",
+     "license": "OGDL_v1_ccby40",
+     "period_month": "2026-05-01",
+     "release_date": null,
+     "source_provider": "moea_dos",
+     "source_role": "official_moea_production_index",
+     "source_url": "https://service.moea.gov.tw/EE520/opendata/經濟部統計處_製造業生產價值指數.csv",
+     "stat_item": "生產價值指數",
+     "unit": "110年=100",
+     "value": 104.18
+    },
+    {
+     "attribution": "經濟部統計處",
+     "item_code": "10",
+     "item_name": "菸草製造業",
+     "license": "OGDL_v1_ccby40",
+     "period_month": "2026-05-01",
+     "release_date": null,
+     "source_provider": "moea_dos",
+     "source_role": "official_moea_production_index",
+     "source_url": "https://service.moea.gov.tw/EE520/opendata/經濟部統計處_製造業生產價值指數.csv",
+     "stat_item": "生產價值指數",
+     "unit": "110年=100",
+     "value": 79.95
+    },
+    {
+     "attribution": "經濟部統計處",
+     "item_code": "11",
+     "item_name": "紡織業",
+     "license": "OGDL_v1_ccby40",
+     "period_month": "2026-05-01",
+     "release_date": null,
+     "source_provider": "moea_dos",
+     "source_role": "official_moea_production_index",
+     "source_url": "https://service.moea.gov.tw/EE520/opendata/經濟部統計處_製造業生產價值指數.csv",
+     "stat_item": "生產價值指數",
+     "unit": "110年=100",
+     "value": 68.08
+    },
+    {
+     "attribution": "經濟部統計處",
+     "item_code": "12",
+     "item_name": "成衣及服飾品製造業",
+     "license": "OGDL_v1_ccby40",
+     "period_month": "2026-05-01",
+     "release_date": null,
+     "source_provider": "moea_dos",
+     "source_role": "official_moea_production_index",
+     "source_url": "https://service.moea.gov.tw/EE520/opendata/經濟部統計處_製造業生產價值指數.csv",
+     "stat_item": "生產價值指數",
+     "unit": "110年=100",
+     "value": 76.08
+    }
+   ],
+   "data_count": 5,
+   "dataset_id": "production_value_index_monthly",
+   "envelope": {
+    "dataset_id": "production_value_index_monthly",
+    "row_count": 5,
+    "scope": "tw_industrial_production_value_index_monthly"
+   },
+   "error": null,
+   "known_gaps": [
+    "official_statistics_are_REVISED_a_recent_month_can_change_after_first_publication",
+    "index_base_year_changes_over_a_44_year_series_compare_within_a_base_not_across",
+    "published_with_a_lag_of_roughly_one_to_two_months",
+    "not_investment_advice"
+   ],
+   "lineage": {
+    "attributions": [
+     "經濟部統計處"
+    ],
+    "licenses": [
+     "OGDL_v1_ccby40"
+    ],
+    "semantics": "Ministry of Economic Affairs industrial production / value index by item, monthly from 1982-01.",
+    "shared_table_note": "tw_govt_stats_monthly_items backs three datasets; this response is filtered to dataset_key='production_value_index_monthly'.",
+    "source_providers": [
+     "moea_dos"
+    ]
+   },
+   "quality": {
+    "item_count": 5,
+    "months_in_page": 1,
+    "row_count": 5,
+    "sensitive_fields_exposed": false
+   },
+   "request_context": {
+    "coverage_type": "monthly_official_statistics",
+    "filters": {
+     "date_from": null,
+     "date_to": null,
+     "item_code": null,
+     "limit": 5,
+     "period_month": null
+    },
+    "max_period_month": "2026-05-01",
+    "min_period_month": "2026-05-01",
+    "scope": "tw_industrial_production_value_index_monthly"
+   },
+   "warnings": [
+    "not_investment_advice"
+   ]
+  },
+  "status": 200
+ },
+ "route": "/v2/datasets/production-value-index-monthly",
+ "sdk_error": null
+}

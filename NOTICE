@@ -1,0 +1,39 @@
+TW Market Data Python SDK
+Copyright 2026 TW Market Data (twmarketdata.com)
+
+This product includes software developed by TW Market Data.
+
+Licensed under the Apache License, Version 2.0 (the "License"); you may not use
+this file except in compliance with the License. You may obtain a copy of the
+License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software distributed
+under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+CONDITIONS OF ANY KIND, either express or implied. See the License for the
+specific language governing permissions and limitations under the License.
+
+--------------------------------------------------------------------------------
+TRADEMARKS AND COMPATIBILITY
+--------------------------------------------------------------------------------
+
+"TWMD" and "TW Market Data" refer to the data service at twmarketdata.com.
+
+This package ships a compatibility module, `twmd.compat.finmind`, that mirrors
+the public call signatures of the open-source FinMind package so that existing
+code can run against TW Market Data with minimal changes.
+
+    This project is NOT affiliated with, endorsed by, or sponsored by FinMind.
+
+"FinMind" is referenced nominatively, solely to identify the interface being
+made compatible. No FinMind source code is included in, derived from, or
+redistributed by this project. The compatibility surface was built by reading
+the public method signatures of the installed open-source package (FinMind
+v2.0.7, read 2026-08-12) — the FinMind service was not called and no FinMind
+credentials were used.
+
+For every FinMind call this package recognises, `mapping/finmind_map.csv`
+records whether TW Market Data has a one-to-one equivalent, a reshaped
+equivalent, a substitute with different semantics, or nothing at all. Calls in
+the last category raise NotMappedError rather than returning an empty result.

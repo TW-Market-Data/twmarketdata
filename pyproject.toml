@@ -1,53 +1,60 @@
 [build-system]
-requires = ["hatchling>=1.21"]
-build-backend = "hatchling.build"
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
 
 [project]
-# Distribution name is "twmarketdata" (PyPI rejected "twmd" as too similar to an
-# existing project). The import package stays `twmd` — so: pip install twmarketdata,
-# then `import twmd`.
 name = "twmarketdata"
-version = "0.1.0"
-description = "Data-access client for the TW Market Data API. Retrieval only, for research and education."
+version = "0.2.0"
+description = "Official Python SDK for TW Market Data (TWMD) — Taiwan market data with point-in-time correctness and surfaced data gaps"
 readme = "README.md"
 requires-python = ">=3.9"
-license = { file = "LICENSE" }
-authors = [{ name = "TW Market Data" }]
-keywords = ["taiwan", "market-data", "dataset", "api-client", "research"]
+license = "Apache-2.0"
+license-files = ["LICENSE", "NOTICE"]
+authors = [{ name = "TW Market Data", email = "support@twmarketdata.com" }]
+keywords = ["taiwan", "stock", "market-data", "finance", "point-in-time", "backtesting", "twse", "tpex"]
 classifiers = [
   "Development Status :: 3 - Alpha",
+  "Intended Audience :: Financial and Insurance Industry",
   "Intended Audience :: Developers",
-  "Intended Audience :: Education",
-  "License :: OSI Approved :: MIT License",
   "Programming Language :: Python :: 3",
   "Programming Language :: Python :: 3.9",
   "Programming Language :: Python :: 3.10",
   "Programming Language :: Python :: 3.11",
   "Programming Language :: Python :: 3.12",
   "Programming Language :: Python :: 3.13",
-  # Deliberately NOT "Information Analysis": this package retrieves data and
-  # does not analyse it. The classifier is part of the shipped positioning.
-  "Topic :: Software Development :: Libraries :: Python Modules",
-  "Topic :: Database :: Front-Ends",
+  "Topic :: Office/Business :: Financial :: Investment",
   "Typing :: Typed",
 ]
-
-# Pure-Python wheels only. No compiled extensions, no system libraries.
-dependencies = [
-  "httpx>=0.27,<1.0",
-  "pandas>=1.5",
-]
+dependencies = ["requests>=2.31.0"]
 
 [project.optional-dependencies]
-test = ["pytest>=7.4", "respx>=0.21"]
+pandas = ["pandas>=1.5"]
+dev = ["pandas>=1.5", "pytest>=7.4", "mypy>=1.8", "types-requests", "responses>=0.24"]
 
 [project.urls]
 Homepage = "https://twmarketdata.com"
-Documentation = "https://api.twmarketdata.com/openapi.json"
+Documentation = "https://twmarketdata.com/en/docs"
+Source = "https://github.com/twmarketdata/twmd-python-sdk"
 
-[tool.hatch.build.targets.wheel]
-packages = ["src/twmd"]
+[tool.setuptools]
+packages = ["twmd", "twmd.compat"]
+
+[tool.setuptools.package-data]
+# Per-package: a key only covers its own package, so twmd.compat needs its own
+# entry. Without it the wheel omits _finmind_map.json and
+# `from twmd.compat import finmind` raises FileNotFoundError on import.
+twmd = ["py.typed", "_registry.json", "*.pyi"]
+"twmd.compat" = ["*.json"]
+
+[tool.mypy]
+python_version = "3.9"
+strict = true
+warn_unreachable = true
+
+[[tool.mypy.overrides]]
+module = "pandas.*"
+ignore_missing_imports = true
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
-markers = ["live: hits the real API over the network (deselect with -m 'not live')"]
+markers = ["network: hits the live API (free tier, no key required)"]

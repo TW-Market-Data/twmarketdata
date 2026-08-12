@@ -1,0 +1,70 @@
+{
+ "dataset": "taifex_options_settlement_price",
+ "recorded_with": "restricted test key (value never stored)",
+ "request": {
+  "headers": {
+   "X-API-Key": "REDACTED"
+  },
+  "method": "GET",
+  "params": {
+   "limit": 5,
+   "ticker": "2330"
+  }
+ },
+ "response": {
+  "body": {
+   "data": [],
+   "data_count": 0,
+   "dataset_id": "taifex_options_settlement_price",
+   "envelope": {
+    "dataset_id": "taifex_options_settlement_price",
+    "row_count": 0,
+    "scope": "taifex_options_settlement_price_only"
+   },
+   "error": null,
+   "known_gaps": [
+    "options_settlement_only",
+    "single_trading_date_baseline",
+    "no_futures_settlement",
+    "no_institutional_flow",
+    "not_options_daily_taifex_price_table",
+    "not_investment_advice"
+   ],
+   "lineage": {
+    "source_families": [],
+    "source_providers": [],
+    "source_roles": []
+   },
+   "quality": {
+    "contract_count": 0,
+    "row_count": 0,
+    "sensitive_fields_exposed": false
+   },
+   "reason": "taifex_options_settlement_price_not_found",
+   "request_context": {
+    "coverage_type": "bounded_verified_snapshot_set",
+    "filters": {
+     "call_put": null,
+     "contract_code": "2330",
+     "date_from": null,
+     "date_to": null,
+     "expiry_month": null,
+     "limit": 5,
+     "source_family": null,
+     "trade_date": null
+    },
+    "max_trade_date": null,
+    "min_trade_date": null,
+    "scope": "taifex_options_settlement_price_only"
+   },
+   "status": "not_found",
+   "warnings": [
+    "not_investment_advice",
+    "options_settlement_only"
+   ]
+  },
+  "status": 200
+ },
+ "route": "/v2/datasets/taifex-options-settlement-price",
+ "sdk_error": null
+}

@@ -1,0 +1,219 @@
+{
+ "dataset": "industry_index_daily",
+ "recorded_with": "restricted test key (value never stored)",
+ "request": {
+  "headers": {
+   "X-API-Key": "REDACTED"
+  },
+  "method": "GET",
+  "params": {
+   "limit": 5
+  }
+ },
+ "response": {
+  "body": {
+   "api_version": "v2",
+   "data": [
+    {
+     "change": 2.61,
+     "change_direction": "+",
+     "change_pct": 4.28,
+     "date": "2026-08-10",
+     "index_value": 63.6,
+     "index_version": "industry_index_daily_v1",
+     "industry_name": "光電類",
+     "lineage": {
+      "change_basis": "漲跌點數 stored UNSIGNED, matching the existing rows; the direction is in change_direction, read from 漲跌(+/-) after stripping its HTML wrapper",
+      "change_pct_basis": "漲跌百分比(%) is already signed and is not re-signed",
+      "endpoint": "exchangeReport/MI_INDEX",
+      "published_name": "光電類指數",
+      "scope": "site-facing headline industries only",
+      "scope_note": "the source publishes 56 price indices; only the two the public site displays are written here",
+      "table_title": "115年08月10日 價格指數(臺灣證券交易所)"
+     },
+     "market": "TWSE",
+     "not_investment_advice": true,
+     "source_name": "TWSE MI_INDEX historical industry price index",
+     "source_url": "https://www.twse.com.tw/exchangeReport/MI_INDEX",
+     "turnover": null,
+     "turnover_coverage_status": "quarantined_not_in_source"
+    },
+    {
+     "change": 4.1,
+     "change_direction": "+",
+     "change_pct": 1.46,
+     "date": "2026-08-10",
+     "index_value": 284.21,
+     "index_version": "industry_index_daily_v1",
+     "industry_name": "其他電子類",
+     "lineage": {
+      "change_basis": "漲跌點數 stored UNSIGNED, matching the existing rows; the direction is in change_direction, read from 漲跌(+/-) after stripping its HTML wrapper",
+      "change_pct_basis": "漲跌百分比(%) is already signed and is not re-signed",
+      "endpoint": "exchangeReport/MI_INDEX",
+      "published_name": "其他電子類指數",
+      "scope": "site-facing headline industries only",
+      "scope_note": "the source publishes 56 price indices; only the two the public site displays are written here",
+      "table_title": "115年08月10日 價格指數(臺灣證券交易所)"
+     },
+     "market": "TWSE",
+     "not_investment_advice": true,
+     "source_name": "TWSE MI_INDEX historical industry price index",
+     "source_url": "https://www.twse.com.tw/exchangeReport/MI_INDEX",
+     "turnover": null,
+     "turnover_coverage_status": "quarantined_not_in_source"
+    },
+    {
+     "change": 0.38,
+     "change_direction": "+",
+     "change_pct": 0.14,
+     "date": "2026-08-10",
+     "index_value": 274.67,
+     "index_version": "industry_index_daily_v1",
+     "industry_name": "其他類",
+     "lineage": {
+      "change_basis": "漲跌點數 stored UNSIGNED, matching the existing rows; the direction is in change_direction, read from 漲跌(+/-) after stripping its HTML wrapper",
+      "change_pct_basis": "漲跌百分比(%) is already signed and is not re-signed",
+      "endpoint": "exchangeReport/MI_INDEX",
+      "published_name": "其他類指數",
+      "scope": "site-facing headline industries only",
+      "scope_note": "the source publishes 56 price indices; only the two the public site displays are written here",
+      "table_title": "115年08月10日 價格指數(臺灣證券交易所)"
+     },
+     "market": "TWSE",
+     "not_investment_advice": true,
+     "source_name": "TWSE MI_INDEX historical industry price index",
+     "source_url": "https://www.twse.com.tw/exchangeReport/MI_INDEX",
+     "turnover": null,
+     "turnover_coverage_status": "quarantined_not_in_source"
+    },
+    {
+     "change": 6.27,
+     "change_direction": "+",
+     "change_pct": 3.83,
+     "date": "2026-08-10",
+     "index_value": 170.02,
+     "index_version": "industry_index_daily_v1",
+     "industry_name": "化學生技醫療類",
+     "lineage": {
+      "change_basis": "漲跌點數 stored UNSIGNED, matching the existing rows; the direction is in change_direction, read from 漲跌(+/-) after stripping its HTML wrapper",
+      "change_pct_basis": "漲跌百分比(%) is already signed and is not re-signed",
+      "endpoint": "exchangeReport/MI_INDEX",
+      "published_name": "化學生技醫療類指數",
+      "scope": "site-facing headline industries only",
+      "scope_note": "the source publishes 56 price indices; only the two the public site displays are written here",
+      "table_title": "115年08月10日 價格指數(臺灣證券交易所)"
+     },
+     "market": "TWSE",
+     "not_investment_advice": true,
+     "source_name": "TWSE MI_INDEX historical industry price index",
+     "source_url": "https://www.twse.com.tw/exchangeReport/MI_INDEX",
+     "turnover": null,
+     "turnover_coverage_status": "quarantined_not_in_source"
+    },
+    {
+     "change": 4.63,
+     "change_direction": "+",
+     "change_pct": 2.51,
+     "date": "2026-08-10",
+     "index_value": 189.19,
+     "index_version": "industry_index_daily_v1",
+     "industry_name": "化學類",
+     "lineage": {
+      "change_basis": "漲跌點數 stored UNSIGNED, matching the existing rows; the direction is in change_direction, read from 漲跌(+/-) after stripping its HTML wrapper",
+      "change_pct_basis": "漲跌百分比(%) is already signed and is not re-signed",
+      "endpoint": "exchangeReport/MI_INDEX",
+      "published_name": "化學類指數",
+      "scope": "site-facing headline industries only",
+      "scope_note": "the source publishes 56 price indices; only the two the public site displays are written here",
+      "table_title": "115年08月10日 價格指數(臺灣證券交易所)"
+     },
+     "market": "TWSE",
+     "not_investment_advice": true,
+     "source_name": "TWSE MI_INDEX historical industry price index",
+     "source_url": "https://www.twse.com.tw/exchangeReport/MI_INDEX",
+     "turnover": null,
+     "turnover_coverage_status": "quarantined_not_in_source"
+    }
+   ],
+   "data_as_of": "2026-08-10",
+   "data_count": 5,
+   "dataset": "industry_index_daily",
+   "dataset_id": "industry_index_daily",
+   "dataset_version": "v2.0.0-preview",
+   "error": {
+    "blocking_gate": null,
+    "dataset": "industry_index_daily",
+    "error_code": null,
+    "error_message": null,
+    "request_id": "read-api-20260810"
+   },
+   "known_gaps": [
+    "twse_only_scope",
+    "no_tpex_coverage",
+    "headline_industries_only",
+    "turnover_not_in_source",
+    "not_investment_advice"
+   ],
+   "lineage": {
+    "fallback_chain": [],
+    "industries": [
+     "光電類",
+     "其他電子類",
+     "其他類",
+     "化學生技醫療類",
+     "化學類"
+    ],
+    "policy_notes": [
+     "official/public-first canonical",
+     "TWSE MI_INDEX (exchangeReport/MI_INDEX) price indices",
+     "site-facing headline industries only; the source publishes 56 price indices",
+     "turnover is not in the source index table -> NULL (turnover_coverage_status)",
+     "change is stored unsigned; the sign is in change_direction",
+     "not_investment_advice"
+    ],
+    "selected_source": "twse_mi_index_industry_price_index",
+    "source_role": "canonical"
+   },
+   "not_investment_advice": true,
+   "quality": {
+    "completeness_ratio": 1.0,
+    "freshness_as_of": "2026-08-10",
+    "freshness_state": "fresh",
+    "industry_count": 5,
+    "quality_status": "partial"
+   },
+   "release_date": "2026-08-10",
+   "release_version": "v2.2026-08-10.preview",
+   "request_context": {
+    "as_of_date": "2026-08-10",
+    "coverage_type": "daily_industry_price_index",
+    "dataset_view": "industry_index_daily_v1",
+    "date_range": {
+     "date_from": null,
+     "date_to": null
+    },
+    "family": "market_technical",
+    "field_group_type": "canonical",
+    "industry_name_filter": null,
+    "market_filter": "TWSE",
+    "scope": "twse_industry_price_index_daily",
+    "supported_filter_fields": [
+     "market",
+     "industry_name",
+     "date_from",
+     "date_to",
+     "index_version"
+    ],
+    "ticker": "TWSE"
+   },
+   "warnings": [
+    "not_investment_advice",
+    "twse_only_scope",
+    "turnover_not_in_source"
+   ]
+  },
+  "status": 200
+ },
+ "route": "/v2/datasets/industry-index-daily",
+ "sdk_error": null
+}

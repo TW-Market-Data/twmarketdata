@@ -1,0 +1,156 @@
+{
+ "dataset": "margin_short_total",
+ "recorded_with": "restricted test key (value never stored)",
+ "request": {
+  "headers": {
+   "X-API-Key": "REDACTED"
+  },
+  "method": "GET",
+  "params": {
+   "limit": 5
+  }
+ },
+ "response": {
+  "body": {
+   "count": 5,
+   "dataset": "total_margin_short",
+   "dataset_id": "total_margin_short",
+   "meta": {
+    "end_date": "2026-08-12",
+    "is_limited": false,
+    "market": "TWSE",
+    "plan": "max",
+    "private_beta_contract": true,
+    "row_limit": 10000,
+    "start_date": null,
+    "twse_only_scope": true
+   },
+   "plan_id": "max",
+   "rows": [
+    {
+     "currency": "TWD",
+     "data_gaps": [
+      "margin_purchase_amount_total=金額不在逐檔源→NULL"
+     ],
+     "margin_purchase_amount_total": null,
+     "margin_purchase_balance_total": 9003223.0,
+     "margin_purchase_buy_total": 436013.0,
+     "margin_purchase_sell_total": 412135.0,
+     "market": "TWSE",
+     "market_scope": "TWSE",
+     "not_investment_advice": true,
+     "short_sale_balance_total": 202632.0,
+     "short_sale_buy_total": 28202.0,
+     "short_sale_sell_total": 17314.0,
+     "source_lineage": {
+      "derivation": "sum per-ticker margin_short_enhanced by (market,trade_date)",
+      "emitter": "build_margin_short_total_candidates",
+      "verified_vs": "total_margin_short_daily_items official overlap (n6, 1551/1551)"
+     },
+     "source_provider": "derived_twmd",
+     "source_role": "derived_market_total_from_margin_short_enhanced",
+     "trade_date": "2026-08-10"
+    },
+    {
+     "currency": "TWD",
+     "data_gaps": [
+      "margin_purchase_amount_total=金額不在逐檔源→NULL"
+     ],
+     "margin_purchase_amount_total": null,
+     "margin_purchase_balance_total": 8986438.0,
+     "margin_purchase_buy_total": 350138.0,
+     "margin_purchase_sell_total": 297106.0,
+     "market": "TWSE",
+     "market_scope": "TWSE",
+     "not_investment_advice": true,
+     "short_sale_balance_total": 192740.0,
+     "short_sale_buy_total": 22629.0,
+     "short_sale_sell_total": 20636.0,
+     "source_lineage": {
+      "derivation": "sum per-ticker margin_short_enhanced by (market,trade_date)",
+      "emitter": "build_margin_short_total_candidates",
+      "verified_vs": "total_margin_short_daily_items official overlap (n6, 1551/1551)"
+     },
+     "source_provider": "derived_twmd",
+     "source_role": "derived_market_total_from_margin_short_enhanced",
+     "trade_date": "2026-08-07"
+    },
+    {
+     "currency": "TWD",
+     "data_gaps": [
+      "margin_purchase_amount_total=金額不在逐檔源→NULL"
+     ],
+     "margin_purchase_amount_total": null,
+     "margin_purchase_balance_total": 8958262.0,
+     "margin_purchase_buy_total": 361806.0,
+     "margin_purchase_sell_total": 300476.0,
+     "market": "TWSE",
+     "market_scope": "TWSE",
+     "not_investment_advice": true,
+     "short_sale_balance_total": 191897.0,
+     "short_sale_buy_total": 25282.0,
+     "short_sale_sell_total": 28775.0,
+     "source_lineage": {
+      "derivation": "sum per-ticker margin_short_enhanced by (market,trade_date)",
+      "emitter": "build_margin_short_total_candidates",
+      "verified_vs": "total_margin_short_daily_items official overlap (n6, 1551/1551)"
+     },
+     "source_provider": "derived_twmd",
+     "source_role": "derived_market_total_from_margin_short_enhanced",
+     "trade_date": "2026-08-06"
+    },
+    {
+     "currency": "TWD",
+     "data_gaps": [
+      "margin_purchase_amount_total=金額不在逐檔源→NULL"
+     ],
+     "margin_purchase_amount_total": null,
+     "margin_purchase_balance_total": 8901190.0,
+     "margin_purchase_buy_total": 478902.0,
+     "margin_purchase_sell_total": 566111.0,
+     "market": "TWSE",
+     "market_scope": "TWSE",
+     "not_investment_advice": true,
+     "short_sale_balance_total": 197222.0,
+     "short_sale_buy_total": 36425.0,
+     "short_sale_sell_total": 33305.0,
+     "source_lineage": {
+      "derivation": "sum per-ticker margin_short_enhanced by (market,trade_date)",
+      "emitter": "build_margin_short_total_candidates",
+      "verified_vs": "total_margin_short_daily_items official overlap (n6, 1551/1551)"
+     },
+     "source_provider": "derived_twmd",
+     "source_role": "derived_market_total_from_margin_short_enhanced",
+     "trade_date": "2026-08-05"
+    },
+    {
+     "currency": "TWD",
+     "data_gaps": [
+      "margin_purchase_amount_total=金額不在逐檔源→NULL"
+     ],
+     "margin_purchase_amount_total": null,
+     "margin_purchase_balance_total": 9032013.0,
+     "margin_purchase_buy_total": 383105.0,
+     "margin_purchase_sell_total": 465343.0,
+     "market": "TWSE",
+     "market_scope": "TWSE",
+     "not_investment_advice": true,
+     "short_sale_balance_total": 196970.0,
+     "short_sale_buy_total": 34156.0,
+     "short_sale_sell_total": 21262.0,
+     "source_lineage": {
+      "derivation": "sum per-ticker margin_short_enhanced by (market,trade_date)",
+      "emitter": "build_margin_short_total_candidates",
+      "verified_vs": "total_margin_short_daily_items official overlap (n6, 1551/1551)"
+     },
+     "source_provider": "derived_twmd",
+     "source_role": "derived_market_total_from_margin_short_enhanced",
+     "trade_date": "2026-08-04"
+    }
+   ]
+  },
+  "status": 200
+ },
+ "route": "/v2/datasets/total-margin-short",
+ "sdk_error": null
+}

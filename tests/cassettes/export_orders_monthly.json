@@ -1,0 +1,141 @@
+{
+ "dataset": "export_orders_monthly",
+ "recorded_with": "restricted test key (value never stored)",
+ "request": {
+  "headers": {
+   "X-API-Key": "REDACTED"
+  },
+  "method": "GET",
+  "params": {
+   "limit": 5
+  }
+ },
+ "response": {
+  "body": {
+   "data": [
+    {
+     "attribution": "經濟部統計處",
+     "item_code": "光學器材",
+     "item_name": "光學器材",
+     "license": "OGDL_v1_ccby40",
+     "period_month": "2026-06-01",
+     "release_date": null,
+     "source_provider": "moea_dos",
+     "source_role": "official_moea_export_orders",
+     "source_url": "https://service.moea.gov.tw/EE520/opendata/經濟部統計處_外銷訂單_光學器材.csv",
+     "stat_item": "外銷訂單金額_美元",
+     "unit": "百萬美元",
+     "value": 1940.0
+    },
+    {
+     "attribution": "經濟部統計處",
+     "item_code": "化學品",
+     "item_name": "化學品",
+     "license": "OGDL_v1_ccby40",
+     "period_month": "2026-06-01",
+     "release_date": null,
+     "source_provider": "moea_dos",
+     "source_role": "official_moea_export_orders",
+     "source_url": "https://service.moea.gov.tw/EE520/opendata/經濟部統計處_外銷訂單_化學品.csv",
+     "stat_item": "外銷訂單金額_美元",
+     "unit": "百萬美元",
+     "value": 1507.0
+    },
+    {
+     "attribution": "經濟部統計處",
+     "item_code": "基本金屬及其製品",
+     "item_name": "基本金屬及其製品",
+     "license": "OGDL_v1_ccby40",
+     "period_month": "2026-06-01",
+     "release_date": null,
+     "source_provider": "moea_dos",
+     "source_role": "official_moea_export_orders",
+     "source_url": "https://service.moea.gov.tw/EE520/opendata/經濟部統計處_外銷訂單_基本金屬.csv",
+     "stat_item": "外銷訂單金額_美元",
+     "unit": "百萬美元",
+     "value": 2194.0
+    },
+    {
+     "attribution": "經濟部統計處",
+     "item_code": "塑膠、橡膠及其製品",
+     "item_name": "塑膠、橡膠及其製品",
+     "license": "OGDL_v1_ccby40",
+     "period_month": "2026-06-01",
+     "release_date": null,
+     "source_provider": "moea_dos",
+     "source_role": "official_moea_export_orders",
+     "source_url": "https://service.moea.gov.tw/EE520/opendata/經濟部統計處_外銷訂單_塑橡膠製品.csv",
+     "stat_item": "外銷訂單金額_美元",
+     "unit": "百萬美元",
+     "value": 1442.0
+    },
+    {
+     "attribution": "經濟部統計處",
+     "item_code": "機械",
+     "item_name": "機械",
+     "license": "OGDL_v1_ccby40",
+     "period_month": "2026-06-01",
+     "release_date": null,
+     "source_provider": "moea_dos",
+     "source_role": "official_moea_export_orders",
+     "source_url": "https://service.moea.gov.tw/EE520/opendata/經濟部統計處_外銷訂單_機械.csv",
+     "stat_item": "外銷訂單金額_美元",
+     "unit": "百萬美元",
+     "value": 2176.0
+    }
+   ],
+   "data_count": 5,
+   "dataset_id": "export_orders_monthly",
+   "envelope": {
+    "dataset_id": "export_orders_monthly",
+    "row_count": 5,
+    "scope": "tw_export_orders_monthly"
+   },
+   "error": null,
+   "known_gaps": [
+    "export_ORDERS_are_not_shipments_an_order_may_never_convert",
+    "official_statistics_are_REVISED_a_recent_month_can_change_after_first_publication",
+    "published_with_a_lag_of_roughly_one_month",
+    "not_investment_advice"
+   ],
+   "lineage": {
+    "attributions": [
+     "經濟部統計處"
+    ],
+    "licenses": [
+     "OGDL_v1_ccby40"
+    ],
+    "semantics": "Ministry of Economic Affairs export orders by category, monthly from 1984-01.",
+    "shared_table_note": "tw_govt_stats_monthly_items backs three datasets; this response is filtered to dataset_key='export_orders_monthly'.",
+    "source_providers": [
+     "moea_dos"
+    ]
+   },
+   "quality": {
+    "item_count": 5,
+    "months_in_page": 1,
+    "row_count": 5,
+    "sensitive_fields_exposed": false
+   },
+   "request_context": {
+    "coverage_type": "monthly_official_statistics",
+    "filters": {
+     "date_from": null,
+     "date_to": null,
+     "item_code": null,
+     "limit": 5,
+     "period_month": null
+    },
+    "max_period_month": "2026-06-01",
+    "min_period_month": "2026-06-01",
+    "scope": "tw_export_orders_monthly"
+   },
+   "warnings": [
+    "not_investment_advice"
+   ]
+  },
+  "status": 200
+ },
+ "route": "/v2/datasets/export-orders-monthly",
+ "sdk_error": null
+}

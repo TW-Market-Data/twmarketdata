@@ -1,0 +1,179 @@
+{
+ "dataset": "price_move_context",
+ "recorded_with": "restricted test key (value never stored)",
+ "request": {
+  "headers": {
+   "X-API-Key": "REDACTED"
+  },
+  "method": "GET",
+  "params": {
+   "limit": 5,
+   "ticker": "2330"
+  }
+ },
+ "response": {
+  "body": {
+   "data": [
+    {
+     "day_trade_ratio": null,
+     "event_coverage_note": null,
+     "events": [],
+     "grade": "derived",
+     "hit_track": "absolute",
+     "inst_net": null,
+     "limit_move_flag": false,
+     "limit_move_flag_method": "approx",
+     "magnitude_bucket": "5-7",
+     "margin_delta": null,
+     "market": "TPEx",
+     "market_pct_change": 0.0159,
+     "no_official_event": true,
+     "pct_change": 0.05577918,
+     "provider": "twmd_derived",
+     "relative_to_market": 0.03987918,
+     "threshold_version": "pmc_v1",
+     "ticker": "00877",
+     "trade_date": "2026-08-10"
+    },
+    {
+     "day_trade_ratio": null,
+     "event_coverage_note": null,
+     "events": [],
+     "grade": "derived",
+     "hit_track": "absolute",
+     "inst_net": null,
+     "limit_move_flag": false,
+     "limit_move_flag_method": "approx",
+     "magnitude_bucket": "5-7",
+     "margin_delta": null,
+     "market": "TWSE",
+     "market_pct_change": 0.0159,
+     "no_official_event": true,
+     "pct_change": 0.05008537,
+     "provider": "twmd_derived",
+     "relative_to_market": 0.03418537,
+     "threshold_version": "pmc_v1",
+     "ticker": "00947",
+     "trade_date": "2026-08-10"
+    },
+    {
+     "day_trade_ratio": null,
+     "event_coverage_note": null,
+     "events": [],
+     "grade": "derived",
+     "hit_track": "both",
+     "inst_net": null,
+     "limit_move_flag": true,
+     "limit_move_flag_method": "approx",
+     "magnitude_bucket": ">=9.5",
+     "margin_delta": null,
+     "market": "TWSE",
+     "market_pct_change": 0.0159,
+     "no_official_event": true,
+     "pct_change": 0.0990603,
+     "provider": "twmd_derived",
+     "relative_to_market": 0.0831603,
+     "threshold_version": "pmc_v1",
+     "ticker": "02001L",
+     "trade_date": "2026-08-10"
+    },
+    {
+     "day_trade_ratio": null,
+     "event_coverage_note": null,
+     "events": [],
+     "grade": "derived",
+     "hit_track": "relative",
+     "inst_net": null,
+     "limit_move_flag": false,
+     "limit_move_flag_method": "approx",
+     "magnitude_bucket": "<5",
+     "margin_delta": null,
+     "market": "TWSE",
+     "market_pct_change": 0.0159,
+     "no_official_event": true,
+     "pct_change": -0.03147954,
+     "provider": "twmd_derived",
+     "relative_to_market": -0.04737954,
+     "threshold_version": "pmc_v1",
+     "ticker": "1203",
+     "trade_date": "2026-08-10"
+    },
+    {
+     "day_trade_ratio": null,
+     "event_coverage_note": null,
+     "events": [],
+     "grade": "derived",
+     "hit_track": "relative",
+     "inst_net": null,
+     "limit_move_flag": false,
+     "limit_move_flag_method": "approx",
+     "magnitude_bucket": "<5",
+     "margin_delta": null,
+     "market": "TWSE",
+     "market_pct_change": 0.0159,
+     "no_official_event": true,
+     "pct_change": -0.04923077,
+     "provider": "twmd_derived",
+     "relative_to_market": -0.06513077,
+     "threshold_version": "pmc_v1",
+     "ticker": "1307",
+     "trade_date": "2026-08-10"
+    }
+   ],
+   "data_count": 5,
+   "dataset_id": "price_move_context",
+   "envelope": {
+    "dataset_id": "price_move_context",
+    "row_count": 5,
+    "scope": "large_move_day_context"
+   },
+   "error": null,
+   "known_gaps": [
+    "events_are_CO_OCCURRING_official_filings_not_established_causes",
+    "no_official_event_true_means_none_was_matched_not_that_none_occurred",
+    "relative_to_market_is_the_move_net_of_the_index_not_a_risk_adjusted_alpha",
+    "chip_fields_inst_net_margin_delta_day_trade_ratio_are_same_day_context",
+    "not_investment_advice"
+   ],
+   "lineage": {
+    "semantics": "For a sharp single-day move: the market's move that day, the move net of it, a magnitude bucket, whether it was a limit move, any co-occurring official filings, and same-day chip context. Association, not causation.",
+    "threshold_versions": [
+     "pmc_v1"
+    ]
+   },
+   "quality": {
+    "magnitude_buckets_present": [
+     "5-7",
+     "<5",
+     ">=9.5"
+    ],
+    "row_count": 5,
+    "rows_without_matched_event": 5,
+    "sensitive_fields_exposed": false,
+    "ticker_count": 5
+   },
+   "request_context": {
+    "coverage_type": "daily_derived",
+    "filters": {
+     "date_from": null,
+     "date_to": null,
+     "limit": 5,
+     "limit_moves_only": false,
+     "magnitude_bucket": null,
+     "market": null,
+     "ticker": null,
+     "trade_date": null
+    },
+    "max_trade_date": "2026-08-10",
+    "min_trade_date": "2026-08-10",
+    "scope": "large_move_day_context"
+   },
+   "warnings": [
+    "not_investment_advice"
+   ]
+  },
+  "status": 200
+ },
+ "route": "/v2/datasets/price-move-context",
+ "sdk_error": null
+}

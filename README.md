@@ -1,327 +1,280 @@
-# twmd — Taiwan stock market data for Python
+# TWMD Python SDK
 
-[![PyPI](https://img.shields.io/pypi/v/twmarketdata)](https://pypi.org/project/twmarketdata/)
-[![Python](https://img.shields.io/pypi/pyversions/twmarketdata)](https://pypi.org/project/twmarketdata/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![Downloads](https://img.shields.io/pypi/dm/twmarketdata)](https://pypi.org/project/twmarketdata/)
-
-**English** · [繁體中文](README.zh-TW.md) · [简体中文](README.zh-CN.md)
-
-Official Python client for the **[TW Market Data](https://twmarketdata.com)** API —
-TWSE / TPEx prices, financial statements, institutional flows, valuation and factor
-data, and 80+ datasets, returned as pandas DataFrames. **Five sample tickers work
-with no API key**, so you can try it in one line.
+**TWMD = TW Market Data = [twmarketdata.com](https://twmarketdata.com)** — the official Python SDK for Taiwan market data.
 
 ```bash
 pip install twmarketdata
 ```
+
 ```python
 from twmd import Client
-Client().get_dataset("twse-daily-price", symbol="2330", limit=5)   # no key needed
+
+df = Client().daily_price("2330")     # TSMC daily OHLCV, no API key needed
 ```
 
-**Get started:** [Free API key](https://twmarketdata.com) · [Pricing](https://twmarketdata.com/pricing) · [Docs](https://twmarketdata.com/docs) · [Dataset catalog](https://twmarketdata.com/datasets) · [MCP / AI agents](https://twmarketdata.com/docs/tools-and-mcp)
+That returns a `pandas.DataFrame`. No key, no signup, no config — the free tier serves five demo symbols so the example above runs as written.
+
+> The distribution is `twmarketdata`; the import is `twmd`.
 
 ---
 
-`twmd` retrieves published datasets over HTTP and returns them as pandas
-DataFrames. It is a transport layer for data retrieval, intended for research
-and educational use. It fetches records as the API publishes them and performs
-no analysis, scoring, ranking, or interpretation of any kind. Deciding what the
-data means, and what if anything to do about it, is entirely the caller's own
-work and responsibility.
+## Why this SDK exists
 
-Responses carry the API's own `lineage.not_investment_advice` flag; this client
-preserves it unmodified.
+The REST API is not uniform. Across the 82 sellable datasets, the security identifier is spelled seven different ways, date bounds five different ways, `as_of` exists on 17 routes, `offset` on 9, and six routes are not the kebab-case of their dataset key. Response rows arrive under `rows`, `items`, or `data` depending on the dataset.
 
-## Install
+This SDK absorbs all of that, so you write `ticker=`, `start=`, `end=` everywhere and get one response shape back.
 
-```bash
-pip install twmarketdata
-```
+It also does something most market-data clients don't: **it tells you what it doesn't know.**
 
-The distribution is named `twmarketdata`; the import package is `twmd`:
+---
 
-```python
-import twmd
-```
+## Three things this SDK guarantees
 
-Pure Python. Dependencies are `httpx` and `pandas` — no compiled extensions, no
-system libraries, installable in a restricted sandbox.
+### 1. Two lines to a DataFrame
 
-Requires Python 3.9 or newer. The floors are deliberately low (`pandas>=1.5`,
-`httpx>=0.27`) so this installs into existing environments without forcing an
-upgrade, and CI runs the full suite pinned to exactly those floors so they stay
-honest rather than aspirational.
-
-One caveat that is not ours to fix: pandas 1.5 wheels are built against the
-numpy 1.x C ABI and fail at import under numpy 2 with `numpy.dtype size
-changed`. If you are pinned to pandas 1.x, pin `numpy<2` alongside it. Anything
-from pandas 2.2.2 onward works with numpy 2 unconstrained.
-
-## Quick start — no API key needed
-
-Five sample tickers are served without credentials on selected datasets, so
-this runs with zero configuration:
+Every one of the 82 sellable datasets has a named method, generated from the live API's own registry so none can be missed:
 
 ```python
 from twmd import Client
 
-client = Client()
-df = client.get_dataset("twse-daily-price", symbol="2330", limit=5)
-
-print(df[["date", "open", "high", "low", "close", "volume_shares"]])
-print(df.attrs["data_as_of"])       # data freshness date
-print(df.attrs["lineage"])          # provider, source endpoints, source table
+c = Client()                                  # free tier
+c.monthly_revenue(ticker="2330")              # 月營收
+c.security_master(limit=10)                   # 證券主檔
+c.trading_calendar(start="2026-01-01")        # 交易日曆
 ```
 
-## Why twmd
-
-- **Official sources, stated plainly.** Every response carries its `lineage` —
-  provider, official source endpoint, and source table — plus a `data_as_of`
-  freshness date. Nothing is fabricated, interpolated, or back-filled.
-- **Retrieval only, no hidden opinions.** This client fetches data and returns it;
-  it produces no scores, signals, or recommendations. What the data means is yours
-  to decide.
-- **Honest coverage.** Datasets report what they actually have. Gaps are shown as
-  gaps — never filled with zeros or another ticker's rows.
-- **Pure Python.** `httpx` + `pandas`, no compiled extensions — installs anywhere,
-  even a restricted sandbox. CI proves it across Linux / macOS / Windows on
-  Python 3.9–3.13.
-- **Built for AI agents too.** The same data is reachable over
-  [MCP](https://twmarketdata.com/docs/tools-and-mcp) and an
-  [`llms.txt`](https://twmarketdata.com/llms.txt) index, so agents can discover and
-  query datasets directly.
-
-## Authentication
-
-Set your key in the environment; it is never written to disk or logged:
-
-```bash
-export TWMD_API_KEY="sk_live_..."
-```
-
-`Client()` picks it up automatically. You may also pass `Client(api_key=...)`
-explicitly. With no key set, the client runs in key-free mode and reaches the
-datasets listed below.
-
-## Key-free access matrix
-
-Key-free access is scoped **per dataset**, not globally per ticker. The same
-ticker that is served on one dataset may require a key on another. Measured
-against the live API on 2026-07-21:
-
-| Tier | Datasets | Tickers served without a key |
-| --- | --- | --- |
-| Open | `security-master`, `market-index` | any |
-| Sample | `twse-daily-price`, `tpex-daily-price`, `monthly-revenue` | `2330`, `2317`, `2454`, `0050`, `2603` only |
-| Key required | everything else, including `institutional-flow`, `market-prices`, `financial-metrics`, `income-statement`, `balance-sheet` | none |
-
-Check before requesting:
+There's a generic escape hatch too, and a capability lookup so you never have to discover limits by trial and error:
 
 ```python
-from twmd import is_key_free
+import twmd
 
-is_key_free("twse-daily-price", "2330")     # True
-is_key_free("twse-daily-price", "1101")     # False — outside the sample set
-is_key_free("security-master", "1101")      # True — open dataset
-is_key_free("institutional-flow", "2330")   # False — key required
+c.dataset("monthly_revenue", ticker="2330", start="2024-01-01")
+
+twmd.capabilities("monthly_revenue")
+# {'tier': 'free', 'status': 'active', 'as_of': 'client_unsafe',
+#  'point_in_time_safe': False, 'knowledge_time_field': 'as_of_date',
+#  'pagination': 'limit_only', 'runnable_without_key': True, ...}
 ```
 
-Datasets not in the table are treated as key-required, which is the safe
-default. The client never blocks a request on this basis — it only uses the
-matrix to explain a 401 after the fact.
+### 2. Point-in-time that refuses to lie
 
-## DataFrames and metadata
-
-Records become rows. Everything else in the response envelope is preserved on
-`df.attrs`.
-
-The API uses **two envelope shapes**, and `twmd` handles both transparently:
+`as_of=` replays a dataset to what was knowable on a given date. The interesting part is what happens when it *can't*:
 
 ```python
-# rows / count — twse-daily-price, tpex-daily-price, monthly-revenue
-df.attrs["dataset"]       # "twse_daily_price"
-df.attrs["count"]         # record count
-df.attrs["data_as_of"]    # data freshness date
-df.attrs["source_role"]   # e.g. "official_twse"
-df.attrs["lineage"]       # provider, official_source, source_endpoints, table
-df.attrs["meta"]          # last_trading_day, market_status
+c.balance_sheet(ticker="2330", as_of="2023-06-30")   # server-side replay
 
-# items / row_count — security-master, market-index
-df.attrs["dataset_id"]                  # "security-master"
-df.attrs["row_count"]                   # record count
-df.attrs["as_of_date"]                  # snapshot date
-df.attrs["survivorship_bias_warning"]   # integrity caveat raised by the API
+c.company_peer_groups(as_of="2023-06-30")
+# raises PointInTimeUnavailable:
+#   this dataset declares no knowledge-time axis, so there is no honest way to
+#   replay it to a past date
 ```
 
-Envelope contents vary by dataset — `monthly-revenue` sends only `dataset`,
-`rows` and `count` — so read `attrs` defensively.
+That refusal is the feature. Take `monthly_revenue`: its declared `as_of_date` is the revenue **period**, not the announcement date — June revenue is disclosed in July. Filtering on it would mark June revenue as known on June 30, which is precisely the look-ahead `as_of` exists to prevent. So the SDK will not filter on that column.
 
-Records in the `items` variant contain nested objects (`security_identity`,
-`market_identity`, `index_level`). These stay as dict-valued columns rather than
-being flattened, so a DataFrame reflects what the API actually sent. Expand one
-when you want to:
+It does not refuse blindly, though. The registry is a snapshot and the API is not, so for these datasets the SDK makes the request and looks: if the response carries a real server-supplied `knowledge_date`, that outranks the classification and the query is answered. `monthly_revenue` returns one as of 2026-08-12, so `as_of="2026-06-30"` now correctly drops the June figure (knowledge date 2026-07-10) and keeps May. When no such column comes back, the call raises — and says it checked.
+
+Five states, one per dataset, all visible in `capabilities()`:
+
+| state | datasets | behaviour |
+|---|---|---|
+| `server` | 16 | the route filters; passed straight through |
+| `client` | 45 | PIT-safe, knowledge column published; filtered locally |
+| `client_unsafe` | 8 | declared column isn't a disclosure date; **refused** unless you pass `as_of_policy="declared_field"` |
+| `client_unverified` | 5 | declared column isn't in the published schema; verified against actual rows at runtime |
+| `unsupported` | 8 | no knowledge axis at all; **refused** |
+
+When the API supplies a `knowledge_date` column, it wins over the declared field — and if those dates are imputed, you hear about it:
 
 ```python
-import pandas as pd
-identity = pd.json_normalize(df["security_identity"])
+import warnings
+# ImputedKnowledgeDateWarning:
+#   1,234 of 1,242 rows (99.4%) carry kd_imputed=true (kd_source=statutory_deadline):
+#   the knowledge date was derived from a statutory filing deadline, not observed
+#   from an announcement. Treat this as a rule-based approximation of what was
+#   knowable, not as an observed disclosure timestamp.
 ```
 
-Note that `security-master` carries a `survivorship_bias_warning` stating the
-current master is not point-in-time complete. It is surfaced on `attrs`
-unmodified; check it before using that dataset for historical work.
+An imputed knowledge date is a rule, not a fact, and this SDK will never present it as one.
+
+### 3. Gaps and truncation surfaced, never filled
+
+No zero-filling. No forward-filling. No interpolation. Missing data is reported as missing, labelled with where the knowledge came from:
+
+```python
+df = c.twse_daily_price(ticker="2330", start="2024-01-01")
+m = df.twmd                       # or c.last_meta
+
+m.truncated       # True if the row limit was hit on a route that can't paginate
+m.data_gaps       # [Gap(2024-02-08..2024-02-14, no_row_for_trading_day), ...]
+m.gaps_source     # 'server' | 'client_derived' | 'unsupported' | 'unknown'
+m.coverage_min, m.coverage_max
+m.source_role, m.lineage, m.data_as_of
+```
+
+`gaps_source` matters. Only 22 of 82 routes report gaps themselves; for daily per-entity datasets the SDK can derive them against `trading_calendar` (`derive_gaps=True`, costs one extra request), and where it can't do either it says `unknown` rather than implying there are none.
+
+Truncation is flagged because only 9 of 82 routes support `offset`. On those 9 the SDK paginates to completion; on the other 73, hitting the limit sets `truncated=True` and warns. A short result is never silently passed off as a complete one.
+
+---
+
+## FinMind compatibility
+
+Existing FinMind-shaped code can run against TW Market Data with the call sites unchanged:
+
+```python
+from twmd.compat import finmind as fm
+
+df = fm.taiwan_stock_daily(stock_id="2330", start_date="2026-08-01")
+```
+
+Every recognised call is graded, and the grade decides what happens:
+
+| grade | meaning | behaviour |
+|---|---|---|
+| **A** (19) | same grain and meaning | returns data |
+| **B** (17) | same fact, different shape | reshapes, or refuses and points at the native method |
+| **C** (24) | TWMD covers it differently | returns data + `CompatSubstitutionWarning` explaining the difference |
+| **D** (46) | no equivalent in the 82 datasets | raises `NotMappedError` |
+
+```python
+fm.taiwan_stock_trading_daily_report(stock_id="2330")
+# NotMappedError: taiwan_stock_trading_daily_report has no TW Market Data
+# equivalent: Broker-branch daily flow is not in the 82. TWMD has the branch
+# ROSTER (broker_branch_reference / securities_firm_master) but not
+# branch-level buy/sell.
+```
+
+D-grade calls raise instead of returning an empty frame, because an empty frame reads as "your query matched nothing" — a different claim from "this data doesn't exist here". Nine further mappings are candidates that haven't been verified row by row yet; they also raise, and name the candidate dataset, rather than shipping possibly-wrong.
+
+**Two honest limits.** Parameter names are mirrored, but **response column names are TWMD's** — a `stock_id` alias is added where an identifier column exists. Mirroring column names would mean comparing live responses from both services, which this project does not do. And the mapping table was built by reading the public method signatures of the open-source package (FinMind v2.0.7, read 2026-08-12) — the FinMind service was never called and no credentials were used.
+
+`mapping/finmind_map.csv` records all 144 rows with their grade, confidence, and verification source.
+
+> This project is **not affiliated with, endorsed by, or sponsored by FinMind**. The name is used nominatively to identify the interface being made compatible. No FinMind source code is included or redistributed. See [NOTICE](NOTICE).
+
+---
+
+## Free tier
+
+No API key required for **five demo symbols**: `2330` 台積電, `2317` 鴻海, `2454` 聯發科, `0050` 元大台灣50, `2603` 長榮.
+
+Every example in this README runs against one of the **16 datasets measured to return data without a key**:
+
+`security_master` · `trading_calendar` · `monthly_revenue` · `twse_daily_price` · `index_constituents` · `trading_rules_reference` · `bond_convertible_reference` · `broker_branch_reference` · `warrants_reference` · `company_industry_exposures` · `company_peer_groups` · `securities_firm_master` · `fund_etf_metadata` · `issuer_classification` · `stock_delisting_lifecycle` · `stock_split_par_value_events`
+
+```python
+twmd.runnable_without_key()     # the list above, measured not declared
+twmd.free_tier_symbols()        # the five demo symbols
+```
+
+That list is *measured*, not read off the tier column: three datasets marked `tier=free` return 401 in practice, so they're excluded. Requesting any other symbol without a key raises `FreeTierSymbolError` listing the five, rather than returning an empty frame.
+
+With a key, everything your plan includes is available:
+
+```python
+c = Client("your_api_key")            # or set TWMD_API_KEY
+```
+
+The key is read from the argument first, then `TWMD_API_KEY`. It is never logged and never appears in `repr()`.
+
+---
 
 ## Errors
 
-```python
-from twmd import Client, TwmdAuthError, TwmdPaymentRequired
-
-try:
-    df = client.get_dataset("institutional-flow", symbol="2330")
-except TwmdAuthError as exc:
-    print(exc.error_code)   # "missing_api_key" or "invalid_api_key"
-    print(exc.body)         # decoded response body, verbatim
+```
+TwmdError
+├── TwmdConfigError → FreeTierSymbolError
+├── TwmdAuthError   → MissingApiKeyError, InvalidApiKeyError,
+│                     TierRequiredError, InsufficientCreditsError
+├── TwmdRequestError → DatasetNotFoundError, UnsupportedParameterError
+├── RateLimitedError        429, and 403 temporarily_blocked
+├── EndpointRetiredError    410
+├── TwmdServerError         5xx and transport failures
+├── PointInTimeUnavailable  as_of can't be honoured for this dataset
+└── NotMappedError          compat call with no TWMD equivalent
 ```
 
-Every `TwmdAPIError` subclass — every row in the table below except the last —
-exposes `.status_code`, `.body` (decoded body, unmodified), `.text` and
-`.error_code`. `TwmdTransportError` and `TwmdConfigError` derive from `TwmdError`
-directly and carry none of those, since no response was received.
+Two of these are worth calling out:
 
-| Status | Exception | Retried |
-| --- | --- | --- |
-| 401 | `TwmdAuthError` | no |
-| 402 | `TwmdPaymentRequired` | no |
-| 404 | `TwmdNotFoundError` | no |
-| 422 | `TwmdValidationError` | no |
-| 429 | `TwmdRateLimitError` | yes |
-| 5xx | `TwmdServerError` | yes |
-| network failure | `TwmdTransportError` | yes |
+**`403 temporarily_blocked` is a rate limit, not a permissions problem.** It reads like "forbidden" and sends people hunting for a plan bug that isn't there. The SDK classifies it as a rate limit, retries with exponential backoff and jitter, and says so in the message. Default `max_concurrency` is **2** — during measurement, four concurrent requests tripped a block that persisted for tens of minutes.
 
-Retries use exponential backoff with jitter. A `Retry-After` header — in either
-RFC 7231 form, delta-seconds or HTTP-date — overrides that and is honoured
-exactly, with no jitter and no shortening, since retrying sooner than the server
-permitted is worse than waiting too long. If it asks for more than
-`RETRY_AFTER_MAX` (120s) the client stops and raises the server's error rather
-than blocking for minutes.
+**`UnsupportedParameterError` is deliberate.** Passing `start=` to a dataset with no date parameter is an error, not something to quietly drop — silently ignoring it returns a full unfiltered history that looks like a filtered one.
 
-401 messages are annotated with the key-free status of the dataset and ticker
-you asked for, so "I forgot my key" is distinguishable from "that ticker is not
-in the sample set".
+---
 
-### 401 vs 402
+## Response type
 
-These mean different things and have different answers:
+`TwmdFrame` subclasses `pandas.DataFrame`, so `isinstance` checks pass and the whole pandas ecosystem works. Metadata rides along as `df.twmd`.
 
-- **401** — no key, or a bad key. Answered by registering / adding a key.
-- **402** — a valid key whose **plan does not include** the dataset. Answered by
-  upgrading the plan.
+pandas preserves `_metadata` through slicing and copying, but some operations (`merge`, several groupby paths) build a fresh frame and drop it. So the same `Meta` is always on the client as `c.last_meta`, which no pandas operation can lose.
 
-The live 402 body (verified 2026-07-21):
+Without pandas the SDK still works and returns `list[dict]`. Pass `raw=True` for the decoded JSON envelope.
 
-```json
-{
-  "error": "not_entitled_for_dataset",
-  "message": "您的方案未包含此資料集…",
-  "payment": {
-    "price": "pro",
-    "credits_url": "https://twmarketdata.com/pricing",
-    "purchase_hint": "upgrade_plan"
-  }
-}
-```
+---
 
-The whole body is preserved verbatim on `.body`. For convenience, the `payment`
-object and its fields are also exposed on the exception — read from whatever the
-API sent, never fabricated:
+## Coverage and limits
 
-```python
-except TwmdPaymentRequired as exc:
-    exc.payment        # the payment object, or None
-    exc.price          # "pro"
-    exc.credits_url    # "https://twmarketdata.com/pricing"
-    exc.purchase_hint  # "upgrade_plan"
-    exc.body           # the full response, unmodified
-```
+- **82 sellable datasets.** The registry lists 125 entries and the OpenAPI spec mounts 119 dataset routes; 82 is the sellable, queryable subset this SDK ships.
+- **Dataset status is visible.** 75 are `active`; 5 `partial`, 1 `planned`, 1 `private_beta` warn on use, because a partial series shouldn't be mistaken for a complete one.
+- **Registry is generated and dated.** `twmd.REGISTRY_MEASURED_ON` tells you when the routes and semantics were last verified against the live API.
 
-## Source attribution
+---
 
-Pass `source` to mark every request with the integration that produced it, so
-the publisher can attribute traffic:
+## Upgrading from 0.1.0
 
-```python
-client = Client(source="ecosys/tradingagents")
-```
+0.2.0 keeps the same distribution (`twmarketdata`) and the same import name
+(`twmd`), so `pip install -U twmarketdata` is the whole upgrade. Everything
+0.1.0 exported still resolves and still works, now emitting `DeprecationWarning`
+with the replacement named:
 
-It is attached as a `source` query parameter on every request. A per-call
-`source=` on `get_dataset` overrides the client-wide value. It is an ordinary
-query parameter — it does not change the response, does not enter a data
-response's `request_context.filters`, and carries nothing about the user. Leave
-it unset to send nothing.
+| 0.1.0 | 0.2.0 |
+|---|---|
+| `client.get_dataset("twse-daily-price", symbol="2330")` | `client.twse_daily_price(ticker="2330")` |
+| `client.get_all(...)` / `iter_pages(...)` | `client.dataset(...)` — paginates internally |
+| `client.list_datasets()` | `twmd.datasets()` / `twmd.capabilities(name)` |
+| `twmd.access.is_key_free(...)` | `twmd.runnable_without_key()` |
+| `twmd.frames.to_dataframe(payload)` | returned frames already carry `.twmd` metadata |
+| `TwmdAPIError`, `TwmdPaymentRequired`, … | still importable; `TwmdPaymentRequired` keeps `payment` / `price` / `credits_url` / `purchase_hint` |
 
-## Pagination
+Two behaviours changed on purpose, both toward accuracy:
 
-```python
-df = client.get_all("twse-daily-price", symbol="2330", limit=1000)
+- **The access tables were re-measured.** 0.1.0 recorded 2 key-free datasets
+  from a probe on 2026-07-21. A full 82-route sweep, plus a second sweep with a
+  non-demo ticker to separate "open to anyone" from "demo symbols only", found
+  15 open and the same 3 sample-only. Names, semantics and return types are
+  unchanged.
+- **Pagination stops when the server ignores `offset`.** Measured on
+  `index-constituents`: offsets 0, 3 and 6 returned identical pages. Continuing
+  would append duplicate rows and present them as a full history, so pagination
+  halts and the result is flagged `truncated`.
 
-for page in client.iter_pages("twse-daily-price", symbol="2330", limit=500):
-    process(page)
-```
+0.1.0 remains MIT; 0.2.0 onward is Apache-2.0.
 
-The API publishes no cursor: no `cursor` or `next_cursor` field appears in any
-response or in the OpenAPI document. Paging is `limit`/`offset`, and `offset`
-was measured to be **ignored** on the key-free endpoints — `offset=3` returned
-the same records as `offset=0`.
-
-So pagination here is defensive. It advances `offset` as documented, then stops
-when either a page comes back shorter than `limit`, or a page repeats the
-previous page's first record — the signature of a silently ignored `offset`.
-Against endpoints that ignore `offset` this yields exactly one page, which is
-the correct outcome rather than a failure. `max_pages` caps the loop.
-
-## `as_of`
-
-`get_dataset()` accepts an `as_of` argument and forwards it as a query
-parameter. **Its scope is narrow.** As measured on 2026-07-21:
-
-- `as_of` is declared on exactly four endpoints — `income-statement`,
-  `cash-flow-statement`, `balance-sheet`, `financials` — all of which require an
-  API key.
-- On every other endpoint it is not a declared parameter. The API silently
-  ignores unknown query parameters, returning 200 rather than 422, so passing
-  `as_of` there has no observable effect and raises no error.
-- Its behaviour on the four declared endpoints is **unverified** by this
-  project, which has no credentials to exercise them.
-
-Treat `as_of` as forwarded-but-unconfirmed rather than as a general
-point-in-time facility. The `data_as_of` field in responses is a data-freshness
-date and is a different thing.
+---
 
 ## Development
 
 ```bash
-pip install -e ".[test]"
-pytest -m "not live"    # offline, no network
-pytest -m live          # hits the real API, key-free paths only
+pip install -e ".[dev]"
+pytest                        # offline suite
+pytest -m network             # live free-tier checks, no key needed
 ```
 
-The live suite asserts a sample of the key-free matrix — seven dataset/ticker
-pairs — still matches what the API serves, so drift in those surfaces as a test
-failure. It is a tripwire, not full coverage: the five sample tickers are
-verified only against `twse-daily-price`, and three datasets listed as
-key-required are assumed rather than probed (see
-`access.PRESUMED_KEY_REQUIRED_DATASETS`, and `access.provenance()` to tell the
-two apart).
+Regenerating the registry after an API change:
 
-## Scope
+```bash
+python tools/build_mapping.py    # re-derive the mapping tables from live sources
+python tools/gen_registry.py     # → twmd/_registry.json
+python tools/gen_methods.py      # → twmd/_methods.py + .pyi
+python tools/gen_compat_map.py   # → twmd/compat/_finmind_map.json
+```
 
-This package retrieves data. It does not generate recommendations, forecasts,
-signals, valuations, or opinions about any security, and nothing it returns
-should be read as such. The data is provided for research and educational
-purposes; verify it against the original sources before relying on it. Use of
-the underlying API is governed by TW Market Data's own terms.
+Design notes and the full evidence trail live in [`DESIGN_v1.md`](DESIGN_v1.md), [`mapping/`](mapping/), and [`mapping/sources/`](mapping/sources/).
+
+---
 
 ## License
 
-MIT
+[Apache-2.0](LICENSE). See [NOTICE](NOTICE) for trademark and compatibility statements.
+
+*Not investment advice.*

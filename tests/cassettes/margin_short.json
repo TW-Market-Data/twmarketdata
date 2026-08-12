@@ -1,0 +1,214 @@
+{
+ "dataset": "margin_short",
+ "recorded_with": "restricted test key (value never stored)",
+ "request": {
+  "headers": {
+   "X-API-Key": "REDACTED"
+  },
+  "method": "GET",
+  "params": {
+   "limit": 5,
+   "ticker": "2330"
+  }
+ },
+ "response": {
+  "body": {
+   "count": 5,
+   "dataset": "margin_short",
+   "dataset_id": "margin_short",
+   "meta": {
+    "is_limited": false,
+    "market": "TWSE",
+    "plan": "max",
+    "private_beta_contract": true,
+    "row_limit": 10000
+   },
+   "plan_id": "max",
+   "rows": [
+    {
+     "as_of_date": "2026-08-10",
+     "data_gaps": [],
+     "margin_balance": 29788.0,
+     "margin_purchase": 804.0,
+     "margin_purchase_balance": 29788.0,
+     "margin_purchase_buy": 804.0,
+     "margin_purchase_sell": 662.0,
+     "margin_utilization_ratio": 0.001074258090506244,
+     "market": "TWSE",
+     "not_investment_advice": true,
+     "short_balance": 32.0,
+     "short_sale": 3.0,
+     "short_sale_balance": 32.0,
+     "short_sale_buy": 4.0,
+     "short_sale_sell": 3.0,
+     "source_lineage": {
+      "endpoint": "https://www.twse.com.tw/exchangeReport/MI_MARGN",
+      "parsed_by": "position",
+      "request_params": {
+       "date": "20260810",
+       "response": "json",
+       "selectType": "ALL"
+      },
+      "source_family": "twse_margin_short_balance",
+      "source_provider": "twse_official",
+      "source_role": "official_twse_mi_margn",
+      "source_title": "115年08月10日 融資融券彙總 (全部)",
+      "source_url": "https://www.twse.com.tw/exchangeReport/MI_MARGN?response=json&date=20260810&selectType=ALL"
+     },
+     "source_provider": "twse_official",
+     "source_role": "official_twse_mi_margn",
+     "symbol": "2330",
+     "ticker": "2330",
+     "trade_date": "2026-08-10"
+    },
+    {
+     "as_of_date": "2026-08-07",
+     "data_gaps": [],
+     "margin_balance": 29657.0,
+     "margin_purchase": 262.0,
+     "margin_purchase_balance": 29657.0,
+     "margin_purchase_buy": 262.0,
+     "margin_purchase_sell": 513.0,
+     "margin_utilization_ratio": 0.001112722122938935,
+     "market": "TWSE",
+     "not_investment_advice": true,
+     "short_balance": 33.0,
+     "short_sale": 3.0,
+     "short_sale_balance": 33.0,
+     "short_sale_buy": 8.0,
+     "short_sale_sell": 3.0,
+     "source_lineage": {
+      "endpoint": "https://www.twse.com.tw/exchangeReport/MI_MARGN",
+      "parsed_by": "position",
+      "request_params": {
+       "date": "20260807",
+       "response": "json",
+       "selectType": "ALL"
+      },
+      "source_family": "twse_margin_short_balance",
+      "source_provider": "twse_official",
+      "source_role": "official_twse_mi_margn",
+      "source_title": "115年08月07日 融資融券彙總 (全部)",
+      "source_url": "https://www.twse.com.tw/exchangeReport/MI_MARGN?response=json&date=20260807&selectType=ALL"
+     },
+     "source_provider": "twse_official",
+     "source_role": "official_twse_mi_margn",
+     "symbol": "2330",
+     "ticker": "2330",
+     "trade_date": "2026-08-07"
+    },
+    {
+     "as_of_date": "2026-08-06",
+     "data_gaps": [],
+     "margin_balance": 29949.0,
+     "margin_purchase": 1073.0,
+     "margin_purchase_balance": 29949.0,
+     "margin_purchase_buy": 1073.0,
+     "margin_purchase_sell": 331.0,
+     "margin_utilization_ratio": 0.0012688236669003974,
+     "market": "TWSE",
+     "not_investment_advice": true,
+     "short_balance": 38.0,
+     "short_sale": 3.0,
+     "short_sale_balance": 38.0,
+     "short_sale_buy": 27.0,
+     "short_sale_sell": 3.0,
+     "source_lineage": {
+      "endpoint": "https://www.twse.com.tw/exchangeReport/MI_MARGN",
+      "parsed_by": "position",
+      "request_params": {
+       "date": "20260806",
+       "response": "json",
+       "selectType": "ALL"
+      },
+      "source_family": "twse_margin_short_balance",
+      "source_provider": "twse_official",
+      "source_role": "official_twse_mi_margn",
+      "source_title": "115年08月06日 融資融券彙總 (全部)",
+      "source_url": "https://www.twse.com.tw/exchangeReport/MI_MARGN?response=json&date=20260806&selectType=ALL"
+     },
+     "source_provider": "twse_official",
+     "source_role": "official_twse_mi_margn",
+     "symbol": "2330",
+     "ticker": "2330",
+     "trade_date": "2026-08-06"
+    },
+    {
+     "as_of_date": "2026-08-05",
+     "data_gaps": [],
+     "margin_balance": 29226.0,
+     "margin_purchase": 362.0,
+     "margin_purchase_balance": 29226.0,
+     "margin_purchase_buy": 362.0,
+     "margin_purchase_sell": 1882.0,
+     "margin_utilization_ratio": 0.0021213987545336344,
+     "market": "TWSE",
+     "not_investment_advice": true,
+     "short_balance": 62.0,
+     "short_sale": 24.0,
+     "short_sale_balance": 62.0,
+     "short_sale_buy": 9.0,
+     "short_sale_sell": 24.0,
+     "source_lineage": {
+      "endpoint": "https://www.twse.com.tw/exchangeReport/MI_MARGN",
+      "parsed_by": "position",
+      "request_params": {
+       "date": "20260805",
+       "response": "json",
+       "selectType": "ALL"
+      },
+      "source_family": "twse_margin_short_balance",
+      "source_provider": "twse_official",
+      "source_role": "official_twse_mi_margn",
+      "source_title": "115年08月05日 融資融券彙總 (全部)",
+      "source_url": "https://www.twse.com.tw/exchangeReport/MI_MARGN?response=json&date=20260805&selectType=ALL"
+     },
+     "source_provider": "twse_official",
+     "source_role": "official_twse_mi_margn",
+     "symbol": "2330",
+     "ticker": "2330",
+     "trade_date": "2026-08-05"
+    },
+    {
+     "as_of_date": "2026-08-04",
+     "data_gaps": [],
+     "margin_balance": 30765.0,
+     "margin_purchase": 1391.0,
+     "margin_purchase_balance": 30765.0,
+     "margin_purchase_buy": 1391.0,
+     "margin_purchase_sell": 594.0,
+     "margin_utilization_ratio": 0.0015277100601332684,
+     "market": "TWSE",
+     "not_investment_advice": true,
+     "short_balance": 47.0,
+     "short_sale": 4.0,
+     "short_sale_balance": 47.0,
+     "short_sale_buy": 51.0,
+     "short_sale_sell": 4.0,
+     "source_lineage": {
+      "endpoint": "https://www.twse.com.tw/exchangeReport/MI_MARGN",
+      "parsed_by": "position",
+      "request_params": {
+       "date": "20260804",
+       "response": "json",
+       "selectType": "ALL"
+      },
+      "source_family": "twse_margin_short_balance",
+      "source_provider": "twse_official",
+      "source_role": "official_twse_mi_margn",
+      "source_title": "115年08月04日 融資融券彙總 (全部)",
+      "source_url": "https://www.twse.com.tw/exchangeReport/MI_MARGN?response=json&date=20260804&selectType=ALL"
+     },
+     "source_provider": "twse_official",
+     "source_role": "official_twse_mi_margn",
+     "symbol": "2330",
+     "ticker": "2330",
+     "trade_date": "2026-08-04"
+    }
+   ]
+  },
+  "status": 200
+ },
+ "route": "/v2/datasets/margin-short",
+ "sdk_error": null
+}

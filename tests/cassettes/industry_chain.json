@@ -1,0 +1,138 @@
+{
+ "dataset": "industry_chain",
+ "recorded_with": "restricted test key (value never stored)",
+ "request": {
+  "headers": {
+   "X-API-Key": "REDACTED"
+  },
+  "method": "GET",
+  "params": {
+   "limit": 5
+  }
+ },
+ "response": {
+  "body": {
+   "data": [
+    {
+     "capture_date": "2026-08-04",
+     "chain_name": "水泥",
+     "market": "TW",
+     "node_name": "水泥成品",
+     "node_position": "中游",
+     "pit_safe_from": null,
+     "provider": "twse_official",
+     "source_authority": "TPEx 產業價值鏈資訊平台 (ic.tpex.org.tw)",
+     "source_family": "TPEX_IC_CHAIN",
+     "source_role": "official_tpex_industry_chain",
+     "ticker": "1101",
+     "trade_date": "2026-08-04"
+    },
+    {
+     "capture_date": "2026-08-04",
+     "chain_name": "水泥",
+     "market": "TW",
+     "node_name": "水泥熟料",
+     "node_position": "中游",
+     "pit_safe_from": null,
+     "provider": "twse_official",
+     "source_authority": "TPEx 產業價值鏈資訊平台 (ic.tpex.org.tw)",
+     "source_family": "TPEX_IC_CHAIN",
+     "source_role": "official_tpex_industry_chain",
+     "ticker": "1101",
+     "trade_date": "2026-08-04"
+    },
+    {
+     "capture_date": "2026-08-04",
+     "chain_name": "水泥",
+     "market": "TW",
+     "node_name": "水泥生料",
+     "node_position": "中游",
+     "pit_safe_from": null,
+     "provider": "twse_official",
+     "source_authority": "TPEx 產業價值鏈資訊平台 (ic.tpex.org.tw)",
+     "source_family": "TPEX_IC_CHAIN",
+     "source_role": "official_tpex_industry_chain",
+     "ticker": "1101",
+     "trade_date": "2026-08-04"
+    },
+    {
+     "capture_date": "2026-08-04",
+     "chain_name": "水泥",
+     "market": "TW",
+     "node_name": "石灰石",
+     "node_position": "上游",
+     "pit_safe_from": null,
+     "provider": "twse_official",
+     "source_authority": "TPEx 產業價值鏈資訊平台 (ic.tpex.org.tw)",
+     "source_family": "TPEX_IC_CHAIN",
+     "source_role": "official_tpex_industry_chain",
+     "ticker": "1101",
+     "trade_date": "2026-08-04"
+    },
+    {
+     "capture_date": "2026-08-04",
+     "chain_name": "水泥",
+     "market": "TW",
+     "node_name": "預拌混凝土",
+     "node_position": "下游",
+     "pit_safe_from": null,
+     "provider": "twse_official",
+     "source_authority": "TPEx 產業價值鏈資訊平台 (ic.tpex.org.tw)",
+     "source_family": "TPEX_IC_CHAIN",
+     "source_role": "official_tpex_industry_chain",
+     "ticker": "1101",
+     "trade_date": "2026-08-04"
+    }
+   ],
+   "data_count": 5,
+   "dataset_id": "industry_chain",
+   "envelope": {
+    "dataset_id": "industry_chain",
+    "row_count": 5,
+    "scope": "tw_value_chain_membership"
+   },
+   "error": null,
+   "known_gaps": [
+    "chain_membership_is_a_curated_mapping_not_an_official_disclosure",
+    "node_position_is_currently_null_for_every_row_upstream_downstream_ordering_is_not_yet_populated",
+    "single_snapshot_today_a_re_snapshot_will_add_versions_not_replace_rows",
+    "pit_safe_from_null_means_the_capture_date_is_our_observation_date_not_a_disclosure_date",
+    "not_investment_advice"
+   ],
+   "lineage": {
+    "providers": [
+     "twse_official"
+    ],
+    "semantics": "Which tickers sit on which node of which value chain. Returns the CURRENT capture per (ticker, chain_name, node_name); pass as_of to read the newest capture at or before a date."
+   },
+   "quality": {
+    "chain_count": 1,
+    "row_count": 5,
+    "rows_without_pit_safe_from": 5,
+    "sensitive_fields_exposed": false,
+    "ticker_count": 1
+   },
+   "request_context": {
+    "captures_present": [
+     "2026-08-04"
+    ],
+    "coverage_type": "versioned_snapshot",
+    "current_capture": "2026-08-04",
+    "filters": {
+     "as_of": null,
+     "chain_name": null,
+     "limit": 5,
+     "node_name": null,
+     "ticker": null
+    },
+    "scope": "tw_value_chain_membership"
+   },
+   "warnings": [
+    "not_investment_advice"
+   ]
+  },
+  "status": 200
+ },
+ "route": "/v2/datasets/industry-chain",
+ "sdk_error": null
+}

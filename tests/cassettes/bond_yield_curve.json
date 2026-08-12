@@ -1,0 +1,171 @@
+{
+ "dataset": "bond_yield_curve",
+ "recorded_with": "restricted test key (value never stored)",
+ "request": {
+  "headers": {
+   "X-API-Key": "REDACTED"
+  },
+  "method": "GET",
+  "params": {
+   "limit": 5
+  }
+ },
+ "response": {
+  "body": {
+   "data": [
+    {
+     "as_of": "2026-08-10",
+     "curve_type": "govbond",
+     "index_version": "tpex_govbond_curve:068ec5e779db",
+     "lineage": {
+      "bond_code": "A15203",
+      "echo_ok": true,
+      "emitter": "build_bond_yield_curve_candidates",
+      "residual_years": 1.936,
+      "source_data_date": "2026-08-10"
+     },
+     "maturity_years": 2.0,
+     "source_authority": "TPEx 公債殖利率曲線",
+     "source_family": "TPEX_GOVBOND_DAILY_02",
+     "source_provider": "tpex_official",
+     "source_role": "official_tpex_govbond_curve",
+     "tenor_label": "2Y",
+     "trade_date": "2026-08-10",
+     "yield_rate": 1.6613
+    },
+    {
+     "as_of": "2026-08-10",
+     "curve_type": "govbond",
+     "index_version": "tpex_govbond_curve:068ec5e779db",
+     "lineage": {
+      "bond_code": "A15108",
+      "echo_ok": true,
+      "emitter": "build_bond_yield_curve_candidates",
+      "residual_years": 5.0,
+      "source_data_date": "2026-08-10"
+     },
+     "maturity_years": 5.0,
+     "source_authority": "TPEx 公債殖利率曲線",
+     "source_family": "TPEX_GOVBOND_DAILY_02",
+     "source_provider": "tpex_official",
+     "source_role": "official_tpex_govbond_curve",
+     "tenor_label": "5Y",
+     "trade_date": "2026-08-10",
+     "yield_rate": 1.85
+    },
+    {
+     "as_of": "2026-08-10",
+     "curve_type": "govbond",
+     "index_version": "tpex_govbond_curve:068ec5e779db",
+     "lineage": {
+      "bond_code": "A15106R",
+      "echo_ok": true,
+      "emitter": "build_bond_yield_curve_candidates",
+      "residual_years": 9.84,
+      "source_data_date": "2026-08-10"
+     },
+     "maturity_years": 10.0,
+     "source_authority": "TPEx 公債殖利率曲線",
+     "source_family": "TPEX_GOVBOND_DAILY_02",
+     "source_provider": "tpex_official",
+     "source_role": "official_tpex_govbond_curve",
+     "tenor_label": "10Y",
+     "trade_date": "2026-08-10",
+     "yield_rate": 1.9642
+    },
+    {
+     "as_of": "2026-08-10",
+     "curve_type": "govbond",
+     "index_version": "tpex_govbond_curve:068ec5e779db",
+     "lineage": {
+      "bond_code": "A15107",
+      "echo_ok": true,
+      "emitter": "build_bond_yield_curve_candidates",
+      "residual_years": 19.964,
+      "source_data_date": "2026-08-10"
+     },
+     "maturity_years": 20.0,
+     "source_authority": "TPEx 公債殖利率曲線",
+     "source_family": "TPEX_GOVBOND_DAILY_02",
+     "source_provider": "tpex_official",
+     "source_role": "official_tpex_govbond_curve",
+     "tenor_label": "20Y",
+     "trade_date": "2026-08-10",
+     "yield_rate": 2.2
+    },
+    {
+     "as_of": "2026-08-10",
+     "curve_type": "govbond",
+     "index_version": "tpex_govbond_curve:068ec5e779db",
+     "lineage": {
+      "bond_code": "A15105",
+      "echo_ok": true,
+      "emitter": "build_bond_yield_curve_candidates",
+      "residual_years": 29.802,
+      "source_data_date": "2026-08-10"
+     },
+     "maturity_years": 30.0,
+     "source_authority": "TPEx 公債殖利率曲線",
+     "source_family": "TPEX_GOVBOND_DAILY_02",
+     "source_provider": "tpex_official",
+     "source_role": "official_tpex_govbond_curve",
+     "tenor_label": "30Y",
+     "trade_date": "2026-08-10",
+     "yield_rate": 1.886
+    }
+   ],
+   "data_count": 5,
+   "dataset_id": "bond_yield_curve",
+   "envelope": {
+    "dataset_id": "bond_yield_curve",
+    "row_count": 5,
+    "scope": "tw_government_bond_yield_curve"
+   },
+   "error": null,
+   "known_gaps": [
+    "no_scheduled_producer_history_is_real_but_the_series_does_not_advance_on_its_own",
+    "daily_cadence_by_nature_so_a_stale_max_trade_date_means_a_gap_not_a_quiet_market",
+    "tpex_govbond_source_only_no_corporate_or_swap_curve",
+    "not_investment_advice"
+   ],
+   "lineage": {
+    "semantics": "Taiwan government bond yields by tenor per trading day. One row per (trade_date, tenor); order a single date by maturity_years to read it as a curve.",
+    "source_families": [
+     "TPEX_GOVBOND_DAILY_02"
+    ]
+   },
+   "quality": {
+    "row_count": 5,
+    "sensitive_fields_exposed": false,
+    "tenors_present": [
+     "10Y",
+     "20Y",
+     "2Y",
+     "30Y",
+     "5Y"
+    ],
+    "trade_days_in_page": 1
+   },
+   "request_context": {
+    "coverage_type": "daily",
+    "filters": {
+     "curve_type": null,
+     "date_from": null,
+     "date_to": null,
+     "limit": 5,
+     "tenor_label": null,
+     "trade_date": null
+    },
+    "max_trade_date": "2026-08-10",
+    "min_trade_date": "2026-08-10",
+    "scope": "tw_government_bond_yield_curve"
+   },
+   "warnings": [
+    "not_investment_advice"
+   ]
+  },
+  "status": 200
+ },
+ "route": "/v2/datasets/bond-yield-curve",
+ "sdk_error": null
+}

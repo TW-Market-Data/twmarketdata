@@ -1,0 +1,156 @@
+{
+ "dataset": "securities_lending",
+ "recorded_with": "restricted test key (value never stored)",
+ "request": {
+  "headers": {
+   "X-API-Key": "REDACTED"
+  },
+  "method": "GET",
+  "params": {
+   "limit": 5,
+   "ticker": "2330"
+  }
+ },
+ "response": {
+  "body": {
+   "api_version": "v2",
+   "dataset": "securities_lending",
+   "endpoint": "/v2/datasets/chip-deep-securities-lending-daily",
+   "envelope": {
+    "api_version": "v2",
+    "data": [
+     {
+      "as_of_date": "2026-08-10",
+      "borrowed_volume": null,
+      "close_price": 2380.0,
+      "lending_balance": 258133000.0,
+      "market": "TWSE",
+      "market_value": null,
+      "prev_lending_balance": 253757000.0,
+      "returned_volume": null,
+      "symbol": "2330"
+     },
+     {
+      "as_of_date": "2026-08-07",
+      "borrowed_volume": null,
+      "close_price": 2370.0,
+      "lending_balance": 253757000.0,
+      "market": "TWSE",
+      "market_value": null,
+      "prev_lending_balance": 255505000.0,
+      "returned_volume": null,
+      "symbol": "2330"
+     },
+     {
+      "as_of_date": "2026-08-06",
+      "borrowed_volume": null,
+      "close_price": 2365.0,
+      "lending_balance": 255505000.0,
+      "market": "TWSE",
+      "market_value": null,
+      "prev_lending_balance": 261090000.0,
+      "returned_volume": null,
+      "symbol": "2330"
+     },
+     {
+      "as_of_date": "2026-08-05",
+      "borrowed_volume": null,
+      "close_price": 2405.0,
+      "lending_balance": 261090000.0,
+      "market": "TWSE",
+      "market_value": null,
+      "prev_lending_balance": 262627000.0,
+      "returned_volume": null,
+      "symbol": "2330"
+     },
+     {
+      "as_of_date": "2026-08-04",
+      "borrowed_volume": null,
+      "close_price": 2320.0,
+      "lending_balance": 262627000.0,
+      "market": "TWSE",
+      "market_value": null,
+      "prev_lending_balance": 254164000.0,
+      "returned_volume": null,
+      "symbol": "2330"
+     }
+    ],
+    "data_as_of": "2026-08-10",
+    "dataset": "securities_lending",
+    "dataset_version": "v2.0.0-preview",
+    "error": {
+     "blocking_gate": null,
+     "dataset": "securities_lending",
+     "error_code": null,
+     "error_message": null,
+     "request_id": "read-api-4154da97bc61"
+    },
+    "lineage": {
+     "fallback_chain": [],
+     "policy_notes": [
+      "securities lending daily (TWT72U 借券) productized serving path",
+      "contract-aligned filters: symbol/as_of_date/start_date/end_date/market",
+      "nullable optional fields are preserved as-is"
+     ],
+     "selected_source": "securities_lending",
+     "source_role": "canonical"
+    },
+    "quality": {
+     "completeness_ratio": 1.0,
+     "freshness_as_of": "2026-08-10",
+     "freshness_state": "fresh",
+     "quality_status": "ready"
+    },
+    "release_date": "2026-08-10",
+    "release_version": "v2.2026-08-10.preview",
+    "request_context": {
+     "as_of_date": "2026-08-10",
+     "dataset_view": "securities_lending_v1",
+     "family": "chip_deep",
+     "field_group_type": "canonical",
+     "ticker": "2330"
+    }
+   },
+   "meta": {
+    "is_limited": false,
+    "mandatory_contract_fields_present": [
+     "api_version",
+     "data",
+     "data_as_of",
+     "dataset",
+     "dataset_version",
+     "error",
+     "lineage",
+     "quality",
+     "release_date",
+     "release_version",
+     "request_context"
+    ],
+    "plan": "max",
+    "row_limit": 10000,
+    "rows_returned": 5
+   },
+   "plan_id": "max",
+   "query": {
+    "as_of_date": null,
+    "end_date": null,
+    "legacy_aliases_used": {
+     "date_from": false,
+     "date_to": false,
+     "offset": false,
+     "sort_by": false,
+     "sort_order": false,
+     "ticker": true
+    },
+    "limit": 5,
+    "market": null,
+    "start_date": null,
+    "symbol": "2330"
+   },
+   "request_id": "req_6e1c13d544ef"
+  },
+  "status": 200
+ },
+ "route": "/v2/datasets/securities-lending",
+ "sdk_error": null
+}

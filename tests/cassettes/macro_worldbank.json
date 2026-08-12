@@ -1,0 +1,22 @@
+{
+ "dataset": "macro_worldbank",
+ "recorded_with": "restricted test key (value never stored)",
+ "request": {
+  "headers": {
+   "X-API-Key": "REDACTED"
+  },
+  "method": "GET",
+  "params": {
+   "limit": 5
+  }
+ },
+ "response": {
+  "body": {
+   "error": "commercial_use_not_allowed",
+   "message": "Developer 僅限個人開發與測試使用，不可用於商業產品或對外服務。 升級至 Pro 或 Enterprise 以用於商業產品與正式環境。"
+  },
+  "status": 403
+ },
+ "route": "/v2/datasets/macro-worldbank",
+ "sdk_error": "TierRequiredError"
+}

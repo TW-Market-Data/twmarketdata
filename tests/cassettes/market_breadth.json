@@ -1,0 +1,22 @@
+{
+ "dataset": "market_breadth",
+ "recorded_with": "restricted test key (value never stored)",
+ "request": {
+  "headers": {
+   "X-API-Key": "REDACTED"
+  },
+  "method": "GET",
+  "params": {
+   "limit": 5
+  }
+ },
+ "response": {
+  "body": {
+   "error": "missing_required_filter",
+   "message": "Missing required filter"
+  },
+  "status": 400
+ },
+ "route": "/v2/datasets/market-breadth",
+ "sdk_error": "TwmdError"
+}

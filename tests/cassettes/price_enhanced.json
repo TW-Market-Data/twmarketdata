@@ -1,0 +1,206 @@
+{
+ "dataset": "price_enhanced",
+ "recorded_with": "restricted test key (value never stored)",
+ "request": {
+  "headers": {
+   "X-API-Key": "REDACTED"
+  },
+  "method": "GET",
+  "params": {
+   "limit": 5,
+   "ticker": "2330"
+  }
+ },
+ "response": {
+  "body": {
+   "api_version": "v2",
+   "dataset": "price_enhanced",
+   "endpoint": "/v2/datasets/price-enhanced",
+   "envelope": {
+    "api_version": "v2",
+    "data": [
+     {
+      "event_type": "ex_dividend",
+      "factor": 0.99733481,
+      "lineage": {
+       "endpoint_name": "twse_exchangeReport_TWT49U",
+       "payload_date": "20260611",
+       "request_date": "2026-06-11",
+       "row_index": 6874,
+       "source_authority": "TWSE TWT49U 除權除息計算結果 (derived back-adjustment factor)",
+       "source_hash": "padj:2330:2026-06-11:ex_dividend"
+      },
+      "market": "TWSE",
+      "pre_event_close": 2255.0,
+      "provider": "twse_official",
+      "reference_price": 2248.99,
+      "source_role": "derived_price_adjustment",
+      "ticker": "2330",
+      "trade_date": "2026-06-11",
+      "updated_at": "2026-07-02T03:27:19.920375+00:00"
+     },
+     {
+      "event_type": "ex_dividend",
+      "factor": 0.99674255,
+      "lineage": {
+       "endpoint_name": "twse_exchangeReport_TWT49U",
+       "payload_date": "20260317",
+       "request_date": "2026-03-17",
+       "row_index": 6635,
+       "source_authority": "TWSE TWT49U 除權除息計算結果 (derived back-adjustment factor)",
+       "source_hash": "padj:2330:2026-03-17:ex_dividend"
+      },
+      "market": "TWSE",
+      "pre_event_close": 1845.0,
+      "provider": "twse_official",
+      "reference_price": 1838.99,
+      "source_role": "derived_price_adjustment",
+      "ticker": "2330",
+      "trade_date": "2026-03-17",
+      "updated_at": "2026-07-02T03:27:10.904277+00:00"
+     },
+     {
+      "event_type": "ex_dividend",
+      "factor": 0.9966711,
+      "lineage": {
+       "endpoint_name": "twse_exchangeReport_TWT49U",
+       "payload_date": "20251211",
+       "request_date": "2025-12-11",
+       "row_index": 6458,
+       "source_authority": "TWSE TWT49U 除權除息計算結果 (derived back-adjustment factor)",
+       "source_hash": "padj:2330:2025-12-11:ex_dividend"
+      },
+      "market": "TWSE",
+      "pre_event_close": 1505.0,
+      "provider": "twse_official",
+      "reference_price": 1499.99,
+      "source_role": "derived_price_adjustment",
+      "ticker": "2330",
+      "trade_date": "2025-12-11",
+      "updated_at": "2026-07-02T03:27:02.529341+00:00"
+     },
+     {
+      "event_type": "ex_dividend",
+      "factor": 0.99600797,
+      "lineage": {
+       "endpoint_name": "twse_exchangeReport_TWT49U",
+       "payload_date": "20250916",
+       "request_date": "2025-09-16",
+       "row_index": 6308,
+       "source_authority": "TWSE TWT49U 除權除息計算結果 (derived back-adjustment factor)",
+       "source_hash": "padj:2330:2025-09-16:ex_dividend"
+      },
+      "market": "TWSE",
+      "pre_event_close": 1255.0,
+      "provider": "twse_official",
+      "reference_price": 1249.99,
+      "source_role": "derived_price_adjustment",
+      "ticker": "2330",
+      "trade_date": "2025-09-16",
+      "updated_at": "2026-07-02T03:26:47.632182+00:00"
+     },
+     {
+      "event_type": "ex_dividend",
+      "factor": 0.99576526,
+      "lineage": {
+       "endpoint_name": "twse_exchangeReport_TWT49U",
+       "payload_date": "20250612",
+       "request_date": "2025-06-12",
+       "row_index": 5430,
+       "source_authority": "TWSE TWT49U 除權除息計算結果 (derived back-adjustment factor)",
+       "source_hash": "padj:2330:2025-06-12:ex_dividend"
+      },
+      "market": "TWSE",
+      "pre_event_close": 1065.0,
+      "provider": "twse_official",
+      "reference_price": 1060.49,
+      "source_role": "derived_price_adjustment",
+      "ticker": "2330",
+      "trade_date": "2025-06-12",
+      "updated_at": "2026-07-02T03:26:16.545168+00:00"
+     }
+    ],
+    "data_as_of": "2026-06-11",
+    "dataset": "price_enhanced",
+    "dataset_version": "v2.0.0-preview",
+    "error": {
+     "blocking_gate": null,
+     "dataset": "price_enhanced",
+     "error_code": null,
+     "error_message": null,
+     "request_id": "read-api-ec5e535a9d64"
+    },
+    "lineage": {
+     "fallback_chain": [
+      "tpex_official",
+      "data_gov_mirror"
+     ],
+     "policy_notes": [
+      "official/public-first canonical",
+      "price_enhanced derived from normalized official daily prices with deterministic return/volatility formulas",
+      "unstable fields excluded from public contract (signal/label/score/custom factor and non-stable turnover_ratio)"
+     ],
+     "selected_source": "twse_official",
+     "source_role": "canonical"
+    },
+    "quality": {
+     "completeness_ratio": 1.0,
+     "freshness_as_of": "2026-06-11",
+     "freshness_state": "fresh",
+     "quality_status": "ready"
+    },
+    "release_date": "2026-06-11",
+    "release_version": "v2.2026-06-11.preview",
+    "request_context": {
+     "as_of_date": "2026-06-11",
+     "dataset_view": "price_enhanced_v1",
+     "family": "market_technical",
+     "field_group_type": "derived",
+     "price_basis": "close",
+     "supported_filter_fields": [
+      "ticker",
+      "date_from",
+      "date_to"
+     ],
+     "supported_sort_by": [
+      "trade_date"
+     ],
+     "ticker": "2330"
+    }
+   },
+   "meta": {
+    "is_limited": false,
+    "mandatory_contract_fields_present": [
+     "api_version",
+     "data",
+     "data_as_of",
+     "dataset",
+     "dataset_version",
+     "error",
+     "lineage",
+     "quality",
+     "release_date",
+     "release_version",
+     "request_context"
+    ],
+    "plan": "max",
+    "row_limit": 10000,
+    "rows_returned": 5
+   },
+   "plan_id": "max",
+   "query": {
+    "date_from": null,
+    "date_to": null,
+    "limit": 5,
+    "offset": 0,
+    "sort_by": "trade_date",
+    "sort_order": "desc",
+    "ticker": "2330"
+   },
+   "request_id": "req_1e4efd93db08"
+  },
+  "status": 200
+ },
+ "route": "/v2/datasets/price-enhanced",
+ "sdk_error": null
+}

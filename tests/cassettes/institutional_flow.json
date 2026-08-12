@@ -1,0 +1,180 @@
+{
+ "dataset": "institutional_flow",
+ "recorded_with": "restricted test key (value never stored)",
+ "request": {
+  "headers": {
+   "X-API-Key": "REDACTED"
+  },
+  "method": "GET",
+  "params": {
+   "limit": 5,
+   "ticker": "2330"
+  }
+ },
+ "response": {
+  "body": {
+   "count": 5,
+   "dataset": "institutional_flow",
+   "rows": [
+    {
+     "as_of_date": "2026-08-10",
+     "date": "2026-08-10",
+     "dealer_buy": null,
+     "dealer_net_buy_sell": 448255.0,
+     "dealer_sell": null,
+     "foreign_buy": null,
+     "foreign_holding_ratio": null,
+     "foreign_net_buy_sell": 119096.0,
+     "foreign_sell": null,
+     "institutional_participation_ratio": null,
+     "investment_trust_buy": null,
+     "investment_trust_net_buy_sell": 132372.0,
+     "investment_trust_sell": null,
+     "is_common_universe": true,
+     "lineage": {
+      "endpoint_name": "T86",
+      "payload_date": "20260810",
+      "request_date": "2026-08-10",
+      "row_index": 201,
+      "source_authority": "TWSE T86",
+      "source_hash": "81d3375d53eea681c7fb163d4bcfae14ebb3512123fec240fefe58e3c7c80b07"
+     },
+     "market": "TWSE",
+     "provider": "twse_official",
+     "source_role": "official_twse_t86",
+     "symbol": "2330",
+     "total_institutional_net_buy_sell": 699723.0,
+     "universe_class": "common_stock",
+     "updated_at": "2026-08-10T09:32:11.334036"
+    },
+    {
+     "as_of_date": "2026-08-07",
+     "date": "2026-08-07",
+     "dealer_buy": null,
+     "dealer_net_buy_sell": 1242950.0,
+     "dealer_sell": null,
+     "foreign_buy": null,
+     "foreign_holding_ratio": null,
+     "foreign_net_buy_sell": 641660.0,
+     "foreign_sell": null,
+     "institutional_participation_ratio": null,
+     "investment_trust_buy": null,
+     "investment_trust_net_buy_sell": 61000.0,
+     "investment_trust_sell": null,
+     "is_common_universe": true,
+     "lineage": {
+      "endpoint_name": "T86",
+      "payload_date": "20260807",
+      "request_date": "2026-08-07",
+      "row_index": 59,
+      "source_authority": "TWSE T86",
+      "source_hash": "0ef26d1140b1a4b97d2c8f807ee33a1dfdb7d5215177f51d66d819aacea084b6"
+     },
+     "market": "TWSE",
+     "provider": "twse_official",
+     "source_role": "official_twse_t86",
+     "symbol": "2330",
+     "total_institutional_net_buy_sell": 1945610.0,
+     "universe_class": "common_stock",
+     "updated_at": "2026-08-10T09:32:11.334036"
+    },
+    {
+     "as_of_date": "2026-08-06",
+     "date": "2026-08-06",
+     "dealer_buy": null,
+     "dealer_net_buy_sell": -583413.0,
+     "dealer_sell": null,
+     "foreign_buy": null,
+     "foreign_holding_ratio": null,
+     "foreign_net_buy_sell": -4011452.0,
+     "foreign_sell": null,
+     "institutional_participation_ratio": null,
+     "investment_trust_buy": null,
+     "investment_trust_net_buy_sell": -82362.0,
+     "investment_trust_sell": null,
+     "is_common_universe": true,
+     "lineage": {
+      "endpoint_name": "T86",
+      "payload_date": "20260806",
+      "request_date": "2026-08-06",
+      "row_index": 1299,
+      "source_authority": "TWSE T86",
+      "source_hash": "931ac5905d8c789fa2f85eeacd1f34fc1b51fa18473b89d752725311a72ac4e4"
+     },
+     "market": "TWSE",
+     "provider": "twse_official",
+     "source_role": "official_twse_t86",
+     "symbol": "2330",
+     "total_institutional_net_buy_sell": -4677227.0,
+     "universe_class": "common_stock",
+     "updated_at": "2026-08-10T09:32:11.334036"
+    },
+    {
+     "as_of_date": "2026-08-05",
+     "date": "2026-08-05",
+     "dealer_buy": null,
+     "dealer_net_buy_sell": -1099016.0,
+     "dealer_sell": null,
+     "foreign_buy": null,
+     "foreign_holding_ratio": null,
+     "foreign_net_buy_sell": 12251238.0,
+     "foreign_sell": null,
+     "institutional_participation_ratio": null,
+     "investment_trust_buy": null,
+     "investment_trust_net_buy_sell": -1204507.0,
+     "investment_trust_sell": null,
+     "is_common_universe": true,
+     "lineage": {
+      "endpoint_name": "T86",
+      "payload_date": "20260805",
+      "request_date": "2026-08-05",
+      "row_index": 35,
+      "source_authority": "TWSE T86",
+      "source_hash": "5382ad4a670b7220e5c74bdf428524c2a6f835c5660372b78d4939cf87986ac0"
+     },
+     "market": "TWSE",
+     "provider": "twse_official",
+     "source_role": "official_twse_t86",
+     "symbol": "2330",
+     "total_institutional_net_buy_sell": 9947715.0,
+     "universe_class": "common_stock",
+     "updated_at": "2026-08-06T09:32:55.528049"
+    },
+    {
+     "as_of_date": "2026-08-04",
+     "date": "2026-08-04",
+     "dealer_buy": null,
+     "dealer_net_buy_sell": -2326919.0,
+     "dealer_sell": null,
+     "foreign_buy": null,
+     "foreign_holding_ratio": null,
+     "foreign_net_buy_sell": -12429517.0,
+     "foreign_sell": null,
+     "institutional_participation_ratio": null,
+     "investment_trust_buy": null,
+     "investment_trust_net_buy_sell": 436602.0,
+     "investment_trust_sell": null,
+     "is_common_universe": true,
+     "lineage": {
+      "endpoint_name": "T86",
+      "payload_date": "20260804",
+      "request_date": "2026-08-04",
+      "row_index": 1321,
+      "source_authority": "TWSE T86",
+      "source_hash": "aa6628fdc5b51ff9c21033e544be39305d19e99d402164cc4c58923c30d827f9"
+     },
+     "market": "TWSE",
+     "provider": "twse_official",
+     "source_role": "official_twse_t86",
+     "symbol": "2330",
+     "total_institutional_net_buy_sell": -14319834.0,
+     "universe_class": "common_stock",
+     "updated_at": "2026-08-04T09:31:15.296611"
+    }
+   ]
+  },
+  "status": 200
+ },
+ "route": "/v2/datasets/institutional-flow",
+ "sdk_error": null
+}

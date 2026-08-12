@@ -1,0 +1,416 @@
+{
+ "dataset": "valuation_data",
+ "recorded_with": "restricted test key (value never stored)",
+ "request": {
+  "headers": {
+   "X-API-Key": "REDACTED"
+  },
+  "method": "GET",
+  "params": {
+   "limit": 5,
+   "ticker": "2330"
+  }
+ },
+ "response": {
+  "body": {
+   "count": 5,
+   "dataset": "valuation_data",
+   "rows": [
+    {
+     "as_of_date": "2026-08-10",
+     "book_to_price": null,
+     "dividend_yield": 0.92,
+     "earnings_yield": null,
+     "fundamentals_context": {
+      "available_tools_or_endpoints": [
+       {
+        "name": "valuation_data",
+        "path": "/v2/datasets/valuation-data"
+       }
+      ],
+      "coverage_window": {
+       "coverage_confidence": "medium",
+       "max_period": null,
+       "min_period": null,
+       "row_count": 0
+      },
+      "data_gaps": [],
+      "generated_at": "2026-08-12T06:27:55Z",
+      "metric_values": {
+       "book_to_price": null,
+       "dividend_yield": 0.92,
+       "earnings_yield": null,
+       "market_cap": null,
+       "pb_ratio": 10.48,
+       "pe_ratio": 32.0,
+       "shares_outstanding": null,
+       "symbol": "2330",
+       "updated_at": "2026-08-11T09:02:45.682359",
+       "valuation_version": "v1"
+      },
+      "not_investment_advice": true,
+      "period": "2026-08-10",
+      "period_type": "daily_event",
+      "restatement_warning": {
+       "has_restatement": false,
+       "previous_version_ref": null,
+       "reason": null
+      },
+      "safe_usage_notes": [
+       "not_investment_advice",
+       "official_public_first_policy",
+       "period_semantics_explicit",
+       "raw_full_body_storage_forbidden"
+      ],
+      "source_lineage": {
+       "endpoint_name": "BWIBBU_d",
+       "payload_date": "20260810",
+       "provider": "unknown",
+       "request_date": "2026-08-10",
+       "row_index": 279,
+       "source_authority": "TWSE BWIBBU",
+       "source_hash": "f9df92fecbb6d252f74773b3334e612b78f0faa18942e37cc10a3ead0e780360",
+       "source_role": "official_twse_bwibbu"
+      },
+      "statement_family": "valuation_data",
+      "ticker": "2330"
+     },
+     "lineage": {
+      "endpoint_name": "BWIBBU_d",
+      "payload_date": "20260810",
+      "request_date": "2026-08-10",
+      "row_index": 279,
+      "source_authority": "TWSE BWIBBU",
+      "source_hash": "f9df92fecbb6d252f74773b3334e612b78f0faa18942e37cc10a3ead0e780360"
+     },
+     "market": "TWSE",
+     "market_cap": null,
+     "pb_ratio": 10.48,
+     "pe_ratio": 32.0,
+     "provider": "twse_official",
+     "shares_outstanding": null,
+     "source_role": "official_twse_bwibbu",
+     "symbol": "2330",
+     "updated_at": "2026-08-11T09:02:45.682359",
+     "valuation_version": "v1"
+    },
+    {
+     "as_of_date": "2026-08-07",
+     "book_to_price": null,
+     "dividend_yield": 0.93,
+     "earnings_yield": null,
+     "fundamentals_context": {
+      "available_tools_or_endpoints": [
+       {
+        "name": "valuation_data",
+        "path": "/v2/datasets/valuation-data"
+       }
+      ],
+      "coverage_window": {
+       "coverage_confidence": "medium",
+       "max_period": null,
+       "min_period": null,
+       "row_count": 0
+      },
+      "data_gaps": [],
+      "generated_at": "2026-08-12T06:27:55Z",
+      "metric_values": {
+       "book_to_price": null,
+       "dividend_yield": 0.93,
+       "earnings_yield": null,
+       "market_cap": null,
+       "pb_ratio": 10.43,
+       "pe_ratio": 31.86,
+       "shares_outstanding": null,
+       "symbol": "2330",
+       "updated_at": "2026-08-07T09:01:48.102678",
+       "valuation_version": "v1"
+      },
+      "not_investment_advice": true,
+      "period": "2026-08-07",
+      "period_type": "daily_event",
+      "restatement_warning": {
+       "has_restatement": false,
+       "previous_version_ref": null,
+       "reason": null
+      },
+      "safe_usage_notes": [
+       "not_investment_advice",
+       "official_public_first_policy",
+       "period_semantics_explicit",
+       "raw_full_body_storage_forbidden"
+      ],
+      "source_lineage": {
+       "endpoint_name": "BWIBBU_d",
+       "payload_date": "20260807",
+       "provider": "unknown",
+       "request_date": "2026-08-07",
+       "row_index": 278,
+       "source_authority": "TWSE BWIBBU",
+       "source_hash": "f5e49b5b96917fc648a2bca4ada2a5a2c6600fab253b968ea75a4c28878c212e",
+       "source_role": "official_twse_bwibbu"
+      },
+      "statement_family": "valuation_data",
+      "ticker": "2330"
+     },
+     "lineage": {
+      "endpoint_name": "BWIBBU_d",
+      "payload_date": "20260807",
+      "request_date": "2026-08-07",
+      "row_index": 278,
+      "source_authority": "TWSE BWIBBU",
+      "source_hash": "f5e49b5b96917fc648a2bca4ada2a5a2c6600fab253b968ea75a4c28878c212e"
+     },
+     "market": "TWSE",
+     "market_cap": null,
+     "pb_ratio": 10.43,
+     "pe_ratio": 31.86,
+     "provider": "twse_official",
+     "shares_outstanding": null,
+     "source_role": "official_twse_bwibbu",
+     "symbol": "2330",
+     "updated_at": "2026-08-07T09:01:48.102678",
+     "valuation_version": "v1"
+    },
+    {
+     "as_of_date": "2026-08-06",
+     "book_to_price": null,
+     "dividend_yield": 0.93,
+     "earnings_yield": null,
+     "fundamentals_context": {
+      "available_tools_or_endpoints": [
+       {
+        "name": "valuation_data",
+        "path": "/v2/datasets/valuation-data"
+       }
+      ],
+      "coverage_window": {
+       "coverage_confidence": "medium",
+       "max_period": null,
+       "min_period": null,
+       "row_count": 0
+      },
+      "data_gaps": [],
+      "generated_at": "2026-08-12T06:27:55Z",
+      "metric_values": {
+       "book_to_price": null,
+       "dividend_yield": 0.93,
+       "earnings_yield": null,
+       "market_cap": null,
+       "pb_ratio": 10.41,
+       "pe_ratio": 31.8,
+       "shares_outstanding": null,
+       "symbol": "2330",
+       "updated_at": "2026-08-07T09:01:48.102678",
+       "valuation_version": "v1"
+      },
+      "not_investment_advice": true,
+      "period": "2026-08-06",
+      "period_type": "daily_event",
+      "restatement_warning": {
+       "has_restatement": false,
+       "previous_version_ref": null,
+       "reason": null
+      },
+      "safe_usage_notes": [
+       "not_investment_advice",
+       "official_public_first_policy",
+       "period_semantics_explicit",
+       "raw_full_body_storage_forbidden"
+      ],
+      "source_lineage": {
+       "endpoint_name": "BWIBBU_d",
+       "payload_date": "20260806",
+       "provider": "unknown",
+       "request_date": "2026-08-06",
+       "row_index": 278,
+       "source_authority": "TWSE BWIBBU",
+       "source_hash": "d78ca0b45db968330556fb3ebfc8c26b647517d8be368716dad48c857953201c",
+       "source_role": "official_twse_bwibbu"
+      },
+      "statement_family": "valuation_data",
+      "ticker": "2330"
+     },
+     "lineage": {
+      "endpoint_name": "BWIBBU_d",
+      "payload_date": "20260806",
+      "request_date": "2026-08-06",
+      "row_index": 278,
+      "source_authority": "TWSE BWIBBU",
+      "source_hash": "d78ca0b45db968330556fb3ebfc8c26b647517d8be368716dad48c857953201c"
+     },
+     "market": "TWSE",
+     "market_cap": null,
+     "pb_ratio": 10.41,
+     "pe_ratio": 31.8,
+     "provider": "twse_official",
+     "shares_outstanding": null,
+     "source_role": "official_twse_bwibbu",
+     "symbol": "2330",
+     "updated_at": "2026-08-07T09:01:48.102678",
+     "valuation_version": "v1"
+    },
+    {
+     "as_of_date": "2026-08-05",
+     "book_to_price": null,
+     "dividend_yield": 0.91,
+     "earnings_yield": null,
+     "fundamentals_context": {
+      "available_tools_or_endpoints": [
+       {
+        "name": "valuation_data",
+        "path": "/v2/datasets/valuation-data"
+       }
+      ],
+      "coverage_window": {
+       "coverage_confidence": "medium",
+       "max_period": null,
+       "min_period": null,
+       "row_count": 0
+      },
+      "data_gaps": [],
+      "generated_at": "2026-08-12T06:27:55Z",
+      "metric_values": {
+       "book_to_price": null,
+       "dividend_yield": 0.91,
+       "earnings_yield": null,
+       "market_cap": null,
+       "pb_ratio": 10.59,
+       "pe_ratio": 32.33,
+       "shares_outstanding": null,
+       "symbol": "2330",
+       "updated_at": "2026-08-05T09:01:40.982922",
+       "valuation_version": "v1"
+      },
+      "not_investment_advice": true,
+      "period": "2026-08-05",
+      "period_type": "daily_event",
+      "restatement_warning": {
+       "has_restatement": false,
+       "previous_version_ref": null,
+       "reason": null
+      },
+      "safe_usage_notes": [
+       "not_investment_advice",
+       "official_public_first_policy",
+       "period_semantics_explicit",
+       "raw_full_body_storage_forbidden"
+      ],
+      "source_lineage": {
+       "endpoint_name": "BWIBBU_d",
+       "payload_date": "20260805",
+       "provider": "unknown",
+       "request_date": "2026-08-05",
+       "row_index": 278,
+       "source_authority": "TWSE BWIBBU",
+       "source_hash": "fd14579002ab6ebd9c138ccc167016ef416bcd524b343ea57f6e08ccf545712f",
+       "source_role": "official_twse_bwibbu"
+      },
+      "statement_family": "valuation_data",
+      "ticker": "2330"
+     },
+     "lineage": {
+      "endpoint_name": "BWIBBU_d",
+      "payload_date": "20260805",
+      "request_date": "2026-08-05",
+      "row_index": 278,
+      "source_authority": "TWSE BWIBBU",
+      "source_hash": "fd14579002ab6ebd9c138ccc167016ef416bcd524b343ea57f6e08ccf545712f"
+     },
+     "market": "TWSE",
+     "market_cap": null,
+     "pb_ratio": 10.59,
+     "pe_ratio": 32.33,
+     "provider": "twse_official",
+     "shares_outstanding": null,
+     "source_role": "official_twse_bwibbu",
+     "symbol": "2330",
+     "updated_at": "2026-08-05T09:01:40.982922",
+     "valuation_version": "v1"
+    },
+    {
+     "as_of_date": "2026-08-04",
+     "book_to_price": null,
+     "dividend_yield": 0.95,
+     "earnings_yield": null,
+     "fundamentals_context": {
+      "available_tools_or_endpoints": [
+       {
+        "name": "valuation_data",
+        "path": "/v2/datasets/valuation-data"
+       }
+      ],
+      "coverage_window": {
+       "coverage_confidence": "medium",
+       "max_period": null,
+       "min_period": null,
+       "row_count": 0
+      },
+      "data_gaps": [],
+      "generated_at": "2026-08-12T06:27:55Z",
+      "metric_values": {
+       "book_to_price": null,
+       "dividend_yield": 0.95,
+       "earnings_yield": null,
+       "market_cap": null,
+       "pb_ratio": 10.21,
+       "pe_ratio": 31.19,
+       "shares_outstanding": null,
+       "symbol": "2330",
+       "updated_at": "2026-08-05T09:01:40.982922",
+       "valuation_version": "v1"
+      },
+      "not_investment_advice": true,
+      "period": "2026-08-04",
+      "period_type": "daily_event",
+      "restatement_warning": {
+       "has_restatement": false,
+       "previous_version_ref": null,
+       "reason": null
+      },
+      "safe_usage_notes": [
+       "not_investment_advice",
+       "official_public_first_policy",
+       "period_semantics_explicit",
+       "raw_full_body_storage_forbidden"
+      ],
+      "source_lineage": {
+       "endpoint_name": "BWIBBU_d",
+       "payload_date": "20260804",
+       "provider": "unknown",
+       "request_date": "2026-08-04",
+       "row_index": 278,
+       "source_authority": "TWSE BWIBBU",
+       "source_hash": "f9800a2fef80e7dca37fb3c284adbdc84920b48635e2e5d2a94e191926490712",
+       "source_role": "official_twse_bwibbu"
+      },
+      "statement_family": "valuation_data",
+      "ticker": "2330"
+     },
+     "lineage": {
+      "endpoint_name": "BWIBBU_d",
+      "payload_date": "20260804",
+      "request_date": "2026-08-04",
+      "row_index": 278,
+      "source_authority": "TWSE BWIBBU",
+      "source_hash": "f9800a2fef80e7dca37fb3c284adbdc84920b48635e2e5d2a94e191926490712"
+     },
+     "market": "TWSE",
+     "market_cap": null,
+     "pb_ratio": 10.21,
+     "pe_ratio": 31.19,
+     "provider": "twse_official",
+     "shares_outstanding": null,
+     "source_role": "official_twse_bwibbu",
+     "symbol": "2330",
+     "updated_at": "2026-08-05T09:01:40.982922",
+     "valuation_version": "v1"
+    }
+   ],
+   "status": "ok"
+  },
+  "status": 200
+ },
+ "route": "/v2/datasets/valuation-data",
+ "sdk_error": null
+}

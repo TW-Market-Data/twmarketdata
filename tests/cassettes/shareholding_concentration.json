@@ -1,0 +1,112 @@
+{
+ "dataset": "shareholding_concentration",
+ "recorded_with": "restricted test key (value never stored)",
+ "request": {
+  "headers": {
+   "X-API-Key": "REDACTED"
+  },
+  "method": "GET",
+  "params": {
+   "limit": 5,
+   "ticker": "2330"
+  }
+ },
+ "response": {
+  "body": {
+   "data": [
+    {
+     "holder_count_total": 3080236,
+     "holder_count_total_wow_delta": -20079,
+     "large_holder_count_400": 2620,
+     "large_holder_pct_1000": 0.8467,
+     "large_holder_pct_1000_wow_delta": 0.0005,
+     "large_holder_pct_400": 0.8743,
+     "large_holder_pct_400_wow_delta": 0.0004,
+     "market": "TWSE",
+     "report_date": "2026-08-07",
+     "retail_pct": 0.0113,
+     "retail_pct_wow_delta": -0.0001,
+     "ticker": "2330",
+     "tier_map_version": "tdcc_15tier_v1"
+    },
+    {
+     "holder_count_total": 3100315,
+     "holder_count_total_wow_delta": 431727,
+     "large_holder_count_400": 2621,
+     "large_holder_pct_1000": 0.8462,
+     "large_holder_pct_1000_wow_delta": -0.0079,
+     "large_holder_pct_400": 0.8739,
+     "large_holder_pct_400_wow_delta": -0.0073,
+     "market": "TWSE",
+     "report_date": "2026-07-31",
+     "retail_pct": 0.0114,
+     "retail_pct_wow_delta": 0.0016,
+     "ticker": "2330",
+     "tier_map_version": "tdcc_15tier_v1"
+    },
+    {
+     "holder_count_total": 2668588,
+     "holder_count_total_wow_delta": null,
+     "large_holder_count_400": 2618,
+     "large_holder_pct_1000": 0.8541,
+     "large_holder_pct_1000_wow_delta": null,
+     "large_holder_pct_400": 0.8812,
+     "large_holder_pct_400_wow_delta": null,
+     "market": "TWSE",
+     "report_date": "2026-05-29",
+     "retail_pct": 0.0098,
+     "retail_pct_wow_delta": null,
+     "ticker": "2330",
+     "tier_map_version": "tdcc_15tier_v1"
+    }
+   ],
+   "data_count": 3,
+   "dataset_id": "shareholding_concentration",
+   "envelope": {
+    "dataset_id": "shareholding_concentration",
+    "row_count": 3,
+    "scope": "tw_shareholding_concentration_weekly"
+   },
+   "error": null,
+   "known_gaps": [
+    "weekly_series_accumulating_forward_from_2026_08_not_a_backfilled_history",
+    "tdcc_bulk_feed_serves_the_current_week_only_no_archive_exists_to_backfill_from",
+    "served_from_a_view_freshness_follows_tdcc_shareholding_distribution_items",
+    "wow_delta_columns_are_null_until_a_second_week_has_accumulated",
+    "not_investment_advice"
+   ],
+   "lineage": {
+    "semantics": "Concentration measures derived from the TDCC 集保戶股權分散表: the 17 holding tiers aggregated into large-holder and retail shares. This is a WEEKLY SERIES THAT ACCUMULATES FORWARD from 2026-08 -- TDCC's bulk feed serves only the current week and keeps no archive, so earlier weeks cannot be backfilled and the depth grows one week at a time. Week-over-week deltas stay NULL until a second week exists; that is the series being young, not a missing value.",
+    "tier_map_versions": [
+     "tdcc_15tier_v1"
+    ]
+   },
+   "quality": {
+    "distinct_report_dates_in_dataset": 3,
+    "row_count": 3,
+    "sensitive_fields_exposed": false,
+    "weekly_history_depth": "multi_week",
+    "wow_deltas_meaningful": true
+   },
+   "request_context": {
+    "coverage_type": "weekly_series_accumulating_forward",
+    "filters": {
+     "date_from": null,
+     "date_to": null,
+     "limit": 5,
+     "report_date": null,
+     "ticker": "2330"
+    },
+    "max_report_date": "2026-08-07",
+    "min_report_date": "2026-05-29",
+    "scope": "tw_shareholding_concentration_weekly"
+   },
+   "warnings": [
+    "not_investment_advice"
+   ]
+  },
+  "status": 200
+ },
+ "route": "/v2/datasets/shareholding-concentration",
+ "sdk_error": null
+}

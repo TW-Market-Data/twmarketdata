@@ -1,0 +1,3491 @@
+{
+ "package": "FinMind",
+ "version": "2.0.7",
+ "methods": [
+  {
+   "name": "cnn_fear_greed_index",
+   "params": [
+    {
+     "name": "start_date",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "end_date",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "timeout",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "None",
+     "annotation": "<class 'int'>"
+    }
+   ],
+   "doc_first_line": "get 恐懼與貪婪指數"
+  },
+  {
+   "name": "get_data",
+   "params": [
+    {
+     "name": "dataset",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": null,
+     "annotation": "<enum 'Dataset'>"
+    },
+    {
+     "name": "data_id",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "securities_trader_id",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "stock_id",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "start_date",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "data_id_list",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "None",
+     "annotation": "typing.List[str]"
+    },
+    {
+     "name": "securities_trader_id_list",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "None",
+     "annotation": "typing.List[str]"
+    },
+    {
+     "name": "end_date",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "timeout",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "60",
+     "annotation": "<class 'int'>"
+    },
+    {
+     "name": "use_async",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "False",
+     "annotation": "<class 'bool'>"
+    },
+    {
+     "name": "max_retry_times",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "30",
+     "annotation": "<class 'int'>"
+    }
+   ],
+   "doc_first_line": ":param params: finmind api參數"
+  },
+  {
+   "name": "get_datalist",
+   "params": [
+    {
+     "name": "dataset",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": null,
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "timeout",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "None",
+     "annotation": "<class 'int'>"
+    }
+   ],
+   "doc_first_line": ""
+  },
+  {
+   "name": "get_object",
+   "params": [
+    {
+     "name": "dataset",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": null,
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "date",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": null,
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "timeout",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": null,
+     "annotation": "<class 'int'>"
+    }
+   ],
+   "doc_first_line": "透過 signed URL 下載整日資料物件 (parquet 格式)"
+  },
+  {
+   "name": "get_taiwan_futures_snapshot",
+   "params": [
+    {
+     "name": "dataset",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": null,
+     "annotation": "<enum 'Dataset'>"
+    },
+    {
+     "name": "data_id",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "timeout",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "None",
+     "annotation": "<class 'int'>"
+    }
+   ],
+   "doc_first_line": ":param params: finmind api參數"
+  },
+  {
+   "name": "get_taiwan_options_snapshot",
+   "params": [
+    {
+     "name": "dataset",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": null,
+     "annotation": "<enum 'Dataset'>"
+    },
+    {
+     "name": "data_id",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "timeout",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "None",
+     "annotation": "<class 'int'>"
+    }
+   ],
+   "doc_first_line": ":param params: finmind api參數"
+  },
+  {
+   "name": "get_taiwan_stock_tick_snapshot",
+   "params": [
+    {
+     "name": "dataset",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": null,
+     "annotation": "<enum 'Dataset'>"
+    },
+    {
+     "name": "data_id",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "typing.Union[str, typing.List[str]]"
+    },
+    {
+     "name": "timeout",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "None",
+     "annotation": "<class 'int'>"
+    }
+   ],
+   "doc_first_line": ":param params: finmind api參數"
+  },
+  {
+   "name": "login_by_token",
+   "params": [
+    {
+     "name": "api_token",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": null,
+     "annotation": "<class 'str'>"
+    }
+   ],
+   "doc_first_line": ":param api_token: finmind api token"
+  },
+  {
+   "name": "taiwan_asset_swap_fixed_income_daily",
+   "params": [
+    {
+     "name": "stock_id",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "start_date",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "end_date",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "timeout",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "None",
+     "annotation": "<class 'int'>"
+    },
+    {
+     "name": "use_async",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "False",
+     "annotation": "<class 'bool'>"
+    },
+    {
+     "name": "stock_id_list",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "None",
+     "annotation": "typing.List[str]"
+    }
+   ],
+   "doc_first_line": "get 資產交換固定收益日成交資訊"
+  },
+  {
+   "name": "taiwan_asset_swap_option_daily",
+   "params": [
+    {
+     "name": "stock_id",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "start_date",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "end_date",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "timeout",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "None",
+     "annotation": "<class 'int'>"
+    },
+    {
+     "name": "use_async",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "False",
+     "annotation": "<class 'bool'>"
+    },
+    {
+     "name": "stock_id_list",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "None",
+     "annotation": "typing.List[str]"
+    }
+   ],
+   "doc_first_line": "get 資產交換選擇權日成交資訊"
+  },
+  {
+   "name": "taiwan_business_indicator",
+   "params": [
+    {
+     "name": "start_date",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "end_date",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "timeout",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "None",
+     "annotation": "<class 'int'>"
+    }
+   ],
+   "doc_first_line": "get 台灣每月景氣對策信號表"
+  },
+  {
+   "name": "taiwan_daily_short_sale_balances",
+   "params": [
+    {
+     "name": "stock_id",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "start_date",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "end_date",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "timeout",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "None",
+     "annotation": "<class 'int'>"
+    },
+    {
+     "name": "use_async",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "False",
+     "annotation": "<class 'bool'>"
+    },
+    {
+     "name": "stock_id_list",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "None",
+     "annotation": "typing.List[str]"
+    }
+   ],
+   "doc_first_line": "get 借券成交明細"
+  },
+  {
+   "name": "taiwan_futopt_daily_info",
+   "params": [
+    {
+     "name": "timeout",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "None",
+     "annotation": "<class 'int'>"
+    }
+   ],
+   "doc_first_line": "get 期貨, 選擇權日成交資訊總覽"
+  },
+  {
+   "name": "taiwan_futopt_tick_info",
+   "params": [
+    {
+     "name": "timeout",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "None",
+     "annotation": "<class 'int'>"
+    }
+   ],
+   "doc_first_line": "get 期貨, 選擇權即時報價總覽"
+  },
+  {
+   "name": "taiwan_futopt_tick_realtime",
+   "params": [
+    {
+     "name": "data_id",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": null,
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "timeout",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "None",
+     "annotation": "<class 'int'>"
+    }
+   ],
+   "doc_first_line": "get 期貨, 選擇權即時報價"
+  },
+  {
+   "name": "taiwan_futures_daily",
+   "params": [
+    {
+     "name": "futures_id",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "start_date",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "end_date",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "timeout",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "None",
+     "annotation": "<class 'int'>"
+    },
+    {
+     "name": "use_async",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "False",
+     "annotation": "<class 'bool'>"
+    },
+    {
+     "name": "futures_id_list",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "None",
+     "annotation": "typing.List[str]"
+    }
+   ],
+   "doc_first_line": "get 期貨日成交資訊"
+  },
+  {
+   "name": "taiwan_futures_dealer_trading_volume_daily",
+   "params": [
+    {
+     "name": "futures_id",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "start_date",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "end_date",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "timeout",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "None",
+     "annotation": "<class 'int'>"
+    },
+    {
+     "name": "use_async",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "False",
+     "annotation": "<class 'bool'>"
+    },
+    {
+     "name": "futures_id_list",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "None",
+     "annotation": "typing.List[str]"
+    }
+   ],
+   "doc_first_line": "get 期貨各卷商每日交易"
+  },
+  {
+   "name": "taiwan_futures_final_settlement_price",
+   "params": [
+    {
+     "name": "futures_id",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "start_date",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "end_date",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "timeout",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "None",
+     "annotation": "<class 'int'>"
+    },
+    {
+     "name": "use_async",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "False",
+     "annotation": "<class 'bool'>"
+    },
+    {
+     "name": "futures_id_list",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "None",
+     "annotation": "typing.List[str]"
+    }
+   ],
+   "doc_first_line": "get 期貨最後結算價"
+  },
+  {
+   "name": "taiwan_futures_institutional_investors",
+   "params": [
+    {
+     "name": "futures_id",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "start_date",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "end_date",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "timeout",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "None",
+     "annotation": "<class 'int'>"
+    },
+    {
+     "name": "use_async",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "False",
+     "annotation": "<class 'bool'>"
+    },
+    {
+     "name": "futures_id_list",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "None",
+     "annotation": "typing.List[str]"
+    }
+   ],
+   "doc_first_line": "get 期貨三大法人買賣"
+  },
+  {
+   "name": "taiwan_futures_institutional_investors_after_hours",
+   "params": [
+    {
+     "name": "futures_id",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "start_date",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "end_date",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "timeout",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "None",
+     "annotation": "<class 'int'>"
+    },
+    {
+     "name": "use_async",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "False",
+     "annotation": "<class 'bool'>"
+    },
+    {
+     "name": "futures_id_list",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "None",
+     "annotation": "typing.List[str]"
+    }
+   ],
+   "doc_first_line": "get 期貨夜盤三大法人買賣"
+  },
+  {
+   "name": "taiwan_futures_open_interest_large_traders",
+   "params": [
+    {
+     "name": "futures_id",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "start_date",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "end_date",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "timeout",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "None",
+     "annotation": "<class 'int'>"
+    },
+    {
+     "name": "use_async",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "False",
+     "annotation": "<class 'bool'>"
+    },
+    {
+     "name": "futures_id_list",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "None",
+     "annotation": "typing.List[str]"
+    }
+   ],
+   "doc_first_line": "get 期貨大額交易人未沖銷部位"
+  },
+  {
+   "name": "taiwan_futures_snapshot",
+   "params": [
+    {
+     "name": "futures_id",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "timeout",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "None",
+     "annotation": "<class 'int'>"
+    }
+   ],
+   "doc_first_line": "get 台股期貨即時資訊 taiwan_futures_snapshot (只限 sponsor 會員使用)"
+  },
+  {
+   "name": "taiwan_futures_spread_tick",
+   "params": [
+    {
+     "name": "futures_id",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "date",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "timeout",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "None",
+     "annotation": "<class 'int'>"
+    }
+   ],
+   "doc_first_line": "get 期貨價差每筆成交資料, 資料量大, 單次請求只提供一天資料"
+  },
+  {
+   "name": "taiwan_futures_spread_trading",
+   "params": [
+    {
+     "name": "futures_id",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "start_date",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "end_date",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "timeout",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "None",
+     "annotation": "<class 'int'>"
+    },
+    {
+     "name": "use_async",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "False",
+     "annotation": "<class 'bool'>"
+    },
+    {
+     "name": "futures_id_list",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "None",
+     "annotation": "typing.List[str]"
+    }
+   ],
+   "doc_first_line": "get 期貨價差行情表"
+  },
+  {
+   "name": "taiwan_futures_tick",
+   "params": [
+    {
+     "name": "futures_id",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "date",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "timeout",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "None",
+     "annotation": "<class 'int'>"
+    },
+    {
+     "name": "use_object",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "False",
+     "annotation": "<class 'bool'>"
+    }
+   ],
+   "doc_first_line": "get 期貨交易明細表, 資料量超過10萬筆, 需等一段時間"
+  },
+  {
+   "name": "taiwan_option_daily",
+   "params": [
+    {
+     "name": "option_id",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "start_date",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "end_date",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "timeout",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "None",
+     "annotation": "<class 'int'>"
+    },
+    {
+     "name": "use_async",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "False",
+     "annotation": "<class 'bool'>"
+    },
+    {
+     "name": "option_id_list",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "None",
+     "annotation": "typing.List[str]"
+    }
+   ],
+   "doc_first_line": "get 選擇權日成交資訊"
+  },
+  {
+   "name": "taiwan_option_dealer_trading_volume_daily",
+   "params": [
+    {
+     "name": "option_id",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "start_date",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "end_date",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "timeout",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "None",
+     "annotation": "<class 'int'>"
+    },
+    {
+     "name": "use_async",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "False",
+     "annotation": "<class 'bool'>"
+    },
+    {
+     "name": "option_id_list",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "None",
+     "annotation": "typing.List[str]"
+    }
+   ],
+   "doc_first_line": "get 選擇權各卷商每日交易"
+  },
+  {
+   "name": "taiwan_option_final_settlement_price",
+   "params": [
+    {
+     "name": "option_id",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "start_date",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "end_date",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "timeout",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "None",
+     "annotation": "<class 'int'>"
+    },
+    {
+     "name": "use_async",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "False",
+     "annotation": "<class 'bool'>"
+    },
+    {
+     "name": "option_id_list",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "None",
+     "annotation": "typing.List[str]"
+    }
+   ],
+   "doc_first_line": "get 選擇權最後結算價"
+  },
+  {
+   "name": "taiwan_option_institutional_investors",
+   "params": [
+    {
+     "name": "option_id",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "start_date",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "end_date",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "timeout",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "None",
+     "annotation": "<class 'int'>"
+    },
+    {
+     "name": "use_async",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "False",
+     "annotation": "<class 'bool'>"
+    },
+    {
+     "name": "option_id_list",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "None",
+     "annotation": "typing.List[str]"
+    }
+   ],
+   "doc_first_line": "get 選擇權三大法人買賣"
+  },
+  {
+   "name": "taiwan_option_institutional_investors_after_hours",
+   "params": [
+    {
+     "name": "option_id",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "start_date",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "end_date",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "timeout",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "None",
+     "annotation": "<class 'int'>"
+    },
+    {
+     "name": "use_async",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "False",
+     "annotation": "<class 'bool'>"
+    },
+    {
+     "name": "option_id_list",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "None",
+     "annotation": "typing.List[str]"
+    }
+   ],
+   "doc_first_line": "get 選擇權夜盤三大法人買賣"
+  },
+  {
+   "name": "taiwan_option_open_interest_large_traders",
+   "params": [
+    {
+     "name": "option_id",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "start_date",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "end_date",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "timeout",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "None",
+     "annotation": "<class 'int'>"
+    },
+    {
+     "name": "use_async",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "False",
+     "annotation": "<class 'bool'>"
+    },
+    {
+     "name": "option_id_list",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "None",
+     "annotation": "typing.List[str]"
+    }
+   ],
+   "doc_first_line": "get 選擇權大額交易人未沖銷部位"
+  },
+  {
+   "name": "taiwan_option_tick",
+   "params": [
+    {
+     "name": "option_id",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "date",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "timeout",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "None",
+     "annotation": "<class 'int'>"
+    },
+    {
+     "name": "use_async",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "False",
+     "annotation": "<class 'bool'>"
+    },
+    {
+     "name": "option_id_list",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "None",
+     "annotation": "typing.List[str]"
+    },
+    {
+     "name": "use_object",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "False",
+     "annotation": "<class 'bool'>"
+    }
+   ],
+   "doc_first_line": "get 選擇權交易明細表, 資料量超過10萬筆, 需等一段時間"
+  },
+  {
+   "name": "taiwan_option_vix",
+   "params": [
+    {
+     "name": "start_date",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "end_date",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "timeout",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "None",
+     "annotation": "<class 'int'>"
+    }
+   ],
+   "doc_first_line": "get 臺指選擇權波動率指數"
+  },
+  {
+   "name": "taiwan_options_snapshot",
+   "params": [
+    {
+     "name": "options_id",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "timeout",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "None",
+     "annotation": "<class 'int'>"
+    }
+   ],
+   "doc_first_line": "get 台股選擇權即時資訊 taiwan_options_snapshot (只限 sponsor 會員使用)"
+  },
+  {
+   "name": "taiwan_securities_trader_info",
+   "params": [
+    {
+     "name": "timeout",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "None",
+     "annotation": "<class 'int'>"
+    }
+   ],
+   "doc_first_line": "get 證券商資訊表"
+  },
+  {
+   "name": "taiwan_stock_10year",
+   "params": [
+    {
+     "name": "stock_id",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "start_date",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "end_date",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "timeout",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "None",
+     "annotation": "<class 'int'>"
+    },
+    {
+     "name": "use_async",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "False",
+     "annotation": "<class 'bool'>"
+    },
+    {
+     "name": "stock_id_list",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "None",
+     "annotation": "typing.List[str]"
+    }
+   ],
+   "doc_first_line": "get 台灣個股10年平均收盤價"
+  },
+  {
+   "name": "taiwan_stock_active_etf_holding",
+   "params": [
+    {
+     "name": "stock_id",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "start_date",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "end_date",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "timeout",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "None",
+     "annotation": "<class 'int'>"
+    },
+    {
+     "name": "use_async",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "False",
+     "annotation": "<class 'bool'>"
+    },
+    {
+     "name": "stock_id_list",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "None",
+     "annotation": "typing.List[str]"
+    }
+   ],
+   "doc_first_line": "get 主動式ETF每日持股明細（Sponsor）"
+  },
+  {
+   "name": "taiwan_stock_active_etf_holding_change",
+   "params": [
+    {
+     "name": "stock_id",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "start_date",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "end_date",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "timeout",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "None",
+     "annotation": "<class 'int'>"
+    },
+    {
+     "name": "use_async",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "False",
+     "annotation": "<class 'bool'>"
+    },
+    {
+     "name": "stock_id_list",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "None",
+     "annotation": "typing.List[str]"
+    }
+   ],
+   "doc_first_line": "get 主動式ETF每日持股異動／買賣（Sponsor）"
+  },
+  {
+   "name": "taiwan_stock_active_etf_info",
+   "params": [
+    {
+     "name": "timeout",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "None",
+     "annotation": "<class 'int'>"
+    }
+   ],
+   "doc_first_line": "get 主動式ETF清單（台灣掛牌主動式ETF 代號/名稱/分類/市場別）"
+  },
+  {
+   "name": "taiwan_stock_balance_sheet",
+   "params": [
+    {
+     "name": "stock_id",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "start_date",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "end_date",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "timeout",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "None",
+     "annotation": "<class 'int'>"
+    },
+    {
+     "name": "use_async",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "False",
+     "annotation": "<class 'bool'>"
+    },
+    {
+     "name": "stock_id_list",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "None",
+     "annotation": "typing.List[str]"
+    }
+   ],
+   "doc_first_line": "get 資產負債表"
+  },
+  {
+   "name": "taiwan_stock_block_trade",
+   "params": [
+    {
+     "name": "stock_id",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "start_date",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "end_date",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "timeout",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "None",
+     "annotation": "<class 'int'>"
+    },
+    {
+     "name": "use_async",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "False",
+     "annotation": "<class 'bool'>"
+    },
+    {
+     "name": "stock_id_list",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "None",
+     "annotation": "typing.List[str]"
+    }
+   ],
+   "doc_first_line": "get 鉅額交易日成交資訊（逐筆，Sponsor）"
+  },
+  {
+   "name": "taiwan_stock_book_and_trade",
+   "params": [
+    {
+     "name": "date",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": null,
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "timeout",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "None",
+     "annotation": "<class 'int'>"
+    }
+   ],
+   "doc_first_line": "get 每 5 秒委託成交統計"
+  },
+  {
+   "name": "taiwan_stock_capital_reduction_reference_price",
+   "params": [
+    {
+     "name": "stock_id",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "start_date",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "end_date",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "timeout",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "None",
+     "annotation": "<class 'int'>"
+    },
+    {
+     "name": "use_async",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "False",
+     "annotation": "<class 'bool'>"
+    },
+    {
+     "name": "stock_id_list",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "None",
+     "annotation": "typing.List[str]"
+    }
+   ],
+   "doc_first_line": "get 減資恢復買賣參考價格"
+  },
+  {
+   "name": "taiwan_stock_cash_flows_statement",
+   "params": [
+    {
+     "name": "stock_id",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "start_date",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "end_date",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "timeout",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "None",
+     "annotation": "<class 'int'>"
+    },
+    {
+     "name": "use_async",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "False",
+     "annotation": "<class 'bool'>"
+    },
+    {
+     "name": "stock_id_list",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "None",
+     "annotation": "typing.List[str]"
+    }
+   ],
+   "doc_first_line": "get 現金流量表"
+  },
+  {
+   "name": "taiwan_stock_convertible_bond_daily",
+   "params": [
+    {
+     "name": "cb_id",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "start_date",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "end_date",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "timeout",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "None",
+     "annotation": "<class 'int'>"
+    }
+   ],
+   "doc_first_line": "get 可轉債日成交資訊"
+  },
+  {
+   "name": "taiwan_stock_convertible_bond_daily_overview",
+   "params": [
+    {
+     "name": "cb_id",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "start_date",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "end_date",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "timeout",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "None",
+     "annotation": "<class 'int'>"
+    }
+   ],
+   "doc_first_line": "get 可轉債每日總覽資訊"
+  },
+  {
+   "name": "taiwan_stock_convertible_bond_info",
+   "params": [
+    {
+     "name": "timeout",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "None",
+     "annotation": "<class 'int'>"
+    }
+   ],
+   "doc_first_line": "get 可轉債總覽"
+  },
+  {
+   "name": "taiwan_stock_convertible_bond_institutional_investors",
+   "params": [
+    {
+     "name": "cb_id",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "start_date",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "end_date",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "timeout",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "None",
+     "annotation": "<class 'int'>"
+    }
+   ],
+   "doc_first_line": "get 可轉債三大法人日交易資訊"
+  },
+  {
+   "name": "taiwan_stock_convertible_bond_monthly_analysis",
+   "params": [
+    {
+     "name": "cb_id",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "start_date",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "end_date",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "timeout",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "None",
+     "annotation": "<class 'int'>"
+    }
+   ],
+   "doc_first_line": "get 可轉換公司債月份分析表"
+  },
+  {
+   "name": "taiwan_stock_convertible_bond_put_provision",
+   "params": [
+    {
+     "name": "cb_id",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "start_date",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "end_date",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "timeout",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "None",
+     "annotation": "<class 'int'>"
+    }
+   ],
+   "doc_first_line": "get 可轉債賣回權時程（含未來已公告場次）"
+  },
+  {
+   "name": "taiwan_stock_daily",
+   "params": [
+    {
+     "name": "stock_id",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "start_date",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "end_date",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "timeout",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "None",
+     "annotation": "<class 'int'>"
+    },
+    {
+     "name": "use_async",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "False",
+     "annotation": "<class 'bool'>"
+    },
+    {
+     "name": "stock_id_list",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "None",
+     "annotation": "typing.List[str]"
+    }
+   ],
+   "doc_first_line": "get 台灣股價資料表"
+  },
+  {
+   "name": "taiwan_stock_daily_adj",
+   "params": [
+    {
+     "name": "stock_id",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": null,
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "start_date",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": null,
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "end_date",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": null,
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "timeout",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "None",
+     "annotation": "<class 'int'>"
+    },
+    {
+     "name": "use_async",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "False",
+     "annotation": "<class 'bool'>"
+    },
+    {
+     "name": "stock_id_list",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "None",
+     "annotation": "typing.List[str]"
+    }
+   ],
+   "doc_first_line": "get 還原股價, 主要採用向前還原"
+  },
+  {
+   "name": "taiwan_stock_day_trading",
+   "params": [
+    {
+     "name": "stock_id",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "start_date",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "end_date",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "timeout",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "None",
+     "annotation": "<class 'int'>"
+    },
+    {
+     "name": "use_async",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "False",
+     "annotation": "<class 'bool'>"
+    },
+    {
+     "name": "stock_id_list",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "None",
+     "annotation": "typing.List[str]"
+    }
+   ],
+   "doc_first_line": "get 當日沖銷交易標的及成交量值"
+  },
+  {
+   "name": "taiwan_stock_day_trading_borrowing_fee_rate",
+   "params": [
+    {
+     "name": "stock_id",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "start_date",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "end_date",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "timeout",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "None",
+     "annotation": "<class 'int'>"
+    }
+   ],
+   "doc_first_line": "get 現股當日沖銷券差借券費率"
+  },
+  {
+   "name": "taiwan_stock_day_trading_suspension",
+   "params": [
+    {
+     "name": "stock_id",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "start_date",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "end_date",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "timeout",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "None",
+     "annotation": "<class 'int'>"
+    }
+   ],
+   "doc_first_line": "get 暫停先賣後買當沖預告表"
+  },
+  {
+   "name": "taiwan_stock_delisting",
+   "params": [
+    {
+     "name": "stock_id",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "start_date",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "end_date",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "timeout",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "None",
+     "annotation": "<class 'int'>"
+    },
+    {
+     "name": "use_async",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "False",
+     "annotation": "<class 'bool'>"
+    },
+    {
+     "name": "stock_id_list",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "None",
+     "annotation": "typing.List[str]"
+    }
+   ],
+   "doc_first_line": "get 台股個股下市下櫃表"
+  },
+  {
+   "name": "taiwan_stock_disposition_securities_period",
+   "params": [
+    {
+     "name": "stock_id",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "start_date",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "end_date",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "timeout",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "None",
+     "annotation": "<class 'int'>"
+    },
+    {
+     "name": "use_async",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "False",
+     "annotation": "<class 'bool'>"
+    },
+    {
+     "name": "stock_id_list",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "None",
+     "annotation": "typing.List[str]"
+    }
+   ],
+   "doc_first_line": "get 公布處置有價證券表"
+  },
+  {
+   "name": "taiwan_stock_dividend",
+   "params": [
+    {
+     "name": "stock_id",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "start_date",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "end_date",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "timeout",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "None",
+     "annotation": "<class 'int'>"
+    },
+    {
+     "name": "use_async",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "False",
+     "annotation": "<class 'bool'>"
+    },
+    {
+     "name": "stock_id_list",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "None",
+     "annotation": "typing.List[str]"
+    }
+   ],
+   "doc_first_line": "股利政策表"
+  },
+  {
+   "name": "taiwan_stock_dividend_result",
+   "params": [
+    {
+     "name": "stock_id",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "start_date",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "end_date",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "timeout",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "None",
+     "annotation": "<class 'int'>"
+    },
+    {
+     "name": "use_async",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "False",
+     "annotation": "<class 'bool'>"
+    },
+    {
+     "name": "stock_id_list",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "None",
+     "annotation": "typing.List[str]"
+    }
+   ],
+   "doc_first_line": "get 除權除息結果表"
+  },
+  {
+   "name": "taiwan_stock_every5seconds_index",
+   "params": [
+    {
+     "name": "data_id",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "date",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "timeout",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "None",
+     "annotation": "<class 'int'>"
+    },
+    {
+     "name": "use_async",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "False",
+     "annotation": "<class 'bool'>"
+    },
+    {
+     "name": "data_id_list",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "None",
+     "annotation": "typing.List[str]"
+    }
+   ],
+   "doc_first_line": "get 每5秒指數統計"
+  },
+  {
+   "name": "taiwan_stock_financial_statement",
+   "params": [
+    {
+     "name": "stock_id",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "start_date",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "end_date",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "timeout",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "None",
+     "annotation": "<class 'int'>"
+    },
+    {
+     "name": "use_async",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "False",
+     "annotation": "<class 'bool'>"
+    },
+    {
+     "name": "stock_id_list",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "None",
+     "annotation": "typing.List[str]"
+    }
+   ],
+   "doc_first_line": "get 綜合損益表"
+  },
+  {
+   "name": "taiwan_stock_government_bank_buy_sell",
+   "params": [
+    {
+     "name": "start_date",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "timeout",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "None",
+     "annotation": "<class 'int'>"
+    }
+   ],
+   "doc_first_line": "get 當日八大行庫對各股買賣股數和金額"
+  },
+  {
+   "name": "taiwan_stock_holding_shares_per",
+   "params": [
+    {
+     "name": "stock_id",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "start_date",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "end_date",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "timeout",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "None",
+     "annotation": "<class 'int'>"
+    },
+    {
+     "name": "use_async",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "False",
+     "annotation": "<class 'bool'>"
+    },
+    {
+     "name": "stock_id_list",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "None",
+     "annotation": "typing.List[str]"
+    }
+   ],
+   "doc_first_line": "get 股權持股分級表"
+  },
+  {
+   "name": "taiwan_stock_industry_chain",
+   "params": [
+    {
+     "name": "stock_id",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "timeout",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "None",
+     "annotation": "<class 'int'>"
+    }
+   ],
+   "doc_first_line": "get 個體公司所屬產業鏈"
+  },
+  {
+   "name": "taiwan_stock_industry_chain_money_flow",
+   "params": [
+    {
+     "name": "date",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "timeout",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "None",
+     "annotation": "<class 'int'>"
+    }
+   ],
+   "doc_first_line": "get 台股產業鏈資金流向（Sponsor）"
+  },
+  {
+   "name": "taiwan_stock_info",
+   "params": [
+    {
+     "name": "timeout",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "None",
+     "annotation": "<class 'int'>"
+    }
+   ],
+   "doc_first_line": "get 台股總覽"
+  },
+  {
+   "name": "taiwan_stock_info_with_warrant",
+   "params": [
+    {
+     "name": "timeout",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "None",
+     "annotation": "<class 'int'>"
+    }
+   ],
+   "doc_first_line": "get 台股總覽(包含權證)"
+  },
+  {
+   "name": "taiwan_stock_info_with_warrant_summary",
+   "params": [
+    {
+     "name": "start_date",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "end_date",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "stock_id",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "timeout",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "None",
+     "annotation": "<class 'int'>"
+    }
+   ],
+   "doc_first_line": "get 台股權證標的對照表"
+  },
+  {
+   "name": "taiwan_stock_institutional_investors",
+   "params": [
+    {
+     "name": "stock_id",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "start_date",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "end_date",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "timeout",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "None",
+     "annotation": "<class 'int'>"
+    },
+    {
+     "name": "use_async",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "False",
+     "annotation": "<class 'bool'>"
+    },
+    {
+     "name": "stock_id_list",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "None",
+     "annotation": "typing.List[str]"
+    }
+   ],
+   "doc_first_line": "get 個股三大法人買賣表"
+  },
+  {
+   "name": "taiwan_stock_institutional_investors_total",
+   "params": [
+    {
+     "name": "start_date",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": null,
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "end_date",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "timeout",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "None",
+     "annotation": "<class 'int'>"
+    }
+   ],
+   "doc_first_line": "get 整體三大市場法人買賣表"
+  },
+  {
+   "name": "taiwan_stock_institutional_investors_wide",
+   "params": [
+    {
+     "name": "stock_id",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "start_date",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "end_date",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "timeout",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "None",
+     "annotation": "<class 'int'>"
+    },
+    {
+     "name": "use_async",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "False",
+     "annotation": "<class 'bool'>"
+    },
+    {
+     "name": "stock_id_list",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "None",
+     "annotation": "typing.List[str]"
+    }
+   ],
+   "doc_first_line": "get 個股三大法人買賣表（寬表）"
+  },
+  {
+   "name": "taiwan_stock_kbar",
+   "params": [
+    {
+     "name": "stock_id",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "stock_id_list",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "None",
+     "annotation": "typing.List[str]"
+    },
+    {
+     "name": "date",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "timeout",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "None",
+     "annotation": "<class 'int'>"
+    },
+    {
+     "name": "use_async",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "False",
+     "annotation": "<class 'bool'>"
+    },
+    {
+     "name": "use_object",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "False",
+     "annotation": "<class 'bool'>"
+    }
+   ],
+   "doc_first_line": "get 台股分 K 資料表"
+  },
+  {
+   "name": "taiwan_stock_loan_collateral_balance",
+   "params": [
+    {
+     "name": "stock_id",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "start_date",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "end_date",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "timeout",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "None",
+     "annotation": "<class 'int'>"
+    },
+    {
+     "name": "use_async",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "False",
+     "annotation": "<class 'bool'>"
+    },
+    {
+     "name": "stock_id_list",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "None",
+     "annotation": "typing.List[str]"
+    }
+   ],
+   "doc_first_line": "get 借貸款項擔保品餘額表（Sponsor）"
+  },
+  {
+   "name": "taiwan_stock_margin_maintenance",
+   "params": [
+    {
+     "name": "stock_id",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "start_date",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "end_date",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "timeout",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "None",
+     "annotation": "<class 'int'>"
+    },
+    {
+     "name": "use_async",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "False",
+     "annotation": "<class 'bool'>"
+    },
+    {
+     "name": "stock_id_list",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "None",
+     "annotation": "typing.List[str]"
+    }
+   ],
+   "doc_first_line": "get 個股融資維持率（Sponsor）"
+  },
+  {
+   "name": "taiwan_stock_margin_purchase_short_sale",
+   "params": [
+    {
+     "name": "stock_id",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "start_date",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "end_date",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "timeout",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "None",
+     "annotation": "<class 'int'>"
+    },
+    {
+     "name": "use_async",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "False",
+     "annotation": "<class 'bool'>"
+    },
+    {
+     "name": "stock_id_list",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "None",
+     "annotation": "typing.List[str]"
+    }
+   ],
+   "doc_first_line": "get 個股融資融劵表"
+  },
+  {
+   "name": "taiwan_stock_margin_purchase_short_sale_total",
+   "params": [
+    {
+     "name": "start_date",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": null,
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "end_date",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "timeout",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "None",
+     "annotation": "<class 'int'>"
+    }
+   ],
+   "doc_first_line": "get 整體市場融資融劵表"
+  },
+  {
+   "name": "taiwan_stock_margin_short_sale_suspension",
+   "params": [
+    {
+     "name": "stock_id",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "start_date",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "end_date",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "timeout",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "None",
+     "annotation": "<class 'int'>"
+    },
+    {
+     "name": "use_async",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "False",
+     "annotation": "<class 'bool'>"
+    },
+    {
+     "name": "stock_id_list",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "None",
+     "annotation": "typing.List[str]"
+    }
+   ],
+   "doc_first_line": "get 暫停融券賣出表(融券回補日)"
+  },
+  {
+   "name": "taiwan_stock_market_value",
+   "params": [
+    {
+     "name": "stock_id",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "start_date",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "end_date",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "timeout",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "None",
+     "annotation": "<class 'int'>"
+    },
+    {
+     "name": "use_async",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "False",
+     "annotation": "<class 'bool'>"
+    },
+    {
+     "name": "stock_id_list",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "None",
+     "annotation": "typing.List[str]"
+    }
+   ],
+   "doc_first_line": "get 台灣個股市值"
+  },
+  {
+   "name": "taiwan_stock_market_value_weight",
+   "params": [
+    {
+     "name": "stock_id",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "start_date",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "end_date",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "timeout",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "None",
+     "annotation": "<class 'int'>"
+    },
+    {
+     "name": "use_async",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "False",
+     "annotation": "<class 'bool'>"
+    },
+    {
+     "name": "stock_id_list",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "None",
+     "annotation": "typing.List[str]"
+    }
+   ],
+   "doc_first_line": "get 台股市值比重表"
+  },
+  {
+   "name": "taiwan_stock_month_revenue",
+   "params": [
+    {
+     "name": "stock_id",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "start_date",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "end_date",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "timeout",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "None",
+     "annotation": "<class 'int'>"
+    },
+    {
+     "name": "use_async",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "False",
+     "annotation": "<class 'bool'>"
+    },
+    {
+     "name": "stock_id_list",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "None",
+     "annotation": "typing.List[str]"
+    }
+   ],
+   "doc_first_line": "get 月營收表"
+  },
+  {
+   "name": "taiwan_stock_monthly",
+   "params": [
+    {
+     "name": "stock_id",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "start_date",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "end_date",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "timeout",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "None",
+     "annotation": "<class 'int'>"
+    },
+    {
+     "name": "use_async",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "False",
+     "annotation": "<class 'bool'>"
+    },
+    {
+     "name": "stock_id_list",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "None",
+     "annotation": "typing.List[str]"
+    }
+   ],
+   "doc_first_line": "get 台股月 K 資料表"
+  },
+  {
+   "name": "taiwan_stock_news",
+   "params": [
+    {
+     "name": "stock_id",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "start_date",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "end_date",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "timeout",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "None",
+     "annotation": "<class 'int'>"
+    }
+   ],
+   "doc_first_line": "get 相關新聞"
+  },
+  {
+   "name": "taiwan_stock_par_value_change",
+   "params": [
+    {
+     "name": "start_date",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "end_date",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "timeout",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "None",
+     "annotation": "<class 'int'>"
+    }
+   ],
+   "doc_first_line": "get 台灣股票變更面額恢復買賣參考價格"
+  },
+  {
+   "name": "taiwan_stock_per_pbr",
+   "params": [
+    {
+     "name": "stock_id",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "start_date",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "end_date",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "timeout",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "None",
+     "annotation": "<class 'int'>"
+    },
+    {
+     "name": "use_async",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "False",
+     "annotation": "<class 'bool'>"
+    },
+    {
+     "name": "stock_id_list",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "None",
+     "annotation": "typing.List[str]"
+    }
+   ],
+   "doc_first_line": "get 個股 PER、PBR 資料"
+  },
+  {
+   "name": "taiwan_stock_price_limit",
+   "params": [
+    {
+     "name": "stock_id",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "start_date",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "end_date",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "timeout",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "None",
+     "annotation": "<class 'int'>"
+    },
+    {
+     "name": "use_async",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "False",
+     "annotation": "<class 'bool'>"
+    },
+    {
+     "name": "stock_id_list",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "None",
+     "annotation": "typing.List[str]"
+    }
+   ],
+   "doc_first_line": "get 每日漲跌停價"
+  },
+  {
+   "name": "taiwan_stock_securities_lending",
+   "params": [
+    {
+     "name": "stock_id",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "start_date",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "end_date",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "timeout",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "None",
+     "annotation": "<class 'int'>"
+    },
+    {
+     "name": "use_async",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "False",
+     "annotation": "<class 'bool'>"
+    },
+    {
+     "name": "stock_id_list",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "None",
+     "annotation": "typing.List[str]"
+    }
+   ],
+   "doc_first_line": "get 借券成交明細"
+  },
+  {
+   "name": "taiwan_stock_shareholding",
+   "params": [
+    {
+     "name": "stock_id",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "start_date",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "end_date",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "timeout",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "None",
+     "annotation": "<class 'int'>"
+    },
+    {
+     "name": "use_async",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "False",
+     "annotation": "<class 'bool'>"
+    },
+    {
+     "name": "stock_id_list",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "None",
+     "annotation": "typing.List[str]"
+    }
+   ],
+   "doc_first_line": "get 外資持股表"
+  },
+  {
+   "name": "taiwan_stock_split_price",
+   "params": [
+    {
+     "name": "start_date",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "end_date",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "timeout",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "None",
+     "annotation": "<class 'int'>"
+    }
+   ],
+   "doc_first_line": "get 台股分割後參考價"
+  },
+  {
+   "name": "taiwan_stock_suspended",
+   "params": [
+    {
+     "name": "stock_id",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "start_date",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "end_date",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "timeout",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "None",
+     "annotation": "<class 'int'>"
+    }
+   ],
+   "doc_first_line": "get 台股暫停交易公告"
+  },
+  {
+   "name": "taiwan_stock_tick",
+   "params": [
+    {
+     "name": "stock_id",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "None",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "date",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "stock_id_list",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "None",
+     "annotation": "typing.List[str]"
+    },
+    {
+     "name": "timeout",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "None",
+     "annotation": "<class 'int'>"
+    },
+    {
+     "name": "use_async",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "False",
+     "annotation": "<class 'bool'>"
+    },
+    {
+     "name": "use_object",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "False",
+     "annotation": "<class 'bool'>"
+    }
+   ],
+   "doc_first_line": "get 台灣股價歷史逐筆資料表 TaiwanStockPriceTick"
+  },
+  {
+   "name": "taiwan_stock_tick_snapshot",
+   "params": [
+    {
+     "name": "stock_id",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "typing.Union[str, typing.List[str]]"
+    },
+    {
+     "name": "timeout",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "None",
+     "annotation": "<class 'int'>"
+    }
+   ],
+   "doc_first_line": "get 台股即時資訊 taiwan_stock_tick_snapshot (只限 sponsor 會員使用)"
+  },
+  {
+   "name": "taiwan_stock_total_return_index",
+   "params": [
+    {
+     "name": "index_id",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "start_date",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "end_date",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "timeout",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "None",
+     "annotation": "<class 'int'>"
+    }
+   ],
+   "doc_first_line": "get 加權, 櫃買報酬指數"
+  },
+  {
+   "name": "taiwan_stock_trading_daily_report",
+   "params": [
+    {
+     "name": "stock_id",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "securities_trader_id",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "stock_id_list",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "None",
+     "annotation": "typing.List[str]"
+    },
+    {
+     "name": "securities_trader_id_list",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "None",
+     "annotation": "typing.List[str]"
+    },
+    {
+     "name": "date",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "timeout",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "None",
+     "annotation": "<class 'int'>"
+    },
+    {
+     "name": "use_async",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "False",
+     "annotation": "<class 'bool'>"
+    },
+    {
+     "name": "use_object",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "False",
+     "annotation": "<class 'bool'>"
+    }
+   ],
+   "doc_first_line": "get 當日卷商分點表"
+  },
+  {
+   "name": "taiwan_stock_trading_daily_report_secid_agg",
+   "params": [
+    {
+     "name": "stock_id",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "securities_trader_id",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "start_date",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "end_date",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "timeout",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "None",
+     "annotation": "<class 'int'>"
+    }
+   ],
+   "doc_first_line": "get 當日卷商分點統計表"
+  },
+  {
+   "name": "taiwan_stock_trading_date",
+   "params": [
+    {
+     "name": "start_date",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "end_date",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "timeout",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "None",
+     "annotation": "<class 'int'>"
+    }
+   ],
+   "doc_first_line": "get 台灣交易日日期"
+  },
+  {
+   "name": "taiwan_stock_warrant_trading_daily_report",
+   "params": [
+    {
+     "name": "stock_id",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "securities_trader_id",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "stock_id_list",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "None",
+     "annotation": "typing.List[str]"
+    },
+    {
+     "name": "date",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "timeout",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "None",
+     "annotation": "<class 'int'>"
+    },
+    {
+     "name": "use_async",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "False",
+     "annotation": "<class 'bool'>"
+    },
+    {
+     "name": "use_object",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "False",
+     "annotation": "<class 'bool'>"
+    }
+   ],
+   "doc_first_line": "get 當日權證卷商分點表"
+  },
+  {
+   "name": "taiwan_stock_weekly",
+   "params": [
+    {
+     "name": "stock_id",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "start_date",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "end_date",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "timeout",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "None",
+     "annotation": "<class 'int'>"
+    },
+    {
+     "name": "use_async",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "False",
+     "annotation": "<class 'bool'>"
+    },
+    {
+     "name": "stock_id_list",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "None",
+     "annotation": "typing.List[str]"
+    }
+   ],
+   "doc_first_line": "get 台股週 K 資料表"
+  },
+  {
+   "name": "taiwan_total_exchange_margin_maintenance",
+   "params": [
+    {
+     "name": "start_date",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "end_date",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "timeout",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "None",
+     "annotation": "<class 'int'>"
+    }
+   ],
+   "doc_first_line": "get 台灣大盤融資維持率"
+  },
+  {
+   "name": "translation",
+   "params": [
+    {
+     "name": "dataset",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": null,
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "timeout",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "None",
+     "annotation": "<class 'int'>"
+    }
+   ],
+   "doc_first_line": ""
+  },
+  {
+   "name": "tse",
+   "params": [
+    {
+     "name": "date",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": null,
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "timeout",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "None",
+     "annotation": "<class 'int'>"
+    }
+   ],
+   "doc_first_line": "get 加權指數"
+  },
+  {
+   "name": "us_stock_info",
+   "params": [
+    {
+     "name": "timeout",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "None",
+     "annotation": "<class 'int'>"
+    }
+   ],
+   "doc_first_line": "get 美國股票代碼總覽"
+  },
+  {
+   "name": "us_stock_price",
+   "params": [
+    {
+     "name": "stock_id",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "start_date",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "end_date",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "''",
+     "annotation": "<class 'str'>"
+    },
+    {
+     "name": "timeout",
+     "kind": "POSITIONAL_OR_KEYWORD",
+     "default": "None",
+     "annotation": "<class 'int'>"
+    }
+   ],
+   "doc_first_line": "get 美國股價資料表"
+  }
+ ],
+ "dataset_enum": [
+  "CnnFearGreedIndex",
+  "CrudeOilPrices",
+  "EuropeStockInfo",
+  "ExchangeRate",
+  "GoldPrice",
+  "GovernmentBondsYield",
+  "InterestRate",
+  "JapanStockInfo",
+  "TaiwanAssetSwapFixedIncomeDaily",
+  "TaiwanAssetSwapOptionDaily",
+  "TaiwanBusinessIndicator",
+  "TaiwanDailyShortSaleBalances",
+  "TaiwanExchangeRate",
+  "TaiwanFutOptDailyInfo",
+  "TaiwanFutOptTick",
+  "TaiwanFutOptTickInfo",
+  "TaiwanFuturesDaily",
+  "TaiwanFuturesDealerTradingVolumeDaily",
+  "TaiwanFuturesFinalSettlementPrice",
+  "TaiwanFuturesInstitutionalInvestors",
+  "TaiwanFuturesInstitutionalInvestorsAfterHours",
+  "TaiwanFuturesOpenInterestLargeTraders",
+  "TaiwanFuturesSpreadTick",
+  "TaiwanFuturesSpreadTrading",
+  "TaiwanFuturesTick",
+  "TaiwanOptionDaily",
+  "TaiwanOptionDealerTradingVolumeDaily",
+  "TaiwanOptionFinalSettlementPrice",
+  "TaiwanOptionInstitutionalInvestors",
+  "TaiwanOptionInstitutionalInvestorsAfterHours",
+  "TaiwanOptionOpenInterestLargeTraders",
+  "TaiwanOptionTick",
+  "TaiwanOptionVix",
+  "TaiwanSecuritiesTraderInfo",
+  "TaiwanStock10Year",
+  "TaiwanStockActiveETFHolding",
+  "TaiwanStockActiveETFHoldingChange",
+  "TaiwanStockActiveETFInfo",
+  "TaiwanStockBalanceSheet",
+  "TaiwanStockBlockTrade",
+  "TaiwanStockCapitalReductionReferencePrice",
+  "TaiwanStockCashFlowsStatement",
+  "TaiwanStockConvertibleBondDaily",
+  "TaiwanStockConvertibleBondDailyOverview",
+  "TaiwanStockConvertibleBondInfo",
+  "TaiwanStockConvertibleBondInstitutionalInvestors",
+  "TaiwanStockConvertibleBondMonthlyAnalysis",
+  "TaiwanStockConvertibleBondPutProvision",
+  "TaiwanStockDayTrading",
+  "TaiwanStockDayTradingBorrowingFeeRate",
+  "TaiwanStockDayTradingSuspension",
+  "TaiwanStockDelisting",
+  "TaiwanStockDispositionSecuritiesPeriod",
+  "TaiwanStockDividend",
+  "TaiwanStockDividendResult",
+  "TaiwanStockEvery5SecondsIndex",
+  "TaiwanStockFinancialStatements",
+  "TaiwanStockGovernmentBankBuySell",
+  "TaiwanStockHoldingSharesPer",
+  "TaiwanStockIndustryChain",
+  "TaiwanStockIndustryChainMoneyFlow",
+  "TaiwanStockInfo",
+  "TaiwanStockInfoWithWarrant",
+  "TaiwanStockInfoWithWarrantSummary",
+  "TaiwanStockInstitutionalInvestorsBuySell",
+  "TaiwanStockInstitutionalInvestorsBuySellWide",
+  "TaiwanStockKBar",
+  "TaiwanStockLoanCollateralBalance",
+  "TaiwanStockMarginMaintenance",
+  "TaiwanStockMarginPurchaseShortSale",
+  "TaiwanStockMarginShortSaleSuspension",
+  "TaiwanStockMarketValue",
+  "TaiwanStockMarketValueWeight",
+  "TaiwanStockMonthPrice",
+  "TaiwanStockMonthRevenue",
+  "TaiwanStockNews",
+  "TaiwanStockPER",
+  "TaiwanStockParValueChange",
+  "TaiwanStockPrice",
+  "TaiwanStockPriceAdj",
+  "TaiwanStockPriceBidAsk",
+  "TaiwanStockPriceLimit",
+  "TaiwanStockPriceTick",
+  "TaiwanStockSecuritiesLending",
+  "TaiwanStockShareholding",
+  "TaiwanStockSplitPrice",
+  "TaiwanStockStatisticsOfOrderBookAndTrade",
+  "TaiwanStockSuspended",
+  "TaiwanStockTotalInstitutionalInvestors",
+  "TaiwanStockTotalMarginPurchaseShortSale",
+  "TaiwanStockTotalReturnIndex",
+  "TaiwanStockTradingDailyReport",
+  "TaiwanStockTradingDailyReportSecIdAgg",
+  "TaiwanStockTradingDate",
+  "TaiwanStockWarrantTradingDailyReport",
+  "TaiwanStockWeekPrice",
+  "TaiwanTotalExchangeMarginMaintenance",
+  "TaiwanVariousIndicators5Seconds",
+  "UKStockInfo",
+  "USStockInfo",
+  "USStockPrice",
+  "USStockPriceMinute",
+  "taiwan_futures_snapshot",
+  "taiwan_options_snapshot",
+  "taiwan_stock_tick_snapshot"
+ ]
+}

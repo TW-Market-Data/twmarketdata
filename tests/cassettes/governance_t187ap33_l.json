@@ -1,0 +1,165 @@
+{
+ "dataset": "governance_t187ap33_l",
+ "recorded_with": "restricted test key (value never stored)",
+ "request": {
+  "headers": {
+   "X-API-Key": "REDACTED"
+  },
+  "method": "GET",
+  "params": {
+   "limit": 5,
+   "ticker": "2330"
+  }
+ },
+ "response": {
+  "body": {
+   "data": [
+    {
+     "as_of_date": "2026-08-10",
+     "chairperson_concurrent_general_manager": false,
+     "chairperson_name": "魏哲家",
+     "company_name": "台積電",
+     "general_manager_name": "總裁: 魏哲家",
+     "lineage": {
+      "latest_only": true,
+      "report_date_roc": "1150810",
+      "source": "TWSE OpenAPI t187ap33_L",
+      "source_role": "official_governance_openapi",
+      "source_url": "https://openapi.twse.com.tw/v1/opendata/t187ap33_L"
+     },
+     "source_dataset_code": "t187ap33_L",
+     "source_role": "official_governance_openapi",
+     "source_url": "https://openapi.twse.com.tw/v1/opendata/t187ap33_L",
+     "status_code": "not_concurrent",
+     "status_text": "未兼任",
+     "ticker": "2330"
+    },
+    {
+     "as_of_date": "2026-08-09",
+     "chairperson_concurrent_general_manager": false,
+     "chairperson_name": "魏哲家",
+     "company_name": "台積電",
+     "general_manager_name": "總裁: 魏哲家",
+     "lineage": {
+      "latest_only": true,
+      "report_date_roc": "1150809",
+      "source": "TWSE OpenAPI t187ap33_L",
+      "source_role": "official_governance_openapi",
+      "source_url": "https://openapi.twse.com.tw/v1/opendata/t187ap33_L"
+     },
+     "source_dataset_code": "t187ap33_L",
+     "source_role": "official_governance_openapi",
+     "source_url": "https://openapi.twse.com.tw/v1/opendata/t187ap33_L",
+     "status_code": "not_concurrent",
+     "status_text": "未兼任",
+     "ticker": "2330"
+    },
+    {
+     "as_of_date": "2026-08-06",
+     "chairperson_concurrent_general_manager": false,
+     "chairperson_name": "魏哲家",
+     "company_name": "台積電",
+     "general_manager_name": "總裁: 魏哲家",
+     "lineage": {
+      "latest_only": true,
+      "report_date_roc": "1150806",
+      "source": "TWSE OpenAPI t187ap33_L",
+      "source_role": "official_governance_openapi",
+      "source_url": "https://openapi.twse.com.tw/v1/opendata/t187ap33_L"
+     },
+     "source_dataset_code": "t187ap33_L",
+     "source_role": "official_governance_openapi",
+     "source_url": "https://openapi.twse.com.tw/v1/opendata/t187ap33_L",
+     "status_code": "not_concurrent",
+     "status_text": "未兼任",
+     "ticker": "2330"
+    },
+    {
+     "as_of_date": "2026-08-05",
+     "chairperson_concurrent_general_manager": false,
+     "chairperson_name": "魏哲家",
+     "company_name": "台積電",
+     "general_manager_name": "總裁: 魏哲家",
+     "lineage": {
+      "latest_only": true,
+      "report_date_roc": "1150805",
+      "source": "TWSE OpenAPI t187ap33_L",
+      "source_role": "official_governance_openapi",
+      "source_url": "https://openapi.twse.com.tw/v1/opendata/t187ap33_L"
+     },
+     "source_dataset_code": "t187ap33_L",
+     "source_role": "official_governance_openapi",
+     "source_url": "https://openapi.twse.com.tw/v1/opendata/t187ap33_L",
+     "status_code": "not_concurrent",
+     "status_text": "未兼任",
+     "ticker": "2330"
+    },
+    {
+     "as_of_date": "2026-08-04",
+     "chairperson_concurrent_general_manager": false,
+     "chairperson_name": "魏哲家",
+     "company_name": "台積電",
+     "general_manager_name": "總裁: 魏哲家",
+     "lineage": {
+      "latest_only": true,
+      "report_date_roc": "1150804",
+      "source": "TWSE OpenAPI t187ap33_L",
+      "source_role": "official_governance_openapi",
+      "source_url": "https://openapi.twse.com.tw/v1/opendata/t187ap33_L"
+     },
+     "source_dataset_code": "t187ap33_L",
+     "source_role": "official_governance_openapi",
+     "source_url": "https://openapi.twse.com.tw/v1/opendata/t187ap33_L",
+     "status_code": "not_concurrent",
+     "status_text": "未兼任",
+     "ticker": "2330"
+    }
+   ],
+   "data_count": 5,
+   "dataset_id": "governance_t187ap33_l",
+   "envelope": {
+    "dataset_id": "governance_t187ap33_l",
+    "row_count": 5,
+    "scope": "listed_company_chair_gm_concurrency"
+   },
+   "error": null,
+   "known_gaps": [
+    "as_of_date_is_the_observation_date_not_the_appointment_date",
+    "listed_companies_only_t187ap33_L_scope",
+    "not_investment_advice"
+   ],
+   "lineage": {
+    "semantics": "MOPS t187ap33_L: whether a listed company's chairperson also serves as general manager, with both names, as observed on as_of_date. A governance concentration signal, not a performance metric.",
+    "source_dataset_codes": [
+     "t187ap33_L"
+    ]
+   },
+   "quality": {
+    "concurrent_chair_gm_count": 0,
+    "row_count": 5,
+    "sensitive_fields_exposed": false,
+    "ticker_count": 1
+   },
+   "request_context": {
+    "coverage_type": "as_of_date_snapshot",
+    "filters": {
+     "as_of_date": null,
+     "concurrent_only": false,
+     "date_from": null,
+     "date_to": null,
+     "limit": 5,
+     "ticker": "2330"
+    },
+    "max_as_of_date": "2026-08-10",
+    "min_as_of_date": "2026-08-04",
+    "scope": "listed_company_chair_gm_concurrency"
+   },
+   "warnings": [
+    "not_investment_advice"
+   ]
+  },
+  "status": 200
+ },
+ "route": "/v2/datasets/governance-t187ap33-l",
+ "sdk_error": null
+}

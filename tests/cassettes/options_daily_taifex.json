@@ -1,0 +1,210 @@
+{
+ "dataset": "options_daily_taifex",
+ "recorded_with": "restricted test key (value never stored)",
+ "request": {
+  "headers": {
+   "X-API-Key": "REDACTED"
+  },
+  "method": "GET",
+  "params": {
+   "limit": 5
+  }
+ },
+ "response": {
+  "body": {
+   "data": [
+    {
+     "close": null,
+     "contract_symbol": "CAO",
+     "data_gaps": [],
+     "expiry_month": "202608",
+     "high": null,
+     "lineage": {
+      "endpoint_name": "optDataDown",
+      "payload_date": "20260810",
+      "request_date": "2026-08-10",
+      "row_index": 42,
+      "source_authority": "TAIFEX optDataDown (date-range CSV)",
+      "source_hash": "taifex_opt:2026-08"
+     },
+     "low": null,
+     "not_investment_advice": true,
+     "open": null,
+     "open_interest": null,
+     "option_type": "call",
+     "settlement_price": 66.5,
+     "source_family": "taifex_options_daily_download",
+     "source_provider": "taifex_official",
+     "source_role": "options_daily_quote_settlement_open_interest",
+     "strike_price": 120.0,
+     "trade_date": "2026-08-10",
+     "volume": null
+    },
+    {
+     "close": null,
+     "contract_symbol": "CAO",
+     "data_gaps": [],
+     "expiry_month": "202608W2",
+     "high": null,
+     "lineage": {
+      "endpoint_name": "optDataDown",
+      "payload_date": "20260810",
+      "request_date": "2026-08-10",
+      "row_index": 0,
+      "source_authority": "TAIFEX optDataDown (date-range CSV)",
+      "source_hash": "taifex_opt:2026-08"
+     },
+     "low": null,
+     "not_investment_advice": true,
+     "open": null,
+     "open_interest": null,
+     "option_type": "call",
+     "settlement_price": 66.5,
+     "source_family": "taifex_options_daily_download",
+     "source_provider": "taifex_official",
+     "source_role": "options_daily_quote_settlement_open_interest",
+     "strike_price": 120.0,
+     "trade_date": "2026-08-10",
+     "volume": null
+    },
+    {
+     "close": null,
+     "contract_symbol": "CAO",
+     "data_gaps": [],
+     "expiry_month": "202609",
+     "high": null,
+     "lineage": {
+      "endpoint_name": "optDataDown",
+      "payload_date": "20260810",
+      "request_date": "2026-08-10",
+      "row_index": 102,
+      "source_authority": "TAIFEX optDataDown (date-range CSV)",
+      "source_hash": "taifex_opt:2026-08"
+     },
+     "low": null,
+     "not_investment_advice": true,
+     "open": null,
+     "open_interest": null,
+     "option_type": "call",
+     "settlement_price": 68.5,
+     "source_family": "taifex_options_daily_download",
+     "source_provider": "taifex_official",
+     "source_role": "options_daily_quote_settlement_open_interest",
+     "strike_price": 120.0,
+     "trade_date": "2026-08-10",
+     "volume": null
+    },
+    {
+     "close": null,
+     "contract_symbol": "CAO",
+     "data_gaps": [],
+     "expiry_month": "202612",
+     "high": null,
+     "lineage": {
+      "endpoint_name": "optDataDown",
+      "payload_date": "20260810",
+      "request_date": "2026-08-10",
+      "row_index": 162,
+      "source_authority": "TAIFEX optDataDown (date-range CSV)",
+      "source_hash": "taifex_opt:2026-08"
+     },
+     "low": null,
+     "not_investment_advice": true,
+     "open": null,
+     "open_interest": null,
+     "option_type": "call",
+     "settlement_price": 75.0,
+     "source_family": "taifex_options_daily_download",
+     "source_provider": "taifex_official",
+     "source_role": "options_daily_quote_settlement_open_interest",
+     "strike_price": 120.0,
+     "trade_date": "2026-08-10",
+     "volume": null
+    },
+    {
+     "close": null,
+     "contract_symbol": "CAO",
+     "data_gaps": [],
+     "expiry_month": "202608",
+     "high": null,
+     "lineage": {
+      "endpoint_name": "optDataDown",
+      "payload_date": "20260810",
+      "request_date": "2026-08-10",
+      "row_index": 44,
+      "source_authority": "TAIFEX optDataDown (date-range CSV)",
+      "source_hash": "taifex_opt:2026-08"
+     },
+     "low": null,
+     "not_investment_advice": true,
+     "open": null,
+     "open_interest": null,
+     "option_type": "call",
+     "settlement_price": 61.5,
+     "source_family": "taifex_options_daily_download",
+     "source_provider": "taifex_official",
+     "source_role": "options_daily_quote_settlement_open_interest",
+     "strike_price": 125.0,
+     "trade_date": "2026-08-10",
+     "volume": null
+    }
+   ],
+   "data_count": 5,
+   "dataset_id": "options_daily_taifex",
+   "envelope": {
+    "dataset_id": "options_daily_taifex",
+    "row_count": 5,
+    "scope": "options_daily_taifex_latest_daily_file_only"
+   },
+   "error": null,
+   "known_gaps": [
+    "latest_daily_file_only",
+    "single_trading_date_baseline",
+    "no_historical_options_coverage_claim",
+    "not_futures_daily",
+    "not_options_strategy_analytics",
+    "not_derived_greeks",
+    "not_investment_advice"
+   ],
+   "lineage": {
+    "source_families": [
+     "taifex_options_daily_download"
+    ],
+    "source_providers": [
+     "taifex_official"
+    ],
+    "source_roles": [
+     "options_daily_quote_settlement_open_interest"
+    ]
+   },
+   "not_investment_advice": true,
+   "quality": {
+    "contract_count": 1,
+    "row_count": 5,
+    "sensitive_fields_exposed": false
+   },
+   "request_context": {
+    "coverage_type": "latest_daily_file_only",
+    "filters": {
+     "contract_symbol": null,
+     "date_from": null,
+     "date_to": null,
+     "expiry_month": null,
+     "limit": 5,
+     "option_type": null,
+     "source_family": null,
+     "trade_date": null
+    },
+    "max_trade_date": "2026-08-10",
+    "min_trade_date": "2026-08-10",
+    "scope": "options_daily_taifex_latest_daily_file_only"
+   },
+   "warnings": [
+    "not_investment_advice"
+   ]
+  },
+  "status": 200
+ },
+ "route": "/v2/datasets/options-daily-taifex",
+ "sdk_error": null
+}

@@ -1,0 +1,169 @@
+{
+ "dataset": "stock_price_limit_daily",
+ "recorded_with": "restricted test key (value never stored)",
+ "request": {
+  "headers": {
+   "X-API-Key": "REDACTED"
+  },
+  "method": "GET",
+  "params": {
+   "limit": 5,
+   "ticker": "2330"
+  }
+ },
+ "response": {
+  "body": {
+   "data": [
+    {
+     "data_gaps": [],
+     "limit_down_price": 2025.0,
+     "limit_up_price": 2470.0,
+     "lineage": {
+      "endpoint_name": "twse_exchangeReport_TWT49U",
+      "event_category": "息",
+      "event_type": "ex_dividend",
+      "knowledge_date": "2026-06-11",
+      "reference_basis": "開盤競價基準"
+     },
+     "market": "TWSE",
+     "reference_price": 2250.0,
+     "source_family": "TWSE_TWT49U_EX_RIGHT",
+     "source_provider": "twse_official",
+     "source_role": "official_stock_price_limit_daily",
+     "ticker": "2330",
+     "trade_date": "2026-06-11"
+    },
+    {
+     "data_gaps": [],
+     "limit_down_price": 1660.0,
+     "limit_up_price": 2020.0,
+     "lineage": {
+      "endpoint_name": "twse_exchangeReport_TWT49U",
+      "event_category": "息",
+      "event_type": "ex_dividend",
+      "knowledge_date": "2026-03-17",
+      "reference_basis": "開盤競價基準"
+     },
+     "market": "TWSE",
+     "reference_price": 1840.0,
+     "source_family": "TWSE_TWT49U_EX_RIGHT",
+     "source_provider": "twse_official",
+     "source_role": "official_stock_price_limit_daily",
+     "ticker": "2330",
+     "trade_date": "2026-03-17"
+    },
+    {
+     "data_gaps": [],
+     "limit_down_price": 1350.0,
+     "limit_up_price": 1645.0,
+     "lineage": {
+      "endpoint_name": "twse_exchangeReport_TWT49U",
+      "event_category": "息",
+      "event_type": "ex_dividend",
+      "knowledge_date": "2025-12-11",
+      "reference_basis": "開盤競價基準"
+     },
+     "market": "TWSE",
+     "reference_price": 1500.0,
+     "source_family": "TWSE_TWT49U_EX_RIGHT",
+     "source_provider": "twse_official",
+     "source_role": "official_stock_price_limit_daily",
+     "ticker": "2330",
+     "trade_date": "2025-12-11"
+    },
+    {
+     "data_gaps": [],
+     "limit_down_price": 1125.0,
+     "limit_up_price": 1370.0,
+     "lineage": {
+      "endpoint_name": "twse_exchangeReport_TWT49U",
+      "event_category": "息",
+      "event_type": "ex_dividend",
+      "knowledge_date": "2025-09-16",
+      "reference_basis": "開盤競價基準"
+     },
+     "market": "TWSE",
+     "reference_price": 1250.0,
+     "source_family": "TWSE_TWT49U_EX_RIGHT",
+     "source_provider": "twse_official",
+     "source_role": "official_stock_price_limit_daily",
+     "ticker": "2330",
+     "trade_date": "2025-09-16"
+    },
+    {
+     "data_gaps": [],
+     "limit_down_price": 955.0,
+     "limit_up_price": 1165.0,
+     "lineage": {
+      "endpoint_name": "twse_exchangeReport_TWT49U",
+      "event_category": "息",
+      "event_type": "ex_dividend",
+      "knowledge_date": "2025-06-12",
+      "reference_basis": "開盤競價基準"
+     },
+     "market": "TWSE",
+     "reference_price": 1060.0,
+     "source_family": "TWSE_TWT49U_EX_RIGHT",
+     "source_provider": "twse_official",
+     "source_role": "official_stock_price_limit_daily",
+     "ticker": "2330",
+     "trade_date": "2025-06-12"
+    }
+   ],
+   "data_count": 5,
+   "dataset_id": "stock_price_limit_daily",
+   "envelope": {
+    "dataset_id": "stock_price_limit_daily",
+    "row_count": 5,
+    "scope": "tpex_price_limit_only"
+   },
+   "error": null,
+   "known_gaps": [
+    "tpex_only",
+    "no_twse_price_limit_coverage",
+    "no_historical_full_depth_claim",
+    "no_derived_price_limit_formula",
+    "not_daily_ohlc",
+    "not_adjusted_price",
+    "not_investment_advice"
+   ],
+   "lineage": {
+    "source_families": [
+     "TWSE_TWT49U_EX_RIGHT"
+    ],
+    "source_providers": [
+     "twse_official"
+    ],
+    "source_roles": [
+     "official_stock_price_limit_daily"
+    ]
+   },
+   "quality": {
+    "row_count": 5,
+    "sensitive_fields_exposed": false,
+    "ticker_count": 1
+   },
+   "request_context": {
+    "coverage_type": "latest_snapshot_baseline",
+    "filters": {
+     "date_from": null,
+     "date_to": null,
+     "limit": 5,
+     "market": null,
+     "source_family": null,
+     "ticker": "2330",
+     "trade_date": null
+    },
+    "max_trade_date": "2026-06-11",
+    "min_trade_date": "2025-06-12",
+    "scope": "tpex_price_limit_only"
+   },
+   "warnings": [
+    "not_investment_advice"
+   ]
+  },
+  "status": 200
+ },
+ "route": "/v2/datasets/stock-price-limit-daily",
+ "sdk_error": null
+}

@@ -1,0 +1,6 @@
+{
+ "etf_holdings": {
+  "error": "TierRequiredError: etf_holdings 不在你目前的方案裡，developer 方案涵蓋它。免費層目前可讀 0 個資料集；下面這行不用金鑰也拿得到資料。",
+  "ok": false
+ }
+}

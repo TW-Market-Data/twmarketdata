@@ -2,12 +2,10 @@ __pycache__/
 *.py[cod]
 .venv/
 venv/
-build/
-dist/
-*.egg-info/
+.mypy_cache/
 .pytest_cache/
-.coverage
-htmlcov/
-.DS_Store
+dist/
+build/
+*.egg-info/
 .env
-PYPI_PUBLISH_OWNER.md
+.env.local

@@ -1,0 +1,141 @@
+{
+ "dataset": "market_value_weight",
+ "recorded_with": "restricted test key (value never stored)",
+ "request": {
+  "headers": {
+   "X-API-Key": "REDACTED"
+  },
+  "method": "GET",
+  "params": {
+   "limit": 5,
+   "ticker": "2330"
+  }
+ },
+ "response": {
+  "body": {
+   "data": [
+    {
+     "as_of_date": "2026-07-31",
+     "lineage": {
+      "constituents_in_denominator": 1080,
+      "market_scope": "TWSE_only",
+      "method": "100*market_cap/sum(market_cap) over (as_of_date,market)",
+      "source_field": "market_cap",
+      "source_table": "valuation_data_items",
+      "tpex_status": "source_gap_no_market_cap"
+     },
+     "market": "TWSE",
+     "source_family": "derived_valuation_market_cap_weight",
+     "ticker": "2330",
+     "weight_pct": 44.4128253
+    },
+    {
+     "as_of_date": "2026-07-30",
+     "lineage": {
+      "constituents_in_denominator": 1080,
+      "market_scope": "TWSE_only",
+      "method": "100*market_cap/sum(market_cap) over (as_of_date,market)",
+      "source_field": "market_cap",
+      "source_table": "valuation_data_items",
+      "tpex_status": "source_gap_no_market_cap"
+     },
+     "market": "TWSE",
+     "source_family": "derived_valuation_market_cap_weight",
+     "ticker": "2330",
+     "weight_pct": 43.58316746
+    },
+    {
+     "as_of_date": "2026-07-29",
+     "lineage": {
+      "constituents_in_denominator": 1079,
+      "market_scope": "TWSE_only",
+      "method": "100*market_cap/sum(market_cap) over (as_of_date,market)",
+      "source_field": "market_cap",
+      "source_table": "valuation_data_items",
+      "tpex_status": "source_gap_no_market_cap"
+     },
+     "market": "TWSE",
+     "source_family": "derived_valuation_market_cap_weight",
+     "ticker": "2330",
+     "weight_pct": 43.36049224
+    },
+    {
+     "as_of_date": "2026-07-28",
+     "lineage": {
+      "constituents_in_denominator": 1079,
+      "market_scope": "TWSE_only",
+      "method": "100*market_cap/sum(market_cap) over (as_of_date,market)",
+      "source_field": "market_cap",
+      "source_table": "valuation_data_items",
+      "tpex_status": "source_gap_no_market_cap"
+     },
+     "market": "TWSE",
+     "source_family": "derived_valuation_market_cap_weight",
+     "ticker": "2330",
+     "weight_pct": 43.2231165
+    },
+    {
+     "as_of_date": "2026-07-27",
+     "lineage": {
+      "constituents_in_denominator": 1079,
+      "market_scope": "TWSE_only",
+      "method": "100*market_cap/sum(market_cap) over (as_of_date,market)",
+      "source_field": "market_cap",
+      "source_table": "valuation_data_items",
+      "tpex_status": "source_gap_no_market_cap"
+     },
+     "market": "TWSE",
+     "source_family": "derived_valuation_market_cap_weight",
+     "ticker": "2330",
+     "weight_pct": 42.4528014
+    }
+   ],
+   "data_count": 5,
+   "dataset_id": "market_value_weight",
+   "envelope": {
+    "dataset_id": "market_value_weight",
+    "row_count": 5,
+    "scope": "twse_market_cap_weight_only"
+   },
+   "error": null,
+   "known_gaps": [
+    "twse_only",
+    "tpex_pending_no_market_cap_source",
+    "weight_relative_to_covered_valuation_universe",
+    "not_investment_advice"
+   ],
+   "lineage": {
+    "method": "100*market_cap/sum(market_cap) over (as_of_date, market); TWSE only",
+    "source_families": [
+     "derived_valuation_market_cap_weight"
+    ]
+   },
+   "quality": {
+    "row_count": 5,
+    "sensitive_fields_exposed": false,
+    "ticker_count": 1
+   },
+   "request_context": {
+    "coverage_type": "derived_from_valuation_market_cap",
+    "filters": {
+     "as_of_date": null,
+     "date_from": null,
+     "date_to": null,
+     "limit": 5,
+     "market": null,
+     "source_family": null,
+     "ticker": "2330"
+    },
+    "max_as_of_date": "2026-07-31",
+    "min_as_of_date": "2026-07-27",
+    "scope": "twse_market_cap_weight_only"
+   },
+   "warnings": [
+    "not_investment_advice"
+   ]
+  },
+  "status": 200
+ },
+ "route": "/v2/datasets/market-value-weight",
+ "sdk_error": null
+}

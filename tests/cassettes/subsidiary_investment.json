@@ -1,0 +1,135 @@
+{
+ "dataset": "subsidiary_investment",
+ "recorded_with": "restricted test key (value never stored)",
+ "request": {
+  "headers": {
+   "X-API-Key": "REDACTED"
+  },
+  "method": "GET",
+  "params": {
+   "limit": 5
+  }
+ },
+ "response": {
+  "body": {
+   "data": [
+    {
+     "criterion": "1",
+     "fact_date": "2026-03-12",
+     "holding_pct": null,
+     "invested_entity_name": "OYAK Cimento Fabrikalari A.S.",
+     "main_business": "製造及分銷熟料、水泥",
+     "market": "TW",
+     "parent_ticker": "1101",
+     "pit_safe_from": null,
+     "region": "TURKEY/土耳其",
+     "source_authority": "MOPS 公開資訊觀測站 重要子公司資訊 (t79sb02)",
+     "source_provider": "mops_official",
+     "source_role": "official_mops_t79sb02"
+    },
+    {
+     "criterion": "1",
+     "fact_date": "2025-03-12",
+     "holding_pct": null,
+     "invested_entity_name": "TCC Dutch Holdings B.V.",
+     "main_business": "投資控股",
+     "market": "TW",
+     "parent_ticker": "1101",
+     "pit_safe_from": null,
+     "region": "NETHERLANDS/荷蘭",
+     "source_authority": "MOPS 公開資訊觀測站 重要子公司資訊 (t79sb02)",
+     "source_provider": "mops_official",
+     "source_role": "official_mops_t79sb02"
+    },
+    {
+     "criterion": "1",
+     "fact_date": "2026-03-12",
+     "holding_pct": null,
+     "invested_entity_name": "TCC Europe Holdings B.V.",
+     "main_business": "投資控股",
+     "market": "TW",
+     "parent_ticker": "1101",
+     "pit_safe_from": null,
+     "region": "NETHERLANDS/荷蘭",
+     "source_authority": "MOPS 公開資訊觀測站 重要子公司資訊 (t79sb02)",
+     "source_provider": "mops_official",
+     "source_role": "official_mops_t79sb02"
+    },
+    {
+     "criterion": "1",
+     "fact_date": "2013-03-29",
+     "holding_pct": null,
+     "invested_entity_name": "TCC Hong Kong Cement (BVI) Holdings Ltd.",
+     "main_business": "投資控股",
+     "market": "TW",
+     "parent_ticker": "1101",
+     "pit_safe_from": null,
+     "region": "HONG KONG/香港",
+     "source_authority": "MOPS 公開資訊觀測站 重要子公司資訊 (t79sb02)",
+     "source_provider": "mops_official",
+     "source_role": "official_mops_t79sb02"
+    },
+    {
+     "criterion": "1",
+     "fact_date": "2013-03-29",
+     "holding_pct": null,
+     "invested_entity_name": "TCC Hong Kong Cement (International) Ltd .",
+     "main_business": "投資控股",
+     "market": "TW",
+     "parent_ticker": "1101",
+     "pit_safe_from": null,
+     "region": "HONG KONG/香港",
+     "source_authority": "MOPS 公開資訊觀測站 重要子公司資訊 (t79sb02)",
+     "source_provider": "mops_official",
+     "source_role": "official_mops_t79sb02"
+    }
+   ],
+   "data_count": 5,
+   "dataset_id": "subsidiary_investment",
+   "envelope": {
+    "dataset_id": "subsidiary_investment",
+    "row_count": 5,
+    "scope": "listed_parent_direct_investments"
+   },
+   "error": null,
+   "known_gaps": [
+    "fact_date_is_the_snapshot_we_observed_not_the_date_the_holding_changed",
+    "pit_safe_from_null_means_the_version_boundary_is_an_ingest_date_not_a_disclosure_date",
+    "holding_pct_may_be_null_where_the_filing_stated_no_percentage",
+    "direct_holdings_as_filed_no_look_through_to_indirect_ownership",
+    "not_investment_advice"
+   ],
+   "lineage": {
+    "semantics": "Entities a listed parent reports investing in, with the holding percentage where filed. Returns the CURRENT version per (parent_ticker, invested_entity_name); pass as_of for an earlier one.",
+    "source_providers": [
+     "mops_official"
+    ]
+   },
+   "quality": {
+    "parent_count": 1,
+    "row_count": 5,
+    "rows_without_holding_pct": 5,
+    "rows_without_pit_safe_from": 5,
+    "sensitive_fields_exposed": false
+   },
+   "request_context": {
+    "coverage_type": "versioned_snapshot",
+    "filters": {
+     "as_of": null,
+     "limit": 5,
+     "parent_ticker": null,
+     "region": null
+    },
+    "max_fact_date": "2026-03-12",
+    "min_fact_date": "2013-03-29",
+    "scope": "listed_parent_direct_investments"
+   },
+   "warnings": [
+    "not_investment_advice"
+   ]
+  },
+  "status": 200
+ },
+ "route": "/v2/datasets/subsidiary-investment",
+ "sdk_error": null
+}

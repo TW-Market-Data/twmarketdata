@@ -1,0 +1,63 @@
+{
+ "dataset": "taifex_options_delta",
+ "recorded_with": "restricted test key (value never stored)",
+ "request": {
+  "headers": {
+   "X-API-Key": "REDACTED"
+  },
+  "method": "GET",
+  "params": {
+   "limit": 5,
+   "ticker": "2330"
+  }
+ },
+ "response": {
+  "body": {
+   "data": [],
+   "data_count": 0,
+   "dataset_id": "taifex_options_delta",
+   "envelope": {
+    "dataset_id": "taifex_options_delta",
+    "row_count": 0,
+    "scope": "taifex_option_delta_only"
+   },
+   "error": null,
+   "known_gaps": [
+    "latest_trading_day_snapshot_daily_accumulator",
+    "trade_date_stamped_from_sibling_option_daily_report",
+    "not_investment_advice"
+   ],
+   "lineage": {
+    "semantics": "TAIFEX DailyOptionsDelta: per option contract/callput/month/strike Delta (trade_date from DailyMarketReportOpt)",
+    "source_families": []
+   },
+   "quality": {
+    "contract_count": 0,
+    "row_count": 0,
+    "sensitive_fields_exposed": false
+   },
+   "reason": "taifex_options_delta_not_found",
+   "request_context": {
+    "coverage_type": "latest_trading_day_snapshot",
+    "filters": {
+     "call_put": null,
+     "contract": "2330",
+     "date_from": null,
+     "date_to": null,
+     "limit": 5,
+     "trade_date": null
+    },
+    "max_trade_date": null,
+    "min_trade_date": null,
+    "scope": "taifex_option_delta_only"
+   },
+   "status": "not_found",
+   "warnings": [
+    "not_investment_advice"
+   ]
+  },
+  "status": 200
+ },
+ "route": "/v2/datasets/taifex-options-delta",
+ "sdk_error": null
+}

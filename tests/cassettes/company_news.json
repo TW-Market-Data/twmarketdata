@@ -1,0 +1,132 @@
+{
+ "dataset": "company_news",
+ "recorded_with": "restricted test key (value never stored)",
+ "request": {
+  "headers": {
+   "X-API-Key": "REDACTED"
+  },
+  "method": "GET",
+  "params": {
+   "limit": 5,
+   "ticker": "2330"
+  }
+ },
+ "response": {
+  "body": {
+   "api_version": "v2",
+   "dataset": "company_news",
+   "endpoint": "/v2/datasets/company-news",
+   "envelope": {
+    "api_version": "v2",
+    "data": [],
+    "data_as_of": "2026-08-12T06:23:39.188821+00:00",
+    "dataset": "company_news",
+    "dataset_version": "v2.0.0-preview",
+    "error": {
+     "blocking_gate": null,
+     "dataset": "company_news",
+     "error_code": null,
+     "error_message": null,
+     "request_id": "read-api-86653ec3ef3d"
+    },
+    "lineage": {
+     "fallback_chain": [],
+     "policy_notes": [
+      "company news productized table serving path",
+      "contract-aligned filters: ticker/date_from/date_to/source_name/keyword/limit",
+      "metadata-only allowlist fields only",
+      "company_news remains separate from mops_major_event and material_information",
+      "nullable optional fields are preserved as-is"
+     ],
+     "selected_source": "company_news",
+     "source_role": "canonical"
+    },
+    "quality": {
+     "completeness_ratio": 0.0,
+     "freshness_as_of": "2026-08-12T06:23:39.188821+00:00",
+     "freshness_state": "unknown",
+     "quality_status": "partial"
+    },
+    "release_date": "2026-08-12T06:23:39.188821+00:00",
+    "release_version": "v2.2026-08-12T06:23:39.188821+00:00.preview",
+    "request_context": {
+     "as_of_date": "2026-08-12T06:23:39.188821+00:00",
+     "dataset_view": "company_news_v1",
+     "family": "issuer_official_news",
+     "field_group_type": "derived",
+     "ticker": "2330"
+    }
+   },
+   "meta": {
+    "allowed_filters": [
+     "ticker",
+     "date_from",
+     "date_to",
+     "source_name",
+     "keyword",
+     "limit"
+    ],
+    "allowlist_fields": [
+     "ticker",
+     "market",
+     "published_at",
+     "headline",
+     "summary",
+     "content_url",
+     "source_name",
+     "provider",
+     "source_role",
+     "language",
+     "lineage",
+     "created_at",
+     "updated_at"
+    ],
+    "internal_only": true,
+    "is_limited": false,
+    "mandatory_contract_fields_present": [
+     "api_version",
+     "data",
+     "data_as_of",
+     "dataset",
+     "dataset_version",
+     "error",
+     "lineage",
+     "quality",
+     "release_date",
+     "release_version",
+     "request_context"
+    ],
+    "metadata_only": true,
+    "plan": "max",
+    "production_exposure": false,
+    "public_exposure": false,
+    "row_limit": 10000,
+    "rows_returned": 0,
+    "safe_usage_notes": [
+     "not_investment_advice",
+     "metadata_only",
+     "source_attribution_required",
+     "no_full_text_republication",
+     "no_unauthorized_crawling",
+     "company_news_separate_from_mops_major_event",
+     "company_news_separate_from_material_information"
+    ],
+    "source_attribution_required": true
+   },
+   "not_investment_advice": true,
+   "plan_id": "max",
+   "query": {
+    "date_from": null,
+    "date_to": null,
+    "keyword": null,
+    "limit": 5,
+    "source_name": null,
+    "ticker": "2330"
+   },
+   "request_id": "req_3f4d155b22e5"
+  },
+  "status": 200
+ },
+ "route": "/v2/datasets/company-news",
+ "sdk_error": null
+}

@@ -1,0 +1,133 @@
+{
+ "dataset": "lending_utilization",
+ "recorded_with": "restricted test key (value never stored)",
+ "request": {
+  "headers": {
+   "X-API-Key": "REDACTED"
+  },
+  "method": "GET",
+  "params": {
+   "limit": 5,
+   "ticker": "2330"
+  }
+ },
+ "response": {
+  "body": {
+   "data": [
+    {
+     "derivation_method": "derived_securities_lending_over_foreign_holding_shares_issued",
+     "lending_balance": 258133000.0,
+     "market": "TWSE",
+     "rule_version": "derived_v1_lending_balance_over_shares_issued",
+     "shares_issued": 25932370067.0,
+     "ticker": "2330",
+     "trade_date": "2026-08-10",
+     "utilisation_note": null,
+     "utilisation_pct": 0.995408,
+     "utilisation_pctile": 0.18358426420592522
+    },
+    {
+     "derivation_method": "derived_securities_lending_over_foreign_holding_shares_issued",
+     "lending_balance": 253757000.0,
+     "market": "TWSE",
+     "rule_version": "derived_v1_lending_balance_over_shares_issued",
+     "shares_issued": 25932370067.0,
+     "ticker": "2330",
+     "trade_date": "2026-08-07",
+     "utilisation_note": null,
+     "utilisation_pct": 0.978534,
+     "utilisation_pctile": 0.18075801749271136
+    },
+    {
+     "derivation_method": "derived_securities_lending_over_foreign_holding_shares_issued",
+     "lending_balance": 255505000.0,
+     "market": "TWSE",
+     "rule_version": "derived_v1_lending_balance_over_shares_issued",
+     "shares_issued": 25932370067.0,
+     "ticker": "2330",
+     "trade_date": "2026-08-06",
+     "utilisation_note": null,
+     "utilisation_pct": 0.985274,
+     "utilisation_pctile": 0.1827016520894072
+    },
+    {
+     "derivation_method": "derived_securities_lending_over_foreign_holding_shares_issued",
+     "lending_balance": 261090000.0,
+     "market": "TWSE",
+     "rule_version": "derived_v1_lending_balance_over_shares_issued",
+     "shares_issued": 25932370067.0,
+     "ticker": "2330",
+     "trade_date": "2026-08-05",
+     "utilisation_note": null,
+     "utilisation_pct": 1.006811,
+     "utilisation_pctile": 0.1836734693877551
+    },
+    {
+     "derivation_method": "derived_securities_lending_over_foreign_holding_shares_issued",
+     "lending_balance": 262627000.0,
+     "market": "TWSE",
+     "rule_version": "derived_v1_lending_balance_over_shares_issued",
+     "shares_issued": 25932370067.0,
+     "ticker": "2330",
+     "trade_date": "2026-08-04",
+     "utilisation_note": null,
+     "utilisation_pct": 1.012738,
+     "utilisation_pctile": 0.184645286686103
+    }
+   ],
+   "data_count": 5,
+   "dataset_id": "lending_utilization",
+   "envelope": {
+    "dataset_id": "lending_utilization",
+    "row_count": 5,
+    "scope": "twse_tpex_securities_lending_utilisation"
+   },
+   "error": null,
+   "known_gaps": [
+    "utilisation_pct_is_derived_lending_balance_over_shares_issued",
+    "shares_issued_is_a_point_in_time_master_value_not_restated_history",
+    "derivation_method_and_rule_version_pin_how_each_row_was_computed",
+    "not_investment_advice"
+   ],
+   "lineage": {
+    "derivation_methods": [
+     "derived_securities_lending_over_foreign_holding_shares_issued"
+    ],
+    "rule_versions": [
+     "derived_v1_lending_balance_over_shares_issued"
+    ],
+    "semantics": "Securities-lending balance as a share of shares issued, per ticker per trading day, with the cross-sectional percentile of that ratio. DERIVED: utilisation_pct = lending_balance / shares_issued."
+   },
+   "quality": {
+    "row_count": 5,
+    "rows_without_shares_issued": 0,
+    "sensitive_fields_exposed": false,
+    "ticker_count": 1
+   },
+   "request_context": {
+    "applied_defaults": {
+     "default_window_days": 30,
+     "reason": "no date filter given; bounded to keep the view's percent_rank window from scanning all history (15.7s unbounded vs 0.7s bounded)"
+    },
+    "coverage_type": "daily_derived",
+    "filters": {
+     "date_from": null,
+     "date_to": null,
+     "limit": 5,
+     "market": null,
+     "ticker": "2330",
+     "trade_date": null
+    },
+    "max_trade_date": "2026-08-10",
+    "min_trade_date": "2026-08-04",
+    "scope": "twse_tpex_securities_lending_utilisation"
+   },
+   "warnings": [
+    "not_investment_advice"
+   ]
+  },
+  "status": 200
+ },
+ "route": "/v2/datasets/lending-utilization",
+ "sdk_error": null
+}
