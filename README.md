@@ -219,6 +219,38 @@ Without pandas the SDK still works and returns `list[dict]`. Pass `raw=True` for
 
 ---
 
+## Upgrading from 0.1.0
+
+0.2.0 keeps the same distribution (`twmarketdata`) and the same import name
+(`twmd`), so `pip install -U twmarketdata` is the whole upgrade. Everything
+0.1.0 exported still resolves and still works, now emitting `DeprecationWarning`
+with the replacement named:
+
+| 0.1.0 | 0.2.0 |
+|---|---|
+| `client.get_dataset("twse-daily-price", symbol="2330")` | `client.twse_daily_price(ticker="2330")` |
+| `client.get_all(...)` / `iter_pages(...)` | `client.dataset(...)` — paginates internally |
+| `client.list_datasets()` | `twmd.datasets()` / `twmd.capabilities(name)` |
+| `twmd.access.is_key_free(...)` | `twmd.runnable_without_key()` |
+| `twmd.frames.to_dataframe(payload)` | returned frames already carry `.twmd` metadata |
+| `TwmdAPIError`, `TwmdPaymentRequired`, … | still importable; `TwmdPaymentRequired` keeps `payment` / `price` / `credits_url` / `purchase_hint` |
+
+Two behaviours changed on purpose, both toward accuracy:
+
+- **The access tables were re-measured.** 0.1.0 recorded 2 key-free datasets
+  from a probe on 2026-07-21. A full 82-route sweep, plus a second sweep with a
+  non-demo ticker to separate "open to anyone" from "demo symbols only", found
+  15 open and the same 3 sample-only. Names, semantics and return types are
+  unchanged.
+- **Pagination stops when the server ignores `offset`.** Measured on
+  `index-constituents`: offsets 0, 3 and 6 returned identical pages. Continuing
+  would append duplicate rows and present them as a full history, so pagination
+  halts and the result is flagged `truncated`.
+
+0.1.0 remains MIT; 0.2.0 onward is Apache-2.0.
+
+---
+
 ## Development
 
 ```bash
