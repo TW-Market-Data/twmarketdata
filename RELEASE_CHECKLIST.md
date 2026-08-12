@@ -6,14 +6,16 @@
 
 ---
 
-## 0. 前置(尚未完成,擋住發布)
+## 0. 前置 —— ✅ 已完成(2026-08-12)
 
-- [ ] **受限測試 key 產出**(enterprise console,**不是** enterprise key 本身)
-- [ ] `export TWMD_API_KEY=<受限 key>`(**在你自己的 shell**,不要貼進任何對話)
-- [ ] `python tools/record_cassettes.py` — 錄付費層 cassette,自動 redact
-- [ ] `TWMD_API_KEY=... python tools/verify_low_confidence.py --all` — 驗 7 條未驗證映射
-- [ ] `python examples/03_backtest_ready_fundamentals.py` / `04_chips_and_derivatives.py` —— 跑過後把檔頭的 `RECORDED PENDING TEST KEY` 拿掉、註解換成真實輸出
-- [ ] **回 console 刪掉那把受限 key**
+- [x] 受限測試 key(max)+ 拋棄式 developer key 皆已使用完畢
+- [x] `python tools/record_cassettes.py` — **63 支付費 cassette 已錄**,auth header 已 redact 並有測試把關
+- [x] `python tools/verify_low_confidence.py --all` — 未驗證映射 **9 → 1**(剩下的 `taiwan_stock_10year` 無法從簽章判定語義)
+- [x] `examples/03` / `04` 已對真端點跑過,`RECORDED PENDING TEST KEY` 標記已移除
+- [ ] **撤銷 `key_test_12fba983320f4818`**(24h 會自動到期,手動撤較乾淨)
+- [ ] 3 支吃到 403 `commercial_use_not_allowed` 的資料集(`interest_rate_snapshots`、
+      `tax_business_registration`、`macro_worldbank`)待 catalog allow-list 還原後補錄
+      —— **不擋發布**,cassette 已記錄 403 現況
 
 ---
 
@@ -137,9 +139,9 @@ assert hasattr(Client(), 'get_dataset')    # 0.1.0 alias 還在
 print('smoke ok:', len(df), 'rows')"
 ```
 
-- [ ] build 成功、`twine check` 通過
-- [ ] wheel 稽核通過
-- [ ] 乾淨環境冒煙通過
+- [x] build 成功、`twine check` 通過(2026-08-12)
+- [x] wheel 稽核通過 —— 過程中抓到並修好 `twmd.compat` 資料檔漏打包
+- [x] 乾淨環境冒煙通過
 
 ---
 
@@ -187,7 +189,7 @@ print('0.1.0 alias intact:', hasattr(Client(), 'get_dataset'))"
       **TWMD = TW Market Data = twmarketdata.com**
 - [ ] 把 `twmd-python-client`(0.1.0 原始碼)指向這個 repo,或封存並在 README 註明後續在此
 - [ ] 確認 PyPI 頁面顯示 Apache-2.0,且 README 渲染正常
-- [ ] `mapping/api_inconsistencies.md`(A–P 共 16 項)轉「API 一致性」工單
+- [ ] `mapping/api_inconsistencies.md`(**A–V 共 22 項**)轉「API 一致性」工單
 
 ---
 
