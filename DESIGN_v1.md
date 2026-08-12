@@ -405,7 +405,7 @@ df = fm.taiwan_stock_trading_daily_report(...)                         # D 級,N
 
 付費層的範例與測試在測試 key 核發前一律標 **`recorded pending test key`**,不寫看起來能跑但其實沒驗證過的 code。
 
-> 註:先前外洩的那把 key(`sk_live_…c3477`)本專案完全未使用,owner 另行輪替。本次所有探測皆為免 key 呼叫。
+> 註:先前外洩的那把 key 本專案完全未使用(owner 另行輪替),此處刻意不記錄其任何片段。本次所有探測皆為免 key 呼叫。
 
 ---
 

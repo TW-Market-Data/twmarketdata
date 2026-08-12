@@ -1,0 +1,1087 @@
+{
+ "finmind_source": "introspection of FinMind v2.0.7 @ 2026-08-12",
+ "method_count": 106,
+ "methods": {
+  "cnn_fear_greed_index": {
+   "confidence": "high",
+   "dataset_enum": "CnnFearGreedIndex",
+   "note": "Third-party sentiment index: not in the 82.",
+   "tier": "D",
+   "twmd": [],
+   "verified_by": "method_signature",
+   "via_get_data_only": false
+  },
+  "crude_oil_prices": {
+   "confidence": "high",
+   "dataset_enum": "CrudeOilPrices",
+   "note": "Commodity: not in the 82.",
+   "tier": "D",
+   "twmd": [],
+   "verified_by": "dataset_enum",
+   "via_get_data_only": true
+  },
+  "europe_stock_info": {
+   "confidence": "high",
+   "dataset_enum": "EuropeStockInfo",
+   "note": "Non-Taiwan.",
+   "tier": "D",
+   "twmd": [],
+   "verified_by": "dataset_enum",
+   "via_get_data_only": true
+  },
+  "exchange_rate": {
+   "confidence": "high",
+   "dataset_enum": "TaiwanExchangeRate",
+   "note": "TWMD covers USD/TWD plus the JPY/KRW/CNY export-competitor crosses, not a full FX board.",
+   "tier": "C",
+   "twmd": [
+    "competitor_fx"
+   ],
+   "verified_by": "dataset_enum",
+   "via_get_data_only": true
+  },
+  "exchange_rate_global": {
+   "confidence": "high",
+   "dataset_enum": "ExchangeRate",
+   "note": "Global FX board: not in the 82.",
+   "tier": "D",
+   "twmd": [],
+   "verified_by": "dataset_enum",
+   "via_get_data_only": true
+  },
+  "gold_price": {
+   "confidence": "high",
+   "dataset_enum": "GoldPrice",
+   "note": "Commodity: not in the 82.",
+   "tier": "D",
+   "twmd": [],
+   "verified_by": "dataset_enum",
+   "via_get_data_only": true
+  },
+  "government_bonds_yield": {
+   "confidence": "medium",
+   "dataset_enum": "GovernmentBondsYield",
+   "note": "Taiwan central-government bond curve by tenor. tier=max.",
+   "tier": "B",
+   "twmd": [
+    "bond_yield_curve"
+   ],
+   "verified_by": "dataset_enum",
+   "via_get_data_only": true
+  },
+  "interest_rate": {
+   "confidence": "medium",
+   "dataset_enum": "InterestRate",
+   "note": "tier=developer.",
+   "tier": "C",
+   "twmd": [
+    "interest_rate_snapshots"
+   ],
+   "verified_by": "dataset_enum",
+   "via_get_data_only": true
+  },
+  "japan_stock_info": {
+   "confidence": "high",
+   "dataset_enum": "JapanStockInfo",
+   "note": "Non-Taiwan.",
+   "tier": "D",
+   "twmd": [],
+   "verified_by": "dataset_enum",
+   "via_get_data_only": true
+  },
+  "price_bid_ask": {
+   "confidence": "high",
+   "dataset_enum": "TaiwanStockPriceBidAsk",
+   "note": "Best bid/ask: not in the 82.",
+   "tier": "D",
+   "twmd": [],
+   "verified_by": "dataset_enum",
+   "via_get_data_only": true
+  },
+  "taiwan_asset_swap_fixed_income_daily": {
+   "confidence": "high",
+   "dataset_enum": "TaiwanAssetSwapFixedIncomeDaily",
+   "note": "Not in the 82.",
+   "tier": "D",
+   "twmd": [],
+   "verified_by": "method_signature",
+   "via_get_data_only": false
+  },
+  "taiwan_asset_swap_option_daily": {
+   "confidence": "high",
+   "dataset_enum": "TaiwanAssetSwapOptionDaily",
+   "note": "Not in the 82.",
+   "tier": "D",
+   "twmd": [],
+   "verified_by": "method_signature",
+   "via_get_data_only": false
+  },
+  "taiwan_business_indicator": {
+   "confidence": "high",
+   "dataset_enum": "TaiwanBusinessIndicator",
+   "note": "A /business-indicator-monthly route exists in the OpenAPI but is not in the 82 sellable set.",
+   "tier": "D",
+   "twmd": [],
+   "verified_by": "method_signature",
+   "via_get_data_only": false
+  },
+  "taiwan_daily_short_sale_balances": {
+   "confidence": "medium",
+   "dataset_enum": "TaiwanDailyShortSaleBalances",
+   "note": "TWMD carries both margin-short (ms_*) and SBL (sbl_*) legs plus next-day limits; wider than the source.",
+   "tier": "B",
+   "twmd": [
+    "short_sale_balance_control"
+   ],
+   "verified_by": "method_signature",
+   "via_get_data_only": false
+  },
+  "taiwan_futopt_daily_info": {
+   "confidence": "medium",
+   "dataset_enum": "TaiwanFutOptDailyInfo",
+   "note": "Contract reference listing: not in the 82.",
+   "tier": "D",
+   "twmd": [],
+   "verified_by": "method_signature",
+   "via_get_data_only": false
+  },
+  "taiwan_futopt_tick_info": {
+   "confidence": "high",
+   "dataset_enum": "TaiwanFutOptTickInfo",
+   "note": "Not in the 82.",
+   "tier": "D",
+   "twmd": [],
+   "verified_by": "method_signature",
+   "via_get_data_only": false
+  },
+  "taiwan_futopt_tick_realtime": {
+   "confidence": "high",
+   "dataset_enum": "TaiwanFutOptTick",
+   "note": "Realtime: not in the 82.",
+   "tier": "D",
+   "twmd": [],
+   "verified_by": "method_signature",
+   "via_get_data_only": false
+  },
+  "taiwan_futures_daily": {
+   "confidence": "medium",
+   "dataset_enum": "TaiwanFuturesDaily",
+   "note": "tier=max.",
+   "tier": "B",
+   "twmd": [
+    "derivatives_market"
+   ],
+   "verified_by": "method_signature",
+   "via_get_data_only": false
+  },
+  "taiwan_futures_dealer_trading_volume_daily": {
+   "confidence": "high",
+   "dataset_enum": "TaiwanFuturesDealerTradingVolumeDaily",
+   "note": "Not in the 82.",
+   "tier": "D",
+   "twmd": [],
+   "verified_by": "method_signature",
+   "via_get_data_only": false
+  },
+  "taiwan_futures_final_settlement_price": {
+   "confidence": "high",
+   "dataset_enum": "TaiwanFuturesFinalSettlementPrice",
+   "note": "Filter product_type=futures. Route is /futures-final-settlement (NOT kebab(dataset_key)).",
+   "tier": "A",
+   "twmd": [
+    "taifex_final_settlement"
+   ],
+   "verified_by": "method_signature",
+   "via_get_data_only": false
+  },
+  "taiwan_futures_institutional_investors": {
+   "confidence": "medium",
+   "dataset_enum": "TaiwanFuturesInstitutionalInvestors",
+   "note": "Only inst_net_oi_foreign is carried, and it is NULL before 2023-07.",
+   "tier": "C",
+   "twmd": [
+    "futures_daily_context"
+   ],
+   "verified_by": "method_signature",
+   "via_get_data_only": false
+  },
+  "taiwan_futures_institutional_investors_after_hours": {
+   "confidence": "high",
+   "dataset_enum": "TaiwanFuturesInstitutionalInvestorsAfterHours",
+   "note": "Not in the 82.",
+   "tier": "D",
+   "twmd": [],
+   "verified_by": "method_signature",
+   "via_get_data_only": false
+  },
+  "taiwan_futures_open_interest_large_traders": {
+   "confidence": "high",
+   "dataset_enum": "TaiwanFuturesOpenInterestLargeTraders",
+   "note": "Not in the 82.",
+   "tier": "D",
+   "twmd": [],
+   "verified_by": "method_signature",
+   "via_get_data_only": false
+  },
+  "taiwan_futures_snapshot": {
+   "confidence": "high",
+   "dataset_enum": "taiwan_futures_snapshot",
+   "note": "Realtime: not in the 82.",
+   "tier": "D",
+   "twmd": [],
+   "verified_by": "method_signature",
+   "via_get_data_only": false
+  },
+  "taiwan_futures_spread_tick": {
+   "confidence": "high",
+   "dataset_enum": "TaiwanFuturesSpreadTick",
+   "note": "Not in the 82.",
+   "tier": "D",
+   "twmd": [],
+   "verified_by": "method_signature",
+   "via_get_data_only": false
+  },
+  "taiwan_futures_spread_trading": {
+   "confidence": "high",
+   "dataset_enum": "TaiwanFuturesSpreadTrading",
+   "note": "Not in the 82.",
+   "tier": "D",
+   "twmd": [],
+   "verified_by": "method_signature",
+   "via_get_data_only": false
+  },
+  "taiwan_futures_tick": {
+   "confidence": "high",
+   "dataset_enum": "TaiwanFuturesTick",
+   "note": "Tick data: not in the 82.",
+   "tier": "D",
+   "twmd": [],
+   "verified_by": "method_signature",
+   "via_get_data_only": false
+  },
+  "taiwan_option_daily": {
+   "confidence": "medium",
+   "dataset_enum": "TaiwanOptionDaily",
+   "note": "tier=max.",
+   "tier": "A",
+   "twmd": [
+    "options_daily_taifex"
+   ],
+   "verified_by": "method_signature",
+   "via_get_data_only": false
+  },
+  "taiwan_option_dealer_trading_volume_daily": {
+   "confidence": "high",
+   "dataset_enum": "TaiwanOptionDealerTradingVolumeDaily",
+   "note": "Not in the 82.",
+   "tier": "D",
+   "twmd": [],
+   "verified_by": "method_signature",
+   "via_get_data_only": false
+  },
+  "taiwan_option_final_settlement_price": {
+   "confidence": "medium",
+   "dataset_enum": "TaiwanOptionFinalSettlementPrice",
+   "note": "Filter product_type=option. A separate /option-final-settlement route exists but is not in the 82.",
+   "tier": "B",
+   "twmd": [
+    "taifex_final_settlement"
+   ],
+   "verified_by": "method_signature",
+   "via_get_data_only": false
+  },
+  "taiwan_option_institutional_investors": {
+   "confidence": "high",
+   "dataset_enum": "TaiwanOptionInstitutionalInvestors",
+   "note": "Not in the 82.",
+   "tier": "D",
+   "twmd": [],
+   "verified_by": "method_signature",
+   "via_get_data_only": false
+  },
+  "taiwan_option_institutional_investors_after_hours": {
+   "confidence": "high",
+   "dataset_enum": "TaiwanOptionInstitutionalInvestorsAfterHours",
+   "note": "Not in the 82.",
+   "tier": "D",
+   "twmd": [],
+   "verified_by": "method_signature",
+   "via_get_data_only": false
+  },
+  "taiwan_option_open_interest_large_traders": {
+   "confidence": "high",
+   "dataset_enum": "TaiwanOptionOpenInterestLargeTraders",
+   "note": "Not in the 82.",
+   "tier": "D",
+   "twmd": [],
+   "verified_by": "method_signature",
+   "via_get_data_only": false
+  },
+  "taiwan_option_tick": {
+   "confidence": "high",
+   "dataset_enum": "TaiwanOptionTick",
+   "note": "Tick data: not in the 82.",
+   "tier": "D",
+   "twmd": [],
+   "verified_by": "method_signature",
+   "via_get_data_only": false
+  },
+  "taiwan_option_vix": {
+   "confidence": "high",
+   "dataset_enum": "TaiwanOptionVix",
+   "note": "NOT the official VIX. TWMD derives ATM implied volatility via Black-Scholes from official TXO prices and TAIEX spot. Compat labels the column atm_iv_derived and warns.",
+   "tier": "C",
+   "twmd": [
+    "taifex_atm_iv"
+   ],
+   "verified_by": "method_signature",
+   "via_get_data_only": false
+  },
+  "taiwan_options_snapshot": {
+   "confidence": "high",
+   "dataset_enum": "taiwan_options_snapshot",
+   "note": "Realtime: not in the 82.",
+   "tier": "D",
+   "twmd": [],
+   "verified_by": "method_signature",
+   "via_get_data_only": false
+  },
+  "taiwan_securities_trader_info": {
+   "confidence": "high",
+   "dataset_enum": "TaiwanSecuritiesTraderInfo",
+   "note": "Firm master plus monthly branch-roster snapshot.",
+   "tier": "B",
+   "twmd": [
+    "securities_firm_master",
+    "broker_branch_reference"
+   ],
+   "verified_by": "method_signature",
+   "via_get_data_only": false
+  },
+  "taiwan_stock_10year": {
+   "confidence": "low",
+   "dataset_enum": "TaiwanStock10Year",
+   "note": "Semantics of the source series not established from the signature alone; deliberately left unmapped rather than guessed.",
+   "tier": "D",
+   "twmd": [],
+   "verified_by": "method_signature",
+   "via_get_data_only": false
+  },
+  "taiwan_stock_active_etf_holding": {
+   "confidence": "medium",
+   "dataset_enum": "TaiwanStockActiveETFHolding",
+   "note": "tier=developer.",
+   "tier": "C",
+   "twmd": [
+    "etf_holdings"
+   ],
+   "verified_by": "method_signature",
+   "via_get_data_only": false
+  },
+  "taiwan_stock_active_etf_holding_change": {
+   "confidence": "low",
+   "dataset_enum": "TaiwanStockActiveETFHoldingChange",
+   "note": "Change series would have to be diffed client-side from consecutive holdings snapshots.",
+   "tier": "C",
+   "twmd": [
+    "etf_holdings"
+   ],
+   "verified_by": "method_signature",
+   "via_get_data_only": false
+  },
+  "taiwan_stock_active_etf_info": {
+   "confidence": "medium",
+   "dataset_enum": "TaiwanStockActiveETFInfo",
+   "note": "TWMD metadata spans funds/ETFs generally rather than active ETFs specifically.",
+   "tier": "C",
+   "twmd": [
+    "fund_etf_metadata"
+   ],
+   "verified_by": "method_signature",
+   "via_get_data_only": false
+  },
+  "taiwan_stock_balance_sheet": {
+   "confidence": "high",
+   "dataset_enum": "TaiwanStockBalanceSheet",
+   "note": "Same wide->long reshape.",
+   "tier": "B",
+   "twmd": [
+    "balance_sheet"
+   ],
+   "verified_by": "method_signature",
+   "via_get_data_only": false
+  },
+  "taiwan_stock_block_trade": {
+   "confidence": "medium",
+   "dataset_enum": "TaiwanStockBlockTrade",
+   "note": "tier=developer.",
+   "tier": "A",
+   "twmd": [
+    "block_trade_daily"
+   ],
+   "verified_by": "method_signature",
+   "via_get_data_only": false
+  },
+  "taiwan_stock_book_and_trade": {
+   "confidence": "high",
+   "dataset_enum": "TaiwanStockStatisticsOfOrderBookAndTrade",
+   "note": "Order-book stats: not in the 82.",
+   "tier": "D",
+   "twmd": [],
+   "verified_by": "method_signature",
+   "via_get_data_only": false
+  },
+  "taiwan_stock_capital_reduction_reference_price": {
+   "confidence": "medium",
+   "dataset_enum": "TaiwanStockCapitalReductionReferencePrice",
+   "note": "TWMD covers both cash capital increase schedules and capital reduction history.",
+   "tier": "B",
+   "twmd": [
+    "capital_formation_events"
+   ],
+   "verified_by": "method_signature",
+   "via_get_data_only": false
+  },
+  "taiwan_stock_cash_flows_statement": {
+   "confidence": "high",
+   "dataset_enum": "TaiwanStockCashFlowsStatement",
+   "note": "Same wide->long reshape.",
+   "tier": "B",
+   "twmd": [
+    "cash_flow_statement"
+   ],
+   "verified_by": "method_signature",
+   "via_get_data_only": false
+  },
+  "taiwan_stock_convertible_bond_daily": {
+   "confidence": "low",
+   "dataset_enum": "TaiwanStockConvertibleBondDaily",
+   "note": "Overview carries reference_price, not a full CB OHLC series.",
+   "tier": "C",
+   "twmd": [
+    "convertible_bond_overview"
+   ],
+   "verified_by": "method_signature",
+   "via_get_data_only": false
+  },
+  "taiwan_stock_convertible_bond_daily_overview": {
+   "confidence": "high",
+   "dataset_enum": "TaiwanStockConvertibleBondDailyOverview",
+   "note": "",
+   "tier": "A",
+   "twmd": [
+    "convertible_bond_overview"
+   ],
+   "verified_by": "method_signature",
+   "via_get_data_only": false
+  },
+  "taiwan_stock_convertible_bond_info": {
+   "confidence": "high",
+   "dataset_enum": "TaiwanStockConvertibleBondInfo",
+   "note": "Includes matured bonds.",
+   "tier": "A",
+   "twmd": [
+    "bond_convertible_reference"
+   ],
+   "verified_by": "method_signature",
+   "via_get_data_only": false
+  },
+  "taiwan_stock_convertible_bond_institutional_investors": {
+   "confidence": "high",
+   "dataset_enum": "TaiwanStockConvertibleBondInstitutionalInvestors",
+   "note": "",
+   "tier": "A",
+   "twmd": [
+    "convertible_bond_institutional"
+   ],
+   "verified_by": "method_signature",
+   "via_get_data_only": false
+  },
+  "taiwan_stock_convertible_bond_monthly_analysis": {
+   "confidence": "medium",
+   "dataset_enum": "TaiwanStockConvertibleBondMonthlyAnalysis",
+   "note": "TDCC custody monthly.",
+   "tier": "B",
+   "twmd": [
+    "convertible_bond_monthly"
+   ],
+   "verified_by": "method_signature",
+   "via_get_data_only": false
+  },
+  "taiwan_stock_convertible_bond_put_provision": {
+   "confidence": "low",
+   "dataset_enum": "TaiwanStockConvertibleBondPutProvision",
+   "note": "Put/call provisions appear inside the overview board; extraction unconfirmed.",
+   "tier": "C",
+   "twmd": [
+    "convertible_bond_overview"
+   ],
+   "verified_by": "method_signature",
+   "via_get_data_only": false
+  },
+  "taiwan_stock_daily": {
+   "confidence": "high",
+   "dataset_enum": "TaiwanStockPrice",
+   "note": "L3 c.daily_price() merges both boards and adds a `market` column; no silent cross-board dedup.",
+   "tier": "A",
+   "twmd": [
+    "twse_daily_price",
+    "tpex_daily_price"
+   ],
+   "verified_by": "method_signature",
+   "via_get_data_only": false
+  },
+  "taiwan_stock_daily_adj": {
+   "confidence": "medium",
+   "dataset_enum": "TaiwanStockPriceAdj",
+   "note": "TWMD publishes adjustment FACTORS rather than a pre-adjusted series; compat applies the factors and marks the result adjusted=True with the factor version used.",
+   "tier": "C",
+   "twmd": [
+    "price_enhanced",
+    "twse_daily_price"
+   ],
+   "verified_by": "method_signature",
+   "via_get_data_only": false
+  },
+  "taiwan_stock_day_trading": {
+   "confidence": "low",
+   "dataset_enum": "TaiwanStockDayTrading",
+   "note": "Only a day_trade_ratio column on large-move days; NOT a full day-trading table. Ships as NotMappedError unless the caller opts in explicitly.",
+   "tier": "C",
+   "twmd": [
+    "price_move_context"
+   ],
+   "verified_by": "method_signature",
+   "via_get_data_only": false
+  },
+  "taiwan_stock_day_trading_borrowing_fee_rate": {
+   "confidence": "high",
+   "dataset_enum": "TaiwanStockDayTradingBorrowingFeeRate",
+   "note": "Not in the 82.",
+   "tier": "D",
+   "twmd": [],
+   "verified_by": "method_signature",
+   "via_get_data_only": false
+  },
+  "taiwan_stock_day_trading_suspension": {
+   "confidence": "high",
+   "dataset_enum": "TaiwanStockDayTradingSuspension",
+   "note": "PIT WARNING: suspension_start_date is a future effective date and no announcement column exists; as_of is rejected.",
+   "tier": "A",
+   "twmd": [
+    "day_trading_suspension"
+   ],
+   "verified_by": "method_signature",
+   "via_get_data_only": false
+  },
+  "taiwan_stock_delisting": {
+   "confidence": "medium",
+   "dataset_enum": "TaiwanStockDelisting",
+   "note": "TWMD models the full lifecycle (multiple stages), not a single delisting date.",
+   "tier": "B",
+   "twmd": [
+    "stock_delisting_lifecycle"
+   ],
+   "verified_by": "method_signature",
+   "via_get_data_only": false
+  },
+  "taiwan_stock_disposition_securities_period": {
+   "confidence": "high",
+   "dataset_enum": "TaiwanStockDispositionSecuritiesPeriod",
+   "note": "TWMD folds attention and disposition into one event table. PIT WARNING: event_date is the EFFECTIVE date and the announcement precedes it; as_of is rejected.",
+   "tier": "B",
+   "twmd": [
+    "attention_disposal_events"
+   ],
+   "verified_by": "method_signature",
+   "via_get_data_only": false
+  },
+  "taiwan_stock_dividend": {
+   "confidence": "medium",
+   "dataset_enum": "TaiwanStockDividend",
+   "note": "TWMD registry_status=partial. Compat surfaces status='partial' in Meta.",
+   "tier": "B",
+   "twmd": [
+    "dividends"
+   ],
+   "verified_by": "method_signature",
+   "via_get_data_only": false
+  },
+  "taiwan_stock_dividend_result": {
+   "confidence": "medium",
+   "dataset_enum": "TaiwanStockDividendResult",
+   "note": "TWMD models ex-rights/ex-dividend REFERENCE PRICES; registry_status=partial.",
+   "tier": "C",
+   "twmd": [
+    "corporate_actions"
+   ],
+   "verified_by": "method_signature",
+   "via_get_data_only": false
+  },
+  "taiwan_stock_every5seconds_index": {
+   "confidence": "high",
+   "dataset_enum": "TaiwanStockEvery5SecondsIndex",
+   "note": "5-second index: not in the 82.",
+   "tier": "D",
+   "twmd": [],
+   "verified_by": "method_signature",
+   "via_get_data_only": false
+  },
+  "taiwan_stock_financial_statement": {
+   "confidence": "high",
+   "dataset_enum": "TaiwanStockFinancialStatements",
+   "note": "FinMind returns a long (type, value) row per line item; TWMD is wide (revenue, operating_income, net_income, eps). Compat melts wide->long to preserve the caller's shape.",
+   "tier": "B",
+   "twmd": [
+    "income_statement"
+   ],
+   "verified_by": "method_signature",
+   "via_get_data_only": false
+  },
+  "taiwan_stock_government_bank_buy_sell": {
+   "confidence": "high",
+   "dataset_enum": "TaiwanStockGovernmentBankBuySell",
+   "note": "Eight-bank buy/sell: not in the 82.",
+   "tier": "D",
+   "twmd": [],
+   "verified_by": "method_signature",
+   "via_get_data_only": false
+  },
+  "taiwan_stock_holding_shares_per": {
+   "confidence": "high",
+   "dataset_enum": "TaiwanStockHoldingSharesPer",
+   "note": "COVERAGE WARNING: TWMD derives >=400 / >=1000 lot tiers rather than republishing the raw 15-tier table, AND the series accumulates forward from 2026-08 (the source keeps no archive). Earlier weeks are unobtainable, not missing. Compat states this in data_gaps.",
+   "tier": "C",
+   "twmd": [
+    "shareholding_concentration"
+   ],
+   "verified_by": "method_signature",
+   "via_get_data_only": false
+  },
+  "taiwan_stock_industry_chain": {
+   "confidence": "high",
+   "dataset_enum": "TaiwanStockIndustryChain",
+   "note": "PIT WARNING: capture_date is TWMD's OBSERVATION date, not the disclosure date, and history is not backfilled; point_in_time_safe=false.",
+   "tier": "B",
+   "twmd": [
+    "industry_chain"
+   ],
+   "verified_by": "method_signature",
+   "via_get_data_only": false
+  },
+  "taiwan_stock_industry_chain_money_flow": {
+   "confidence": "high",
+   "dataset_enum": "TaiwanStockIndustryChainMoneyFlow",
+   "note": "Not in the 82.",
+   "tier": "D",
+   "twmd": [],
+   "verified_by": "method_signature",
+   "via_get_data_only": false
+  },
+  "taiwan_stock_info": {
+   "confidence": "high",
+   "dataset_enum": "TaiwanStockInfo",
+   "note": "TWMD carries list_date/delist_date, so a delisting-aware universe is constructible.",
+   "tier": "A",
+   "twmd": [
+    "security_master"
+   ],
+   "verified_by": "method_signature",
+   "via_get_data_only": false
+  },
+  "taiwan_stock_info_with_warrant": {
+   "confidence": "medium",
+   "dataset_enum": "TaiwanStockInfoWithWarrant",
+   "note": "Compat concatenates the equity master with the warrant reference table.",
+   "tier": "B",
+   "twmd": [
+    "security_master",
+    "warrants_reference"
+   ],
+   "verified_by": "method_signature",
+   "via_get_data_only": false
+  },
+  "taiwan_stock_info_with_warrant_summary": {
+   "confidence": "low",
+   "dataset_enum": "TaiwanStockInfoWithWarrantSummary",
+   "note": "Summary aggregation shape unconfirmed.",
+   "tier": "C",
+   "twmd": [
+    "warrants_reference"
+   ],
+   "verified_by": "method_signature",
+   "via_get_data_only": false
+  },
+  "taiwan_stock_institutional_investors": {
+   "confidence": "high",
+   "dataset_enum": "TaiwanStockInstitutionalInvestorsBuySell",
+   "note": "GRAIN LOSS: FinMind splits by investor type (foreign / trust / dealer); TWMD institutional_flow is the three-institution NET TOTAL. Compat returns the total with investor type set to 'total' and warns. Per-type breakdown is not in the 82.",
+   "tier": "C",
+   "twmd": [
+    "institutional_flow"
+   ],
+   "verified_by": "method_signature",
+   "via_get_data_only": false
+  },
+  "taiwan_stock_institutional_investors_total": {
+   "confidence": "high",
+   "dataset_enum": "TaiwanStockTotalInstitutionalInvestors",
+   "note": "A market-level aggregate route exists in the OpenAPI (institutional-flow-market-aggregate) but is NOT in the 82 sellable set, so compat will not silently reach for it.",
+   "tier": "D",
+   "twmd": [],
+   "verified_by": "method_signature",
+   "via_get_data_only": false
+  },
+  "taiwan_stock_institutional_investors_wide": {
+   "confidence": "high",
+   "dataset_enum": "TaiwanStockInstitutionalInvestorsBuySellWide",
+   "note": "Same grain loss as above.",
+   "tier": "C",
+   "twmd": [
+    "institutional_flow"
+   ],
+   "verified_by": "method_signature",
+   "via_get_data_only": false
+  },
+  "taiwan_stock_kbar": {
+   "confidence": "high",
+   "dataset_enum": "TaiwanStockKBar",
+   "note": "Intraday K-bars: no intraday dataset among the 82.",
+   "tier": "D",
+   "twmd": [],
+   "verified_by": "method_signature",
+   "via_get_data_only": false
+  },
+  "taiwan_stock_loan_collateral_balance": {
+   "confidence": "high",
+   "dataset_enum": "TaiwanStockLoanCollateralBalance",
+   "note": "Not in the 82.",
+   "tier": "D",
+   "twmd": [],
+   "verified_by": "method_signature",
+   "via_get_data_only": false
+  },
+  "taiwan_stock_margin_maintenance": {
+   "confidence": "high",
+   "dataset_enum": "TaiwanStockMarginMaintenance",
+   "note": "HONEST GAP: margin_system_stats.maintenance_ratio is documented NULL (not loaded). Compat returns the column as NA and records it in data_gaps rather than substituting a computed proxy.",
+   "tier": "C",
+   "twmd": [
+    "margin_system_stats"
+   ],
+   "verified_by": "method_signature",
+   "via_get_data_only": false
+  },
+  "taiwan_stock_margin_purchase_short_sale": {
+   "confidence": "high",
+   "dataset_enum": "TaiwanStockMarginPurchaseShortSale",
+   "note": "",
+   "tier": "A",
+   "twmd": [
+    "margin_short"
+   ],
+   "verified_by": "method_signature",
+   "via_get_data_only": false
+  },
+  "taiwan_stock_margin_purchase_short_sale_total": {
+   "confidence": "medium",
+   "dataset_enum": "TaiwanStockTotalMarginPurchaseShortSale",
+   "note": "",
+   "tier": "A",
+   "twmd": [
+    "margin_short_total"
+   ],
+   "verified_by": "method_signature",
+   "via_get_data_only": false
+  },
+  "taiwan_stock_margin_short_sale_suspension": {
+   "confidence": "medium",
+   "dataset_enum": "TaiwanStockMarginShortSaleSuspension",
+   "note": "PIT WARNING: cover_date is a FUTURE event date and the table carries no announcement column, so as_of is rejected (PointInTimeUnavailable) rather than answered with a look-ahead.",
+   "tier": "C",
+   "twmd": [
+    "margin_short_cover_date"
+   ],
+   "verified_by": "method_signature",
+   "via_get_data_only": false
+  },
+  "taiwan_stock_market_value": {
+   "confidence": "low",
+   "dataset_enum": "TaiwanStockMarketValue",
+   "note": "Market cap is expected inside valuation_core_daily but is NOT confirmed. Ships as NotMappedError until a live row proves the column exists.",
+   "tier": "C",
+   "twmd": [
+    "valuation_core_daily"
+   ],
+   "verified_by": "method_signature",
+   "via_get_data_only": false
+  },
+  "taiwan_stock_market_value_weight": {
+   "confidence": "high",
+   "dataset_enum": "TaiwanStockMarketValueWeight",
+   "note": "",
+   "tier": "A",
+   "twmd": [
+    "market_value_weight"
+   ],
+   "verified_by": "method_signature",
+   "via_get_data_only": false
+  },
+  "taiwan_stock_month_revenue": {
+   "confidence": "high",
+   "dataset_enum": "TaiwanStockMonthRevenue",
+   "note": "PIT WARNING: knowledge_time_field is as_of_date = the revenue PERIOD, not the announcement date. announcement_date was NULL for 2330 in the 2026-08-12 free-tier probe, so as_of on this dataset raises PITDataMissingWarning instead of silently passing.",
+   "tier": "A",
+   "twmd": [
+    "monthly_revenue"
+   ],
+   "verified_by": "method_signature",
+   "via_get_data_only": false
+  },
+  "taiwan_stock_monthly": {
+   "confidence": "high",
+   "dataset_enum": "TaiwanStockMonthPrice",
+   "note": "Same as weekly: resampled from daily, derived=True.",
+   "tier": "C",
+   "twmd": [
+    "twse_daily_price",
+    "tpex_daily_price"
+   ],
+   "verified_by": "method_signature",
+   "via_get_data_only": false
+  },
+  "taiwan_stock_news": {
+   "confidence": "low",
+   "dataset_enum": "TaiwanStockNews",
+   "note": "Different publisher set and different coverage window; not a like-for-like news feed.",
+   "tier": "C",
+   "twmd": [
+    "company_news"
+   ],
+   "verified_by": "method_signature",
+   "via_get_data_only": false
+  },
+  "taiwan_stock_par_value_change": {
+   "confidence": "medium",
+   "dataset_enum": "TaiwanStockParValueChange",
+   "note": "",
+   "tier": "B",
+   "twmd": [
+    "stock_split_par_value_events"
+   ],
+   "verified_by": "method_signature",
+   "via_get_data_only": false
+  },
+  "taiwan_stock_per_pbr": {
+   "confidence": "high",
+   "dataset_enum": "TaiwanStockPER",
+   "note": "PER / PBR / dividend yield, PIT-safe on trade_date.",
+   "tier": "A",
+   "twmd": [
+    "valuation_data"
+   ],
+   "verified_by": "method_signature",
+   "via_get_data_only": false
+  },
+  "taiwan_stock_price_limit": {
+   "confidence": "medium",
+   "dataset_enum": "TaiwanStockPriceLimit",
+   "note": "tier=max. Field equivalence unverified until the test key lands.",
+   "tier": "A",
+   "twmd": [
+    "stock_price_limit_daily"
+   ],
+   "verified_by": "method_signature",
+   "via_get_data_only": false
+  },
+  "taiwan_stock_securities_lending": {
+   "confidence": "high",
+   "dataset_enum": "TaiwanStockSecuritiesLending",
+   "note": "",
+   "tier": "A",
+   "twmd": [
+    "securities_lending"
+   ],
+   "verified_by": "method_signature",
+   "via_get_data_only": false
+  },
+  "taiwan_stock_shareholding": {
+   "confidence": "high",
+   "dataset_enum": "TaiwanStockShareholding",
+   "note": "Foreign + mainland-China holding pct.",
+   "tier": "A",
+   "twmd": [
+    "foreign_holding"
+   ],
+   "verified_by": "method_signature",
+   "via_get_data_only": false
+  },
+  "taiwan_stock_split_price": {
+   "confidence": "medium",
+   "dataset_enum": "TaiwanStockSplitPrice",
+   "note": "",
+   "tier": "B",
+   "twmd": [
+    "stock_split_par_value_events"
+   ],
+   "verified_by": "method_signature",
+   "via_get_data_only": false
+  },
+  "taiwan_stock_suspended": {
+   "confidence": "low",
+   "dataset_enum": "TaiwanStockSuspended",
+   "note": "Suspension may be one lifecycle stage; unconfirmed.",
+   "tier": "C",
+   "twmd": [
+    "stock_delisting_lifecycle"
+   ],
+   "verified_by": "method_signature",
+   "via_get_data_only": false
+  },
+  "taiwan_stock_tick": {
+   "confidence": "high",
+   "dataset_enum": "TaiwanStockPriceTick",
+   "note": "Tick data: not in the 82.",
+   "tier": "D",
+   "twmd": [],
+   "verified_by": "method_signature",
+   "via_get_data_only": false
+  },
+  "taiwan_stock_tick_snapshot": {
+   "confidence": "high",
+   "dataset_enum": "taiwan_stock_tick_snapshot",
+   "note": "Realtime snapshot: not in the 82.",
+   "tier": "D",
+   "twmd": [],
+   "verified_by": "method_signature",
+   "via_get_data_only": false
+  },
+  "taiwan_stock_total_return_index": {
+   "confidence": "high",
+   "dataset_enum": "TaiwanStockTotalReturnIndex",
+   "note": "Dividend-reinvested index. Correct total-return backtest benchmark.",
+   "tier": "A",
+   "twmd": [
+    "return_index_daily"
+   ],
+   "verified_by": "method_signature",
+   "via_get_data_only": false
+  },
+  "taiwan_stock_trading_daily_report": {
+   "confidence": "high",
+   "dataset_enum": "TaiwanStockTradingDailyReport",
+   "note": "Broker-branch daily flow is not in the 82. TWMD has the branch ROSTER (broker_branch_reference / securities_firm_master) but not branch-level buy/sell.",
+   "tier": "D",
+   "twmd": [],
+   "verified_by": "method_signature",
+   "via_get_data_only": false
+  },
+  "taiwan_stock_trading_daily_report_secid_agg": {
+   "confidence": "high",
+   "dataset_enum": "TaiwanStockTradingDailyReportSecIdAgg",
+   "note": "Same as above.",
+   "tier": "D",
+   "twmd": [],
+   "verified_by": "method_signature",
+   "via_get_data_only": false
+  },
+  "taiwan_stock_trading_date": {
+   "confidence": "high",
+   "dataset_enum": "TaiwanStockTradingDate",
+   "note": "PIT note: absence of future rows means 'no evidence yet', not 'market closed'.",
+   "tier": "A",
+   "twmd": [
+    "trading_calendar"
+   ],
+   "verified_by": "method_signature",
+   "via_get_data_only": false
+  },
+  "taiwan_stock_warrant_trading_daily_report": {
+   "confidence": "high",
+   "dataset_enum": "TaiwanStockWarrantTradingDailyReport",
+   "note": "Same as above.",
+   "tier": "D",
+   "twmd": [],
+   "verified_by": "method_signature",
+   "via_get_data_only": false
+  },
+  "taiwan_stock_weekly": {
+   "confidence": "high",
+   "dataset_enum": "TaiwanStockWeekPrice",
+   "note": "No native weekly series; compat resamples daily bars and flags derived=True. Volume sums, OHLC from first/max/min/last within the trading week.",
+   "tier": "C",
+   "twmd": [
+    "twse_daily_price",
+    "tpex_daily_price"
+   ],
+   "verified_by": "method_signature",
+   "via_get_data_only": false
+  },
+  "taiwan_total_exchange_margin_maintenance": {
+   "confidence": "high",
+   "dataset_enum": "TaiwanTotalExchangeMarginMaintenance",
+   "note": "Same NULL maintenance_ratio caveat.",
+   "tier": "C",
+   "twmd": [
+    "margin_system_stats"
+   ],
+   "verified_by": "method_signature",
+   "via_get_data_only": false
+  },
+  "tse": {
+   "confidence": "medium",
+   "dataset_enum": "-",
+   "note": "Intraday TSE aggregate; not in the 82.",
+   "tier": "D",
+   "twmd": [],
+   "verified_by": "method_signature",
+   "via_get_data_only": false
+  },
+  "uk_stock_info": {
+   "confidence": "high",
+   "dataset_enum": "UKStockInfo",
+   "note": "Non-Taiwan.",
+   "tier": "D",
+   "twmd": [],
+   "verified_by": "dataset_enum",
+   "via_get_data_only": true
+  },
+  "us_stock_info": {
+   "confidence": "high",
+   "dataset_enum": "USStockInfo",
+   "note": "Non-Taiwan. TWMD is a Taiwan-market provider.",
+   "tier": "D",
+   "twmd": [],
+   "verified_by": "dataset_enum",
+   "via_get_data_only": true
+  },
+  "us_stock_price": {
+   "confidence": "high",
+   "dataset_enum": "USStockPrice",
+   "note": "Non-Taiwan.",
+   "tier": "D",
+   "twmd": [],
+   "verified_by": "method_signature",
+   "via_get_data_only": false
+  },
+  "us_stock_price_minute": {
+   "confidence": "high",
+   "dataset_enum": "USStockPriceMinute",
+   "note": "Non-Taiwan.",
+   "tier": "D",
+   "twmd": [],
+   "verified_by": "dataset_enum",
+   "via_get_data_only": true
+  },
+  "various_indicators_5s": {
+   "confidence": "high",
+   "dataset_enum": "TaiwanVariousIndicators5Seconds",
+   "note": "Not in the 82.",
+   "tier": "D",
+   "twmd": [],
+   "verified_by": "dataset_enum",
+   "via_get_data_only": true
+  }
+ },
+ "schema_version": 1
+}

@@ -1,0 +1,56 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "twmarketdata"
+version = "0.2.0"
+description = "Official Python SDK for TW Market Data (TWMD) — Taiwan market data with point-in-time correctness and surfaced data gaps"
+readme = "README.md"
+requires-python = ">=3.9"
+license = "Apache-2.0"
+license-files = ["LICENSE", "NOTICE"]
+authors = [{ name = "TW Market Data", email = "support@twmarketdata.com" }]
+keywords = ["taiwan", "stock", "market-data", "finance", "point-in-time", "backtesting", "twse", "tpex"]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Intended Audience :: Financial and Insurance Industry",
+  "Intended Audience :: Developers",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Topic :: Office/Business :: Financial :: Investment",
+  "Typing :: Typed",
+]
+dependencies = ["requests>=2.31.0"]
+
+[project.optional-dependencies]
+pandas = ["pandas>=1.5"]
+dev = ["pandas>=1.5", "pytest>=7.4", "mypy>=1.8", "types-requests", "responses>=0.24"]
+
+[project.urls]
+Homepage = "https://twmarketdata.com"
+Documentation = "https://twmarketdata.com/en/docs"
+Source = "https://github.com/twmarketdata/twmd-python-sdk"
+
+[tool.setuptools]
+packages = ["twmd", "twmd.compat"]
+
+[tool.setuptools.package-data]
+twmd = ["py.typed", "_registry.json", "*.pyi"]
+
+[tool.mypy]
+python_version = "3.9"
+strict = true
+warn_unreachable = true
+
+[[tool.mypy.overrides]]
+module = "pandas.*"
+ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+markers = ["network: hits the live API (free tier, no key required)"]
