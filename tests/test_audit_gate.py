@@ -73,6 +73,26 @@ def test_recorded_cassettes_carry_only_the_marker():
 
 
 # ------------------------------------------------------------ packaging
+def _declared_package_data(pyproject_text):
+    """Package names listed under [tool.setuptools.package-data].
+
+    Scanned line by line rather than with a section regex: the values are TOML
+    arrays, so splitting on "[" truncates the section at the first list.
+    """
+    import re
+    declared, inside = set(), False
+    for line in pyproject_text.splitlines():
+        stripped = line.strip()
+        if stripped.startswith("[") and stripped.endswith("]") and "=" not in stripped:
+            inside = stripped == "[tool.setuptools.package-data]"
+            continue
+        if inside:
+            match = re.match(r'^"?([\w.]+)"?\s*=', stripped)
+            if match:
+                declared.add(match.group(1))
+    return declared
+
+
 def test_every_package_directory_with_data_files_is_declared():
     """A package-data key covers only its own package.
 
@@ -83,19 +103,19 @@ def test_every_package_directory_with_data_files_is_declared():
     publishing.
     """
     import os
-    import re
 
     root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    declared = set(re.findall(r'^"?([\w.]+)"?\s*=\s*\[',
-                              open(os.path.join(root, "pyproject.toml"),
-                                   encoding="utf-8").read().split(
-                                       "[tool.setuptools.package-data]")[1].split("[")[0],
-                              re.M))
+    with open(os.path.join(root, "pyproject.toml"), encoding="utf-8") as fh:
+        declared = _declared_package_data(fh.read())
+    assert declared, "could not parse [tool.setuptools.package-data]"
+
     needs_data = set()
     for dirpath, _dirnames, filenames in os.walk(os.path.join(root, "twmd")):
+        if "__pycache__" in dirpath:
+            continue
         if any(f.endswith((".json", ".pyi")) or f == "py.typed" for f in filenames):
-            rel = os.path.relpath(dirpath, root).replace(os.sep, ".")
-            needs_data.add(rel)
+            needs_data.add(os.path.relpath(dirpath, root).replace(os.sep, "."))
+
     assert needs_data <= declared, (
         "package(s) ship data files but are not in [tool.setuptools.package-data]: %s"
         % sorted(needs_data - declared))
