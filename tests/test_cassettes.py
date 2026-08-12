@@ -147,21 +147,60 @@ def test_margin_system_stats_maintenance_ratio_is_null_as_documented():
 
 
 # --------------------------------------------------------------- plan edges
-def test_developer_tier_is_not_included_in_a_max_plan():
-    """A max-tier key still gets 402 on developer-tier datasets.
+def test_plan_boundaries_come_back_as_402_and_403_both_typed():
+    """Entitlement is per key, and it refuses in two different shapes.
 
-    So the tiers are not a single ladder: `developer` is not below `max`. The
-    SDK classifies these as TierRequiredError rather than an auth failure.
+    The developer key reads 6 developer-tier datasets and is refused on 3 more
+    with 403 `commercial_use_not_allowed` -- a licensing message, although the
+    use here is exactly the personal development and testing that plan permits.
+    macro_global (enterprise) is a 402. Both map to TierRequiredError, so callers
+    do not have to care which shape arrived.
     """
     gated = []
     for path in all_cassettes():
         with open(path, encoding="utf-8") as fh:
             c = json.load(fh)
-        if c["response"]["status"] == 402:
-            gated.append((c["dataset"], twmd.get(c["dataset"]).tier, c["sdk_error"]))
-    assert gated, "no 402s recorded"
-    assert all(err == "TierRequiredError" for _, _, err in gated)
-    assert {tier for _, tier, _ in gated} <= {"developer", "enterprise"}
+        if c["response"]["status"] in (402, 403):
+            gated.append((c["dataset"], c["response"]["status"],
+                          c["response"]["body"].get("error"), c["sdk_error"]))
+    assert gated, "no plan refusals recorded"
+    assert all(err == "TierRequiredError" for _, _, _, err in gated)
+    assert {code for _, _, code, _ in gated} <= {
+        "not_entitled_for_dataset", "commercial_use_not_allowed"}
+
+
+def test_the_developer_key_reached_exactly_its_six_datasets():
+    """The plan said "developer, 6 datasets" and six is what it read.
+
+    Recorded 2026-08-12. The three developer-tier datasets outside that
+    allow-list answer 403 commercial_use_not_allowed rather than naming the
+    allow-list, which is why the SDK keeps the server's wording instead of
+    paraphrasing it.
+    """
+    served = {"etf_holdings", "block_trade_daily", "subsidiary_investment",
+              "esg_ghg_carbon_disclosure", "governance_t187ap33_l",
+              "market_overview_snapshots"}
+    refused_403 = {"interest_rate_snapshots", "tax_business_registration",
+                   "macro_worldbank"}
+    for dataset in served:
+        assert load(dataset)["response"]["status"] == 200, dataset
+    for dataset in refused_403:
+        c = load(dataset)
+        assert c["response"]["status"] == 403, dataset
+        assert c["response"]["body"]["error"] == "commercial_use_not_allowed"
+
+
+def test_etf_holdings_keeps_no_history_so_a_change_series_is_underivable():
+    """Why taiwan_stock_active_etf_holding_change is D rather than C.
+
+    Live on 2026-08-12: as_of=2026-08-10 returns rows; 2026-07-01 and 2026-05-01
+    return none. Without consecutive snapshots there is nothing to diff.
+    """
+    rows, _ = extract_rows(load("etf_holdings")["response"]["body"])
+    if rows:
+        assert {"etf_code", "holding_ticker", "holding_weight", "as_of_date"} <= set(rows[0])
+    from twmd.compat import finmind as fm
+    assert fm.mapping_for("taiwan_stock_active_etf_holding_change")["tier"] == "D"
 
 
 def test_market_breadth_demands_a_filter_the_registry_does_not_know_about():

@@ -13,16 +13,170 @@
  },
  "response": {
   "body": {
-   "error": "not_entitled_for_dataset",
-   "message": "esg_ghg_carbon_disclosure 不在你目前的方案裡，developer 方案涵蓋它。免費層目前可讀 0 個資料集；下面這行不用金鑰也拿得到資料。",
-   "payment": {
-    "credits_url": "https://twmarketdata.com/pricing",
-    "price": 20.0,
-    "purchase_hint": "upgrade_plan"
-   }
+   "data": [
+    {
+     "as_of_date": "2026-07-31",
+     "data_gaps": [],
+     "disclosure_status": "disclosed",
+     "lineage": {
+      "row_index": 276,
+      "source_column": "範疇一取得驗證",
+      "source_url": "https://openapi.twse.com.tw/v1/opendata/t187ap46_L_1"
+     },
+     "market": "TWSE",
+     "metric_name": "scope1_assurance",
+     "metric_unit": null,
+     "metric_value": "是",
+     "not_investment_advice": true,
+     "report_year": 2025,
+     "source_family": "twse_ghg",
+     "source_provider": "twse_official",
+     "source_role": "esg_tesg_official_open",
+     "subfamily": "ghg_carbon_disclosure",
+     "ticker": "2330"
+    },
+    {
+     "as_of_date": "2026-07-31",
+     "data_gaps": [],
+     "disclosure_status": "disclosed",
+     "lineage": {
+      "row_index": 276,
+      "source_column": "範疇一排放量(噸CO2e)",
+      "source_url": "https://openapi.twse.com.tw/v1/opendata/t187ap46_L_1"
+     },
+     "market": "TWSE",
+     "metric_name": "scope1_emissions_tco2e",
+     "metric_unit": "噸CO2e",
+     "metric_value": "2196493.0000",
+     "not_investment_advice": true,
+     "report_year": 2025,
+     "source_family": "twse_ghg",
+     "source_provider": "twse_official",
+     "source_role": "esg_tesg_official_open",
+     "subfamily": "ghg_carbon_disclosure",
+     "ticker": "2330"
+    },
+    {
+     "as_of_date": "2026-07-31",
+     "data_gaps": [],
+     "disclosure_status": "disclosed",
+     "lineage": {
+      "row_index": 276,
+      "source_column": "範疇二取得驗證",
+      "source_url": "https://openapi.twse.com.tw/v1/opendata/t187ap46_L_1"
+     },
+     "market": "TWSE",
+     "metric_name": "scope2_assurance",
+     "metric_unit": null,
+     "metric_value": "是",
+     "not_investment_advice": true,
+     "report_year": 2025,
+     "source_family": "twse_ghg",
+     "source_provider": "twse_official",
+     "source_role": "esg_tesg_official_open",
+     "subfamily": "ghg_carbon_disclosure",
+     "ticker": "2330"
+    },
+    {
+     "as_of_date": "2026-07-31",
+     "data_gaps": [],
+     "disclosure_status": "disclosed",
+     "lineage": {
+      "row_index": 276,
+      "source_column": "範疇二排放量(噸CO2e)",
+      "source_url": "https://openapi.twse.com.tw/v1/opendata/t187ap46_L_1"
+     },
+     "market": "TWSE",
+     "metric_name": "scope2_emissions_tco2e",
+     "metric_unit": "噸CO2e",
+     "metric_value": "11130568.0000",
+     "not_investment_advice": true,
+     "report_year": 2025,
+     "source_family": "twse_ghg",
+     "source_provider": "twse_official",
+     "source_role": "esg_tesg_official_open",
+     "subfamily": "ghg_carbon_disclosure",
+     "ticker": "2330"
+    },
+    {
+     "as_of_date": "2026-07-31",
+     "data_gaps": [],
+     "disclosure_status": "disclosed",
+     "lineage": {
+      "row_index": 276,
+      "source_column": "範疇三取得驗證",
+      "source_url": "https://openapi.twse.com.tw/v1/opendata/t187ap46_L_1"
+     },
+     "market": "TWSE",
+     "metric_name": "scope3_assurance",
+     "metric_unit": null,
+     "metric_value": "是",
+     "not_investment_advice": true,
+     "report_year": 2025,
+     "source_family": "twse_ghg",
+     "source_provider": "twse_official",
+     "source_role": "esg_tesg_official_open",
+     "subfamily": "ghg_carbon_disclosure",
+     "ticker": "2330"
+    }
+   ],
+   "data_count": 5,
+   "dataset_id": "esg_tesg",
+   "envelope": {
+    "dataset_id": "esg_tesg",
+    "row_count": 5,
+    "scope": "esg_tesg_official_open_ghg_only"
+   },
+   "error": null,
+   "known_gaps": [
+    "official_open_current_snapshot_only",
+    "ghg_only_initial_baseline",
+    "no_paid_commercial_tesg_parity_claim",
+    "not_sustainability_report_pdf_ingestion",
+    "not_full_esg_score_product",
+    "not_inferred_esg_rating",
+    "not_investment_advice"
+   ],
+   "lineage": {
+    "source_families": [
+     "twse_ghg"
+    ],
+    "source_providers": [
+     "twse_official"
+    ],
+    "source_roles": [
+     "esg_tesg_official_open"
+    ]
+   },
+   "not_investment_advice": true,
+   "quality": {
+    "row_count": 5,
+    "sensitive_fields_exposed": false,
+    "ticker_count": 1
+   },
+   "request_context": {
+    "coverage_type": "official_open_current_snapshot_only",
+    "filters": {
+     "as_of_date": null,
+     "disclosure_status": null,
+     "limit": 5,
+     "market": null,
+     "metric_name": null,
+     "report_year": null,
+     "source_family": null,
+     "subfamily": null,
+     "ticker": "2330"
+    },
+    "max_as_of_date": "2026-07-31",
+    "min_as_of_date": "2026-07-31",
+    "scope": "esg_tesg_official_open_ghg_only"
+   },
+   "warnings": [
+    "not_investment_advice"
+   ]
   },
-  "status": 402
+  "status": 200
  },
  "route": "/v2/datasets/esg-ghg-carbon-disclosure",
- "sdk_error": "TierRequiredError"
+ "sdk_error": null
 }

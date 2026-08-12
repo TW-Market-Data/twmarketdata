@@ -12,16 +12,158 @@
  },
  "response": {
   "body": {
-   "error": "not_entitled_for_dataset",
-   "message": "block_trade_daily 不在你目前的方案裡，developer 方案涵蓋它。免費層目前可讀 0 個資料集；下面這行不用金鑰也拿得到資料。",
-   "payment": {
-    "credits_url": "https://twmarketdata.com/pricing",
-    "price": 20.0,
-    "purchase_hint": "upgrade_plan"
-   }
+   "data": [
+    {
+     "data_gaps": [],
+     "lineage": {
+      "official_endpoint": "twse_rwd_block_bfiauu_d",
+      "requested_month_token": "20260801",
+      "selected_table": "table0_daily_rows"
+     },
+     "market": "TWSE",
+     "source_family": "official_twse_block_trade_monthly",
+     "source_provider": "twse_official",
+     "source_role": "block_trade_daily",
+     "trade_date": "2026-08-10",
+     "trade_type": "Basket",
+     "trade_value": 0.0,
+     "trade_value_market_share_pct": 0.0,
+     "trade_volume": 0,
+     "trade_volume_market_share_pct": 0.0,
+     "trading_classification": "Non-paired Trade"
+    },
+    {
+     "data_gaps": [],
+     "lineage": {
+      "official_endpoint": "twse_rwd_block_bfiauu_d",
+      "requested_month_token": "20260801",
+      "selected_table": "table0_daily_rows"
+     },
+     "market": "TWSE",
+     "source_family": "official_twse_block_trade_monthly",
+     "source_provider": "twse_official",
+     "source_role": "block_trade_daily",
+     "trade_date": "2026-08-10",
+     "trade_type": "Single Stock",
+     "trade_value": 25630000.0,
+     "trade_value_market_share_pct": 0.0,
+     "trade_volume": 4000,
+     "trade_volume_market_share_pct": 0.0,
+     "trading_classification": "Non-paired Trade"
+    },
+    {
+     "data_gaps": [],
+     "lineage": {
+      "official_endpoint": "twse_rwd_block_bfiauu_d",
+      "requested_month_token": "20260801",
+      "selected_table": "table0_daily_rows"
+     },
+     "market": "TWSE",
+     "source_family": "official_twse_block_trade_monthly",
+     "source_provider": "twse_official",
+     "source_role": "block_trade_daily",
+     "trade_date": "2026-08-10",
+     "trade_type": "Basket",
+     "trade_value": 62841000.0,
+     "trade_value_market_share_pct": 0.01,
+     "trade_volume": 83000,
+     "trade_volume_market_share_pct": 0.0,
+     "trading_classification": "Paired Trade"
+    },
+    {
+     "data_gaps": [],
+     "lineage": {
+      "official_endpoint": "twse_rwd_block_bfiauu_d",
+      "requested_month_token": "20260801",
+      "selected_table": "table0_daily_rows"
+     },
+     "market": "TWSE",
+     "source_family": "official_twse_block_trade_monthly",
+     "source_provider": "twse_official",
+     "source_role": "block_trade_daily",
+     "trade_date": "2026-08-10",
+     "trade_type": "Single Stock",
+     "trade_value": 4113288730.0,
+     "trade_value_market_share_pct": 0.47,
+     "trade_volume": 4016000,
+     "trade_volume_market_share_pct": 0.04,
+     "trading_classification": "Paired Trade"
+    },
+    {
+     "data_gaps": [],
+     "lineage": {
+      "official_endpoint": "twse_rwd_block_bfiauu_d",
+      "requested_month_token": "20260801",
+      "selected_table": "table0_daily_rows"
+     },
+     "market": "TWSE",
+     "source_family": "official_twse_block_trade_monthly",
+     "source_provider": "twse_official",
+     "source_role": "block_trade_daily",
+     "trade_date": "2026-08-07",
+     "trade_type": "Basket",
+     "trade_value": 0.0,
+     "trade_value_market_share_pct": 0.0,
+     "trade_volume": 0,
+     "trade_volume_market_share_pct": 0.0,
+     "trading_classification": "Non-paired Trade"
+    }
+   ],
+   "data_count": 5,
+   "dataset_id": "block_trade_daily",
+   "envelope": {
+    "dataset_id": "block_trade_daily",
+    "row_count": 5,
+    "scope": "twse_block_trade_daily_summary_only"
+   },
+   "error": null,
+   "known_gaps": [
+    "twse_only_scope",
+    "summary_level_only",
+    "no_tpex_coverage",
+    "no_ordinary_ohlc_payload",
+    "not_broker_branch_trading",
+    "not_individual_trade_tape",
+    "parser_date_shape_protections_enabled",
+    "not_investment_advice"
+   ],
+   "lineage": {
+    "source_families": [
+     "official_twse_block_trade_monthly"
+    ],
+    "source_providers": [
+     "twse_official"
+    ],
+    "source_roles": [
+     "block_trade_daily"
+    ]
+   },
+   "quality": {
+    "market_count": 1,
+    "row_count": 5,
+    "sensitive_fields_exposed": false
+   },
+   "request_context": {
+    "coverage_type": "bounded_verified_daily_aggregation_set",
+    "filters": {
+     "date_from": null,
+     "date_to": null,
+     "limit": 5,
+     "market": null,
+     "source_family": null,
+     "trade_date": null
+    },
+    "max_trade_date": "2026-08-10",
+    "min_trade_date": "2026-08-07",
+    "scope": "twse_block_trade_daily_summary_only"
+   },
+   "warnings": [
+    "not_investment_advice",
+    "twse_only_scope"
+   ]
   },
-  "status": 402
+  "status": 200
  },
  "route": "/v2/datasets/block-trade-daily",
- "sdk_error": "TierRequiredError"
+ "sdk_error": null
 }

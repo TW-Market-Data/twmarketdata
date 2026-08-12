@@ -379,13 +379,11 @@
    "via_get_data_only": false
   },
   "taiwan_stock_active_etf_holding_change": {
-   "confidence": "low",
+   "confidence": "high",
    "dataset_enum": "TaiwanStockActiveETFHoldingChange",
-   "note": "STILL UNVERIFIED: etf_holdings is developer-tier and returned 402 for both the max key and the developer key issued on 2026-08-12, so its columns have never been observed. A change series would in any case have to be diffed client-side from consecutive snapshots.",
-   "tier": "C",
-   "twmd": [
-    "etf_holdings"
-   ],
+   "note": "Settled on live rows 2026-08-12 with a developer key. etf_holdings serves the CURRENT snapshot only: as_of=2026-08-10 returns rows, as_of=2026-07-01 and 2026-05-01 return none. With no history retained there are no consecutive snapshots to diff, so a change series cannot be derived client-side either. The holdings snapshot itself maps fine (taiwan_stock_active_etf_holding); only the change series is unavailable.",
+   "tier": "D",
+   "twmd": [],
    "verified_by": "method_signature",
    "via_get_data_only": false
   },

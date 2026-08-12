@@ -172,10 +172,12 @@ MAPPINGS = [
     ("taiwan_stock_active_etf_info", "TaiwanStockActiveETFInfo", "C", "fund_etf_metadata", "medium",
      "TWMD metadata spans funds/ETFs generally rather than active ETFs specifically."),
     ("taiwan_stock_active_etf_holding", "TaiwanStockActiveETFHolding", "C", "etf_holdings", "medium", "tier=developer."),
-    ("taiwan_stock_active_etf_holding_change", "TaiwanStockActiveETFHoldingChange", "C", "etf_holdings", "low",
-     "STILL UNVERIFIED: etf_holdings is developer-tier and returned 402 for both the max key and "
-     "the developer key issued on 2026-08-12, so its columns have never been observed. A change "
-     "series would in any case have to be diffed client-side from consecutive snapshots."),
+    ("taiwan_stock_active_etf_holding_change", "TaiwanStockActiveETFHoldingChange", "D", "", "high",
+     "Settled on live rows 2026-08-12 with a developer key. etf_holdings serves the CURRENT "
+     "snapshot only: as_of=2026-08-10 returns rows, as_of=2026-07-01 and 2026-05-01 return none. "
+     "With no history retained there are no consecutive snapshots to diff, so a change series "
+     "cannot be derived client-side either. The holdings snapshot itself maps fine "
+     "(taiwan_stock_active_etf_holding); only the change series is unavailable."),
 
     # ---------------------------------------------------- convertible bonds
     ("taiwan_stock_convertible_bond_info", "TaiwanStockConvertibleBondInfo", "A", "bond_convertible_reference", "high", "Includes matured bonds."),

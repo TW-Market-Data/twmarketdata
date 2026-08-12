@@ -12,15 +12,10 @@
  },
  "response": {
   "body": {
-   "error": "not_entitled_for_dataset",
-   "message": "macro_worldbank 不在你目前的方案裡，developer 方案涵蓋它。免費層目前可讀 0 個資料集；下面這行不用金鑰也拿得到資料。",
-   "payment": {
-    "credits_url": "https://twmarketdata.com/pricing",
-    "price": 20.0,
-    "purchase_hint": "upgrade_plan"
-   }
+   "error": "commercial_use_not_allowed",
+   "message": "Developer 僅限個人開發與測試使用，不可用於商業產品或對外服務。 升級至 Pro 或 Enterprise 以用於商業產品與正式環境。"
   },
-  "status": 402
+  "status": 403
  },
  "route": "/v2/datasets/macro-worldbank",
  "sdk_error": "TierRequiredError"

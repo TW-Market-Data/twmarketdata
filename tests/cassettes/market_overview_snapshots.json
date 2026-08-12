@@ -12,16 +12,223 @@
  },
  "response": {
   "body": {
-   "error": "not_entitled_for_dataset",
-   "message": "market_overview_snapshots 不在你目前的方案裡，developer 方案涵蓋它。免費層目前可讀 0 個資料集；下面這行不用金鑰也拿得到資料。",
-   "payment": {
-    "credits_url": "https://twmarketdata.com/pricing",
-    "price": 20.0,
-    "purchase_hint": "upgrade_plan"
-   }
+   "api_version": "v2",
+   "data": [
+    {
+     "advancers": 966,
+     "as_of_date": "2026-08-10",
+     "currency": "TWD",
+     "data_gaps": [
+      "missing_transaction_count_from_approved_inputs",
+      "missing_listed_count_from_approved_inputs"
+     ],
+     "decliners": 292,
+     "index_change": 702.85,
+     "index_change_pct": 1.59,
+     "index_level": 44928.76,
+     "is_placeholder": false,
+     "lineage": {
+      "derivation": "index_data_items(TWSE_TAIEX) LEFT JOIN market_breadth_items(TWSE) on as_of_date",
+      "emitter": "build_market_overview_snapshot_candidates",
+      "source_date": "2026-08-10"
+     },
+     "listed_count": null,
+     "market_code": "TWSE",
+     "market_scope": "TWSE",
+     "not_investment_advice": true,
+     "provider": "twse_official",
+     "source_role": "official_market_overview",
+     "traded_count": null,
+     "transaction_count": null,
+     "turnover_value": 873103060859.0,
+     "unchanged": 108,
+     "volume_shares": 7448777482.0
+    },
+    {
+     "advancers": 577,
+     "as_of_date": "2026-08-07",
+     "currency": "TWD",
+     "data_gaps": [
+      "missing_transaction_count_from_approved_inputs",
+      "missing_listed_count_from_approved_inputs"
+     ],
+     "decliners": 679,
+     "index_change": -170.79,
+     "index_change_pct": -0.38,
+     "index_level": 44225.91,
+     "is_placeholder": false,
+     "lineage": {
+      "derivation": "index_data_items(TWSE_TAIEX) LEFT JOIN market_breadth_items(TWSE) on as_of_date",
+      "emitter": "build_market_overview_snapshot_candidates",
+      "source_date": "2026-08-07"
+     },
+     "listed_count": null,
+     "market_code": "TWSE",
+     "market_scope": "TWSE",
+     "not_investment_advice": true,
+     "provider": "twse_official",
+     "source_role": "official_market_overview",
+     "traded_count": null,
+     "transaction_count": null,
+     "turnover_value": 841421920995.0,
+     "unchanged": 104,
+     "volume_shares": 6630144701.0
+    },
+    {
+     "advancers": 619,
+     "as_of_date": "2026-08-06",
+     "currency": "TWD",
+     "data_gaps": [
+      "missing_transaction_count_from_approved_inputs",
+      "missing_listed_count_from_approved_inputs"
+     ],
+     "decliners": 602,
+     "index_change": -214.9,
+     "index_change_pct": -0.48,
+     "index_level": 44396.7,
+     "is_placeholder": false,
+     "lineage": {
+      "derivation": "index_data_items(TWSE_TAIEX) LEFT JOIN market_breadth_items(TWSE) on as_of_date",
+      "emitter": "build_market_overview_snapshot_candidates",
+      "source_date": "2026-08-06"
+     },
+     "listed_count": null,
+     "market_code": "TWSE",
+     "market_scope": "TWSE",
+     "not_investment_advice": true,
+     "provider": "twse_official",
+     "source_role": "official_market_overview",
+     "traded_count": null,
+     "transaction_count": null,
+     "turnover_value": 965941199067.0,
+     "unchanged": 145,
+     "volume_shares": 7473677769.0
+    },
+    {
+     "advancers": 901,
+     "as_of_date": "2026-08-05",
+     "currency": "TWD",
+     "data_gaps": [
+      "missing_transaction_count_from_approved_inputs",
+      "missing_listed_count_from_approved_inputs"
+     ],
+     "decliners": 342,
+     "index_change": 1250.94,
+     "index_change_pct": 2.88,
+     "index_level": 44611.6,
+     "is_placeholder": false,
+     "lineage": {
+      "derivation": "index_data_items(TWSE_TAIEX) LEFT JOIN market_breadth_items(TWSE) on as_of_date",
+      "emitter": "build_market_overview_snapshot_candidates",
+      "source_date": "2026-08-05"
+     },
+     "listed_count": null,
+     "market_code": "TWSE",
+     "market_scope": "TWSE",
+     "not_investment_advice": true,
+     "provider": "twse_official",
+     "source_role": "official_market_overview",
+     "traded_count": null,
+     "transaction_count": null,
+     "turnover_value": 1183558261223.0,
+     "unchanged": 117,
+     "volume_shares": 9762523934.0
+    },
+    {
+     "advancers": 779,
+     "as_of_date": "2026-08-04",
+     "currency": "TWD",
+     "data_gaps": [
+      "missing_transaction_count_from_approved_inputs",
+      "missing_listed_count_from_approved_inputs"
+     ],
+     "decliners": 476,
+     "index_change": -25.75,
+     "index_change_pct": -0.06,
+     "index_level": 43360.66,
+     "is_placeholder": false,
+     "lineage": {
+      "derivation": "index_data_items(TWSE_TAIEX) LEFT JOIN market_breadth_items(TWSE) on as_of_date",
+      "emitter": "build_market_overview_snapshot_candidates",
+      "source_date": "2026-08-04"
+     },
+     "listed_count": null,
+     "market_code": "TWSE",
+     "market_scope": "TWSE",
+     "not_investment_advice": true,
+     "provider": "twse_official",
+     "source_role": "official_market_overview",
+     "traded_count": null,
+     "transaction_count": null,
+     "turnover_value": 1072200574655.0,
+     "unchanged": 109,
+     "volume_shares": 8301845275.0
+    }
+   ],
+   "data_as_of": "2026-08-10",
+   "data_count": 5,
+   "dataset": "market_overview_snapshots",
+   "dataset_id": "market_overview_snapshots",
+   "dataset_version": "v2.0.0-preview",
+   "error": {
+    "blocking_gate": null,
+    "dataset": "market_overview_snapshots",
+    "error_code": null,
+    "error_message": null,
+    "request_id": "read-api-20260810"
+   },
+   "known_gaps": [
+    "missing_listed_count_from_approved_inputs",
+    "missing_transaction_count_from_approved_inputs"
+   ],
+   "lineage": {
+    "fallback_chain": [],
+    "policy_notes": [
+     "official/public-first canonical",
+     "market_overview_snapshots is the seeded anchor surface for index and breadth derivations",
+     "not_investment_advice"
+    ],
+    "selected_source": "market_overview_snapshots",
+    "source_role": "canonical"
+   },
+   "quality": {
+    "completeness_ratio": 1.0,
+    "freshness_as_of": "2026-08-10",
+    "freshness_state": "fresh",
+    "quality_status": "ready"
+   },
+   "release_date": "2026-08-10",
+   "release_version": "v2.2026-08-10.preview",
+   "request_context": {
+    "as_of_date": "2026-08-10",
+    "coverage_type": "seeded_anchor_snapshot_set",
+    "dataset_view": "market_overview_snapshots_v1",
+    "date_range": {
+     "date_from": null,
+     "date_to": null
+    },
+    "family": "taiwan_macro",
+    "field_group_type": "canonical",
+    "market_filter": "TWSE",
+    "scope": "market_overview_snapshots_only",
+    "supported_filter_fields": [
+     "market",
+     "as_of_date",
+     "date_from",
+     "date_to",
+     "latest"
+    ],
+    "supported_sort_by": [
+     "as_of_date"
+    ],
+    "ticker": "TWSE"
+   },
+   "warnings": [
+    "not_investment_advice"
+   ]
   },
-  "status": 402
+  "status": 200
  },
  "route": "/v2/datasets/market-overview-snapshots",
- "sdk_error": "TierRequiredError"
+ "sdk_error": null
 }

@@ -46,13 +46,26 @@ def test_non_taiwan_calls_refuse():
         fm.us_stock_price(stock_id="AAPL")
 
 
-def test_low_confidence_mapping_is_withheld_not_guessed():
-    # etf_holdings is developer-tier and returned 402 to both the max key and
-    # the developer key, so its columns have never been observed.
+def test_the_last_unverified_mapping_is_one_nobody_can_settle_from_here():
+    """taiwan_stock_10year is the only mapping still graded low.
+
+    Its source semantics cannot be established from a method signature, and
+    guessing them is exactly what this table exists to avoid. Everything else
+    has been checked against live rows.
+    """
+    import csv
+    with open("mapping/finmind_map.csv", encoding="utf-8") as fh:
+        low = [r for r in csv.DictReader(fh) if r["confidence"] == "low"]
+    assert [r["finmind_method"] for r in low] == ["taiwan_stock_10year"]
+    with pytest.raises(NotMappedError):
+        fm.taiwan_stock_10year(stock_id="2330")
+
+
+def test_etf_holding_change_is_refused_because_history_is_not_kept():
     with pytest.raises(NotMappedError) as exc:
         fm.taiwan_stock_active_etf_holding_change(stock_id="0050")
-    assert "not been verified row by row" in str(exc.value)
-    assert "etf_holdings" in str(exc.value)              # candidate is still named
+    assert "CURRENT snapshot only" in str(exc.value)
+    assert "cannot be derived" in str(exc.value)
 
 
 def test_mapping_verified_against_live_rows_now_serves(session):

@@ -445,6 +445,32 @@ x-request-id: req_6f95b7d164e248f1
 
 **SDK 對策**:不從 tier 推論可讀性(這點不因上面的修訂而改變 —— 反而更成立);`TierRequiredError` 保留 server 原文。
 
-**附註**:63 支付費資料集的錄製中**沒有出現任何 403**(52×200、10×402、1×400)。若 catalog 形狀缺陷會以 403 呈現,那條路徑在本次錄製中沒有被觸發。
+### 第三次量測(新鑄的 developer 拋棄金鑰,plan=developer / 6 datasets / quota 2000 / 24h)
+
+重錄先前 10 支回 402 的資料集:
+
+| 結果 | 資料集 |
+|---|---|
+| **200** (6 支,正好等於方案宣告的 6 datasets) | `etf_holdings`、`block_trade_daily`、`subsidiary_investment`、`esg_ghg_carbon_disclosure`、`governance_t187ap33_l`、`market_overview_snapshots` |
+| **403 `commercial_use_not_allowed`** (3 支) | `interest_rate_snapshots`、`tax_business_registration`、`macro_worldbank` |
+| **402 `not_entitled_for_dataset`** (1 支) | `macro_global`(enterprise 級,合理) |
+
+**403 的錯誤碼與情境對不上。** 完整回應:
+
+```
+GET /v2/datasets/interest-rate-snapshot?limit=2      x-request-id: req_945946cacc15454e
+HTTP/2 403
+{"error": "commercial_use_not_allowed",
+ "message": "Developer 僅限個人開發與測試使用,不可用於商業產品或對外服務。
+             升級至 Pro 或 Enterprise 以用於商業產品與正式環境。"}
+```
+
+這把 key 的用途**正是**個人開發與測試(錄 SDK 測試用 cassette),而且同一把 key 讀另外 6 支 developer 級資料集都是 200。所以實際成因不是商業用途,而是**該資料集不在這把 key 的 6 支 allow-list 內** —— 但回的錯誤碼講的是授權條款,不是 allow-list。
+
+**影響**:使用者照訊息去升級 Pro 也解決不了問題,因為問題不在方案等級。
+
+**建議**:allow-list 未命中要回自己的錯誤碼(或 402 `not_entitled_for_dataset`),訊息列出這把 key 實際涵蓋的資料集,而不是引用商業使用條款。
+
+**SDK 對策**:`commercial_use_not_allowed` 已在 `_ENTITLEMENT_CODES` 內,402/403 兩種形狀都對映到 `TierRequiredError`,且保留 server 原文 —— 呼叫端不必分辨是哪一種。
 
 **建議**:錯誤訊息應指出**這把 key 目前的 entitlement 清單**,而不是重述資料集的 tier 標籤 —— 現在的訊息會讓已經買了 developer 的人以為自己沒買。

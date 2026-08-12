@@ -13,16 +13,62 @@
  },
  "response": {
   "body": {
-   "error": "not_entitled_for_dataset",
-   "message": "etf_holdings 不在你目前的方案裡，developer 方案涵蓋它。免費層目前可讀 0 個資料集；下面這行不用金鑰也拿得到資料。",
-   "payment": {
-    "credits_url": "https://twmarketdata.com/pricing",
-    "price": 20.0,
-    "purchase_hint": "upgrade_plan"
-   }
+   "data": [],
+   "data_count": 0,
+   "dataset_id": "etf_holdings",
+   "envelope": {
+    "dataset_id": "etf_holdings",
+    "row_count": 0,
+    "scope": "fubon_issuer_limited_latest_available_snapshot_set"
+   },
+   "error": null,
+   "known_gaps": [
+    "latest_available_snapshot_only",
+    "issuer_limited_fubon_only",
+    "approved_etf_scope_only=fubon_page_discovered_50_etfs",
+    "mixed_source_as_of_dates=2026-06-04,2026-06-05",
+    "holding_market_nullable_when_not_source_provided",
+    "no_market_wide_etf_holdings",
+    "no_historical_holdings",
+    "no_non_fubon_issuer_coverage",
+    "not_fund_etf_metadata",
+    "not_index_constituents",
+    "not_etf_price_or_performance",
+    "not_investment_advice"
+   ],
+   "lineage": {
+    "source_families": [],
+    "source_providers": [],
+    "source_roles": []
+   },
+   "quality": {
+    "etf_count": 0,
+    "row_count": 0,
+    "sensitive_fields_exposed": false
+   },
+   "reason": "etf_holdings_not_found",
+   "request_context": {
+    "coverage_type": "latest_available_snapshot_set",
+    "filters": {
+     "as_of_date": null,
+     "etf_code": null,
+     "holding_ticker": null,
+     "issuer": "2330",
+     "limit": 5,
+     "market": null,
+     "source_family": null
+    },
+    "max_as_of_date": null,
+    "min_as_of_date": null,
+    "scope": "fubon_issuer_limited_latest_available_snapshot_set"
+   },
+   "status": "not_found",
+   "warnings": [
+    "not_investment_advice"
+   ]
   },
-  "status": 402
+  "status": 200
  },
  "route": "/v2/datasets/etf-holdings",
- "sdk_error": "TierRequiredError"
+ "sdk_error": null
 }
