@@ -1,0 +1,63 @@
+{
+ "dataset": "convertible_bond_institutional",
+ "recorded_with": "restricted test key (value never stored)",
+ "request": {
+  "headers": {
+   "X-API-Key": "REDACTED"
+  },
+  "method": "GET",
+  "params": {
+   "limit": 5,
+   "ticker": "2330"
+  }
+ },
+ "response": {
+  "body": {
+   "data": [],
+   "data_count": 0,
+   "dataset_id": "convertible_bond_institutional",
+   "envelope": {
+    "dataset_id": "convertible_bond_institutional",
+    "row_count": 0,
+    "scope": "tpex_cb_three_major_institutional_only"
+   },
+   "error": null,
+   "known_gaps": [
+    "tpex_only",
+    "recent_window_initial_load_full_history_backfill_pending",
+    "unit_is_lots_張",
+    "not_investment_advice"
+   ],
+   "lineage": {
+    "semantics": "TPEx CBBIGD 可轉債三大法人日交易: foreign/trust/dealer buy/sell/net + total_net (張)",
+    "source_families": []
+   },
+   "quality": {
+    "cb_count": 0,
+    "row_count": 0,
+    "sensitive_fields_exposed": false
+   },
+   "reason": "convertible_bond_institutional_not_found",
+   "request_context": {
+    "coverage_type": "official_dated_daily",
+    "filters": {
+     "cb_id": "2330",
+     "date_from": null,
+     "date_to": null,
+     "limit": 5,
+     "trade_date": null
+    },
+    "max_trade_date": null,
+    "min_trade_date": null,
+    "scope": "tpex_cb_three_major_institutional_only"
+   },
+   "status": "not_found",
+   "warnings": [
+    "not_investment_advice"
+   ]
+  },
+  "status": 200
+ },
+ "route": "/v2/datasets/convertible-bond-institutional",
+ "sdk_error": null
+}

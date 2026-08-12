@@ -10,18 +10,27 @@ like the rate limit it is, not surfaced as a permissions failure.
 from __future__ import annotations
 
 import random
+import re
 import threading
 import time
 from typing import Any, Dict, Mapping, Optional, Tuple
 
 import requests
 
+import warnings
+
 from .envelope import extract_error
 from .errors import RateLimitedError, TwmdError, TwmdServerError, classify
+from .meta import TruncatedResultWarning
 
 __all__ = ["Transport", "Response"]
 
 _RETRY_STATUSES = frozenset({429, 500, 502, 503, 504})
+#: The OpenAPI-declared row cap is not always what the server enforces --
+#: margin_system_stats declares 5000 and rejects anything over 1000. The server
+#: names the real cap in its 422, so honour it once rather than failing a call
+#: the caller had no way to get right.
+_LIMIT_CAP = re.compile(r"limit:.*?less than or equal to (\d+)", re.I)
 _RETRY_CODES = frozenset({
     "temporarily_blocked", "rate_limit_exceeded", "upstream_error", "upstream_timeout",
 })
@@ -102,7 +111,9 @@ class Transport:
         clean = {k: v for k, v in params.items() if v is not None}
         last_error: Optional[TwmdError] = None
 
-        for attempt in range(self.max_retries + 1):
+        attempt = -1
+        while attempt < self.max_retries:
+            attempt += 1
             with self._semaphore:
                 try:
                     raw = self._session.get(url, params=clean, headers=headers,
@@ -139,6 +150,19 @@ class Transport:
                 dataset=dataset, retry_after=retry_after,
                 details=payload if isinstance(payload, Mapping) else {"raw": payload},
             )
+
+            cap = _LIMIT_CAP.search(message or "")
+            if cap and int(cap.group(1)) < int(clean.get("limit", 0) or 0):
+                enforced = int(cap.group(1))
+                warnings.warn(
+                    "%s enforces limit<=%d though the API spec declares %s; retrying "
+                    "with %d. The result may be incomplete."
+                    % (dataset or route, enforced, clean.get("limit"), enforced),
+                    TruncatedResultWarning, stacklevel=3,
+                )
+                clean["limit"] = enforced
+                attempt -= 1          # a spec correction is not a failed attempt
+                continue
 
             retryable = raw.status_code in _RETRY_STATUSES or code in _RETRY_CODES
             if retryable and attempt < self.max_retries:

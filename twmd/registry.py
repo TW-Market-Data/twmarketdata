@@ -88,6 +88,12 @@ class DatasetInfo:
         return list(self._d.get("api_other_params") or [])
 
     @property
+    def limit_max(self) -> Optional[int]:
+        """This route's own row cap. Five different values are in use."""
+        value = self._d.get("limit_max")
+        return int(value) if value else None
+
+    @property
     def supports_offset(self) -> bool:
         return bool(self._d.get("supports_offset"))
 
@@ -218,6 +224,7 @@ def capabilities(dataset: str) -> Dict[str, Any]:
         "point_in_time_safe": d.point_in_time_safe,
         "data_gaps": "server" if d.supports_data_gaps else "client_derived_or_unknown",
         "pagination": "offset" if d.supports_offset else "limit_only",
+        "limit_max": d.limit_max,
         "filters": d.supported_filters(),
         "entity_param": d.entity_param,
         "entity_is_stock_ticker": d.entity_is_stock_ticker,

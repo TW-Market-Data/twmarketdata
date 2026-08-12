@@ -1,0 +1,63 @@
+{
+ "dataset": "convertible_bond_monthly",
+ "recorded_with": "restricted test key (value never stored)",
+ "request": {
+  "headers": {
+   "X-API-Key": "REDACTED"
+  },
+  "method": "GET",
+  "params": {
+   "limit": 5,
+   "ticker": "2330"
+  }
+ },
+ "response": {
+  "body": {
+   "data": [],
+   "data_count": 0,
+   "dataset_id": "convertible_bond_monthly",
+   "envelope": {
+    "dataset_id": "convertible_bond_monthly",
+    "row_count": 0,
+    "scope": "tdcc_cb_monthly_custody_only"
+   },
+   "error": null,
+   "known_gaps": [
+    "tpex_cb_only",
+    "latest_period_only_no_history_monthly_accumulator",
+    "unit_is_lots_張",
+    "not_investment_advice"
+   ],
+   "lineage": {
+    "semantics": "TDCC getOD id=2-8 可轉債集保月分析: custody_balance/last_month/change/issued/accounts (張)",
+    "source_families": []
+   },
+   "quality": {
+    "cb_count": 0,
+    "row_count": 0,
+    "sensitive_fields_exposed": false
+   },
+   "reason": "convertible_bond_monthly_not_found",
+   "request_context": {
+    "coverage_type": "official_monthly_accumulator",
+    "filters": {
+     "cb_id": "2330",
+     "data_month": null,
+     "limit": 5,
+     "month_from": null,
+     "month_to": null
+    },
+    "max_data_month": null,
+    "min_data_month": null,
+    "scope": "tdcc_cb_monthly_custody_only"
+   },
+   "status": "not_found",
+   "warnings": [
+    "not_investment_advice"
+   ]
+  },
+  "status": 200
+ },
+ "route": "/v2/datasets/convertible-bond-monthly",
+ "sdk_error": null
+}

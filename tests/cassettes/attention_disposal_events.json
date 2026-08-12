@@ -1,0 +1,232 @@
+{
+ "dataset": "attention_disposal_events",
+ "recorded_with": "restricted test key (value never stored)",
+ "request": {
+  "headers": {
+   "X-API-Key": "REDACTED"
+  },
+  "method": "GET",
+  "params": {
+   "limit": 5,
+   "ticker": "2330"
+  }
+ },
+ "response": {
+  "body": {
+   "data": [
+    {
+     "article_clause": "第十一款",
+     "company_name": "台積電",
+     "date_semantics": "event_date_from_notice_row",
+     "event_date": "2026-04-27",
+     "event_type": "attention",
+     "event_version": "twse_attention_notice_v1",
+     "lineage": {
+      "duplicate_policy": "unique",
+      "normalizer": "build_attention_disposal_twse_historical_packages.py",
+      "provider": "TWSE",
+      "request_scope": {
+       "month": "2026-04",
+       "package_by": "month"
+      },
+      "source_kind": "attention",
+      "source_role": "official",
+      "source_url": "https://www.twse.com.tw/announcement/notice?response=json&startDate=20260401&endDate=20260430"
+     },
+     "market": "TWSE",
+     "measures": {
+      "close_price": "2265.00",
+      "cumulative_count": "2",
+      "pe_ratio": "34.19"
+     },
+     "period_end": null,
+     "period_start": null,
+     "reason": "六個營業日起迄兩個營業日收盤價價差達240.00元且當日收盤價為最近六個營業日收盤價最高者<font color='#FF0000'>﹝第十一款﹞</font>。",
+     "source_authority": "TWSE official announcement",
+     "source_name": "TWSE attention notice",
+     "source_url": "https://www.twse.com.tw/announcement/notice?response=json&startDate=20260401&endDate=20260430",
+     "ticker": "2330"
+    },
+    {
+     "article_clause": "第十一款",
+     "company_name": "台積電",
+     "date_semantics": "event_date_from_notice_row",
+     "event_date": "2026-04-09",
+     "event_type": "attention",
+     "event_version": "twse_attention_notice_v1",
+     "lineage": {
+      "duplicate_policy": "unique",
+      "normalizer": "build_attention_disposal_twse_historical_packages.py",
+      "provider": "TWSE",
+      "request_scope": {
+       "month": "2026-04",
+       "package_by": "month"
+      },
+      "source_kind": "attention",
+      "source_role": "official",
+      "source_url": "https://www.twse.com.tw/announcement/notice?response=json&startDate=20260401&endDate=20260430"
+     },
+     "market": "TWSE",
+     "measures": {
+      "close_price": "1955.00",
+      "cumulative_count": "2",
+      "pe_ratio": "29.51"
+     },
+     "period_end": null,
+     "period_start": null,
+     "reason": "六個營業日起迄兩個營業日收盤價價差達195.00元且當日收盤價為最近六個營業日收盤價最高者<font color='#FF0000'>﹝第十一款﹞</font>。",
+     "source_authority": "TWSE official announcement",
+     "source_name": "TWSE attention notice",
+     "source_url": "https://www.twse.com.tw/announcement/notice?response=json&startDate=20260401&endDate=20260430",
+     "ticker": "2330"
+    },
+    {
+     "article_clause": "第十一款",
+     "company_name": "台積電",
+     "date_semantics": "event_date_from_notice_row",
+     "event_date": "2026-02-24",
+     "event_type": "attention",
+     "event_version": "twse_attention_notice_v1",
+     "lineage": {
+      "duplicate_policy": "unique",
+      "normalizer": "build_attention_disposal_twse_historical_packages.py",
+      "provider": "TWSE",
+      "request_scope": {
+       "month": "2026-02",
+       "package_by": "month"
+      },
+      "source_kind": "attention",
+      "source_role": "official",
+      "source_url": "https://www.twse.com.tw/announcement/notice?response=json&startDate=20260201&endDate=20260228"
+     },
+     "market": "TWSE",
+     "measures": {
+      "close_price": "1965.00",
+      "cumulative_count": "1",
+      "pe_ratio": "32.11"
+     },
+     "period_end": null,
+     "period_start": null,
+     "reason": "六個營業日起迄兩個營業日收盤價價差達185.00元且當日收盤價為最近六個營業日收盤價最高者<font color='#FF0000'>﹝第十一款﹞</font>",
+     "source_authority": "TWSE official announcement",
+     "source_name": "TWSE attention notice",
+     "source_url": "https://www.twse.com.tw/announcement/notice?response=json&startDate=20260201&endDate=20260228",
+     "ticker": "2330"
+    },
+    {
+     "article_clause": "第十一款",
+     "company_name": "台積電",
+     "date_semantics": "event_date_from_notice_row",
+     "event_date": "2025-04-08",
+     "event_type": "attention",
+     "event_version": "twse_attention_notice_v1",
+     "lineage": {
+      "duplicate_policy": "unique",
+      "normalizer": "build_attention_disposal_twse_historical_packages.py",
+      "provider": "TWSE",
+      "request_scope": {
+       "month": "2025-04",
+       "package_by": "month"
+      },
+      "source_kind": "attention",
+      "source_role": "official",
+      "source_url": "https://www.twse.com.tw/announcement/notice?response=json&startDate=20250401&endDate=20250430"
+     },
+     "market": "TWSE",
+     "measures": {
+      "close_price": "816.00",
+      "cumulative_count": "1",
+      "pe_ratio": "18.04"
+     },
+     "period_end": null,
+     "period_start": null,
+     "reason": "六個營業日起迄兩個營業日收盤價價差達136.00元且當日收盤價為最近六個營業日收盤價最低者<font color='#FF0000'>﹝第十一款﹞</font>",
+     "source_authority": "TWSE official announcement",
+     "source_name": "TWSE attention notice",
+     "source_url": "https://www.twse.com.tw/announcement/notice?response=json&startDate=20250401&endDate=20250430",
+     "ticker": "2330"
+    },
+    {
+     "article_clause": "第十一款",
+     "company_name": "台積電",
+     "date_semantics": "event_date_from_notice_row",
+     "event_date": "2024-08-05",
+     "event_type": "attention",
+     "event_version": "twse_attention_notice_v1",
+     "lineage": {
+      "duplicate_policy": "unique",
+      "normalizer": "build_attention_disposal_twse_historical_packages.py",
+      "provider": "TWSE",
+      "request_scope": {
+       "month": "2024-08",
+       "package_by": "month"
+      },
+      "source_kind": "attention",
+      "source_role": "official",
+      "source_url": "https://www.twse.com.tw/announcement/notice?response=json&startDate=20240801&endDate=20240831"
+     },
+     "market": "TWSE",
+     "measures": {
+      "close_price": "815.00",
+      "cumulative_count": "1",
+      "pe_ratio": "24.67"
+     },
+     "period_end": null,
+     "period_start": null,
+     "reason": "六個營業日起迄兩個營業日收盤價價差達129.00元且當日收盤價為最近六個營業日收盤價最低者<font color='#FF0000'>﹝第十一款﹞</font>",
+     "source_authority": "TWSE official announcement",
+     "source_name": "TWSE attention notice",
+     "source_url": "https://www.twse.com.tw/announcement/notice?response=json&startDate=20240801&endDate=20240831",
+     "ticker": "2330"
+    }
+   ],
+   "data_count": 5,
+   "dataset_id": "attention_disposal_events",
+   "envelope": {
+    "dataset_id": "attention_disposal_events",
+    "row_count": 5,
+    "scope": "twse_tpex_attention_and_disposal_events"
+   },
+   "error": null,
+   "known_gaps": [
+    "reason_text_is_free_prose_not_a_coded_category",
+    "twse_and_tpex_publish_under_separate_rulebooks",
+    "event_version_increments_when_an_event_is_restated",
+    "not_investment_advice"
+   ],
+   "lineage": {
+    "semantics": "TWSE/TPEx 注意股票 (attention) and 處置股票 (disposal) announcements: one row per ticker per event_date per event_type, with the measures imposed and the rulebook clause cited. date_semantics records whether event_date is the announcement or the effective date.",
+    "source_names": [
+     "TWSE attention notice"
+    ]
+   },
+   "quality": {
+    "event_type_count": 1,
+    "row_count": 5,
+    "sensitive_fields_exposed": false,
+    "ticker_count": 1
+   },
+   "request_context": {
+    "coverage_type": "event_driven",
+    "filters": {
+     "date_from": null,
+     "date_to": null,
+     "event_date": null,
+     "event_type": null,
+     "limit": 5,
+     "market": null,
+     "ticker": "2330"
+    },
+    "max_event_date": "2026-04-27",
+    "min_event_date": "2024-08-05",
+    "scope": "twse_tpex_attention_and_disposal_events"
+   },
+   "warnings": [
+    "not_investment_advice"
+   ]
+  },
+  "status": 200
+ },
+ "route": "/v2/datasets/attention-disposal-events",
+ "sdk_error": null
+}

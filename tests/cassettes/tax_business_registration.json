@@ -1,0 +1,27 @@
+{
+ "dataset": "tax_business_registration",
+ "recorded_with": "restricted test key (value never stored)",
+ "request": {
+  "headers": {
+   "X-API-Key": "REDACTED"
+  },
+  "method": "GET",
+  "params": {
+   "limit": 5
+  }
+ },
+ "response": {
+  "body": {
+   "error": "not_entitled_for_dataset",
+   "message": "tax_business_registration 不在你目前的方案裡，developer 方案涵蓋它。免費層目前可讀 0 個資料集；下面這行不用金鑰也拿得到資料。",
+   "payment": {
+    "credits_url": "https://twmarketdata.com/pricing",
+    "price": 20.0,
+    "purchase_hint": "upgrade_plan"
+   }
+  },
+  "status": 402
+ },
+ "route": "/v2/datasets/tax-business-registration",
+ "sdk_error": "TierRequiredError"
+}

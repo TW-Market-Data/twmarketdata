@@ -1,0 +1,406 @@
+{
+ "dataset": "capital_formation_events",
+ "recorded_with": "restricted test key (value never stored)",
+ "request": {
+  "headers": {
+   "X-API-Key": "REDACTED"
+  },
+  "method": "GET",
+  "params": {
+   "limit": 5,
+   "ticker": "2330"
+  }
+ },
+ "response": {
+  "body": {
+   "api_version": "v2",
+   "data": [
+    {
+     "announcement_date": "2026-05-12",
+     "cash_amount": null,
+     "data_gaps": [],
+     "effective_date": null,
+     "event_date": "2026-05-12",
+     "event_subtype": "capital_reduction_other",
+     "event_type": "capital_reduction",
+     "lineage": {
+      "coverage_note": "減資 history leg (event dates) from 重訊; ratio in body not this table",
+      "event_class": "減資",
+      "ratio_source": "not_in_subject",
+      "source_table": "mops_major_event_items",
+      "subject": "公告本公司董事會決議辦理限制員工權利新股收回註銷\r\n減資事宜"
+     },
+     "market": "TW",
+     "price_per_share": null,
+     "ratio_value": null,
+     "source_event_ref": "MOPS:major_event:2330:2026-05-12:capital_reduction",
+     "source_family": "mops_major_event",
+     "source_provider": "twse_mops",
+     "source_role": "capital_formation_history",
+     "stock_amount": null,
+     "ticker": "2330"
+    },
+    {
+     "announcement_date": "2025-11-11",
+     "cash_amount": null,
+     "data_gaps": [],
+     "effective_date": null,
+     "event_date": "2025-11-11",
+     "event_subtype": "capital_reduction_other",
+     "event_type": "capital_reduction",
+     "lineage": {
+      "coverage_note": "減資 history leg (event dates) from 重訊; ratio in body not this table",
+      "event_class": "減資",
+      "ratio_source": "not_in_subject",
+      "source_table": "mops_major_event_items",
+      "subject": "公告本公司董事會決議辦理限制員工權利新股收回註銷\r\n減資事宜"
+     },
+     "market": "TW",
+     "price_per_share": null,
+     "ratio_value": null,
+     "source_event_ref": "MOPS:major_event:2330:2025-11-11:capital_reduction",
+     "source_family": "mops_major_event",
+     "source_provider": "twse_mops",
+     "source_role": "capital_formation_history",
+     "stock_amount": null,
+     "ticker": "2330"
+    },
+    {
+     "announcement_date": "2025-05-13",
+     "cash_amount": null,
+     "data_gaps": [],
+     "effective_date": null,
+     "event_date": "2025-05-13",
+     "event_subtype": "capital_reduction_other",
+     "event_type": "capital_reduction",
+     "lineage": {
+      "coverage_note": "減資 history leg (event dates) from 重訊; ratio in body not this table",
+      "event_class": "減資",
+      "ratio_source": "not_in_subject",
+      "source_table": "mops_major_event_items",
+      "subject": "公告本公司董事會決議辦理限制員工權利新股收回註銷\r\n減資事宜"
+     },
+     "market": "TW",
+     "price_per_share": null,
+     "ratio_value": null,
+     "source_event_ref": "MOPS:major_event:2330:2025-05-13:capital_reduction",
+     "source_family": "mops_major_event",
+     "source_provider": "twse_mops",
+     "source_role": "capital_formation_history",
+     "stock_amount": null,
+     "ticker": "2330"
+    },
+    {
+     "announcement_date": "2024-08-13",
+     "cash_amount": null,
+     "data_gaps": [],
+     "effective_date": null,
+     "event_date": "2024-08-13",
+     "event_subtype": "capital_reduction_other",
+     "event_type": "capital_reduction",
+     "lineage": {
+      "coverage_note": "減資 history leg (event dates) from 重訊; ratio in body not this table",
+      "event_class": "減資",
+      "ratio_source": "not_in_subject",
+      "source_table": "mops_major_event_items",
+      "subject": "公告本公司董事會決議庫藏股註銷減資事宜"
+     },
+     "market": "TW",
+     "price_per_share": null,
+     "ratio_value": null,
+     "source_event_ref": "MOPS:major_event:2330:2024-08-13:capital_reduction",
+     "source_family": "mops_major_event",
+     "source_provider": "twse_mops",
+     "source_role": "capital_formation_history",
+     "stock_amount": null,
+     "ticker": "2330"
+    },
+    {
+     "announcement_date": "2024-06-05",
+     "cash_amount": null,
+     "data_gaps": [],
+     "effective_date": null,
+     "event_date": "2024-06-05",
+     "event_subtype": "capital_reduction_other",
+     "event_type": "capital_reduction",
+     "lineage": {
+      "coverage_note": "減資 history leg (event dates) from 重訊; ratio in body not this table",
+      "event_class": "減資",
+      "ratio_source": "not_in_subject",
+      "source_table": "mops_major_event_items",
+      "subject": "公告本公司董事會決議辦理限制員工權利新股收回註銷\r\n減資事宜"
+     },
+     "market": "TW",
+     "price_per_share": null,
+     "ratio_value": null,
+     "source_event_ref": "MOPS:major_event:2330:2024-06-05:capital_reduction",
+     "source_family": "mops_major_event",
+     "source_provider": "twse_mops",
+     "source_role": "capital_formation_history",
+     "stock_amount": null,
+     "ticker": "2330"
+    }
+   ],
+   "data_count": 5,
+   "data_gaps": [
+    "twse_only_narrow_baseline",
+    "explicit_cash_capital_increase_schedule_only",
+    "no_tpex_decap_coverage",
+    "no_dividend_distribution_coverage",
+    "no_ex_right_ex_dividend_coverage",
+    "not_full_capital_formation_universe"
+   ],
+   "dataset": "capital_formation_events",
+   "dataset_id": "capital_formation_events",
+   "endpoint": "/v2/datasets/capital-formation-events",
+   "envelope": {
+    "data": [
+     {
+      "announcement_date": "2026-05-12",
+      "cash_amount": null,
+      "data_gaps": [],
+      "effective_date": null,
+      "event_date": "2026-05-12",
+      "event_subtype": "capital_reduction_other",
+      "event_type": "capital_reduction",
+      "lineage": {
+       "coverage_note": "減資 history leg (event dates) from 重訊; ratio in body not this table",
+       "event_class": "減資",
+       "ratio_source": "not_in_subject",
+       "source_table": "mops_major_event_items",
+       "subject": "公告本公司董事會決議辦理限制員工權利新股收回註銷\r\n減資事宜"
+      },
+      "market": "TW",
+      "price_per_share": null,
+      "ratio_value": null,
+      "source_event_ref": "MOPS:major_event:2330:2026-05-12:capital_reduction",
+      "source_family": "mops_major_event",
+      "source_provider": "twse_mops",
+      "source_role": "capital_formation_history",
+      "stock_amount": null,
+      "ticker": "2330"
+     },
+     {
+      "announcement_date": "2025-11-11",
+      "cash_amount": null,
+      "data_gaps": [],
+      "effective_date": null,
+      "event_date": "2025-11-11",
+      "event_subtype": "capital_reduction_other",
+      "event_type": "capital_reduction",
+      "lineage": {
+       "coverage_note": "減資 history leg (event dates) from 重訊; ratio in body not this table",
+       "event_class": "減資",
+       "ratio_source": "not_in_subject",
+       "source_table": "mops_major_event_items",
+       "subject": "公告本公司董事會決議辦理限制員工權利新股收回註銷\r\n減資事宜"
+      },
+      "market": "TW",
+      "price_per_share": null,
+      "ratio_value": null,
+      "source_event_ref": "MOPS:major_event:2330:2025-11-11:capital_reduction",
+      "source_family": "mops_major_event",
+      "source_provider": "twse_mops",
+      "source_role": "capital_formation_history",
+      "stock_amount": null,
+      "ticker": "2330"
+     },
+     {
+      "announcement_date": "2025-05-13",
+      "cash_amount": null,
+      "data_gaps": [],
+      "effective_date": null,
+      "event_date": "2025-05-13",
+      "event_subtype": "capital_reduction_other",
+      "event_type": "capital_reduction",
+      "lineage": {
+       "coverage_note": "減資 history leg (event dates) from 重訊; ratio in body not this table",
+       "event_class": "減資",
+       "ratio_source": "not_in_subject",
+       "source_table": "mops_major_event_items",
+       "subject": "公告本公司董事會決議辦理限制員工權利新股收回註銷\r\n減資事宜"
+      },
+      "market": "TW",
+      "price_per_share": null,
+      "ratio_value": null,
+      "source_event_ref": "MOPS:major_event:2330:2025-05-13:capital_reduction",
+      "source_family": "mops_major_event",
+      "source_provider": "twse_mops",
+      "source_role": "capital_formation_history",
+      "stock_amount": null,
+      "ticker": "2330"
+     },
+     {
+      "announcement_date": "2024-08-13",
+      "cash_amount": null,
+      "data_gaps": [],
+      "effective_date": null,
+      "event_date": "2024-08-13",
+      "event_subtype": "capital_reduction_other",
+      "event_type": "capital_reduction",
+      "lineage": {
+       "coverage_note": "減資 history leg (event dates) from 重訊; ratio in body not this table",
+       "event_class": "減資",
+       "ratio_source": "not_in_subject",
+       "source_table": "mops_major_event_items",
+       "subject": "公告本公司董事會決議庫藏股註銷減資事宜"
+      },
+      "market": "TW",
+      "price_per_share": null,
+      "ratio_value": null,
+      "source_event_ref": "MOPS:major_event:2330:2024-08-13:capital_reduction",
+      "source_family": "mops_major_event",
+      "source_provider": "twse_mops",
+      "source_role": "capital_formation_history",
+      "stock_amount": null,
+      "ticker": "2330"
+     },
+     {
+      "announcement_date": "2024-06-05",
+      "cash_amount": null,
+      "data_gaps": [],
+      "effective_date": null,
+      "event_date": "2024-06-05",
+      "event_subtype": "capital_reduction_other",
+      "event_type": "capital_reduction",
+      "lineage": {
+       "coverage_note": "減資 history leg (event dates) from 重訊; ratio in body not this table",
+       "event_class": "減資",
+       "ratio_source": "not_in_subject",
+       "source_table": "mops_major_event_items",
+       "subject": "公告本公司董事會決議辦理限制員工權利新股收回註銷\r\n減資事宜"
+      },
+      "market": "TW",
+      "price_per_share": null,
+      "ratio_value": null,
+      "source_event_ref": "MOPS:major_event:2330:2024-06-05:capital_reduction",
+      "source_family": "mops_major_event",
+      "source_provider": "twse_mops",
+      "source_role": "capital_formation_history",
+      "stock_amount": null,
+      "ticker": "2330"
+     }
+    ],
+    "dataset_id": "capital_formation_events",
+    "envelope": {
+     "dataset_id": "capital_formation_events",
+     "row_count": 5,
+     "scope": "twse_only_narrow_capital_formation_baseline"
+    },
+    "error": null,
+    "known_gaps": [
+     "twse_only_narrow_baseline",
+     "explicit_cash_capital_increase_schedule_only",
+     "no_tpex_decap_coverage",
+     "no_dividend_distribution_coverage",
+     "no_ex_right_ex_dividend_coverage",
+     "not_full_capital_formation_universe"
+    ],
+    "lineage": {
+     "source_families": [
+      "mops_major_event"
+     ],
+     "source_providers": [
+      "twse_mops"
+     ],
+     "source_roles": [
+      "capital_formation_history"
+     ]
+    },
+    "quality": {
+     "raw_payload_exposed": false,
+     "row_count": 5,
+     "twse_only_scope": true
+    },
+    "request_context": {
+     "coverage_type": "explicit_cash_capital_increase_schedule_only",
+     "filters": {
+      "date_from": null,
+      "date_to": null,
+      "event_type": null,
+      "limit": 5,
+      "market": null,
+      "source_family": null,
+      "ticker": "2330"
+     },
+     "max_event_date": "2026-05-12",
+     "min_event_date": "2024-06-05",
+     "scope": "twse_only_narrow_capital_formation_baseline"
+    },
+    "warnings": [
+     "not_investment_advice"
+    ]
+   },
+   "error": null,
+   "known_gaps": [
+    "twse_only_narrow_baseline",
+    "explicit_cash_capital_increase_schedule_only",
+    "no_tpex_decap_coverage",
+    "no_dividend_distribution_coverage",
+    "no_ex_right_ex_dividend_coverage",
+    "not_full_capital_formation_universe"
+   ],
+   "lineage": {
+    "source_families": [
+     "mops_major_event"
+    ],
+    "source_providers": [
+     "twse_mops"
+    ],
+    "source_roles": [
+     "capital_formation_history"
+    ]
+   },
+   "meta": {
+    "is_limited": false,
+    "mandatory_contract_fields_present": [
+     "data",
+     "error",
+     "lineage",
+     "quality",
+     "request_context"
+    ],
+    "plan": "max",
+    "row_limit": 10000,
+    "rows_returned": 5
+   },
+   "plan_id": "max",
+   "quality": {
+    "raw_payload_exposed": false,
+    "row_count": 5,
+    "twse_only_scope": true
+   },
+   "query": {
+    "date_from": null,
+    "date_to": null,
+    "event_type": null,
+    "limit": 5,
+    "market": null,
+    "source_family": null,
+    "ticker": "2330"
+   },
+   "request_context": {
+    "coverage_type": "explicit_cash_capital_increase_schedule_only",
+    "filters": {
+     "date_from": null,
+     "date_to": null,
+     "event_type": null,
+     "limit": 5,
+     "market": null,
+     "source_family": null,
+     "ticker": "2330"
+    },
+    "max_event_date": "2026-05-12",
+    "min_event_date": "2024-06-05",
+    "scope": "twse_only_narrow_capital_formation_baseline"
+   },
+   "request_id": "req_cb6b74aa5912",
+   "warnings": [
+    "not_investment_advice"
+   ]
+  },
+  "status": 200
+ },
+ "route": "/v2/datasets/capital-formation-events",
+ "sdk_error": null
+}

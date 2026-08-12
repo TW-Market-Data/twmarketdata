@@ -1,0 +1,68 @@
+{
+ "dataset": "futures_daily_context",
+ "recorded_with": "restricted test key (value never stored)",
+ "request": {
+  "headers": {
+   "X-API-Key": "REDACTED"
+  },
+  "method": "GET",
+  "params": {
+   "limit": 5,
+   "ticker": "2330"
+  }
+ },
+ "response": {
+  "body": {
+   "data": [],
+   "data_count": 0,
+   "dataset_id": "futures_daily_context",
+   "envelope": {
+    "dataset_id": "futures_daily_context",
+    "row_count": 0,
+    "scope": "taifex_futures_daily_context"
+   },
+   "error": null,
+   "known_gaps": [
+    "basis_is_futures_close_minus_spot_close_a_negative_basis_is_backwardation",
+    "inst_net_oi_legs_are_net_open_interest_not_traded_volume",
+    "days_to_settlement_counts_calendar_days_not_trading_days",
+    "upstream_is_taifex_futures_daily_a_stop_there_surfaces_here_one_day_later",
+    "not_investment_advice"
+   ],
+   "lineage": {
+    "methods": [],
+    "rule_versions": [],
+    "semantics": "One row per trading session: the futures close against its spot index, the resulting basis (futures minus spot) and basis_pct, open interest and its day-over-day delta, days to settlement, and the three institutional NET OPEN INTEREST legs with the put/call ratio. DERIVED from taifex_futures_daily, so an outage upstream appears here a day later."
+   },
+   "quality": {
+    "contract_count": 0,
+    "row_count": 0,
+    "rows_missing_basis": 0,
+    "sensitive_fields_exposed": false,
+    "settlement_day_count": 0
+   },
+   "reason": "futures_daily_context_not_found",
+   "request_context": {
+    "coverage_type": "daily_series",
+    "filters": {
+     "contract": "2330",
+     "date_from": null,
+     "date_to": null,
+     "limit": 5,
+     "settlement_flag": null,
+     "trade_date": null
+    },
+    "max_trade_date": null,
+    "min_trade_date": null,
+    "scope": "taifex_futures_daily_context"
+   },
+   "status": "not_found",
+   "warnings": [
+    "not_investment_advice"
+   ]
+  },
+  "status": 200
+ },
+ "route": "/v2/datasets/futures-daily-context",
+ "sdk_error": null
+}

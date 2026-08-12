@@ -39,7 +39,7 @@ from typing import Any, Dict, FrozenSet, Iterator, List, Mapping, Optional
 
 from . import registry
 from .envelope import extract_rows
-from .errors import (DatasetNotFoundError, InsufficientCreditsError, MissingApiKeyError,
+from .errors import (DatasetNotFoundError, ValidationError, InsufficientCreditsError, MissingApiKeyError,
                       RateLimitedError, TierRequiredError, TwmdAuthError, TwmdConfigError,
                       TwmdError, TwmdRequestError, TwmdServerError)
 
@@ -234,7 +234,7 @@ class TwmdNotFoundError(DatasetNotFoundError):
     """0.1.0 name for HTTP 404."""
 
 
-class TwmdValidationError(TwmdRequestError):
+class TwmdValidationError(ValidationError):
     """0.1.0 name for HTTP 422."""
 
 

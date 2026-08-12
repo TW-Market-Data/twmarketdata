@@ -1,0 +1,166 @@
+{
+ "dataset": "limit_events",
+ "recorded_with": "restricted test key (value never stored)",
+ "request": {
+  "headers": {
+   "X-API-Key": "REDACTED"
+  },
+  "method": "GET",
+  "params": {
+   "limit": 5
+  }
+ },
+ "response": {
+  "body": {
+   "data": [
+    {
+     "approx_band_pp": 0.5,
+     "close": 140.35,
+     "consecutive_count": null,
+     "direction": "up",
+     "grade": "derived",
+     "limit_confirmed": null,
+     "limit_pct_applied": 0.1,
+     "locked_at_close": true,
+     "market": "TWSE",
+     "method": "approx",
+     "pct_change": 0.0990602976,
+     "prev_close": 127.7,
+     "rule_effective_date": "2015-06-01",
+     "rule_version": "v0",
+     "ticker": "02001L",
+     "trade_date": "2026-08-10",
+     "volume_at_limit": 209000
+    },
+    {
+     "approx_band_pp": 0.5,
+     "close": 24.75,
+     "consecutive_count": null,
+     "direction": "up",
+     "grade": "derived",
+     "limit_confirmed": null,
+     "limit_pct_applied": 0.1,
+     "locked_at_close": true,
+     "market": "TWSE",
+     "method": "approx",
+     "pct_change": 0.1,
+     "prev_close": 22.5,
+     "rule_effective_date": "2015-06-01",
+     "rule_version": "v0",
+     "ticker": "1409",
+     "trade_date": "2026-08-10",
+     "volume_at_limit": 6300637
+    },
+    {
+     "approx_band_pp": 0.5,
+     "close": 9.9,
+     "consecutive_count": null,
+     "direction": "up",
+     "grade": "derived",
+     "limit_confirmed": null,
+     "limit_pct_applied": 0.1,
+     "locked_at_close": true,
+     "market": "TWSE",
+     "method": "approx",
+     "pct_change": 0.1,
+     "prev_close": 9.0,
+     "rule_effective_date": "2015-06-01",
+     "rule_version": "v0",
+     "ticker": "1455",
+     "trade_date": "2026-08-10",
+     "volume_at_limit": 5146746
+    },
+    {
+     "approx_band_pp": 0.5,
+     "close": 38.0,
+     "consecutive_count": null,
+     "direction": "up",
+     "grade": "derived",
+     "limit_confirmed": null,
+     "limit_pct_applied": 0.1,
+     "locked_at_close": true,
+     "market": "TWSE",
+     "method": "approx",
+     "pct_change": 0.0998552822,
+     "prev_close": 34.55,
+     "rule_effective_date": "2015-06-01",
+     "rule_version": "v0",
+     "ticker": "1605",
+     "trade_date": "2026-08-10",
+     "volume_at_limit": 74196432
+    },
+    {
+     "approx_band_pp": 0.5,
+     "close": 38.05,
+     "consecutive_count": null,
+     "direction": "up",
+     "grade": "derived",
+     "limit_confirmed": null,
+     "limit_pct_applied": 0.1,
+     "locked_at_close": true,
+     "market": "TWSE",
+     "method": "approx",
+     "pct_change": 0.0997109827,
+     "prev_close": 34.6,
+     "rule_effective_date": "2015-06-01",
+     "rule_version": "v0",
+     "ticker": "1711",
+     "trade_date": "2026-08-10",
+     "volume_at_limit": 2799648
+    }
+   ],
+   "data_count": 5,
+   "dataset_id": "limit_events",
+   "envelope": {
+    "dataset_id": "limit_events",
+    "row_count": 5,
+    "scope": "twse_tpex_price_limit_hits"
+   },
+   "error": null,
+   "known_gaps": [
+    "limit_pct_applied_records_the_band_in_force_that_day_7pct_before_2015_06_01",
+    "limit_confirmed_distinguishes_a_confirmed_limit_from_a_derived_one",
+    "derived_from_price_history_not_an_official_limit_event_feed",
+    "not_investment_advice"
+   ],
+   "lineage": {
+    "methods": [
+     "approx"
+    ],
+    "rule_versions": [
+     "v0"
+    ],
+    "semantics": "Days on which a security reached its statutory price limit, with the band in force (limit_pct_applied), the direction, whether it stayed locked at the close, and how many consecutive sessions it has done so. DERIVED from price history — there is no official limit-event feed to mirror."
+   },
+   "quality": {
+    "locked_at_close_count": 5,
+    "row_count": 5,
+    "sensitive_fields_exposed": false,
+    "ticker_count": 5,
+    "unconfirmed_count": 0
+   },
+   "request_context": {
+    "coverage_type": "daily_derived",
+    "filters": {
+     "date_from": null,
+     "date_to": null,
+     "direction": null,
+     "limit": 5,
+     "locked_at_close": null,
+     "market": null,
+     "ticker": null,
+     "trade_date": null
+    },
+    "max_trade_date": "2026-08-10",
+    "min_trade_date": "2026-08-10",
+    "scope": "twse_tpex_price_limit_hits"
+   },
+   "warnings": [
+    "not_investment_advice"
+   ]
+  },
+  "status": 200
+ },
+ "route": "/v2/datasets/limit-events",
+ "sdk_error": null
+}

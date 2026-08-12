@@ -19,7 +19,8 @@ from ._methods import DatasetMethods
 from .envelope import extract_count, extract_gaps, extract_provenance, extract_rows
 from .errors import FreeTierSymbolError, TwmdConfigError, UnsupportedParameterError
 from .frame import to_frame
-from .meta import (DatasetStatusWarning, Gap, Meta, TruncatedResultWarning)
+from .meta import (DatasetStatusWarning, Gap, ImputedKnowledgeDateWarning, Meta,
+                   TruncatedResultWarning)
 from .pit import apply_as_of, resolve_mode, scan_knowledge_dates
 from .registry import DatasetInfo
 
@@ -162,8 +163,13 @@ class Client(DatasetMethods, LegacyClientMixin):
 
         params = self._build_params(info, ticker=ticker, start=start, end=end,
                                     as_of=as_of, mode=mode, extra=extra)
-        use_limit = min(int(limit if limit is not None else self.default_limit), MAX_LIMIT)
+        # Each route sets its own row cap; sending more is a 422 on some routes
+        # and a silent clamp on others, so clamp here and say so.
+        route_max = info.limit_max or MAX_LIMIT
+        requested = int(limit if limit is not None else self.default_limit)
+        use_limit = min(requested, route_max, MAX_LIMIT)
         params["limit"] = use_limit
+        limit_clamped = limit is not None and requested > use_limit
         if offset is not None:
             if not info.supports_offset:
                 raise UnsupportedParameterError(info.key, "offset", info.supported_filters())
@@ -179,6 +185,11 @@ class Client(DatasetMethods, LegacyClientMixin):
 
         meta = self._build_meta(info, response, rows, use_limit, pages,
                                 offset_ignored=offset_ignored)
+        if limit_clamped:
+            note = ("limit=%d was reduced to %d, the maximum this route accepts."
+                    % (requested, use_limit))
+            warnings.warn(note, TruncatedResultWarning, stacklevel=4)
+            meta.warnings.append(note)
 
         if as_of and mode and mode != "server":
             rows = apply_as_of(rows, info=info, as_of=as_of, mode=mode,
@@ -191,6 +202,22 @@ class Client(DatasetMethods, LegacyClientMixin):
             meta.knowledge_date_present = kd["present"]
             meta.knowledge_date_imputed_rows = kd["imputed"]
             meta.knowledge_date_sources = list(kd["sources"])
+            # Server-side filtering is still filtering on imputed dates when the
+            # rows say so. Measured 2026-08-12: income_statement, balance_sheet,
+            # cash_flow_statement and financial_ratios return kd_imputed=true on
+            # every row. Warning only in client mode would leave exactly the
+            # people doing server-side PIT backtests uninformed.
+            if kd["imputed"]:
+                note = (
+                    "%d of %d rows carry kd_imputed=true%s: the server filtered on a "
+                    "knowledge date derived from a statutory filing deadline, not one "
+                    "observed from an announcement. Treat this as a rule-based "
+                    "approximation of what was knowable."
+                    % (kd["imputed"], len(rows),
+                       " (kd_source=%s)" % ", ".join(kd["sources"]) if kd["sources"] else "")
+                )
+                warnings.warn(note, ImputedKnowledgeDateWarning, stacklevel=3)
+                meta.warnings.append(note)
 
         self._attach_gaps(info, rows, meta, response, derive_gaps)
         self._warn_on_status(info, meta)

@@ -1,0 +1,108 @@
+{
+ "dataset": "issuer_profiles",
+ "recorded_with": "restricted test key (value never stored)",
+ "request": {
+  "headers": {
+   "X-API-Key": "REDACTED"
+  },
+  "method": "GET",
+  "params": {
+   "limit": 5,
+   "ticker": "2330"
+  }
+ },
+ "response": {
+  "body": {
+   "api_version": "v2",
+   "dataset": "issuer_profile",
+   "endpoint": "/v2/datasets/issuer-profile",
+   "envelope": {
+    "api_version": "v2",
+    "data": [
+     {
+      "address": null,
+      "announcement_type": null,
+      "capital": null,
+      "chairperson": null,
+      "company_name": "台灣積體電路製造股份有限公司",
+      "general_manager": null,
+      "industry": "24",
+      "isin": null,
+      "listing_date": null,
+      "market": "TWSE",
+      "source_as_of": "2026-08-07",
+      "source_name": "official_twse_openapi_t187ap03_l",
+      "source_url": null,
+      "symbol": "2330",
+      "updated_at": "2026-08-08T05:00:42.710520",
+      "website": null
+     }
+    ],
+    "data_as_of": "2026-08-07",
+    "dataset": "issuer_profile",
+    "dataset_version": "v2.0.0-preview",
+    "error": {
+     "blocking_gate": null,
+     "dataset": "issuer_profile",
+     "error_code": null,
+     "error_message": null,
+     "request_id": "read-api-1218839d9183"
+    },
+    "lineage": {
+     "fallback_chain": [],
+     "policy_notes": [
+      "official/public-first canonical",
+      "issuer profile mapped from canonical issuer_profiles table",
+      "nullable profile fields are preserved as-is"
+     ],
+     "selected_source": "issuer_profile",
+     "source_role": "canonical"
+    },
+    "quality": {
+     "completeness_ratio": 1.0,
+     "freshness_as_of": "2026-08-07",
+     "freshness_state": "fresh",
+     "quality_status": "ready"
+    },
+    "release_date": "2026-08-07",
+    "release_version": "v2.2026-08-07.preview",
+    "request_context": {
+     "as_of_date": "2026-08-07",
+     "dataset_view": "issuer_profile_v1",
+     "family": "discovery_reference",
+     "field_group_type": "canonical",
+     "ticker": "2330"
+    }
+   },
+   "meta": {
+    "is_limited": false,
+    "mandatory_contract_fields_present": [
+     "api_version",
+     "data",
+     "data_as_of",
+     "dataset",
+     "dataset_version",
+     "error",
+     "lineage",
+     "quality",
+     "release_date",
+     "release_version",
+     "request_context"
+    ],
+    "plan": "max",
+    "row_limit": 10000,
+    "rows_returned": 1
+   },
+   "plan_id": "max",
+   "query": {
+    "limit": 5,
+    "market": null,
+    "symbol": "2330"
+   },
+   "request_id": "req_48fc0d392e0c"
+  },
+  "status": 200
+ },
+ "route": "/v2/datasets/issuer-profile",
+ "sdk_error": null
+}

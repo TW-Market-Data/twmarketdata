@@ -34,8 +34,12 @@ TEXT_SUFFIXES = {".py", ".pyi", ".md", ".toml", ".json", ".yaml", ".yml", ".txt"
 SECRET_PATTERNS: List[Tuple[str, str]] = [
     (r"sk_live_[A-Za-z0-9_\-]{4,}", "live API key"),
     (r"sk_test_(?!notreal)[A-Za-z0-9_\-]{8,}", "test API key"),
-    (r"(?i)x-api-key['\"]?\s*[:=]\s*['\"][A-Za-z0-9_\-]{8,}", "unredacted X-API-Key"),
-    (r"(?i)authorization['\"]?\s*[:=]\s*['\"]?bearer\s+[A-Za-z0-9._\-]{16,}",
+    # The negative lookahead exempts the literal redaction marker and nothing
+    # else -- a recorded cassette writes "X-API-Key": "REDACTED", which would
+    # otherwise trip this rule and hide real findings behind noise.
+    (r"(?i)x-api-key['\"]?\s*[:=]\s*['\"]?(?!REDACTED\b)[A-Za-z0-9_\-]{8,}",
+     "unredacted X-API-Key"),
+    (r"(?i)authorization['\"]?\s*[:=]\s*['\"]?(?!REDACTED\b)bearer\s+[A-Za-z0-9._\-]{16,}",
      "unredacted Authorization header"),
     (r"(?i)\baws_secret_access_key\b\s*[:=]", "AWS secret"),
     (r"-----BEGIN (?:RSA |EC |OPENSSH )?PRIVATE KEY-----", "private key"),

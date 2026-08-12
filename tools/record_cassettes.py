@@ -148,13 +148,10 @@ def main() -> int:
             written += 1
             status = cassette["response"]["status"]
             body = cassette["response"]["body"]
-            rows = 0
-            if isinstance(body, dict):
-                for candidate in ("rows", "items", "data"):
-                    if isinstance(body.get(candidate), list):
-                        rows = len(body[candidate])
-                        break
-            print("  [%2d/%2d] %-34s %s rows=%d" % (i, len(targets), dataset, status, rows))
+            from twmd.envelope import extract_rows
+            extracted, row_key = extract_rows(body)
+            print("  [%2d/%2d] %-34s %s rows=%d via %s"
+                  % (i, len(targets), dataset, status, len(extracted), row_key or "-"))
         time.sleep(args.pace)
     client.close()
 

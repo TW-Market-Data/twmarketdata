@@ -59,8 +59,13 @@ def build_datasets_csv():
     rows = []
     for key, (zh, cat, tier, slug, ktf, pit_safe, has_note, grain) in pit.items():
         route = "/v2/datasets/" + slug
-        qp = [p["name"] for p in oapi.get(route, {}).get("get", {}).get("parameters", [])
-              if p.get("in") == "query"]
+        params_spec = oapi.get(route, {}).get("get", {}).get("parameters", [])
+        qp = [p["name"] for p in params_spec if p.get("in") == "query"]
+        # The row cap is per route, not global: five different maxima are in use
+        # (100 / 500 / 1000 / 2000 / 5000). Sending more returns 422 on some
+        # routes and is silently clamped on others.
+        limit_spec = next((p for p in params_spec if p.get("name") == "limit"), {})
+        limit_max = (limit_spec.get("schema") or {}).get("maximum")
         reg = registry.get(key, {})
         cols = [c["column_name"] for c in (schemas.get(key, {}).get("schema") or [])]
         probe = smoke.get(key, {})
@@ -135,6 +140,7 @@ def build_datasets_csv():
             "as_of_note": as_of_note,
             "data_gaps_param": "include_data_gaps" if "include_data_gaps" in qp else "",
             "pagination": "offset" if "offset" in qp else "limit_only",
+            "limit_max": limit_max or "",
             "api_entity_param": next((p for p in ENTITY_PARAMS if p in qp), ""),
             "api_start_param": next((p for p in START_PARAMS if p in qp), ""),
             "api_end_param": next((p for p in END_PARAMS if p in qp), ""),

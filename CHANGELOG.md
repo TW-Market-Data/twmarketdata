@@ -77,6 +77,32 @@ Still working, warning on use: `Client.get_dataset` / `get_all` / `iter_pages` /
 `credits_url` / `purchase_hint` accessors, `TwmdRateLimitError`,
 `TwmdTransportError`, `TwmdNotFoundError`, `TwmdValidationError`).
 
+### Found while recording paid-tier responses
+
+- **`limit` is capped per route, at five different values** (100 / 500 / 1000 /
+  2000 / 5000); 56 of 82 are not 5000. Worse, the declared cap is not always the
+  enforced one — `margin_system_stats` declares 5000 and rejects anything over
+  1000. The SDK clamps from the registry, and if a 422 still names a lower cap
+  it retries once at that value and says so.
+- **`knowledge_date` is live on the four fundamentals** (`income_statement`,
+  `balance_sheet`, `cash_flow_statement`, `financial_ratios`) — and every row
+  carries `kd_imputed=true` with `kd_source=statutory_deadline`. Not one
+  observed announcement timestamp. `as_of` on these datasets now warns even in
+  server mode, so nobody running a server-side PIT backtest is the only party
+  not told. `monthly_revenue` still has no knowledge_date, so its refusal stands.
+- **`report_date` is null on every income-statement row**, confirming the
+  upstream writer gap on live paid data — which is why the knowledge date has to
+  be imputed in the first place.
+- **Rows sit at `envelope.data` on 9 datasets**, not just `price_enhanced`.
+  Before the nested lookup they all returned empty frames.
+- **`price_enhanced` really does serve adjustment factors, not OHLCV** —
+  `event_type`, `factor`, `pre_event_close`, `reference_price`. `close` never
+  appears, though the dataset contract declares it required.
+- **A `max` plan does not include `developer`-tier datasets** (10 of them return
+  402). The tiers are not one ladder.
+- `400` / `422` now raise `ValidationError` instead of a generic error, keeping
+  the server's wording — it is the only thing that names the offending field.
+
 ### Known limitations
 
 - **Compat column names are TWMD's.** Parameter names are mirrored; response
@@ -87,10 +113,10 @@ Still working, warning on use: `Client.get_dataset` / `get_all` / `iter_pages` /
   `NotMappedError` naming the candidate dataset rather than shipping a guess.
 - **B-grade mappings without an implemented reshape refuse** and point at the
   native method, rather than returning the wrong shape.
-- Paid-tier behaviour is not yet covered by recorded cassettes; that work is
-  gated on a restricted test key. `examples/03` and `examples/04` are written
-  but marked *recorded pending test key* and have not been run against paid
-  endpoints.
+- Paid-tier behaviour is covered by 63 recorded cassettes (2026-08-12, restricted
+  key since deleted, auth headers redacted and asserted so by a test). Seven
+  compat mappings remain unverified because their datasets are `developer`-tier
+  and a `max` key does not reach them.
 - Three datasets declared `tier=free` return 401 in practice
   (`valuation_data`, `issuer_profiles`, `industry_index`), so `tier` alone does
   not tell you what runs without a key. Use `twmd.runnable_without_key()`.

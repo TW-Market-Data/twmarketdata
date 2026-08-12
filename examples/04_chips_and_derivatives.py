@@ -1,20 +1,17 @@
-"""Chip flows and derivatives context.  ⚠ RECORDED PENDING TEST KEY
+"""Chip flows and derivatives context.  (tier=starter/pro/max — API key required)
 
     TWMD_API_KEY=<your key> python examples/04_chips_and_derivatives.py
 
-Requires a key. Tiers used here: institutional_flow and margin_short are
-starter, foreign_holding and margin_system_stats are pro, taifex_put_call_ratio
-and taifex_atm_iv are max.
+Run against the live API on 2026-08-12 with a restricted key.
 
-STATUS: written but NOT yet executed against the live API. Output in the
-comments is what the SDK is built to produce, not a transcript, and will be
-replaced with real output once a restricted test key is issued.
+Two honesty features are visible in the output:
 
-Two honesty features worth watching in the metadata here:
-
-* ``margin_system_stats.maintenance_ratio`` is documented NULL upstream -- not
-  loaded. The SDK surfaces the column as NA and records it rather than
-  substituting a computed proxy.
+* ``margin_system_stats`` declares limit<=5000 in the API spec and rejects
+  anything over 1000. The SDK reads the real cap out of the 422 and retries,
+  warning that it did so.
+* ``margin_system_stats.maintenance_ratio`` is NULL upstream -- not loaded.
+  Confirmed on live rows. The SDK surfaces the column as NA and records it
+  rather than substituting a computed proxy.
 * ``taifex_atm_iv`` is a DERIVED implied volatility (Black-Scholes from official
   TXO prices plus TAIEX spot). It is not the official VIX, and neither the SDK
   nor the compat layer will call it one.

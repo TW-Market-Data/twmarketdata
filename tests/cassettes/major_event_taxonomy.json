@@ -1,0 +1,123 @@
+{
+ "dataset": "major_event_taxonomy",
+ "recorded_with": "restricted test key (value never stored)",
+ "request": {
+  "headers": {
+   "X-API-Key": "REDACTED"
+  },
+  "method": "GET",
+  "params": {
+   "limit": 5
+  }
+ },
+ "response": {
+  "body": {
+   "data": [
+    {
+     "confidence": 0.6,
+     "event_class": "董事會",
+     "event_date": "2026-08-10",
+     "event_time": "23:07:16",
+     "market": "TW",
+     "rule_version": "mops_taxonomy_v1",
+     "subject": "本公司董事會決議通過銀行聯貸案",
+     "ticker": "7918"
+    },
+    {
+     "confidence": 0.6,
+     "event_class": "董事會",
+     "event_date": "2026-08-10",
+     "event_time": "21:47:36",
+     "market": "TW",
+     "rule_version": "mops_taxonomy_v1",
+     "subject": "本公司董事會決議通過銀行聯貸案",
+     "ticker": "1785"
+    },
+    {
+     "confidence": 0.3,
+     "event_class": "其他",
+     "event_date": "2026-08-10",
+     "event_time": "21:46:59",
+     "market": "TW",
+     "rule_version": "mops_taxonomy_v1",
+     "subject": "公告本公司自地委建新建廠房案",
+     "ticker": "1785"
+    },
+    {
+     "confidence": 0.95,
+     "event_class": "減資",
+     "event_date": "2026-08-10",
+     "event_time": "21:46:48",
+     "market": "TW",
+     "rule_version": "mops_taxonomy_v1",
+     "subject": "公告本公司董事會決議辦理限制員工權利新股收回註銷減資事宜",
+     "ticker": "1785"
+    },
+    {
+     "confidence": 0.6,
+     "event_class": "董事會",
+     "event_date": "2026-08-10",
+     "event_time": "21:46:33",
+     "market": "TW",
+     "rule_version": "mops_taxonomy_v1",
+     "subject": "本公司民國115年度第二季合併財務報告業經董事會決議",
+     "ticker": "1785"
+    }
+   ],
+   "data_count": 5,
+   "dataset_id": "major_event_taxonomy",
+   "envelope": {
+    "dataset_id": "major_event_taxonomy",
+    "row_count": 5,
+    "scope": "mops_material_information_classified"
+   },
+   "error": null,
+   "known_gaps": [
+    "event_class_is_INFERRED_by_a_rule_engine_not_an_official_field",
+    "confidence_is_the_rule_engines_own_score_not_a_calibrated_probability",
+    "rule_version_pins_the_classifier_that_produced_each_row",
+    "subject_is_the_filings_own_headline_text",
+    "not_investment_advice"
+   ],
+   "lineage": {
+    "rule_versions": [
+     "mops_taxonomy_v1"
+    ],
+    "semantics": "MOPS material-information filings assigned an event_class by a rule engine, with the engine's confidence. The classification is DERIVED; the filing's own headline is kept in `subject` so any row can be re-judged."
+   },
+   "quality": {
+    "event_classes_present": [
+     "其他",
+     "減資",
+     "董事會"
+    ],
+    "min_confidence_in_page": 0.3,
+    "row_count": 5,
+    "sensitive_fields_exposed": false,
+    "ticker_count": 2
+   },
+   "request_context": {
+    "coverage_type": "event_driven_derived",
+    "filters": {
+     "date_from": null,
+     "date_to": null,
+     "event_class": null,
+     "event_date": null,
+     "limit": 5,
+     "market": null,
+     "min_confidence": null,
+     "ticker": null
+    },
+    "max_event_date": "2026-08-10",
+    "min_event_date": "2026-08-10",
+    "scope": "mops_material_information_classified"
+   },
+   "warnings": [
+    "not_investment_advice"
+   ]
+  },
+  "status": 200
+ },
+ "route": "/v2/datasets/major-event-taxonomy",
+ "sdk_error": null
+}

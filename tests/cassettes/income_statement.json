@@ -1,0 +1,483 @@
+{
+ "dataset": "income_statement",
+ "recorded_with": "restricted test key (value never stored)",
+ "request": {
+  "headers": {
+   "X-API-Key": "REDACTED"
+  },
+  "method": "GET",
+  "params": {
+   "limit": 5,
+   "ticker": "2330"
+  }
+ },
+ "response": {
+  "body": {
+   "count": 5,
+   "data_as_of": null,
+   "dataset": "income_statement",
+   "period_basis": {
+    "basis": "ytd_cumulative",
+    "cumulative": true,
+    "derived": false,
+    "evidence": "2330 FY2024 revenue Q1..Q4 = 592,644,201 / 1,266,154,378 / 2,025,846,521 / 2,894,307,699 (rising = cumulative)",
+    "note": "Taiwan MOPS files interim statements cumulatively: a Q3 statement covers January–September, not July–September. This is the source's filing convention, not a transformation we applied. Do not sum four quarters — that double-counts to roughly 2.4x.",
+    "resets": "fiscal_year",
+    "standalone_quarter_hint": "difference consecutive periods within the fiscal year, or call period=quarterly_standalone"
+   },
+   "pit": false,
+   "rows": [
+    {
+     "eps": 22.08,
+     "fiscal_period": "2026-Q1",
+     "fiscal_quarter": 1,
+     "fiscal_year": 2026,
+     "frequency": "quarterly",
+     "fundamentals_context": {
+      "available_tools_or_endpoints": [
+       {
+        "name": "income_statement",
+        "path": "/v2/datasets/income-statement"
+       },
+       {
+        "name": "income_statement",
+        "path": "/v2/datasets/financials"
+       }
+      ],
+      "coverage_window": {
+       "coverage_confidence": "medium",
+       "max_period": null,
+       "min_period": null,
+       "row_count": 0
+      },
+      "data_gaps": [],
+      "generated_at": "2026-08-12T06:25:34Z",
+      "metric_values": {
+       "eps": 22.08,
+       "fiscal_period": "2026-Q1",
+       "frequency": "quarterly",
+       "gross_profit": 751295421.0,
+       "kd_imputed": true,
+       "kd_source": "statutory_deadline",
+       "knowledge_date": "2026-05-15",
+       "net_income": 572801304.0,
+       "operating_income": 658966142.0,
+       "period_end_date": "2026-03-31",
+       "pretax_income": 687799687.0,
+       "report_date": null,
+       "revenue": 1134103440.0,
+       "source": "mops_official",
+       "symbol": "2330",
+       "updated_at": "2026-06-04T06:44:59.737553"
+      },
+      "not_investment_advice": true,
+      "period": "2026Q1",
+      "period_type": "quarterly",
+      "restatement_warning": {
+       "has_restatement": false,
+       "previous_version_ref": null,
+       "reason": null
+      },
+      "safe_usage_notes": [
+       "not_investment_advice",
+       "official_public_first_policy",
+       "period_semantics_explicit",
+       "raw_full_body_storage_forbidden"
+      ],
+      "source_lineage": {
+       "provider": "mops_official",
+       "source_role": "official_mops_income_statement"
+      },
+      "statement_family": "income_statement",
+      "ticker": "2330"
+     },
+     "gross_profit": 751295421.0,
+     "kd_imputed": true,
+     "kd_source": "statutory_deadline",
+     "knowledge_date": "2026-05-15",
+     "net_income": 572801304.0,
+     "operating_income": 658966142.0,
+     "period_end_date": "2026-03-31",
+     "period_type": "quarterly",
+     "pretax_income": 687799687.0,
+     "report_date": null,
+     "revenue": 1134103440.0,
+     "source": "mops_official",
+     "symbol": "2330",
+     "updated_at": "2026-06-04T06:44:59.737553"
+    },
+    {
+     "eps": 66.26,
+     "fiscal_period": "2025-Q4",
+     "fiscal_quarter": 4,
+     "fiscal_year": 2025,
+     "frequency": "quarterly",
+     "fundamentals_context": {
+      "available_tools_or_endpoints": [
+       {
+        "name": "income_statement",
+        "path": "/v2/datasets/income-statement"
+       },
+       {
+        "name": "income_statement",
+        "path": "/v2/datasets/financials"
+       }
+      ],
+      "coverage_window": {
+       "coverage_confidence": "medium",
+       "max_period": null,
+       "min_period": null,
+       "row_count": 0
+      },
+      "data_gaps": [],
+      "generated_at": "2026-08-12T06:25:34Z",
+      "metric_values": {
+       "eps": 66.26,
+       "fiscal_period": "2025-Q4",
+       "frequency": "quarterly",
+       "gross_profit": 2281293979.0,
+       "kd_imputed": true,
+       "kd_source": "statutory_deadline",
+       "knowledge_date": "2026-03-31",
+       "net_income": 1715396780.0,
+       "operating_income": 1936091677.0,
+       "period_end_date": "2025-12-31",
+       "pretax_income": 2041662840.0,
+       "report_date": null,
+       "revenue": 3809054272.0,
+       "source": "mops_official",
+       "symbol": "2330",
+       "updated_at": "2026-06-04T06:44:59.737553"
+      },
+      "not_investment_advice": true,
+      "period": "2025Q4",
+      "period_type": "quarterly",
+      "restatement_warning": {
+       "has_restatement": false,
+       "previous_version_ref": null,
+       "reason": null
+      },
+      "safe_usage_notes": [
+       "not_investment_advice",
+       "official_public_first_policy",
+       "period_semantics_explicit",
+       "raw_full_body_storage_forbidden"
+      ],
+      "source_lineage": {
+       "provider": "mops_official",
+       "source_role": "official_mops_income_statement"
+      },
+      "statement_family": "income_statement",
+      "ticker": "2330"
+     },
+     "gross_profit": 2281293979.0,
+     "kd_imputed": true,
+     "kd_source": "statutory_deadline",
+     "knowledge_date": "2026-03-31",
+     "net_income": 1715396780.0,
+     "operating_income": 1936091677.0,
+     "period_end_date": "2025-12-31",
+     "period_type": "quarterly",
+     "pretax_income": 2041662840.0,
+     "report_date": null,
+     "revenue": 3809054272.0,
+     "source": "mops_official",
+     "symbol": "2330",
+     "updated_at": "2026-06-04T06:44:59.737553"
+    },
+    {
+     "eps": 46.75,
+     "fiscal_period": "2025-Q3",
+     "fiscal_quarter": 3,
+     "fiscal_year": 2025,
+     "frequency": "quarterly",
+     "fundamentals_context": {
+      "available_tools_or_endpoints": [
+       {
+        "name": "income_statement",
+        "path": "/v2/datasets/income-statement"
+       },
+       {
+        "name": "income_statement",
+        "path": "/v2/datasets/financials"
+       }
+      ],
+      "coverage_window": {
+       "coverage_confidence": "medium",
+       "max_period": null,
+       "min_period": null,
+       "row_count": 0
+      },
+      "data_gaps": [],
+      "generated_at": "2026-08-12T06:25:34Z",
+      "metric_values": {
+       "eps": 46.75,
+       "fiscal_period": "2025-Q3",
+       "frequency": "quarterly",
+       "gross_profit": 1629307143.0,
+       "kd_imputed": true,
+       "kd_source": "statutory_deadline",
+       "knowledge_date": "2025-11-14",
+       "net_income": 1209981447.0,
+       "operating_income": 1371189264.0,
+       "period_end_date": "2025-09-30",
+       "pretax_income": 1449299639.0,
+       "report_date": null,
+       "revenue": 2762963851.0,
+       "source": "mops_official",
+       "symbol": "2330",
+       "updated_at": "2026-06-04T06:44:59.737553"
+      },
+      "not_investment_advice": true,
+      "period": "2025Q3",
+      "period_type": "quarterly",
+      "restatement_warning": {
+       "has_restatement": false,
+       "previous_version_ref": null,
+       "reason": null
+      },
+      "safe_usage_notes": [
+       "not_investment_advice",
+       "official_public_first_policy",
+       "period_semantics_explicit",
+       "raw_full_body_storage_forbidden"
+      ],
+      "source_lineage": {
+       "provider": "mops_official",
+       "source_role": "official_mops_income_statement"
+      },
+      "statement_family": "income_statement",
+      "ticker": "2330"
+     },
+     "gross_profit": 1629307143.0,
+     "kd_imputed": true,
+     "kd_source": "statutory_deadline",
+     "knowledge_date": "2025-11-14",
+     "net_income": 1209981447.0,
+     "operating_income": 1371189264.0,
+     "period_end_date": "2025-09-30",
+     "period_type": "quarterly",
+     "pretax_income": 1449299639.0,
+     "report_date": null,
+     "revenue": 2762963851.0,
+     "source": "mops_official",
+     "symbol": "2330",
+     "updated_at": "2026-06-04T06:44:59.737553"
+    },
+    {
+     "eps": 29.31,
+     "fiscal_period": "2025-Q2",
+     "fiscal_quarter": 2,
+     "fiscal_year": 2025,
+     "frequency": "quarterly",
+     "fundamentals_context": {
+      "available_tools_or_endpoints": [
+       {
+        "name": "income_statement",
+        "path": "/v2/datasets/income-statement"
+       },
+       {
+        "name": "income_statement",
+        "path": "/v2/datasets/financials"
+       }
+      ],
+      "coverage_window": {
+       "coverage_confidence": "medium",
+       "max_period": null,
+       "min_period": null,
+       "row_count": 0
+      },
+      "data_gaps": [],
+      "generated_at": "2026-08-12T06:25:34Z",
+      "metric_values": {
+       "eps": 29.31,
+       "fiscal_period": "2025-Q2",
+       "frequency": "quarterly",
+       "gross_profit": 1040764314.0,
+       "kd_imputed": true,
+       "kd_source": "statutory_deadline",
+       "knowledge_date": "2025-08-14",
+       "net_income": 758226085.0,
+       "operating_income": 870504446.0,
+       "period_end_date": "2025-06-30",
+       "pretax_income": 923930616.0,
+       "report_date": null,
+       "revenue": 1773045533.0,
+       "source": "mops_official",
+       "symbol": "2330",
+       "updated_at": "2026-06-04T06:44:59.737553"
+      },
+      "not_investment_advice": true,
+      "period": "2025Q2",
+      "period_type": "quarterly",
+      "restatement_warning": {
+       "has_restatement": false,
+       "previous_version_ref": null,
+       "reason": null
+      },
+      "safe_usage_notes": [
+       "not_investment_advice",
+       "official_public_first_policy",
+       "period_semantics_explicit",
+       "raw_full_body_storage_forbidden"
+      ],
+      "source_lineage": {
+       "provider": "mops_official",
+       "source_role": "official_mops_income_statement"
+      },
+      "statement_family": "income_statement",
+      "ticker": "2330"
+     },
+     "gross_profit": 1040764314.0,
+     "kd_imputed": true,
+     "kd_source": "statutory_deadline",
+     "knowledge_date": "2025-08-14",
+     "net_income": 758226085.0,
+     "operating_income": 870504446.0,
+     "period_end_date": "2025-06-30",
+     "period_type": "quarterly",
+     "pretax_income": 923930616.0,
+     "report_date": null,
+     "revenue": 1773045533.0,
+     "source": "mops_official",
+     "symbol": "2330",
+     "updated_at": "2026-06-04T06:44:59.737553"
+    },
+    {
+     "eps": 13.95,
+     "fiscal_period": "2025-Q1",
+     "fiscal_quarter": 1,
+     "fiscal_year": 2025,
+     "frequency": "quarterly",
+     "fundamentals_context": {
+      "available_tools_or_endpoints": [
+       {
+        "name": "income_statement",
+        "path": "/v2/datasets/income-statement"
+       },
+       {
+        "name": "income_statement",
+        "path": "/v2/datasets/financials"
+       }
+      ],
+      "coverage_window": {
+       "coverage_confidence": "medium",
+       "max_period": null,
+       "min_period": null,
+       "row_count": 0
+      },
+      "data_gaps": [],
+      "generated_at": "2026-08-12T06:25:34Z",
+      "metric_values": {
+       "eps": 13.95,
+       "fiscal_period": "2025-Q1",
+       "frequency": "quarterly",
+       "gross_profit": 493395076.0,
+       "kd_imputed": true,
+       "kd_source": "statutory_deadline",
+       "knowledge_date": "2025-05-15",
+       "net_income": 360732661.0,
+       "operating_income": 407080808.0,
+       "period_end_date": "2025-03-31",
+       "pretax_income": 430895412.0,
+       "report_date": null,
+       "revenue": 839253664.0,
+       "source": "mops_official",
+       "symbol": "2330",
+       "updated_at": "2026-06-04T06:44:59.737553"
+      },
+      "not_investment_advice": true,
+      "period": "2025Q1",
+      "period_type": "quarterly",
+      "restatement_warning": {
+       "has_restatement": false,
+       "previous_version_ref": null,
+       "reason": null
+      },
+      "safe_usage_notes": [
+       "not_investment_advice",
+       "official_public_first_policy",
+       "period_semantics_explicit",
+       "raw_full_body_storage_forbidden"
+      ],
+      "source_lineage": {
+       "provider": "mops_official",
+       "source_role": "official_mops_income_statement"
+      },
+      "statement_family": "income_statement",
+      "ticker": "2330"
+     },
+     "gross_profit": 493395076.0,
+     "kd_imputed": true,
+     "kd_source": "statutory_deadline",
+     "knowledge_date": "2025-05-15",
+     "net_income": 360732661.0,
+     "operating_income": 407080808.0,
+     "period_end_date": "2025-03-31",
+     "period_type": "quarterly",
+     "pretax_income": 430895412.0,
+     "report_date": null,
+     "revenue": 839253664.0,
+     "source": "mops_official",
+     "symbol": "2330",
+     "updated_at": "2026-06-04T06:44:59.737553"
+    }
+   ],
+   "status": "ok",
+   "unit": {
+    "currency": "TWD",
+    "fields": {
+     "eps": {
+      "currency": "TWD",
+      "scale": "twd_per_share",
+      "scale_multiplier": 1,
+      "unit_label": "元/股",
+      "verified": true
+     },
+     "gross_profit": {
+      "currency": "TWD",
+      "scale": "thousand_twd",
+      "scale_multiplier": 1000,
+      "unit_label": "仟元",
+      "verified": true
+     },
+     "net_income": {
+      "currency": "TWD",
+      "scale": "thousand_twd",
+      "scale_multiplier": 1000,
+      "unit_label": "仟元",
+      "verified": true
+     },
+     "operating_income": {
+      "currency": "TWD",
+      "scale": "thousand_twd",
+      "scale_multiplier": 1000,
+      "unit_label": "仟元",
+      "verified": true
+     },
+     "pretax_income": {
+      "currency": "TWD",
+      "scale": "thousand_twd",
+      "scale_multiplier": 1000,
+      "unit_label": "仟元",
+      "verified": true
+     },
+     "revenue": {
+      "currency": "TWD",
+      "scale": "thousand_twd",
+      "scale_multiplier": 1000,
+      "unit_label": "仟元",
+      "verified": true
+     }
+    },
+    "note": "科目字典(§2b):單位以官方 MOPS 報表為準——三大報表金額為仟元(值 ×1000 = 元),EPS 為元/股,比率為 %。每個科目的 scale 皆以官方公布數字核對過;無法核對者標 scale_unknown,不臆測。",
+    "scale": "per_field",
+    "source_of_truth": "official_mops_statement",
+    "unverified_fields": []
+   }
+  },
+  "status": 200
+ },
+ "route": "/v2/datasets/income-statement",
+ "sdk_error": null
+}

@@ -1,0 +1,224 @@
+{
+ "dataset": "foreign_holding",
+ "recorded_with": "restricted test key (value never stored)",
+ "request": {
+  "headers": {
+   "X-API-Key": "REDACTED"
+  },
+  "method": "GET",
+  "params": {
+   "limit": 5,
+   "ticker": "2330"
+  }
+ },
+ "response": {
+  "body": {
+   "api_version": "v2",
+   "data": [
+    {
+     "held_shares": 17931402638.0,
+     "holding_pct": 69.14,
+     "isin": "TW0002330008",
+     "limit_change_date": "2026-05-26",
+     "lineage": {
+      "endpoint_name": "rwd_fund_MI_QFIIS",
+      "payload_date": "20260810",
+      "request_date": "2026-08-10",
+      "row_index": 520,
+      "source_authority": "TWSE MI_QFIIS 外資及陸資投資持股統計",
+      "source_hash": "qfiis:20260810"
+     },
+     "market": "TWSE",
+     "name": "台積電",
+     "not_investment_advice": true,
+     "provider": "twse_official",
+     "remaining_investable": 8000967429.0,
+     "remaining_pct": 30.85,
+     "shares_issued": 25932370067.0,
+     "source_authority": "TWSE MI_QFIIS 外資及陸資投資持股統計",
+     "source_family": "TWSE_MI_QFIIS",
+     "source_role": "official_twse_qfiis",
+     "ticker": "2330",
+     "trade_date": "2026-08-10"
+    },
+    {
+     "held_shares": 17931083542.0,
+     "holding_pct": 69.14,
+     "isin": "TW0002330008",
+     "limit_change_date": "2026-05-26",
+     "lineage": {
+      "endpoint_name": "rwd_fund_MI_QFIIS",
+      "payload_date": "20260807",
+      "request_date": "2026-08-07",
+      "row_index": 520,
+      "source_authority": "TWSE MI_QFIIS 外資及陸資投資持股統計",
+      "source_hash": "qfiis:20260807"
+     },
+     "market": "TWSE",
+     "name": "台積電",
+     "not_investment_advice": true,
+     "provider": "twse_official",
+     "remaining_investable": 8001286525.0,
+     "remaining_pct": 30.85,
+     "shares_issued": 25932370067.0,
+     "source_authority": "TWSE MI_QFIIS 外資及陸資投資持股統計",
+     "source_family": "TWSE_MI_QFIIS",
+     "source_role": "official_twse_qfiis",
+     "ticker": "2330",
+     "trade_date": "2026-08-07"
+    },
+    {
+     "held_shares": 17930241882.0,
+     "holding_pct": 69.14,
+     "isin": "TW0002330008",
+     "limit_change_date": "2026-05-26",
+     "lineage": {
+      "endpoint_name": "rwd_fund_MI_QFIIS",
+      "payload_date": "20260806",
+      "request_date": "2026-08-06",
+      "row_index": 519,
+      "source_authority": "TWSE MI_QFIIS 外資及陸資投資持股統計",
+      "source_hash": "qfiis:20260806"
+     },
+     "market": "TWSE",
+     "name": "台積電",
+     "not_investment_advice": true,
+     "provider": "twse_official",
+     "remaining_investable": 8002128185.0,
+     "remaining_pct": 30.85,
+     "shares_issued": 25932370067.0,
+     "source_authority": "TWSE MI_QFIIS 外資及陸資投資持股統計",
+     "source_family": "TWSE_MI_QFIIS",
+     "source_role": "official_twse_qfiis",
+     "ticker": "2330",
+     "trade_date": "2026-08-06"
+    },
+    {
+     "held_shares": 17933430171.0,
+     "holding_pct": 69.15,
+     "isin": "TW0002330008",
+     "limit_change_date": "2026-05-26",
+     "lineage": {
+      "endpoint_name": "rwd_fund_MI_QFIIS",
+      "payload_date": "20260805",
+      "request_date": "2026-08-05",
+      "row_index": 519,
+      "source_authority": "TWSE MI_QFIIS 外資及陸資投資持股統計",
+      "source_hash": "qfiis:20260805"
+     },
+     "market": "TWSE",
+     "name": "台積電",
+     "not_investment_advice": true,
+     "provider": "twse_official",
+     "remaining_investable": 7998939896.0,
+     "remaining_pct": 30.84,
+     "shares_issued": 25932370067.0,
+     "source_authority": "TWSE MI_QFIIS 外資及陸資投資持股統計",
+     "source_family": "TWSE_MI_QFIIS",
+     "source_role": "official_twse_qfiis",
+     "ticker": "2330",
+     "trade_date": "2026-08-05"
+    },
+    {
+     "held_shares": 17920526859.0,
+     "holding_pct": 69.1,
+     "isin": "TW0002330008",
+     "limit_change_date": "2026-05-26",
+     "lineage": {
+      "endpoint_name": "rwd_fund_MI_QFIIS",
+      "payload_date": "20260804",
+      "request_date": "2026-08-04",
+      "row_index": 519,
+      "source_authority": "TWSE MI_QFIIS 外資及陸資投資持股統計",
+      "source_hash": "qfiis:20260804"
+     },
+     "market": "TWSE",
+     "name": "台積電",
+     "not_investment_advice": true,
+     "provider": "twse_official",
+     "remaining_investable": 8011843208.0,
+     "remaining_pct": 30.89,
+     "shares_issued": 25932370067.0,
+     "source_authority": "TWSE MI_QFIIS 外資及陸資投資持股統計",
+     "source_family": "TWSE_MI_QFIIS",
+     "source_role": "official_twse_qfiis",
+     "ticker": "2330",
+     "trade_date": "2026-08-04"
+    }
+   ],
+   "data_as_of": "2026-08-10",
+   "data_count": 5,
+   "dataset": "foreign_holding",
+   "dataset_id": "foreign_holding",
+   "dataset_version": "v2.0.0-preview",
+   "error": {
+    "blocking_gate": null,
+    "dataset": "foreign_holding",
+    "error_code": null,
+    "error_message": null,
+    "request_id": "read-api-20260810"
+   },
+   "known_gaps": [
+    "twse_only_scope",
+    "no_tpex_coverage",
+    "qfiis_daily_snapshot_only",
+    "no_beneficial_owner_identity",
+    "default_window_applied_when_unfiltered",
+    "not_investment_advice"
+   ],
+   "lineage": {
+    "fallback_chain": [],
+    "policy_notes": [
+     "official/public-first canonical",
+     "TWSE MI_QFIIS 外資及陸資投資持股統計 (per ticker, per trading day)",
+     "held_shares / holding_pct are the published aggregate; no beneficial-owner identity",
+     "not_investment_advice"
+    ],
+    "selected_source": "twse_mi_qfiis",
+    "source_role": "canonical"
+   },
+   "not_investment_advice": true,
+   "quality": {
+    "completeness_ratio": 1.0,
+    "freshness_as_of": "2026-08-10",
+    "freshness_state": "fresh",
+    "quality_status": "ready",
+    "ticker_count": 1
+   },
+   "release_date": "2026-08-10",
+   "release_version": "v2.2026-08-10.preview",
+   "request_context": {
+    "applied_default_window": false,
+    "as_of_date": "2026-08-10",
+    "coverage_type": "daily_per_ticker_holding_snapshot",
+    "dataset_view": "foreign_holding_v1",
+    "date_range": {
+     "date_from": null,
+     "date_to": null
+    },
+    "default_window_days": null,
+    "family": "chip_deep",
+    "field_group_type": "canonical",
+    "market_filter": null,
+    "order_by": "ticker ASC, trade_date DESC",
+    "scope": "twse_qfiis_foreign_and_mainland_holding_daily",
+    "supported_filter_fields": [
+     "ticker",
+     "market",
+     "trade_date",
+     "date_from",
+     "date_to"
+    ],
+    "ticker": "2330",
+    "ticker_filter": "2330"
+   },
+   "warnings": [
+    "not_investment_advice",
+    "twse_only_scope"
+   ]
+  },
+  "status": 200
+ },
+ "route": "/v2/datasets/foreign-holding",
+ "sdk_error": null
+}

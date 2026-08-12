@@ -1,0 +1,140 @@
+{
+ "dataset": "customs_trade_monthly",
+ "recorded_with": "restricted test key (value never stored)",
+ "request": {
+  "headers": {
+   "X-API-Key": "REDACTED"
+  },
+  "method": "GET",
+  "params": {
+   "limit": 5
+  }
+ },
+ "response": {
+  "body": {
+   "data": [
+    {
+     "attribution": "財政部關務署",
+     "item_code": "export",
+     "item_name": "出口",
+     "license": "OGDL_v1_ccby40",
+     "period_month": "2026-05-01",
+     "release_date": null,
+     "source_provider": "customs_gov",
+     "source_role": "official_customs_trade",
+     "source_url": "https://opendata.customs.gov.tw/data/6053/csv.csv",
+     "stat_item": "海關進出口",
+     "unit": "新臺幣千元",
+     "value": 2269531138.0
+    },
+    {
+     "attribution": "財政部關務署",
+     "item_code": "export_total",
+     "item_name": "出口總值",
+     "license": "OGDL_v1_ccby40",
+     "period_month": "2026-05-01",
+     "release_date": null,
+     "source_provider": "customs_gov",
+     "source_role": "official_customs_trade",
+     "source_url": "https://opendata.customs.gov.tw/data/6053/csv.csv",
+     "stat_item": "海關進出口",
+     "unit": "新臺幣千元",
+     "value": 2475945706.0
+    },
+    {
+     "attribution": "財政部關務署",
+     "item_code": "import",
+     "item_name": "進口",
+     "license": "OGDL_v1_ccby40",
+     "period_month": "2026-05-01",
+     "release_date": null,
+     "source_provider": "customs_gov",
+     "source_role": "official_customs_trade",
+     "source_url": "https://opendata.customs.gov.tw/data/6053/csv.csv",
+     "stat_item": "海關進出口",
+     "unit": "新臺幣千元",
+     "value": 1907592863.0
+    },
+    {
+     "attribution": "財政部關務署",
+     "item_code": "import_total",
+     "item_name": "進口總值",
+     "license": "OGDL_v1_ccby40",
+     "period_month": "2026-05-01",
+     "release_date": null,
+     "source_provider": "customs_gov",
+     "source_role": "official_customs_trade",
+     "source_url": "https://opendata.customs.gov.tw/data/6053/csv.csv",
+     "stat_item": "海關進出口",
+     "unit": "新臺幣千元",
+     "value": 1910107175.0
+    },
+    {
+     "attribution": "財政部關務署",
+     "item_code": "reexport",
+     "item_name": "復出口",
+     "license": "OGDL_v1_ccby40",
+     "period_month": "2026-05-01",
+     "release_date": null,
+     "source_provider": "customs_gov",
+     "source_role": "official_customs_trade",
+     "source_url": "https://opendata.customs.gov.tw/data/6053/csv.csv",
+     "stat_item": "海關進出口",
+     "unit": "新臺幣千元",
+     "value": 206414568.0
+    }
+   ],
+   "data_count": 5,
+   "dataset_id": "customs_trade_monthly",
+   "envelope": {
+    "dataset_id": "customs_trade_monthly",
+    "row_count": 5,
+    "scope": "tw_customs_trade_monthly"
+   },
+   "error": null,
+   "known_gaps": [
+    "coverage_starts_2014_01_earlier_history_is_not_in_this_feed",
+    "official_statistics_are_REVISED_a_recent_month_can_change_after_first_publication",
+    "not_investment_advice"
+   ],
+   "lineage": {
+    "attributions": [
+     "財政部關務署"
+    ],
+    "licenses": [
+     "OGDL_v1_ccby40"
+    ],
+    "semantics": "Customs Administration import/export trade values, monthly from 2014-01.",
+    "shared_table_note": "tw_govt_stats_monthly_items backs three datasets; this response is filtered to dataset_key='customs_trade_monthly'.",
+    "source_providers": [
+     "customs_gov"
+    ]
+   },
+   "quality": {
+    "item_count": 5,
+    "months_in_page": 1,
+    "row_count": 5,
+    "sensitive_fields_exposed": false
+   },
+   "request_context": {
+    "coverage_type": "monthly_official_statistics",
+    "filters": {
+     "date_from": null,
+     "date_to": null,
+     "item_code": null,
+     "limit": 5,
+     "period_month": null
+    },
+    "max_period_month": "2026-05-01",
+    "min_period_month": "2026-05-01",
+    "scope": "tw_customs_trade_monthly"
+   },
+   "warnings": [
+    "not_investment_advice"
+   ]
+  },
+  "status": 200
+ },
+ "route": "/v2/datasets/customs-trade-monthly",
+ "sdk_error": null
+}

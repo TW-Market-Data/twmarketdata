@@ -1,0 +1,117 @@
+{
+ "dataset": "day_trading_suspension",
+ "recorded_with": "restricted test key (value never stored)",
+ "request": {
+  "headers": {
+   "X-API-Key": "REDACTED"
+  },
+  "method": "GET",
+  "params": {
+   "limit": 5,
+   "ticker": "2330"
+  }
+ },
+ "response": {
+  "body": {
+   "api_version": "v2",
+   "data": [
+    {
+     "data_gaps": [],
+     "event_indicator": "除息",
+     "event_name": "TWSE current day-trading suspension",
+     "lineage": {
+      "endpoint": "https://www.twse.com.tw/exchangeReport/TWTBAU2",
+      "request_params": {
+       "date": "20260609",
+       "response": "json"
+      },
+      "source_family": "twse_current_day_trading_suspension",
+      "source_provider": "twse_openapi",
+      "source_role": "official_current_list",
+      "source_title": "115/06/09 至 115/06/09 暫停先賣後買當日沖銷查詢"
+     },
+     "market": "TWSE",
+     "not_investment_advice": true,
+     "security_name": "台積電",
+     "source_family": "twse_current_day_trading_suspension",
+     "suspension_end_date": "2026-06-12",
+     "suspension_start_date": "2026-06-08",
+     "ticker": "2330"
+    }
+   ],
+   "data_as_of": "2026-06-08",
+   "data_count": 1,
+   "dataset": "day_trading_suspension",
+   "dataset_id": "day_trading_suspension",
+   "dataset_version": "v2.0.0-preview",
+   "error": {
+    "blocking_gate": null,
+    "dataset": "day_trading_suspension",
+    "error_code": null,
+    "error_message": null,
+    "request_id": "read-api-20260608"
+   },
+   "known_gaps": [
+    "twse_only_scope",
+    "no_tpex_coverage",
+    "no_historical_completeness",
+    "no_2022_2026_backfill",
+    "not_investment_advice"
+   ],
+   "lineage": {
+    "fallback_chain": [],
+    "policy_notes": [
+     "official/public-first canonical",
+     "TWSE current snapshot only",
+     "no historical completeness claim",
+     "not_investment_advice"
+    ],
+    "selected_source": "day_trading_suspension",
+    "source_families": [
+     "twse_current_day_trading_suspension"
+    ],
+    "source_role": "canonical"
+   },
+   "not_investment_advice": true,
+   "quality": {
+    "completeness_ratio": 1.0,
+    "freshness_as_of": "2026-06-08",
+    "freshness_state": "fresh",
+    "quality_status": "ready",
+    "ticker_count": 1
+   },
+   "release_date": "2026-06-08",
+   "release_version": "v2.2026-06-08.preview",
+   "request_context": {
+    "as_of_date": "2026-06-08",
+    "coverage_type": "twse_current_snapshot_reference",
+    "dataset_view": "day_trading_suspension_v1",
+    "date_range": {
+     "date_from": null,
+     "date_to": null
+    },
+    "family": "market_structure_corporate_actions",
+    "field_group_type": "canonical",
+    "market_filter": "TWSE",
+    "scope": "day_trading_suspension_twse_current_snapshot_only",
+    "snapshot_mode": "current_snapshot_only",
+    "supported_filter_fields": [
+     "market",
+     "ticker",
+     "date_from",
+     "date_to",
+     "source_family"
+    ],
+    "ticker": "2330",
+    "ticker_filter": "2330"
+   },
+   "warnings": [
+    "not_investment_advice",
+    "twse_only_scope"
+   ]
+  },
+  "status": 200
+ },
+ "route": "/v2/datasets/day-trading-suspension",
+ "sdk_error": null
+}

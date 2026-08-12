@@ -9,18 +9,42 @@ regenerating — this script never changes the grade by itself.
 
 | FinMind call | grade | confidence | TWMD dataset | tier | result |
 |---|---|---|---|---|---|
-| `taiwan_stock_market_value` | C_substituted | low | `valuation_core_daily` | pro | needs an API key (not run) |
-| `taiwan_stock_info_with_warrant_summary` | C_substituted | low | `warrants_reference` | free | 3 rows via `data`; columns: `data_gaps`, `exercise_ratio`, `exercise_style`, `expiry_date`, `issuer`, `lineage`, `listing_date`, `market`, `not_investment_advice`, `settlement_style` |
-| `taiwan_stock_suspended` | C_substituted | low | `stock_delisting_lifecycle` | free | 3 rows via `data`; columns: `announcement_date`, `code`, `company_name`, `data_gaps`, `delisting_date`, `event_type`, `lineage`, `market`, `reason_summary`, `source_event_ref` |
-| `taiwan_stock_day_trading` | C_substituted | low | `price_move_context` | starter | needs an API key (not run) |
-| `taiwan_stock_news` | C_substituted | low | `company_news` | pro | needs an API key (not run) |
-| `taiwan_stock_active_etf_holding_change` | C_substituted | low | `etf_holdings` | developer | needs an API key (not run) |
-| `taiwan_stock_convertible_bond_daily` | C_substituted | low | `convertible_bond_overview` | max | needs an API key (not run) |
-| `taiwan_stock_convertible_bond_put_provision` | C_substituted | low | `convertible_bond_overview` | max | needs an API key (not run) |
+| `taiwan_stock_daily_adj` | C_substituted | medium | `price_enhanced` | starter | TwmdServerError: Request failed with status 500. |
+| `taiwan_stock_daily_adj` | C_substituted | medium | `twse_daily_price` | free | 3 rows via `rows`; columns: `close`, `date`, `high`, `low`, `open`, `price_change`, `price_change_sign`, `price_confidence`, `price_method`, `symbol` |
+| `taiwan_stock_price_limit` | A_one_to_one | medium | `stock_price_limit_daily` | max | 3 rows via `data`; columns: `data_gaps`, `limit_down_price`, `limit_up_price`, `lineage`, `market`, `reference_price`, `source_family`, `source_provider`, `source_role`, `ticker` |
+| `taiwan_stock_market_value` | C_substituted | low | `valuation_core_daily` | pro | 3 rows via `data`; columns: `book_value_per_share`, `close`, `date`, `dividend_per_share_ttm`, `dividend_yield`, `market_cap`, `notes`, `pb`, `pe`, `ps` |
+| `taiwan_stock_info_with_warrant` | B_transformed | medium | `security_master` | free | 1 rows via `items`; columns: `as_of_date`, `available_tools_or_endpoints`, `data_gaps`, `dataset_coverage`, `generated_at`, `market_identity`, `safe_usage_notes`, `security_identity`, `source_lineage`, `survivorship_bias_warning` |
+| `taiwan_stock_info_with_warrant` | B_transformed | medium | `warrants_reference` | free | 3 rows via `data`; columns: `data_gaps`, `exercise_ratio`, `exercise_style`, `expiry_date`, `issuer`, `lineage`, `listing_date`, `market`, `not_investment_advice`, `settlement_style` |
+| `taiwan_stock_info_with_warrant_summary` | C_substituted | medium | `warrants_reference` | free | 3 rows via `data`; columns: `data_gaps`, `exercise_ratio`, `exercise_style`, `expiry_date`, `issuer`, `lineage`, `listing_date`, `market`, `not_investment_advice`, `settlement_style` |
+| `taiwan_stock_delisting` | B_transformed | medium | `stock_delisting_lifecycle` | free | 3 rows via `data`; columns: `announcement_date`, `code`, `company_name`, `data_gaps`, `delisting_date`, `event_type`, `lineage`, `market`, `reason_summary`, `source_event_ref` |
+| `taiwan_stock_suspended` | C_substituted | medium | `stock_delisting_lifecycle` | free | 3 rows via `data`; columns: `announcement_date`, `code`, `company_name`, `data_gaps`, `delisting_date`, `event_type`, `lineage`, `market`, `reason_summary`, `source_event_ref` |
+| `taiwan_stock_dividend` | B_transformed | medium | `dividends` | pro | 2 rows via `envelope.data`; columns: `announcement_date`, `cash_dividend`, `dividend_type`, `event_status`, `ex_dividend_date`, `ex_rights_date`, `fiscal_period`, `lineage`, `market`, `payment_date` |
+| `taiwan_stock_dividend_result` | C_substituted | medium | `corporate_actions` | pro | 3 rows via `envelope.data`; columns: `action_type`, `announcement_date`, `capital_reduction_ratio`, `cash_dividend`, `effective_date`, `ex_date`, `lineage`, `market`, `par_value_from`, `par_value_ratio` |
+| `taiwan_stock_margin_purchase_short_sale_total` | A_one_to_one | medium | `margin_short_total` | starter | 3 rows via `rows`; columns: `currency`, `data_gaps`, `margin_purchase_amount_total`, `margin_purchase_balance_total`, `margin_purchase_buy_total`, `margin_purchase_sell_total`, `market`, `market_scope`, `not_investment_advice`, `short_sale_balance_total` |
+| `taiwan_daily_short_sale_balances` | B_transformed | medium | `short_sale_balance_control` | max | 3 rows via `data`; columns: `lineage`, `market`, `ms_balance`, `ms_buy`, `ms_next_limit`, `ms_prev_balance`, `ms_redeem`, `ms_sell`, `name`, `note` |
+| `taiwan_stock_margin_short_sale_suspension` | C_substituted | medium | `margin_short_cover_date` | pro | 3 rows via `data`; columns: `cover_date`, `lineage`, `market`, `name`, `reason`, `source_family`, `suspension_end_date`, `ticker` |
+| `taiwan_stock_block_trade` | A_one_to_one | medium | `block_trade_daily` | developer | TierRequiredError: block_trade_daily 不在你目前的方案裡，developer 方案涵蓋它。免費層目前可讀 0 個資料集；下面這行不用金鑰也拿得到資料。 |
+| `taiwan_stock_day_trading` | C_substituted | low | `price_move_context` | starter | 3 rows via `data`; columns: `day_trade_ratio`, `event_coverage_note`, `events`, `grade`, `hit_track`, `inst_net`, `limit_move_flag`, `limit_move_flag_method`, `magnitude_bucket`, `margin_delta` |
+| `taiwan_stock_capital_reduction_reference_price` | B_transformed | medium | `capital_formation_events` | starter | TwmdServerError: Request failed with status 500. |
+| `taiwan_stock_par_value_change` | B_transformed | medium | `stock_split_par_value_events` | free | 3 rows via `data`; columns: `announcement_date`, `closing_price_on_last_trading_day`, `data_gaps`, `event_date`, `event_type`, `limit_down_price`, `limit_up_price`, `lineage`, `market`, `opening_reference_price` |
+| `taiwan_stock_split_price` | B_transformed | medium | `stock_split_par_value_events` | free | 3 rows via `data`; columns: `announcement_date`, `closing_price_on_last_trading_day`, `data_gaps`, `event_date`, `event_type`, `limit_down_price`, `limit_up_price`, `lineage`, `market`, `opening_reference_price` |
+| `taiwan_stock_news` | C_substituted | low | `company_news` | pro | TwmdServerError: Request failed with status 500. |
+| `taiwan_stock_active_etf_info` | C_substituted | medium | `fund_etf_metadata` | free | 3 rows via `data`; columns: `currency`, `data_gaps`, `fund_code`, `fund_name`, `fund_type`, `issuer`, `lineage`, `listing_date`, `market`, `not_investment_advice` |
+| `taiwan_stock_active_etf_holding` | C_substituted | medium | `etf_holdings` | developer | TierRequiredError: etf_holdings 不在你目前的方案裡，developer 方案涵蓋它。免費層目前可讀 0 個資料集；下面這行不用金鑰也拿得到資料。 |
+| `taiwan_stock_active_etf_holding_change` | C_substituted | low | `etf_holdings` | developer | TierRequiredError: etf_holdings 不在你目前的方案裡，developer 方案涵蓋它。免費層目前可讀 0 個資料集；下面這行不用金鑰也拿得到資料。 |
+| `taiwan_stock_convertible_bond_monthly_analysis` | B_transformed | medium | `convertible_bond_monthly` | max | 3 rows via `data`; columns: `cb_id`, `cb_name`, `change_amount`, `change_percent`, `custody_accounts`, `custody_balance`, `data_month`, `issued_units`, `last_month_balance`, `lineage` |
+| `taiwan_stock_convertible_bond_daily` | C_substituted | low | `convertible_bond_overview` | max | 3 rows via `data`; columns: `cb_delisting_date`, `cb_id`, `cb_name`, `conversion_end_date`, `conversion_price`, `conversion_start_date`, `coupon_rate`, `issuance_amount`, `lineage`, `market` |
+| `taiwan_stock_convertible_bond_put_provision` | C_substituted | low | `convertible_bond_overview` | max | 3 rows via `data`; columns: `cb_delisting_date`, `cb_id`, `cb_name`, `conversion_end_date`, `conversion_price`, `conversion_start_date`, `coupon_rate`, `issuance_amount`, `lineage`, `market` |
+| `taiwan_futures_daily` | B_transformed | medium | `derivatives_market` | max | 3 rows via `envelope.data`; columns: `as_of_date`, `close`, `contract_code`, `contract_type`, `derivative_type`, `high`, `low`, `market`, `open`, `open_interest` |
+| `taiwan_option_daily` | A_one_to_one | medium | `options_daily_taifex` | max | 3 rows via `data`; columns: `close`, `contract_symbol`, `data_gaps`, `expiry_month`, `high`, `lineage`, `low`, `not_investment_advice`, `open`, `open_interest` |
+| `taiwan_option_final_settlement_price` | B_transformed | medium | `taifex_final_settlement` | max | 3 rows via `data`; columns: `contract`, `contract_delivery_month`, `contract_name`, `lineage`, `market`, `product_type`, `settlement_date`, `settlement_price`, `source_family` |
+| `taiwan_futures_institutional_investors` | C_substituted | medium | `futures_daily_context` | starter | 3 rows via `data`; columns: `basis`, `basis_pct`, `contract`, `days_to_settlement`, `futures_close`, `grade`, `inst_net_oi_dealer`, `inst_net_oi_foreign`, `inst_net_oi_itrust`, `method` |
+| `(government_bonds_yield)` | B_transformed | medium | `bond_yield_curve` | max | 3 rows via `data`; columns: `as_of`, `curve_type`, `index_version`, `lineage`, `maturity_years`, `source_authority`, `source_family`, `source_provider`, `source_role`, `tenor_label` |
+| `(interest_rate)` | C_substituted | medium | `interest_rate_snapshots` | developer | TierRequiredError: interest_rate_snapshot 不在你目前的方案裡，developer 方案涵蓋它。免費層目前可讀 0 個資料集；下面這行不用金鑰也拿得到資料。 |
 
 ## Status
 
-- datasets sampled successfully: **2 / 7**
-- remaining blocked on a key: **5**
+- datasets sampled successfully: **21 / 27**
+- remaining blocked on a key: **6**
 
 Full first rows: `mapping/low_confidence_samples.json`.

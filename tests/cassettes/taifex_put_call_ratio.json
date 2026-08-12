@@ -1,0 +1,134 @@
+{
+ "dataset": "taifex_put_call_ratio",
+ "recorded_with": "restricted test key (value never stored)",
+ "request": {
+  "headers": {
+   "X-API-Key": "REDACTED"
+  },
+  "method": "GET",
+  "params": {
+   "limit": 5
+  }
+ },
+ "response": {
+  "body": {
+   "data": [
+    {
+     "call_oi": 72704.0,
+     "call_volume": 99406.0,
+     "lineage": {
+      "endpoint": "PutCallRatio",
+      "source": "TAIFEX_OpenAPI"
+     },
+     "market": "TAIFEX",
+     "put_call_oi_ratio": 117.38,
+     "put_call_volume_ratio": 114.87,
+     "put_oi": 85342.0,
+     "put_volume": 114188.0,
+     "source_family": "TAIFEX_PUTCALLRATIO",
+     "trade_date": "2026-08-10"
+    },
+    {
+     "call_oi": 55858.0,
+     "call_volume": 331682.0,
+     "lineage": {
+      "endpoint": "PutCallRatio",
+      "source": "TAIFEX_OpenAPI"
+     },
+     "market": "TAIFEX",
+     "put_call_oi_ratio": 106.42,
+     "put_call_volume_ratio": 99.19,
+     "put_oi": 59446.0,
+     "put_volume": 328986.0,
+     "source_family": "TAIFEX_PUTCALLRATIO",
+     "trade_date": "2026-08-07"
+    },
+    {
+     "call_oi": 72476.0,
+     "call_volume": 129162.0,
+     "lineage": {
+      "endpoint": "PutCallRatio",
+      "source": "TAIFEX_OpenAPI"
+     },
+     "market": "TAIFEX",
+     "put_call_oi_ratio": 109.77,
+     "put_call_volume_ratio": 109.14,
+     "put_oi": 79558.0,
+     "put_volume": 140965.0,
+     "source_family": "TAIFEX_PUTCALLRATIO",
+     "trade_date": "2026-08-06"
+    },
+    {
+     "call_oi": 52474.0,
+     "call_volume": 400467.0,
+     "lineage": {
+      "endpoint": "PutCallRatio",
+      "source": "TAIFEX_OpenAPI"
+     },
+     "market": "TAIFEX",
+     "put_call_oi_ratio": 111.87,
+     "put_call_volume_ratio": 109.99,
+     "put_oi": 58701.0,
+     "put_volume": 440480.0,
+     "source_family": "TAIFEX_PUTCALLRATIO",
+     "trade_date": "2026-08-05"
+    },
+    {
+     "call_oi": 91937.0,
+     "call_volume": 171967.0,
+     "lineage": {
+      "endpoint": "PutCallRatio",
+      "source": "TAIFEX_OpenAPI"
+     },
+     "market": "TAIFEX",
+     "put_call_oi_ratio": 102.56,
+     "put_call_volume_ratio": 101.92,
+     "put_oi": 94288.0,
+     "put_volume": 175268.0,
+     "source_family": "TAIFEX_PUTCALLRATIO",
+     "trade_date": "2026-08-04"
+    }
+   ],
+   "data_count": 5,
+   "dataset_id": "taifex_put_call_ratio",
+   "envelope": {
+    "dataset_id": "taifex_put_call_ratio",
+    "row_count": 5,
+    "scope": "taifex_option_put_call_ratio_only"
+   },
+   "error": null,
+   "known_gaps": [
+    "rolling_window_daily_accumulator_full_history_via_csv_pending",
+    "not_investment_advice"
+   ],
+   "lineage": {
+    "semantics": "TAIFEX OpenAPI PutCallRatio: option put/call volume ratio + open-interest ratio (market-wide daily)",
+    "source_families": [
+     "TAIFEX_PUTCALLRATIO"
+    ]
+   },
+   "quality": {
+    "row_count": 5,
+    "sensitive_fields_exposed": false
+   },
+   "request_context": {
+    "coverage_type": "official_dated_daily",
+    "filters": {
+     "date_from": null,
+     "date_to": null,
+     "limit": 5,
+     "trade_date": null
+    },
+    "max_trade_date": "2026-08-10",
+    "min_trade_date": "2026-08-04",
+    "scope": "taifex_option_put_call_ratio_only"
+   },
+   "warnings": [
+    "not_investment_advice"
+   ]
+  },
+  "status": 200
+ },
+ "route": "/v2/datasets/taifex-put-call-ratio",
+ "sdk_error": null
+}

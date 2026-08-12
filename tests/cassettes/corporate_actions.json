@@ -1,0 +1,245 @@
+{
+ "dataset": "corporate_actions",
+ "recorded_with": "restricted test key (value never stored)",
+ "request": {
+  "headers": {
+   "X-API-Key": "REDACTED"
+  },
+  "method": "GET",
+  "params": {
+   "limit": 5,
+   "ticker": "2330"
+  }
+ },
+ "response": {
+  "body": {
+   "api_version": "v2",
+   "dataset": "corporate_actions",
+   "endpoint": "/v2/datasets/corporate-actions",
+   "envelope": {
+    "api_version": "v2",
+    "data": [
+     {
+      "action_type": "ex_dividend",
+      "announcement_date": null,
+      "capital_reduction_ratio": null,
+      "cash_dividend": null,
+      "effective_date": "2026-06-11",
+      "ex_date": "2026-06-11",
+      "lineage": {
+       "detail_ref": "2330,20260611",
+       "endpoint_name": "TWT49U",
+       "payload_status": "OK",
+       "request_end_date": "20260930",
+       "request_start_date": "20260601",
+       "row_index": 47
+      },
+      "market": "TWSE",
+      "par_value_from": null,
+      "par_value_ratio": null,
+      "par_value_to": null,
+      "provider": "twse_official",
+      "quality_flag": "ok",
+      "record_date": null,
+      "rights_price": null,
+      "rights_ratio": null,
+      "source_id": "2330,20260611",
+      "source_role": "historical_ex_right_ex_dividend_reference_price",
+      "split_ratio": null,
+      "stock_dividend": null,
+      "ticker": "2330"
+     },
+     {
+      "action_type": "ex_dividend",
+      "announcement_date": null,
+      "capital_reduction_ratio": null,
+      "cash_dividend": null,
+      "effective_date": "2026-03-17",
+      "ex_date": "2026-03-17",
+      "lineage": {
+       "detail_ref": "2330,20260317",
+       "endpoint_name": "TWT49U",
+       "payload_status": "OK",
+       "request_end_date": "20260331",
+       "request_start_date": "20260301",
+       "row_index": 39
+      },
+      "market": "TWSE",
+      "par_value_from": null,
+      "par_value_ratio": null,
+      "par_value_to": null,
+      "provider": "twse_official",
+      "quality_flag": "ok",
+      "record_date": null,
+      "rights_price": null,
+      "rights_ratio": null,
+      "source_id": "2330,20260317",
+      "source_role": "historical_ex_right_ex_dividend_reference_price",
+      "split_ratio": null,
+      "stock_dividend": null,
+      "ticker": "2330"
+     },
+     {
+      "action_type": "ex_dividend",
+      "announcement_date": null,
+      "capital_reduction_ratio": null,
+      "cash_dividend": null,
+      "effective_date": "2025-12-11",
+      "ex_date": "2025-12-11",
+      "lineage": {
+       "detail_ref": "2330,20251211",
+       "endpoint_name": "TWT49U",
+       "payload_status": "OK",
+       "request_end_date": "20251231",
+       "request_start_date": "20251201",
+       "row_index": 14
+      },
+      "market": "TWSE",
+      "par_value_from": null,
+      "par_value_ratio": null,
+      "par_value_to": null,
+      "provider": "twse_official",
+      "quality_flag": "ok",
+      "record_date": null,
+      "rights_price": null,
+      "rights_ratio": null,
+      "source_id": "2330,20251211",
+      "source_role": "historical_ex_right_ex_dividend_reference_price",
+      "split_ratio": null,
+      "stock_dividend": null,
+      "ticker": "2330"
+     },
+     {
+      "action_type": "ex_dividend",
+      "announcement_date": null,
+      "capital_reduction_ratio": null,
+      "cash_dividend": null,
+      "effective_date": "2025-09-16",
+      "ex_date": "2025-09-16",
+      "lineage": {
+       "detail_ref": "2330,20250916",
+       "endpoint_name": "TWT49U",
+       "payload_status": "OK",
+       "request_end_date": "20250930",
+       "request_start_date": "20250901",
+       "row_index": 73
+      },
+      "market": "TWSE",
+      "par_value_from": null,
+      "par_value_ratio": null,
+      "par_value_to": null,
+      "provider": "twse_official",
+      "quality_flag": "ok",
+      "record_date": null,
+      "rights_price": null,
+      "rights_ratio": null,
+      "source_id": "2330,20250916",
+      "source_role": "historical_ex_right_ex_dividend_reference_price",
+      "split_ratio": null,
+      "stock_dividend": null,
+      "ticker": "2330"
+     },
+     {
+      "action_type": "ex_dividend",
+      "announcement_date": null,
+      "capital_reduction_ratio": null,
+      "cash_dividend": null,
+      "effective_date": "2025-06-12",
+      "ex_date": "2025-06-12",
+      "lineage": {
+       "detail_ref": "2330,20250612",
+       "endpoint_name": "TWT49U",
+       "payload_status": "OK",
+       "request_end_date": "20250630",
+       "request_start_date": "20250601",
+       "row_index": 39
+      },
+      "market": "TWSE",
+      "par_value_from": null,
+      "par_value_ratio": null,
+      "par_value_to": null,
+      "provider": "twse_official",
+      "quality_flag": "ok",
+      "record_date": null,
+      "rights_price": null,
+      "rights_ratio": null,
+      "source_id": "2330,20250612",
+      "source_role": "historical_ex_right_ex_dividend_reference_price",
+      "split_ratio": null,
+      "stock_dividend": null,
+      "ticker": "2330"
+     }
+    ],
+    "data_as_of": "2026-08-12",
+    "dataset": "corporate_actions",
+    "dataset_version": "v2.0.0-preview",
+    "error": {
+     "blocking_gate": null,
+     "dataset": "corporate_actions",
+     "error_code": null,
+     "error_message": null,
+     "request_id": "read-api-508a4b656c78"
+    },
+    "lineage": {
+     "fallback_chain": [
+      "tpex_official",
+      "data_gov_mirror"
+     ],
+     "policy_notes": [
+      "official/public-first canonical",
+      "market-structure canonical aggregate first",
+      "no Yahoo canonical dependency"
+     ],
+     "selected_source": "twse_official",
+     "source_role": "canonical"
+    },
+    "quality": {
+     "completeness_ratio": 1.0,
+     "freshness_as_of": "2026-08-12",
+     "freshness_state": "fresh",
+     "quality_status": "ready"
+    },
+    "release_date": "2026-08-12",
+    "release_version": "v2.2026-08-12.preview",
+    "request_context": {
+     "as_of_date": "2026-08-12",
+     "dataset_view": "market_corporate_actions_aggregate_v1",
+     "family": "market_structure_corporate_actions",
+     "field_group_type": "canonical",
+     "ticker": "2330"
+    }
+   },
+   "meta": {
+    "is_limited": false,
+    "mandatory_contract_fields_present": [
+     "api_version",
+     "data",
+     "data_as_of",
+     "dataset",
+     "dataset_version",
+     "error",
+     "lineage",
+     "quality",
+     "release_date",
+     "release_version",
+     "request_context"
+    ],
+    "plan": "max",
+    "row_limit": 10000,
+    "rows_returned": 5
+   },
+   "plan_id": "max",
+   "query": {
+    "action_type": null,
+    "date_from": null,
+    "date_to": "2026-08-12",
+    "limit": 5,
+    "ticker": "2330"
+   },
+   "request_id": "req_79fb10cab1be"
+  },
+  "status": 200
+ },
+ "route": "/v2/datasets/corporate-actions",
+ "sdk_error": null
+}

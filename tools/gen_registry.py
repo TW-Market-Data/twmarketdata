@@ -17,7 +17,7 @@ FIELDS = [
     "name_zh", "category", "tier", "route", "registry_status", "grain",
     "knowledge_time_field", "point_in_time_safe", "as_of_mode", "as_of_param",
     "as_of_note", "data_gaps_param", "pagination", "api_entity_param",
-    "api_start_param", "api_end_param", "api_other_params",
+    "api_start_param", "api_end_param", "api_other_params", "limit_max",
     "free_tier_probe_2026_08_12", "coverage_min", "coverage_max", "columns",
 ]
 
@@ -39,6 +39,8 @@ def main() -> None:
                 entry["supports_data_gaps"] = bool(v)
             elif f == "free_tier_probe_2026_08_12":
                 entry["free_tier_probe"] = v
+            elif f == "limit_max":
+                entry["limit_max"] = int(v) if v else None
             elif f in ("columns", "api_other_params", "grain"):
                 entry[f] = [x for x in v.split("|") if x]
             else:

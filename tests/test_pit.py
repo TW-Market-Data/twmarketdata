@@ -171,3 +171,34 @@ def test_absent_column_is_reported_as_absent_not_as_null():
         kept = apply_as_of(rows, info=twmd.get("monthly_revenue"), as_of="2026-06-30",
                            mode="client_unsafe", meta=meta, truncated=False)
     assert kept == rows and meta.as_of_applied is False
+
+
+def test_server_side_as_of_still_warns_about_imputed_dates(session):
+    """Measured 2026-08-12: the four fundamentals return kd_imputed=true on
+    every row. Server-mode filtering is still filtering on a statutory-deadline
+    derivation, so it must warn like client mode does -- otherwise the people
+    running server-side PIT backtests are the only ones not told."""
+    from conftest import FakeResponse, rows_envelope
+    c = twmd.Client(session=session)
+    session.queue = [FakeResponse(rows_envelope([
+        {"fiscal_year": 2026, "knowledge_date": "2026-05-15",
+         "kd_imputed": True, "kd_source": "statutory_deadline"},
+    ]))]
+    assert twmd.get("income_statement").as_of_mode == "server"
+    with pytest.warns(ImputedKnowledgeDateWarning, match="statutory filing deadline"):
+        c.income_statement(ticker="2330", as_of="2026-06-30")
+    assert c.last_meta.knowledge_date_imputed_rows == 1
+    assert c.last_meta.knowledge_date_sources == ["statutory_deadline"]
+
+
+def test_server_side_as_of_is_quiet_when_dates_are_observed(session):
+    from conftest import FakeResponse, rows_envelope
+    import warnings as _w
+    c = twmd.Client(session=session)
+    session.queue = [FakeResponse(rows_envelope([
+        {"knowledge_date": "2026-05-15", "kd_imputed": False, "kd_source": "mops"},
+    ]))]
+    with _w.catch_warnings():
+        _w.simplefilter("error", ImputedKnowledgeDateWarning)
+        c.income_statement(ticker="2330", as_of="2026-06-30")
+    assert c.last_meta.knowledge_date_imputed_rows == 0

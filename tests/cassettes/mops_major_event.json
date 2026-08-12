@@ -1,0 +1,176 @@
+{
+ "dataset": "mops_major_event",
+ "recorded_with": "restricted test key (value never stored)",
+ "request": {
+  "headers": {
+   "X-API-Key": "REDACTED"
+  },
+  "method": "GET",
+  "params": {
+   "limit": 5,
+   "ticker": "2330"
+  }
+ },
+ "response": {
+  "body": {
+   "data": [
+    {
+     "article_clause": null,
+     "body": null,
+     "event_classification": null,
+     "event_date": "2026-08-10",
+     "event_description": null,
+     "event_time": "13:51:09",
+     "event_type": null,
+     "event_version": null,
+     "market": "TW",
+     "provider": "twse_official",
+     "source_authority": "MOPS t05st02 (當日重大訊息, whole market)",
+     "source_role": "official_mops_major_event",
+     "source_url": null,
+     "ticker": "2330",
+     "title": "台積公司2026年7月營收報告"
+    },
+    {
+     "article_clause": null,
+     "body": null,
+     "event_classification": null,
+     "event_date": "2026-07-22",
+     "event_description": null,
+     "event_time": "18:32:47",
+     "event_type": null,
+     "event_version": null,
+     "market": "TW",
+     "provider": "twse_official",
+     "source_authority": "MOPS t05st02 (當日重大訊息, whole market)",
+     "source_role": "official_mops_major_event",
+     "source_url": null,
+     "ticker": "2330",
+     "title": "公告本公司115年度第3期無擔保普通公司債(綠色債券)\r\n主要發行條件"
+    },
+    {
+     "article_clause": null,
+     "body": null,
+     "event_classification": null,
+     "event_date": "2026-07-16",
+     "event_description": null,
+     "event_time": "15:12:31",
+     "event_type": null,
+     "event_version": null,
+     "market": "TW",
+     "provider": "twse_official",
+     "source_authority": "MOPS ajax_t05st01 (重大訊息)",
+     "source_role": "official_mops_major_event",
+     "source_url": null,
+     "ticker": "2330",
+     "title": "台積公司2026年第二季每股盈餘新台幣27.25元"
+    },
+    {
+     "article_clause": null,
+     "body": null,
+     "event_classification": null,
+     "event_date": "2026-07-13",
+     "event_description": null,
+     "event_time": "13:50:31",
+     "event_type": null,
+     "event_version": null,
+     "market": "TW",
+     "provider": "twse_official",
+     "source_authority": "MOPS ajax_t05st01 (重大訊息)",
+     "source_role": "official_mops_major_event",
+     "source_url": null,
+     "ticker": "2330",
+     "title": "台積公司2026年6月營收報告"
+    },
+    {
+     "article_clause": null,
+     "body": null,
+     "event_classification": null,
+     "event_date": "2026-07-08",
+     "event_description": null,
+     "event_time": "19:34:35",
+     "event_type": null,
+     "event_version": null,
+     "market": "TW",
+     "provider": "twse_official",
+     "source_authority": "MOPS ajax_t05st01 (重大訊息)",
+     "source_role": "official_mops_major_event",
+     "source_url": null,
+     "ticker": "2330",
+     "title": "本公司代子公司 Emerging Fund, L.P.公告處分有價證券"
+    }
+   ],
+   "data_count": 5,
+   "dataset_id": "mops_major_event",
+   "enrichment_coverage": {
+    "fields": [
+     "article_clause",
+     "event_classification",
+     "event_description"
+    ],
+    "matched_rows": 600,
+    "note": "MOPS 條款 classification and the structured filing body exist only for the t187ap04 open-data slice; outside that window these three fields are null because the broad source does not publish them.",
+    "source": "material_information_events",
+    "window": {
+     "from": "2026-03-11",
+     "to": "2026-06-26"
+    }
+   },
+   "envelope": {
+    "dataset_id": "mops_major_event",
+    "row_count": 5,
+    "scope": "mops_material_information_filings"
+   },
+   "error": null,
+   "fields_not_available": {
+    "body": "not published by the broad source (and NULL on 100% of the previous rows)",
+    "event_type": "the source has no taxonomy; the real classification is article_clause",
+    "event_version": "the broad source carries no restatement version",
+    "source_url": "the only URL available is the bulk CSV endpoint, not a link to the filing"
+   },
+   "known_gaps": [
+    "placeholder_rows_are_excluded_by_default_see_placeholders_withheld",
+    "event_date_is_the_filing_date_the_underlying_event_may_predate_it",
+    "article_clause_and_event_description_exist_only_for_the_2026_03_11_to_2026_06_26_slice",
+    "market_is_TW_on_the_broad_source_no_per_row_TWSE_TPEX_attribution",
+    "event_type_body_source_url_event_version_are_not_carried_see_fields_not_available",
+    "not_investment_advice"
+   ],
+   "lineage": {
+    "providers": [
+     "twse_official"
+    ],
+    "semantics": "MOPS material-information filings as published: the announcement text itself. For a rule-engine classification of the same source, see major_event_taxonomy — this dataset does not infer anything."
+   },
+   "quality": {
+    "placeholders_withheld": 0,
+    "row_count": 5,
+    "rows_with_article_clause": 0,
+    "sensitive_fields_exposed": false,
+    "ticker_count": 1
+   },
+   "request_context": {
+    "coverage_type": "event_driven",
+    "filters": {
+     "date_from": null,
+     "date_to": null,
+     "event_date": null,
+     "event_type": null,
+     "include_placeholders": false,
+     "limit": 5,
+     "market": null,
+     "ticker": "2330"
+    },
+    "max_event_date": "2026-08-10",
+    "min_event_date": "2026-07-08",
+    "scope": "mops_material_information_filings"
+   },
+   "warnings": [
+    "not_investment_advice"
+   ]
+  },
+  "status": 200
+ },
+ "route": "/v2/datasets/mops-major-event",
+ "sdk_error": null
+}

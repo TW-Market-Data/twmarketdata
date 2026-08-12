@@ -1,0 +1,139 @@
+{
+ "dataset": "margin_system_stats",
+ "recorded_with": "restricted test key (value never stored)",
+ "request": {
+  "headers": {
+   "X-API-Key": "REDACTED"
+  },
+  "method": "GET",
+  "params": {
+   "limit": 5
+  }
+ },
+ "response": {
+  "body": {
+   "data": [
+    {
+     "derivation_method": "derived_system_stats_over_total_margin_short_daily_items",
+     "maintenance_ratio": null,
+     "maintenance_ratio_note": "official_system_margin_maintenance_ratio_not_loaded_see_ticket",
+     "margin_net_flow": 23878.0,
+     "margin_purchase_balance_total": 9003223.0,
+     "margin_turnover_intensity": 0.094205,
+     "market": "TWSE",
+     "rule_version": "derived_v1_system_ratios",
+     "short_net_flow": -10888.0,
+     "short_sale_balance_total": 202632.0,
+     "short_to_margin_balance_ratio": 0.022507,
+     "trade_date": "2026-08-10"
+    },
+    {
+     "derivation_method": "derived_system_stats_over_total_margin_short_daily_items",
+     "maintenance_ratio": null,
+     "maintenance_ratio_note": "official_system_margin_maintenance_ratio_not_loaded_see_ticket",
+     "margin_net_flow": 53032.0,
+     "margin_purchase_balance_total": 8986438.0,
+     "margin_turnover_intensity": 0.072025,
+     "market": "TWSE",
+     "rule_version": "derived_v1_system_ratios",
+     "short_net_flow": -1993.0,
+     "short_sale_balance_total": 192740.0,
+     "short_to_margin_balance_ratio": 0.021448,
+     "trade_date": "2026-08-07"
+    },
+    {
+     "derivation_method": "derived_system_stats_over_total_margin_short_daily_items",
+     "maintenance_ratio": null,
+     "maintenance_ratio_note": "official_system_margin_maintenance_ratio_not_loaded_see_ticket",
+     "margin_net_flow": 61330.0,
+     "margin_purchase_balance_total": 8958262.0,
+     "margin_turnover_intensity": 0.07393,
+     "market": "TWSE",
+     "rule_version": "derived_v1_system_ratios",
+     "short_net_flow": 3493.0,
+     "short_sale_balance_total": 191897.0,
+     "short_to_margin_balance_ratio": 0.021421,
+     "trade_date": "2026-08-06"
+    },
+    {
+     "derivation_method": "derived_system_stats_over_total_margin_short_daily_items",
+     "maintenance_ratio": null,
+     "maintenance_ratio_note": "official_system_margin_maintenance_ratio_not_loaded_see_ticket",
+     "margin_net_flow": -87209.0,
+     "margin_purchase_balance_total": 8901190.0,
+     "margin_turnover_intensity": 0.117401,
+     "market": "TWSE",
+     "rule_version": "derived_v1_system_ratios",
+     "short_net_flow": -3120.0,
+     "short_sale_balance_total": 197222.0,
+     "short_to_margin_balance_ratio": 0.022157,
+     "trade_date": "2026-08-05"
+    },
+    {
+     "derivation_method": "derived_system_stats_over_total_margin_short_daily_items",
+     "maintenance_ratio": null,
+     "maintenance_ratio_note": "official_system_margin_maintenance_ratio_not_loaded_see_ticket",
+     "margin_net_flow": -82238.0,
+     "margin_purchase_balance_total": 9032013.0,
+     "margin_turnover_intensity": 0.093938,
+     "market": "TWSE",
+     "rule_version": "derived_v1_system_ratios",
+     "short_net_flow": -12894.0,
+     "short_sale_balance_total": 196970.0,
+     "short_to_margin_balance_ratio": 0.021808,
+     "trade_date": "2026-08-04"
+    }
+   ],
+   "data_count": 5,
+   "dataset_id": "margin_system_stats",
+   "envelope": {
+    "dataset_id": "margin_system_stats",
+    "row_count": 5,
+    "scope": "market_level_margin_short_aggregates"
+   },
+   "error": null,
+   "known_gaps": [
+    "every_column_is_DERIVED_not_an_officially_published_aggregate",
+    "maintenance_ratio_is_not_derivable_from_public_feeds_see_maintenance_ratio_note",
+    "aggregates_inherit_any_gap_in_the_underlying_per_ticker_feeds",
+    "not_investment_advice"
+   ],
+   "lineage": {
+    "derivation_methods": [
+     "derived_system_stats_over_total_margin_short_daily_items"
+    ],
+    "rule_versions": [
+     "derived_v1_system_ratios"
+    ],
+    "semantics": "Market-level margin and short-sale aggregates per trading day: balances, net flows, the short-to-margin ratio and turnover intensity. Every column is DERIVED from the per-ticker margin/short feeds."
+   },
+   "quality": {
+    "markets_present": [
+     "TWSE"
+    ],
+    "row_count": 5,
+    "rows_without_maintenance_ratio": 5,
+    "sensitive_fields_exposed": false
+   },
+   "request_context": {
+    "coverage_type": "daily_derived",
+    "filters": {
+     "date_from": null,
+     "date_to": null,
+     "limit": 5,
+     "market": null,
+     "trade_date": null
+    },
+    "max_trade_date": "2026-08-10",
+    "min_trade_date": "2026-08-04",
+    "scope": "market_level_margin_short_aggregates"
+   },
+   "warnings": [
+    "not_investment_advice"
+   ]
+  },
+  "status": 200
+ },
+ "route": "/v2/datasets/margin-system-stats",
+ "sdk_error": null
+}

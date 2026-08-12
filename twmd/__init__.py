@@ -37,7 +37,7 @@ from .errors import (AuthenticationError, DatasetNotFoundError, EndpointRetiredE
                      TierRequiredError, TWMarketDataError, TwmdAuthError, TwmdConfigError,
                      TwmdRateLimitError,
                      TwmdError, TwmdRequestError, TwmdServerError,
-                     UnsupportedParameterError, UpstreamError)
+                     UnsupportedParameterError, UpstreamError, ValidationError)
 from . import access, frames  # noqa: F401  (0.1.0 module layout)
 from ._legacy import (API_KEY_ENV, KEY_REQUIRED, KEY_REQUIRED_DATASETS, OPEN,
                       OPEN_DATASETS, PRESUMED_KEY_REQUIRED_DATASETS, SAMPLE,
@@ -72,7 +72,7 @@ __all__ = [
     "TwmdError", "TwmdConfigError", "FreeTierSymbolError", "TwmdAuthError",
     "MissingApiKeyError", "InvalidApiKeyError", "TierRequiredError",
     "InsufficientCreditsError", "TwmdRequestError", "DatasetNotFoundError",
-    "UnsupportedParameterError", "RateLimitedError", "EndpointRetiredError",
+    "UnsupportedParameterError", "ValidationError", "RateLimitedError", "EndpointRetiredError",
     "TwmdServerError", "PointInTimeUnavailable", "NotMappedError",
     # --- 0.1.0 compatibility surface (deprecated, still working) ---
     "TWMarketDataError", "AuthenticationError", "EntitlementError",

@@ -1,0 +1,138 @@
+{
+ "dataset": "competitor_fx",
+ "recorded_with": "restricted test key (value never stored)",
+ "request": {
+  "headers": {
+   "X-API-Key": "REDACTED"
+  },
+  "method": "GET",
+  "params": {
+   "limit": 5
+  }
+ },
+ "response": {
+  "body": {
+   "data": [
+    {
+     "cny_per_twd": 0.208956,
+     "derivation_method": "derived_cbc_fx_cross_over_usd",
+     "jpy_per_twd": 4.960981,
+     "krw_per_twd": 44.301994,
+     "rate_date": "2026-07-31",
+     "rule_version": "derived_v1_competitor_fx",
+     "source_name": "cbc_bp01d01",
+     "usd_cny": 6.7476,
+     "usd_jpy": 160.2,
+     "usd_krw": 1430.6,
+     "usd_twd": 32.292
+    },
+    {
+     "cny_per_twd": 0.208184,
+     "derivation_method": "derived_cbc_fx_cross_over_usd",
+     "jpy_per_twd": 5.044987,
+     "krw_per_twd": 44.364331,
+     "rate_date": "2026-07-30",
+     "rule_version": "derived_v1_competitor_fx",
+     "source_name": "cbc_bp01d01",
+     "usd_cny": 6.7564,
+     "usd_jpy": 163.73,
+     "usd_krw": 1439.8,
+     "usd_twd": 32.454
+    },
+    {
+     "cny_per_twd": 0.209031,
+     "derivation_method": "derived_cbc_fx_cross_over_usd",
+     "jpy_per_twd": 5.057159,
+     "krw_per_twd": 44.781561,
+     "rate_date": "2026-07-29",
+     "rule_version": "derived_v1_competitor_fx",
+     "source_name": "cbc_bp01d01",
+     "usd_cny": 6.7655,
+     "usd_jpy": 163.68,
+     "usd_krw": 1449.4,
+     "usd_twd": 32.366
+    },
+    {
+     "cny_per_twd": 0.208974,
+     "derivation_method": "derived_cbc_fx_cross_over_usd",
+     "jpy_per_twd": 5.057436,
+     "krw_per_twd": 45.074728,
+     "rate_date": "2026-07-28",
+     "rule_version": "derived_v1_competitor_fx",
+     "source_name": "cbc_bp01d01",
+     "usd_cny": 6.7674,
+     "usd_jpy": 163.78,
+     "usd_krw": 1459.7,
+     "usd_twd": 32.384
+    },
+    {
+     "cny_per_twd": 0.209485,
+     "derivation_method": "derived_cbc_fx_cross_over_usd",
+     "jpy_per_twd": 5.062065,
+     "krw_per_twd": 45.494505,
+     "rate_date": "2026-07-27",
+     "rule_version": "derived_v1_competitor_fx",
+     "source_name": "cbc_bp01d01",
+     "usd_cny": 6.7674,
+     "usd_jpy": 163.53,
+     "usd_krw": 1469.7,
+     "usd_twd": 32.305
+    }
+   ],
+   "data_count": 5,
+   "dataset_id": "competitor_fx",
+   "envelope": {
+    "dataset_id": "competitor_fx",
+    "row_count": 5,
+    "scope": "tw_export_competitor_fx_daily"
+   },
+   "error": null,
+   "known_gaps": [
+    "served_from_a_view_freshness_follows_the_base_fx_tables_not_a_producer_of_its_own",
+    "per_twd_rates_are_derived_from_the_usd_crosses_not_directly_quoted",
+    "daily_series_has_no_entity_dimension_filter_by_date_only",
+    "not_investment_advice"
+   ],
+   "lineage": {
+    "derivation_methods": [
+     "derived_cbc_fx_cross_over_usd"
+    ],
+    "rule_versions": [
+     "derived_v1_competitor_fx"
+    ],
+    "semantics": "Daily USD crosses for Taiwan and its principal export competitors (JPY, KRW, CNY), plus the same rates expressed per TWD. The per-TWD columns are DERIVED from the USD crosses — no exchange quotes them directly. Served from a view, so freshness follows the underlying FX tables.",
+    "sources": [
+     "cbc_bp01d01"
+    ]
+   },
+   "quality": {
+    "pair_non_null_counts": {
+     "usd_cny": 5,
+     "usd_jpy": 5,
+     "usd_krw": 5,
+     "usd_twd": 5
+    },
+    "row_count": 5,
+    "sensitive_fields_exposed": false
+   },
+   "request_context": {
+    "coverage_type": "daily_series",
+    "filters": {
+     "date_from": null,
+     "date_to": null,
+     "limit": 5,
+     "rate_date": null
+    },
+    "max_rate_date": "2026-07-31",
+    "min_rate_date": "2026-07-27",
+    "scope": "tw_export_competitor_fx_daily"
+   },
+   "warnings": [
+    "not_investment_advice"
+   ]
+  },
+  "status": 200
+ },
+ "route": "/v2/datasets/competitor-fx",
+ "sdk_error": null
+}

@@ -1,0 +1,230 @@
+{
+ "dataset": "short_sale_balance_control",
+ "recorded_with": "restricted test key (value never stored)",
+ "request": {
+  "headers": {
+   "X-API-Key": "REDACTED"
+  },
+  "method": "GET",
+  "params": {
+   "limit": 5,
+   "ticker": "2330"
+  }
+ },
+ "response": {
+  "body": {
+   "data": [
+    {
+     "lineage": {
+      "endpoint": "https://www.twse.com.tw/exchangeReport/TWT93U",
+      "parsed_by": "position",
+      "request_params": {
+       "date": "20260810",
+       "response": "json"
+      },
+      "source_family": "twse_short_sale_balance_control",
+      "source_provider": "twse_official",
+      "source_role": "official_twse_twt93u",
+      "source_title": "115年08月10日 信用額度總量管制餘額表",
+      "source_url": "https://www.twse.com.tw/exchangeReport/TWT93U?response=json&date=20260810"
+     },
+     "market": "TWSE",
+     "ms_balance": 32000.0,
+     "ms_buy": 4000.0,
+     "ms_next_limit": 6483092516.0,
+     "ms_prev_balance": 33000.0,
+     "ms_redeem": 0.0,
+     "ms_sell": 3000.0,
+     "name": "台積電",
+     "note": null,
+     "sbl_adjust": 0.0,
+     "sbl_balance": 16343514.0,
+     "sbl_next_limit": 11660074.0,
+     "sbl_prev_balance": 16559514.0,
+     "sbl_return": 221000.0,
+     "sbl_sell": 5000.0,
+     "source_family": "twse_short_sale_balance_control",
+     "ticker": "2330",
+     "trade_date": "2026-08-10"
+    },
+    {
+     "lineage": {
+      "endpoint": "https://www.twse.com.tw/exchangeReport/TWT93U",
+      "parsed_by": "position",
+      "request_params": {
+       "date": "20260807",
+       "response": "json"
+      },
+      "source_family": "twse_short_sale_balance_control",
+      "source_provider": "twse_official",
+      "source_role": "official_twse_twt93u",
+      "source_title": "115年08月07日 信用額度總量管制餘額表",
+      "source_url": "https://www.twse.com.tw/exchangeReport/TWT93U?response=json&date=20260807"
+     },
+     "market": "TWSE",
+     "ms_balance": 33000.0,
+     "ms_buy": 8000.0,
+     "ms_next_limit": 6483092516.0,
+     "ms_prev_balance": 38000.0,
+     "ms_redeem": 0.0,
+     "ms_sell": 3000.0,
+     "name": "台積電",
+     "note": null,
+     "sbl_adjust": 0.0,
+     "sbl_balance": 16559514.0,
+     "sbl_next_limit": 11983095.0,
+     "sbl_prev_balance": 16480514.0,
+     "sbl_return": 0.0,
+     "sbl_sell": 79000.0,
+     "source_family": "twse_short_sale_balance_control",
+     "ticker": "2330",
+     "trade_date": "2026-08-07"
+    },
+    {
+     "lineage": {
+      "endpoint": "https://www.twse.com.tw/exchangeReport/TWT93U",
+      "parsed_by": "position",
+      "request_params": {
+       "date": "20260806",
+       "response": "json"
+      },
+      "source_family": "twse_short_sale_balance_control",
+      "source_provider": "twse_official",
+      "source_role": "official_twse_twt93u",
+      "source_title": "115年08月06日 信用額度總量管制餘額表",
+      "source_url": "https://www.twse.com.tw/exchangeReport/TWT93U?response=json&date=20260806"
+     },
+     "market": "TWSE",
+     "ms_balance": 38000.0,
+     "ms_buy": 27000.0,
+     "ms_next_limit": 6483092516.0,
+     "ms_prev_balance": 62000.0,
+     "ms_redeem": 0.0,
+     "ms_sell": 3000.0,
+     "name": "台積電",
+     "note": null,
+     "sbl_adjust": 0.0,
+     "sbl_balance": 16480514.0,
+     "sbl_next_limit": 12149955.0,
+     "sbl_prev_balance": 16124514.0,
+     "sbl_return": 55000.0,
+     "sbl_sell": 411000.0,
+     "source_family": "twse_short_sale_balance_control",
+     "ticker": "2330",
+     "trade_date": "2026-08-06"
+    },
+    {
+     "lineage": {
+      "endpoint": "https://www.twse.com.tw/exchangeReport/TWT93U",
+      "parsed_by": "position",
+      "request_params": {
+       "date": "20260805",
+       "response": "json"
+      },
+      "source_family": "twse_short_sale_balance_control",
+      "source_provider": "twse_official",
+      "source_role": "official_twse_twt93u",
+      "source_title": "115年08月05日 信用額度總量管制餘額表",
+      "source_url": "https://www.twse.com.tw/exchangeReport/TWT93U?response=json&date=20260805"
+     },
+     "market": "TWSE",
+     "ms_balance": 62000.0,
+     "ms_buy": 9000.0,
+     "ms_next_limit": 6483092516.0,
+     "ms_prev_balance": 47000.0,
+     "ms_redeem": 0.0,
+     "ms_sell": 24000.0,
+     "name": "台積電",
+     "note": null,
+     "sbl_adjust": 0.0,
+     "sbl_balance": 16124514.0,
+     "sbl_next_limit": 12567631.0,
+     "sbl_prev_balance": 16907514.0,
+     "sbl_return": 1367000.0,
+     "sbl_sell": 584000.0,
+     "source_family": "twse_short_sale_balance_control",
+     "ticker": "2330",
+     "trade_date": "2026-08-05"
+    },
+    {
+     "lineage": {
+      "endpoint": "https://www.twse.com.tw/exchangeReport/TWT93U",
+      "parsed_by": "position",
+      "request_params": {
+       "date": "20260804",
+       "response": "json"
+      },
+      "source_family": "twse_short_sale_balance_control",
+      "source_provider": "twse_official",
+      "source_role": "official_twse_twt93u",
+      "source_title": "115年08月04日 信用額度總量管制餘額表",
+      "source_url": "https://www.twse.com.tw/exchangeReport/TWT93U?response=json&date=20260804"
+     },
+     "market": "TWSE",
+     "ms_balance": 47000.0,
+     "ms_buy": 51000.0,
+     "ms_next_limit": 6483092516.0,
+     "ms_prev_balance": 101000.0,
+     "ms_redeem": 7000.0,
+     "ms_sell": 4000.0,
+     "name": "台積電",
+     "note": null,
+     "sbl_adjust": 0.0,
+     "sbl_balance": 16907514.0,
+     "sbl_next_limit": 12595187.0,
+     "sbl_prev_balance": 16147514.0,
+     "sbl_return": 0.0,
+     "sbl_sell": 760000.0,
+     "source_family": "twse_short_sale_balance_control",
+     "ticker": "2330",
+     "trade_date": "2026-08-04"
+    }
+   ],
+   "data_count": 5,
+   "dataset_id": "short_sale_balance_control",
+   "envelope": {
+    "dataset_id": "short_sale_balance_control",
+    "row_count": 5,
+    "scope": "twse_credit_total_control_balance_only"
+   },
+   "error": null,
+   "known_gaps": [
+    "twse_only",
+    "recent_window_initial_load_full_history_backfill_pending",
+    "not_investment_advice"
+   ],
+   "lineage": {
+    "semantics": "TWSE TWT93U 信用額度總量管制餘額表: ms_* = 融券, sbl_* = 借券; *_next_limit = 次一營業日限額",
+    "source_families": [
+     "twse_short_sale_balance_control"
+    ]
+   },
+   "quality": {
+    "row_count": 5,
+    "sensitive_fields_exposed": false,
+    "ticker_count": 1
+   },
+   "request_context": {
+    "coverage_type": "official_dated_daily",
+    "filters": {
+     "date_from": null,
+     "date_to": null,
+     "limit": 5,
+     "market": null,
+     "source_family": null,
+     "ticker": "2330",
+     "trade_date": null
+    },
+    "max_trade_date": "2026-08-10",
+    "min_trade_date": "2026-08-04",
+    "scope": "twse_credit_total_control_balance_only"
+   },
+   "warnings": [
+    "not_investment_advice"
+   ]
+  },
+  "status": 200
+ },
+ "route": "/v2/datasets/short-sale-balance-control",
+ "sdk_error": null
+}

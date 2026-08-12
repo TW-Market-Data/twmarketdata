@@ -319,3 +319,98 @@ OpenAPI 的必填宣告佐證:`price-enhanced` 必填 `ticker`、`twse-daily-pri
 **SDK 對策**:傳了該資料集不支援的參數一律 `UnsupportedParameterError`,在送出請求**之前**擋下。這正是「寧可報錯也不要默默忽略」那條規則要防的情境 —— server 這側目前不會告訴你。
 
 **建議**:未知查詢參數改為 422(或至少在回應的 `warnings` 裡列出被忽略的參數名),讓「打錯參數名」不再靜默地變成「查詢了全部」。
+
+---
+
+## Q. `limit` 上限有五種,而且**宣告值不等於實際執行值**
+
+以受限測試 key 對 82 支實測(2026-08-12)。OpenAPI 對每支 route 宣告的 `limit` `maximum`:
+
+| 宣告上限 | 支數 |
+|---|---|
+| 500 | 30 |
+| 5000 | 26 |
+| 1000 | 24 |
+| 2000 | 1(`trading_calendar`) |
+| 100 | 1(`company_news`) |
+
+**56/82 不是 5000。** 任何寫死 5000 的 client,對這 56 支不是被 422 拒絕就是被靜默截斷。
+
+### 更嚴重:宣告與執行不一致
+
+`margin_system_stats` 的 OpenAPI 宣告 `maximum: 5000`,實際:
+
+```
+limit=5000 → 422 {"error":"validation_error","message":"limit: Input should be less than or equal to 1000"}
+limit=2000 → 422 同上
+limit=1000 → 200
+```
+
+**照文件寫必然失敗。** 已知至少 `margin_system_stats` 一支;其餘宣告 5000 的 25 支尚未逐支驗證。
+
+**SDK 對策**:
+1. registry 記錄每支的宣告上限,送出前先 clamp;使用者明確要求超過就 clamp 並警告(不靜默縮小)。
+2. 仍收到 422 時,**從 server 的錯誤訊息解析出真正的上限並重試一次**,並發 `TruncatedResultWarning` 說明「規格宣告 X、實際只收 Y」。這是被迫的自我修正,不是設計美感。
+
+**建議**:讓 OpenAPI 的 `maximum` 與實際 validator 同源產生。目前兩者可以各說各話而沒有任何機制會發現。
+
+---
+
+## R. `422` 與 `400` 先前無型別;`missing_required_filter` 出現在 registry 說無必填的 route 上
+
+- `market_breadth` 回 `400 {"error":"missing_required_filter","message":"Missing required filter"}`,但 OpenAPI 對該 route **沒有宣告任何必填參數**,且訊息**沒說缺哪一個**。
+- `422 validation_error` 先前落到通用錯誤類別。
+
+**SDK 對策**:新增 `ValidationError`(400/422/`validation_error`/`missing_required_filter`),並保留 server 原文 —— 因為只有 server 的訊息會點名欄位(如 `limit: Input should be...`)。0.1.0 的 `TwmdValidationError` 現在是它的別名。
+
+**建議**:必填參數要在 OpenAPI 宣告;錯誤訊息要指名缺哪一個。
+
+---
+
+## S. `500 Internal Server Error` 間歇出現,且回應是純文字不是 JSON
+
+同一個請求會時好時壞:
+
+```
+price-enhanced?ticker=2330&limit=3  →  200(一次)
+price-enhanced?ticker=2330&limit=3  →  500(隨後連續三次,間隔 5 秒)
+price-enhanced?ticker=2330&limit=5  →  500
+company-news?ticker=2330&limit=3    →  500(但 limit=5 錄製時是 200)
+capital-formation-events?limit=3    →  500(但 limit=5 錄製時是 200 且有 5 列)
+```
+
+而且 500 的 body 是純文字 `Internal Server Error`,**不是 JSON**,沒有 `request_id`,無法追蹤。
+
+**SDK 對策**:5xx 已納入退避重試;非 JSON body 包成 `{"raw": ...}` 不會炸掉解析。
+
+**建議**:500 也回 JSON 錯誤體並帶 `request_id`,否則使用者回報問題時我們無從追查。間歇性本身需要另外查(三支都與 `envelope.data` 形狀相關,可能同源)。
+
+---
+
+## T. `X-TWMD-*` 回應 header 不存在(0.1.0 的 `ResponseMeta` 因此是空的)
+
+0.1.0 的 `ResponseMeta` 讀 `X-TWMD-Dry-Run`、`X-TWMD-Credits-Cost`、`X-TWMD-Credits-Charged`、`X-TWMD-Plan`。帶 key 實測(200 回應):
+
+```
+HTTP/2 200
+x-render-origin-server: uvicorn
+x-request-id: req_6f95b7d164e248f1
+```
+
+**那四個 header 一個都沒有**,所以 0.1.0 的 `ResponseMeta` 五個欄位有四個永遠是 `None`。
+
+**SDK 對策**:0.2.0 不依賴這些 header;方案資訊改由回應 body 的 `plan_id` 取得(實測 `price_enhanced` 的 body 有 `"plan_id": "max"`)。
+
+---
+
+## U. tier 不是單一階梯:`max` 方案不含 `developer` 級資料集
+
+以 **max tier** 的 key 實測,仍有 10 支回 402 `not_entitled_for_dataset`,全部是 `developer` 或 `enterprise` 級(`block_trade_daily`、`etf_holdings`、`interest_rate_snapshots`、`subsidiary_investment`、`tax_business_registration`、`esg_ghg_carbon_disclosure`、`governance_t187ap33_l`、`macro_worldbank`、`market_overview_snapshots`、`macro_global`)。
+
+也就是說 `free < starter < pro < max` 之外,`developer` / `enterprise` 是**旁支**而非更高階。
+
+**影響**:文件若讓人以為 tier 是線性階梯,買 max 的使用者會預期拿到 developer 級資料。
+
+**SDK 對策**:`TierRequiredError` 保留 server 原文(訊息本身有講需要哪個方案);不自行推論階梯順序。
+
+**建議**:定價頁與 API 文件明確說明 developer/enterprise 不包含在 max 內。

@@ -1,0 +1,192 @@
+{
+ "dataset": "valuation_core_daily",
+ "recorded_with": "restricted test key (value never stored)",
+ "request": {
+  "headers": {
+   "X-API-Key": "REDACTED"
+  },
+  "method": "GET",
+  "params": {
+   "limit": 5,
+   "ticker": "2330"
+  }
+ },
+ "response": {
+  "body": {
+   "api_version": "v2",
+   "data": [
+    {
+     "book_value_per_share": null,
+     "close": 2380.0,
+     "date": "2026-08-10",
+     "dividend_per_share_ttm": null,
+     "dividend_yield": null,
+     "market_cap": 61719040759460.0,
+     "notes": "missing_dependencies=valuation_data",
+     "pb": null,
+     "pe": null,
+     "ps": 6511.01939,
+     "shares_outstanding": 25932370067.0,
+     "source_summary": {
+      "close": "normalized_daily_prices",
+      "pe_pb_yield": "valuation_data_items",
+      "shares": "t187ap03_L feeder",
+      "ttm_revenue": "fundamental_income_statements (PIT)"
+     },
+     "ticker": "2330",
+     "trailing_12m_revenue": 9479167096.0
+    },
+    {
+     "book_value_per_share": 227.229147,
+     "close": 2370.0,
+     "date": "2026-08-07",
+     "dividend_per_share_ttm": null,
+     "dividend_yield": 0.93,
+     "market_cap": 61459717058790.0,
+     "notes": "",
+     "pb": 10.43,
+     "pe": 31.86,
+     "ps": 6483.662165,
+     "shares_outstanding": 25932370067.0,
+     "source_summary": {
+      "close": "normalized_daily_prices",
+      "pe_pb_yield": "valuation_data_items",
+      "shares": "t187ap03_L feeder",
+      "ttm_revenue": "fundamental_income_statements (PIT)"
+     },
+     "ticker": "2330",
+     "trailing_12m_revenue": 9479167096.0
+    },
+    {
+     "book_value_per_share": null,
+     "close": 2365.0,
+     "date": "2026-08-06",
+     "dividend_per_share_ttm": null,
+     "dividend_yield": null,
+     "market_cap": 61330055208455.0,
+     "notes": "missing_dependencies=valuation_data",
+     "pb": null,
+     "pe": null,
+     "ps": 6469.983553,
+     "shares_outstanding": 25932370067.0,
+     "source_summary": {
+      "close": "normalized_daily_prices",
+      "pe_pb_yield": "valuation_data_items",
+      "shares": "t187ap03_L feeder",
+      "ttm_revenue": "fundamental_income_statements (PIT)"
+     },
+     "ticker": "2330",
+     "trailing_12m_revenue": 9479167096.0
+    },
+    {
+     "book_value_per_share": 227.101039,
+     "close": 2405.0,
+     "date": "2026-08-05",
+     "dividend_per_share_ttm": null,
+     "dividend_yield": 0.91,
+     "market_cap": 62367350011135.0,
+     "notes": "",
+     "pb": 10.59,
+     "pe": 32.33,
+     "ps": 6579.41245,
+     "shares_outstanding": 25932370067.0,
+     "source_summary": {
+      "close": "normalized_daily_prices",
+      "pe_pb_yield": "valuation_data_items",
+      "shares": "t187ap03_L feeder",
+      "ttm_revenue": "fundamental_income_statements (PIT)"
+     },
+     "ticker": "2330",
+     "trailing_12m_revenue": 9479167096.0
+    },
+    {
+     "book_value_per_share": null,
+     "close": 2320.0,
+     "date": "2026-08-04",
+     "dividend_per_share_ttm": null,
+     "dividend_yield": null,
+     "market_cap": 60163098555440.0,
+     "notes": "missing_dependencies=valuation_data",
+     "pb": null,
+     "pe": null,
+     "ps": 6346.876044,
+     "shares_outstanding": 25932370067.0,
+     "source_summary": {
+      "close": "normalized_daily_prices",
+      "pe_pb_yield": "valuation_data_items",
+      "shares": "t187ap03_L feeder",
+      "ttm_revenue": "fundamental_income_statements (PIT)"
+     },
+     "ticker": "2330",
+     "trailing_12m_revenue": 9479167096.0
+    }
+   ],
+   "data_as_of": "2026-08-10",
+   "data_count": 5,
+   "dataset": "valuation_core_daily",
+   "dataset_id": "valuation_core_daily",
+   "dataset_version": "v2.0.0-preview",
+   "error": {
+    "blocking_gate": null,
+    "dataset": "valuation_core_daily",
+    "error_code": null,
+    "error_message": null,
+    "request_id": "read-api-20260810"
+   },
+   "known_gaps": [
+    "raw_payload_excluded",
+    "not_investment_advice"
+   ],
+   "lineage": {
+    "fallback_chain": [
+     "ticker_metadata"
+    ],
+    "policy_notes": [
+     "official/public-first canonical",
+     "valuation_core_daily is the seeded anchor surface for valuation facts",
+     "raw_payload excluded from the public read route",
+     "not_investment_advice"
+    ],
+    "selected_source": "valuation_core_daily",
+    "source_role": "canonical"
+   },
+   "quality": {
+    "completeness_ratio": 1.0,
+    "freshness_as_of": "2026-08-10",
+    "freshness_state": "fresh",
+    "quality_status": "ready"
+   },
+   "release_date": "2026-08-10",
+   "release_version": "v2.2026-08-10.preview",
+   "request_context": {
+    "as_of_date": "2026-08-10",
+    "coverage_type": "seeded_anchor_snapshot_set",
+    "dataset_view": "valuation_core_daily_v1",
+    "date_range": {
+     "date_from": null,
+     "date_to": null
+    },
+    "family": "fundamentals",
+    "field_group_type": "canonical",
+    "scope": "valuation_core_daily_only",
+    "supported_filter_fields": [
+     "ticker",
+     "date_from",
+     "date_to",
+     "latest"
+    ],
+    "supported_sort_by": [
+     "date"
+    ],
+    "ticker": "2330"
+   },
+   "warnings": [
+    "not_investment_advice",
+    "raw_payload_excluded"
+   ]
+  },
+  "status": 200
+ },
+ "route": "/v2/datasets/valuation-core-daily",
+ "sdk_error": null
+}

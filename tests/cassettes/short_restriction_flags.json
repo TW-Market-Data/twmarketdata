@@ -1,0 +1,126 @@
+{
+ "dataset": "short_restriction_flags",
+ "recorded_with": "restricted test key (value never stored)",
+ "request": {
+  "headers": {
+   "X-API-Key": "REDACTED"
+  },
+  "method": "GET",
+  "params": {
+   "limit": 5
+  }
+ },
+ "response": {
+  "body": {
+   "data": [
+    {
+     "derivation_method": "derived_ssbc_and_attention_disposal",
+     "disposition_active": true,
+     "has_short_sale_control": false,
+     "market": "TWSE",
+     "ms_limit_value": null,
+     "restriction_note": null,
+     "rule_version": "derived_v1_restriction_flags",
+     "sbl_limit_value": null,
+     "ticker": "039038",
+     "trade_date": "2026-08-20"
+    },
+    {
+     "derivation_method": "derived_ssbc_and_attention_disposal",
+     "disposition_active": true,
+     "has_short_sale_control": false,
+     "market": "TWSE",
+     "ms_limit_value": null,
+     "restriction_note": null,
+     "rule_version": "derived_v1_restriction_flags",
+     "sbl_limit_value": null,
+     "ticker": "068822",
+     "trade_date": "2026-08-20"
+    },
+    {
+     "derivation_method": "derived_ssbc_and_attention_disposal",
+     "disposition_active": true,
+     "has_short_sale_control": false,
+     "market": "TPEx",
+     "ms_limit_value": null,
+     "restriction_note": null,
+     "rule_version": "derived_v1_restriction_flags",
+     "sbl_limit_value": null,
+     "ticker": "3362",
+     "trade_date": "2026-08-20"
+    },
+    {
+     "derivation_method": "derived_ssbc_and_attention_disposal",
+     "disposition_active": true,
+     "has_short_sale_control": false,
+     "market": "TPEx",
+     "ms_limit_value": null,
+     "restriction_note": null,
+     "rule_version": "derived_v1_restriction_flags",
+     "sbl_limit_value": null,
+     "ticker": "33621",
+     "trade_date": "2026-08-20"
+    },
+    {
+     "derivation_method": "derived_ssbc_and_attention_disposal",
+     "disposition_active": true,
+     "has_short_sale_control": false,
+     "market": "TWSE",
+     "ms_limit_value": null,
+     "restriction_note": null,
+     "rule_version": "derived_v1_restriction_flags",
+     "sbl_limit_value": null,
+     "ticker": "039038",
+     "trade_date": "2026-08-19"
+    }
+   ],
+   "data_count": 5,
+   "dataset_id": "short_restriction_flags",
+   "envelope": {
+    "dataset_id": "short_restriction_flags",
+    "row_count": 5,
+    "scope": "per_ticker_short_sale_restriction_state"
+   },
+   "error": null,
+   "known_gaps": [
+    "DERIVED_by_combining_three_feeds_there_is_no_single_official_restriction_flag",
+    "absence_of_a_row_is_not_proof_a_ticker_was_unrestricted_it_may_simply_be_uncovered",
+    "restriction_note_carries_the_specific_rule_that_applied",
+    "not_investment_advice"
+   ],
+   "lineage": {
+    "derivation_methods": [
+     "derived_ssbc_and_attention_disposal"
+    ],
+    "semantics": "Whether a ticker was under a short-sale restriction on a given day, combining margin-short controls, SBL limits and disposition status. DERIVED by joining those feeds — it is not a single official flag."
+   },
+   "quality": {
+    "restricted_count": 5,
+    "row_count": 5,
+    "sensitive_fields_exposed": false,
+    "ticker_count": 4
+   },
+   "request_context": {
+    "coverage_type": "daily_derived",
+    "filters": {
+     "date_from": null,
+     "date_to": null,
+     "limit": 5,
+     "market": null,
+     "restricted_only": false,
+     "ticker": null,
+     "trade_date": null
+    },
+    "max_trade_date": "2026-08-20",
+    "min_trade_date": "2026-08-19",
+    "scope": "per_ticker_short_sale_restriction_state"
+   },
+   "warnings": [
+    "not_investment_advice"
+   ]
+  },
+  "status": 200
+ },
+ "route": "/v2/datasets/short-restriction-flags",
+ "sdk_error": null
+}

@@ -1,17 +1,23 @@
-"""Point-in-time fundamentals for a backtest.  ⚠ RECORDED PENDING TEST KEY
+"""Point-in-time fundamentals for a backtest.  (tier=pro — API key required)
 
     TWMD_API_KEY=<your key> python examples/03_backtest_ready_fundamentals.py
 
-Requires a key: income_statement, balance_sheet and financial_ratios are all
-tier=pro. Without one you get MissingApiKeyError, which is the honest outcome --
-this file is not runnable on the free tier and does not pretend to be.
+Run against the live API on 2026-08-12 with a restricted key. Without a key you
+get MissingApiKeyError, which is the honest outcome -- this file is not runnable
+on the free tier and does not pretend to be.
 
-STATUS: written but NOT yet executed against the live API. The output shown in
-the comments is what the SDK is built to produce, not a transcript. It will be
-run and the comments replaced with real output once a restricted test key is
-issued. Nothing here is presented as a recorded result.
+Real output from that run, for 2330 with as_of=2023-06-30:
 
-Why these three datasets are the interesting case for point-in-time: quarterly
+    income_statement rows knowable on 2023-06-30: 42
+      as_of mode      : server (applied=True)
+      ⚠ imputed rows  : 42 (statutory_deadline)
+
+Every one of those 42 rows carries kd_imputed=true. The API now returns a
+knowledge_date for the fundamentals, but 100% of them are derived from the
+statutory filing deadline rather than observed from an announcement -- so the
+SDK warns, and this example prints the count rather than quietly using them.
+
+Why these datasets are the interesting case for point-in-time: quarterly
 statements are exactly where look-ahead creeps into a backtest. A statement for
 Q2 does not exist on the market until it is filed, so aligning on the period end
 date silently gives your strategy months of foresight.

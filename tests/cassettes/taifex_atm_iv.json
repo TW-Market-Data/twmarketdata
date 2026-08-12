@@ -1,0 +1,110 @@
+{
+ "dataset": "taifex_atm_iv",
+ "recorded_with": "restricted test key (value never stored)",
+ "request": {
+  "headers": {
+   "X-API-Key": "REDACTED"
+  },
+  "method": "GET",
+  "params": {
+   "limit": 5
+  }
+ },
+ "response": {
+  "body": {
+   "data": [
+    {
+     "atm_iv": 0.339705,
+     "atm_strike": 45000.0,
+     "engine_version": "taifex-atm-iv-bs-v1",
+     "expiry_date": "2026-08-19",
+     "n_options": 10,
+     "spot": 44928.76,
+     "trade_date": "2026-08-10"
+    },
+    {
+     "atm_iv": 0.31947,
+     "atm_strike": 44300.0,
+     "engine_version": "taifex-atm-iv-bs-v1",
+     "expiry_date": "2026-08-19",
+     "n_options": 4,
+     "spot": 44225.91,
+     "trade_date": "2026-08-07"
+    },
+    {
+     "atm_iv": 0.354222,
+     "atm_strike": 44400.0,
+     "engine_version": "taifex-atm-iv-bs-v1",
+     "expiry_date": "2026-08-19",
+     "n_options": 6,
+     "spot": 44396.7,
+     "trade_date": "2026-08-06"
+    },
+    {
+     "atm_iv": 0.33343,
+     "atm_strike": 44600.0,
+     "engine_version": "taifex-atm-iv-bs-v1",
+     "expiry_date": "2026-08-19",
+     "n_options": 14,
+     "spot": 44611.6,
+     "trade_date": "2026-08-05"
+    },
+    {
+     "atm_iv": 0.371886,
+     "atm_strike": 43500.0,
+     "engine_version": "taifex-atm-iv-bs-v1",
+     "expiry_date": "2026-08-19",
+     "n_options": 8,
+     "spot": 43360.66,
+     "trade_date": "2026-08-04"
+    }
+   ],
+   "data_count": 5,
+   "dataset_id": "taifex_atm_iv",
+   "envelope": {
+    "dataset_id": "taifex_atm_iv",
+    "row_count": 5,
+    "scope": "taiex_atm_implied_volatility_derived"
+   },
+   "error": null,
+   "known_gaps": [
+    "derivation_verified_not_official_vix",
+    "official_vix_is_paid_edatashop",
+    "txo_source_missing_2020_2025",
+    "no_taiex_spot_2001_2008_engine_skips",
+    "expiry_day_iv_inflated_bs_t_to_zero",
+    "not_investment_advice"
+   ],
+   "lineage": {
+    "method": "Black-Scholes ATM implied volatility from official TXO option prices + TAIEX spot",
+    "verification": "derivation_verified — engine faithfully reproduces its official inputs; NOT reconciled to the (paid) official TAIFEX VIX"
+   },
+   "quality": {
+    "engine_versions": [
+     "taifex-atm-iv-bs-v1"
+    ],
+    "row_count": 5,
+    "sensitive_fields_exposed": false
+   },
+   "request_context": {
+    "coverage_type": "derivation_verified_black_scholes",
+    "filters": {
+     "date_from": null,
+     "date_to": null,
+     "limit": 5,
+     "trade_date": null
+    },
+    "max_trade_date": "2026-08-10",
+    "min_trade_date": "2026-08-04",
+    "scope": "taiex_atm_implied_volatility_derived"
+   },
+   "warnings": [
+    "not_investment_advice",
+    "derived_proxy_not_official_vix"
+   ]
+  },
+  "status": 200
+ },
+ "route": "/v2/datasets/taifex-atm-iv",
+ "sdk_error": null
+}

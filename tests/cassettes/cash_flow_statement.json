@@ -1,0 +1,475 @@
+{
+ "dataset": "cash_flow_statement",
+ "recorded_with": "restricted test key (value never stored)",
+ "request": {
+  "headers": {
+   "X-API-Key": "REDACTED"
+  },
+  "method": "GET",
+  "params": {
+   "limit": 5,
+   "ticker": "2330"
+  }
+ },
+ "response": {
+  "body": {
+   "count": 5,
+   "dataset": "cash_flow_statement",
+   "period_basis": {
+    "basis": "ytd_cumulative",
+    "cumulative": true,
+    "derived": false,
+    "evidence": "2330 FY2024 operating cash flow Q1..Q4 = 436,311,108 / 813,979,318 / 1,205,971,785 / 1,826,177,068 (rising = cumulative)",
+    "note": "Taiwan MOPS files interim statements cumulatively: a Q3 statement covers January–September, not July–September. This is the source's filing convention, not a transformation we applied. Do not sum four quarters — that double-counts to roughly 2.4x.",
+    "resets": "fiscal_year",
+    "standalone_quarter_hint": "difference consecutive periods within the fiscal year, or call period=quarterly_standalone"
+   },
+   "rows": [
+    {
+     "capital_expenditures": null,
+     "cash_beginning": null,
+     "cash_ending": null,
+     "depreciation": null,
+     "financing_cash_flow": -119910612.0,
+     "fiscal_period": "2026-Q1",
+     "fiscal_quarter": 1,
+     "fiscal_year": 2026,
+     "free_cash_flow": 342122509.0,
+     "frequency": "quarterly",
+     "fundamentals_context": {
+      "available_tools_or_endpoints": [
+       {
+        "name": "cash_flow_statement",
+        "path": "/v2/datasets/cash-flow-statement"
+       },
+       {
+        "name": "cash_flow_statement",
+        "path": "/v2/datasets/financials"
+       }
+      ],
+      "coverage_window": {
+       "coverage_confidence": "medium",
+       "max_period": null,
+       "min_period": null,
+       "row_count": 0
+      },
+      "data_gaps": [],
+      "generated_at": "2026-08-12T06:23:35Z",
+      "metric_values": {
+       "capital_expenditures": null,
+       "cash_beginning": null,
+       "cash_ending": null,
+       "depreciation": null,
+       "financing_cash_flow": -119910612.0,
+       "fiscal_period": "2026-Q1",
+       "free_cash_flow": 342122509.0,
+       "frequency": "quarterly",
+       "investing_cash_flow": -356853756.0,
+       "kd_imputed": true,
+       "kd_source": "statutory_deadline",
+       "knowledge_date": "2026-05-15",
+       "net_change_in_cash": null,
+       "operating_cash_flow": 698976265.0,
+       "period_end_date": "2026-03-31",
+       "report_date": null,
+       "source": "official_mopsov_ajax_t163sb20",
+       "source_name": "official_mopsov_ajax_t163sb20",
+       "symbol": "2330",
+       "updated_at": "2026-05-25T10:25:58.801061"
+      },
+      "not_investment_advice": true,
+      "period": "2026Q1",
+      "period_type": "quarterly",
+      "restatement_warning": {
+       "has_restatement": false,
+       "previous_version_ref": null,
+       "reason": null
+      },
+      "safe_usage_notes": [
+       "not_investment_advice",
+       "official_public_first_policy",
+       "period_semantics_explicit",
+       "raw_full_body_storage_forbidden"
+      ],
+      "source_lineage": {
+       "provider": "official_mopsov_ajax_t163sb20",
+       "source_role": "official_mops_cash_flow_statement"
+      },
+      "statement_family": "cash_flow_statement",
+      "ticker": "2330"
+     },
+     "investing_cash_flow": -356853756.0,
+     "kd_imputed": true,
+     "kd_source": "statutory_deadline",
+     "knowledge_date": "2026-05-15",
+     "net_change_in_cash": null,
+     "operating_cash_flow": 698976265.0,
+     "period_end_date": "2026-03-31",
+     "period_type": "quarterly",
+     "report_date": null,
+     "source": "official_mopsov_ajax_t163sb20",
+     "source_name": "official_mopsov_ajax_t163sb20",
+     "symbol": "2330",
+     "ticker": "2330",
+     "updated_at": "2026-05-25T10:25:58.801061"
+    },
+    {
+     "capital_expenditures": null,
+     "cash_beginning": null,
+     "cash_ending": null,
+     "depreciation": null,
+     "financing_cash_flow": -119910612.0,
+     "fiscal_period": "2026-Q1",
+     "fiscal_quarter": 1,
+     "fiscal_year": 2026,
+     "free_cash_flow": null,
+     "frequency": "quarterly",
+     "fundamentals_context": {
+      "available_tools_or_endpoints": [
+       {
+        "name": "cash_flow_statement",
+        "path": "/v2/datasets/cash-flow-statement"
+       },
+       {
+        "name": "cash_flow_statement",
+        "path": "/v2/datasets/financials"
+       }
+      ],
+      "coverage_window": {
+       "coverage_confidence": "medium",
+       "max_period": null,
+       "min_period": null,
+       "row_count": 0
+      },
+      "data_gaps": [],
+      "generated_at": "2026-08-12T06:23:35Z",
+      "metric_values": {
+       "capital_expenditures": null,
+       "cash_beginning": null,
+       "cash_ending": null,
+       "depreciation": null,
+       "financing_cash_flow": -119910612.0,
+       "fiscal_period": "2026-Q1",
+       "free_cash_flow": null,
+       "frequency": "quarterly",
+       "investing_cash_flow": -356853756.0,
+       "kd_imputed": true,
+       "kd_source": "statutory_deadline",
+       "knowledge_date": "2026-05-15",
+       "net_change_in_cash": null,
+       "operating_cash_flow": 698976265.0,
+       "period_end_date": "2026-03-31",
+       "report_date": "2026-05-15",
+       "source": "mops_t163sb20",
+       "source_name": "mops_t163sb20",
+       "symbol": "2330",
+       "updated_at": "2026-07-18T14:43:59.997885"
+      },
+      "not_investment_advice": true,
+      "period": "2026Q1",
+      "period_type": "quarterly",
+      "restatement_warning": {
+       "has_restatement": false,
+       "previous_version_ref": null,
+       "reason": null
+      },
+      "safe_usage_notes": [
+       "not_investment_advice",
+       "official_public_first_policy",
+       "period_semantics_explicit",
+       "raw_full_body_storage_forbidden"
+      ],
+      "source_lineage": {
+       "provider": "mops_t163sb20",
+       "source_role": "official_mops_cash_flow_statement"
+      },
+      "statement_family": "cash_flow_statement",
+      "ticker": "2330"
+     },
+     "investing_cash_flow": -356853756.0,
+     "kd_imputed": true,
+     "kd_source": "statutory_deadline",
+     "knowledge_date": "2026-05-15",
+     "net_change_in_cash": null,
+     "operating_cash_flow": 698976265.0,
+     "period_end_date": "2026-03-31",
+     "period_type": "quarterly",
+     "report_date": "2026-05-15",
+     "source": "mops_t163sb20",
+     "source_name": "mops_t163sb20",
+     "symbol": "2330",
+     "ticker": "2330",
+     "updated_at": "2026-07-18T14:43:59.997885"
+    },
+    {
+     "capital_expenditures": null,
+     "cash_beginning": null,
+     "cash_ending": null,
+     "depreciation": null,
+     "financing_cash_flow": -440344692.0,
+     "fiscal_period": "2025-Q4",
+     "fiscal_quarter": 4,
+     "fiscal_year": 2025,
+     "free_cash_flow": 1130582218.0,
+     "frequency": "quarterly",
+     "fundamentals_context": {
+      "available_tools_or_endpoints": [
+       {
+        "name": "cash_flow_statement",
+        "path": "/v2/datasets/cash-flow-statement"
+       },
+       {
+        "name": "cash_flow_statement",
+        "path": "/v2/datasets/financials"
+       }
+      ],
+      "coverage_window": {
+       "coverage_confidence": "medium",
+       "max_period": null,
+       "min_period": null,
+       "row_count": 0
+      },
+      "data_gaps": [],
+      "generated_at": "2026-08-12T06:23:35Z",
+      "metric_values": {
+       "capital_expenditures": null,
+       "cash_beginning": null,
+       "cash_ending": null,
+       "depreciation": null,
+       "financing_cash_flow": -440344692.0,
+       "fiscal_period": "2025-Q4",
+       "free_cash_flow": 1130582218.0,
+       "frequency": "quarterly",
+       "investing_cash_flow": -1144393407.0,
+       "kd_imputed": true,
+       "kd_source": "statutory_deadline",
+       "knowledge_date": "2026-03-31",
+       "net_change_in_cash": null,
+       "operating_cash_flow": 2274975625.0,
+       "period_end_date": "2025-12-31",
+       "report_date": null,
+       "source": "official_mopsov_ajax_t163sb20",
+       "source_name": "official_mopsov_ajax_t163sb20",
+       "symbol": "2330",
+       "updated_at": "2026-05-14T14:17:26.568107"
+      },
+      "not_investment_advice": true,
+      "period": "2025Q4",
+      "period_type": "quarterly",
+      "restatement_warning": {
+       "has_restatement": false,
+       "previous_version_ref": null,
+       "reason": null
+      },
+      "safe_usage_notes": [
+       "not_investment_advice",
+       "official_public_first_policy",
+       "period_semantics_explicit",
+       "raw_full_body_storage_forbidden"
+      ],
+      "source_lineage": {
+       "provider": "official_mopsov_ajax_t163sb20",
+       "source_role": "official_mops_cash_flow_statement"
+      },
+      "statement_family": "cash_flow_statement",
+      "ticker": "2330"
+     },
+     "investing_cash_flow": -1144393407.0,
+     "kd_imputed": true,
+     "kd_source": "statutory_deadline",
+     "knowledge_date": "2026-03-31",
+     "net_change_in_cash": null,
+     "operating_cash_flow": 2274975625.0,
+     "period_end_date": "2025-12-31",
+     "period_type": "quarterly",
+     "report_date": null,
+     "source": "official_mopsov_ajax_t163sb20",
+     "source_name": "official_mopsov_ajax_t163sb20",
+     "symbol": "2330",
+     "ticker": "2330",
+     "updated_at": "2026-05-14T14:17:26.568107"
+    },
+    {
+     "capital_expenditures": null,
+     "cash_beginning": null,
+     "cash_ending": null,
+     "depreciation": null,
+     "financing_cash_flow": -440344692.0,
+     "fiscal_period": "2025-Q4",
+     "fiscal_quarter": 4,
+     "fiscal_year": 2025,
+     "free_cash_flow": null,
+     "frequency": "quarterly",
+     "fundamentals_context": {
+      "available_tools_or_endpoints": [
+       {
+        "name": "cash_flow_statement",
+        "path": "/v2/datasets/cash-flow-statement"
+       },
+       {
+        "name": "cash_flow_statement",
+        "path": "/v2/datasets/financials"
+       }
+      ],
+      "coverage_window": {
+       "coverage_confidence": "medium",
+       "max_period": null,
+       "min_period": null,
+       "row_count": 0
+      },
+      "data_gaps": [],
+      "generated_at": "2026-08-12T06:23:35Z",
+      "metric_values": {
+       "capital_expenditures": null,
+       "cash_beginning": null,
+       "cash_ending": null,
+       "depreciation": null,
+       "financing_cash_flow": -440344692.0,
+       "fiscal_period": "2025-Q4",
+       "free_cash_flow": null,
+       "frequency": "quarterly",
+       "investing_cash_flow": -1144393407.0,
+       "kd_imputed": true,
+       "kd_source": "statutory_deadline",
+       "knowledge_date": "2026-03-31",
+       "net_change_in_cash": null,
+       "operating_cash_flow": 2274975625.0,
+       "period_end_date": "2025-12-31",
+       "report_date": "2026-03-31",
+       "source": "mops_t163sb20",
+       "source_name": "mops_t163sb20",
+       "symbol": "2330",
+       "updated_at": "2026-07-18T14:43:59.997885"
+      },
+      "not_investment_advice": true,
+      "period": "2025Q4",
+      "period_type": "quarterly",
+      "restatement_warning": {
+       "has_restatement": false,
+       "previous_version_ref": null,
+       "reason": null
+      },
+      "safe_usage_notes": [
+       "not_investment_advice",
+       "official_public_first_policy",
+       "period_semantics_explicit",
+       "raw_full_body_storage_forbidden"
+      ],
+      "source_lineage": {
+       "provider": "mops_t163sb20",
+       "source_role": "official_mops_cash_flow_statement"
+      },
+      "statement_family": "cash_flow_statement",
+      "ticker": "2330"
+     },
+     "investing_cash_flow": -1144393407.0,
+     "kd_imputed": true,
+     "kd_source": "statutory_deadline",
+     "knowledge_date": "2026-03-31",
+     "net_change_in_cash": null,
+     "operating_cash_flow": 2274975625.0,
+     "period_end_date": "2025-12-31",
+     "period_type": "quarterly",
+     "report_date": "2026-03-31",
+     "source": "mops_t163sb20",
+     "source_name": "mops_t163sb20",
+     "symbol": "2330",
+     "ticker": "2330",
+     "updated_at": "2026-07-18T14:43:59.997885"
+    },
+    {
+     "capital_expenditures": null,
+     "cash_beginning": null,
+     "cash_ending": null,
+     "depreciation": null,
+     "financing_cash_flow": -332659319.0,
+     "fiscal_period": "2025-Q3",
+     "fiscal_quarter": 3,
+     "fiscal_year": 2025,
+     "free_cash_flow": 771033488.0,
+     "frequency": "quarterly",
+     "fundamentals_context": {
+      "available_tools_or_endpoints": [
+       {
+        "name": "cash_flow_statement",
+        "path": "/v2/datasets/cash-flow-statement"
+       },
+       {
+        "name": "cash_flow_statement",
+        "path": "/v2/datasets/financials"
+       }
+      ],
+      "coverage_window": {
+       "coverage_confidence": "medium",
+       "max_period": null,
+       "min_period": null,
+       "row_count": 0
+      },
+      "data_gaps": [],
+      "generated_at": "2026-08-12T06:23:35Z",
+      "metric_values": {
+       "capital_expenditures": null,
+       "cash_beginning": null,
+       "cash_ending": null,
+       "depreciation": null,
+       "financing_cash_flow": -332659319.0,
+       "fiscal_period": "2025-Q3",
+       "free_cash_flow": 771033488.0,
+       "frequency": "quarterly",
+       "investing_cash_flow": -778433350.0,
+       "kd_imputed": true,
+       "kd_source": "statutory_deadline",
+       "knowledge_date": "2025-11-14",
+       "net_change_in_cash": null,
+       "operating_cash_flow": 1549466838.0,
+       "period_end_date": "2025-09-30",
+       "report_date": null,
+       "source": "official_mopsov_ajax_t163sb20",
+       "source_name": "official_mopsov_ajax_t163sb20",
+       "symbol": "2330",
+       "updated_at": "2026-05-14T14:17:26.568107"
+      },
+      "not_investment_advice": true,
+      "period": "2025Q3",
+      "period_type": "quarterly",
+      "restatement_warning": {
+       "has_restatement": false,
+       "previous_version_ref": null,
+       "reason": null
+      },
+      "safe_usage_notes": [
+       "not_investment_advice",
+       "official_public_first_policy",
+       "period_semantics_explicit",
+       "raw_full_body_storage_forbidden"
+      ],
+      "source_lineage": {
+       "provider": "official_mopsov_ajax_t163sb20",
+       "source_role": "official_mops_cash_flow_statement"
+      },
+      "statement_family": "cash_flow_statement",
+      "ticker": "2330"
+     },
+     "investing_cash_flow": -778433350.0,
+     "kd_imputed": true,
+     "kd_source": "statutory_deadline",
+     "knowledge_date": "2025-11-14",
+     "net_change_in_cash": null,
+     "operating_cash_flow": 1549466838.0,
+     "period_end_date": "2025-09-30",
+     "period_type": "quarterly",
+     "report_date": null,
+     "source": "official_mopsov_ajax_t163sb20",
+     "source_name": "official_mopsov_ajax_t163sb20",
+     "symbol": "2330",
+     "ticker": "2330",
+     "updated_at": "2026-05-14T14:17:26.568107"
+    }
+   ],
+   "status": "ok"
+  },
+  "status": 200
+ },
+ "route": "/v2/datasets/cash-flow-statement",
+ "sdk_error": null
+}

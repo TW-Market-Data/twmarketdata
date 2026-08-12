@@ -30,6 +30,7 @@ __all__ = [
     "InsufficientCreditsError",
     "TwmdRequestError",
     "DatasetNotFoundError",
+    "ValidationError",
     "UnsupportedParameterError",
     "RateLimitedError",
     "EndpointRetiredError",
@@ -119,6 +120,14 @@ class TwmdRequestError(TwmdError):
 
 class DatasetNotFoundError(TwmdRequestError):
     """Unknown dataset key, or 404 from the API."""
+
+
+class ValidationError(TwmdRequestError):
+    """422 -- the API rejected a parameter value.
+
+    Seen for over-cap ``limit`` values and for a missing required filter. The
+    server's own message is preserved, since it names the offending field.
+    """
 
 
 class UnsupportedParameterError(TwmdRequestError):
@@ -249,6 +258,8 @@ def classify(
         return TierRequiredError(message, **kw)
     if status_code == 404 or error_code == "dataset_not_found":
         return DatasetNotFoundError(message, **kw)
+    if status_code in (400, 422) or error_code in ("validation_error", "missing_required_filter"):
+        return ValidationError(message, **kw)
     if status_code == 429 or error_code in _QUOTA_CODES:
         return RateLimitedError(message, retry_after=retry_after, **kw)
     if status_code >= 500 or error_code in _UPSTREAM_CODES:

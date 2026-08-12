@@ -285,3 +285,78 @@ def test_free_tier_guard_does_not_fire_on_issuer_keyed_routes(client, session):
     # The five-demo-symbol rule is about stock tickers; an issuer code is not one.
     client.dataset("warrants_reference", issuer="not-a-demo-symbol")
     assert session.calls[0]["params"]["issuer"] == "not-a-demo-symbol"
+
+
+# ------------------------------------------------------- per-route row caps
+def test_limit_is_clamped_to_the_route_cap(session):
+    # financial_ratios caps at 1000. Sending the 5000 default returns
+    # 422 "limit: Input should be less than or equal to 1000" -- measured
+    # against the live API on 2026-08-12.
+    c = twmd.Client(session=session)          # default_limit is 5000
+    c.dataset("financial_ratios", ticker="2330")
+    assert session.calls[0]["params"]["limit"] == 1000
+
+
+def test_five_different_route_caps_are_all_respected(session):
+    c = twmd.Client(session=session)
+    for dataset, expected in (("company_news", 100), ("security_master", 500),
+                              ("financial_ratios", 1000), ("trading_calendar", 2000),
+                              ("twse_daily_price", 5000)):
+        assert twmd.get(dataset).limit_max == expected
+        session.calls.clear()
+        c.dataset(dataset, ticker="2330" if twmd.get(dataset).entity_param else None)
+        assert session.calls[0]["params"]["limit"] == expected, dataset
+
+
+def test_an_explicit_over_cap_limit_warns_rather_than_silently_shrinking(session):
+    c = twmd.Client(session=session)
+    with pytest.warns(TruncatedResultWarning, match="reduced to 100"):
+        c.dataset("company_news", ticker="2330", limit=4000)
+    assert session.calls[0]["params"]["limit"] == 100
+
+
+def test_422_and_400_are_validation_errors_not_generic_failures(session):
+    c = twmd.Client(session=session, max_retries=0)
+    session.queue = [FakeResponse(
+        {"error": "validation_error", "message": "limit: Input should be less than or equal to 1000"},
+        status_code=422)]
+    with pytest.raises(twmd.ValidationError) as exc:
+        c.dataset("financial_ratios", ticker="2330")
+    assert "less than or equal to 1000" in str(exc.value)   # server wording kept
+
+    session.queue = [FakeResponse({"error": "missing_required_filter",
+                                   "message": "Missing required filter"}, status_code=400)]
+    with pytest.raises(twmd.ValidationError):
+        c.dataset("market_breadth")
+
+
+def test_server_enforced_cap_overrides_a_stale_spec(session):
+    # margin_system_stats declares limit<=5000 in the OpenAPI and rejects
+    # anything over 1000. The server names the real cap in its 422, so the SDK
+    # honours it once rather than failing a call nobody could have got right.
+    c = twmd.Client(session=session, max_retries=1)
+    c._transport._sleep = lambda _s: None
+    session.queue = [
+        FakeResponse({"error": "validation_error",
+                      "message": "limit: Input should be less than or equal to 1000"},
+                     status_code=422),
+        FakeResponse(rows_envelope([{"a": 1}])),
+    ]
+    with pytest.warns(TruncatedResultWarning, match="enforces limit<=1000"):
+        c.dataset("margin_system_stats")
+    assert session.calls[0]["params"]["limit"] == 5000
+    assert session.calls[1]["params"]["limit"] == 1000
+    assert c.last_meta.row_count == 1
+
+
+def test_the_correction_does_not_loop(session):
+    c = twmd.Client(session=session, max_retries=1)
+    c._transport._sleep = lambda _s: None
+    reject = FakeResponse({"error": "validation_error",
+                           "message": "limit: Input should be less than or equal to 1000"},
+                          status_code=422)
+    session.queue = [reject, reject, reject]
+    with pytest.warns(TruncatedResultWarning):
+        with pytest.raises(twmd.ValidationError):
+            c.dataset("margin_system_stats")
+    assert len(session.calls) <= 3

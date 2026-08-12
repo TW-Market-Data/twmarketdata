@@ -1,0 +1,534 @@
+{
+ "dataset": "balance_sheet",
+ "recorded_with": "restricted test key (value never stored)",
+ "request": {
+  "headers": {
+   "X-API-Key": "REDACTED"
+  },
+  "method": "GET",
+  "params": {
+   "limit": 5,
+   "ticker": "2330"
+  }
+ },
+ "response": {
+  "body": {
+   "count": 5,
+   "dataset": "balance_sheet",
+   "meta": {
+    "is_limited": false,
+    "plan": "max",
+    "row_limit": 10000
+   },
+   "period_basis": {
+    "basis": "point_in_time",
+    "cumulative": false,
+    "derived": false,
+    "evidence": "a balance is measured at the period end; summing four quarters of total_assets has no meaning",
+    "note": "Measured at the period end date. Not cumulative and not additive across quarters.",
+    "resets": null
+   },
+   "plan_id": "max",
+   "rows": [
+    {
+     "accounts_receivable": null,
+     "cash_and_cash_equivalents": null,
+     "created_at": "2026-05-17T17:12:58.659044",
+     "current_assets": null,
+     "current_liabilities": null,
+     "fiscal_period": "2026-Q1",
+     "fiscal_quarter": 1,
+     "fiscal_year": 2026,
+     "frequency": "quarterly",
+     "fundamentals_context": {
+      "available_tools_or_endpoints": [
+       {
+        "name": "balance_sheet",
+        "path": "/v2/datasets/balance-sheet"
+       },
+       {
+        "name": "balance_sheet",
+        "path": "/v2/datasets/financials"
+       }
+      ],
+      "coverage_window": {
+       "coverage_confidence": "medium",
+       "max_period": null,
+       "min_period": null,
+       "row_count": 0
+      },
+      "data_gaps": [],
+      "generated_at": "2026-08-12T06:23:21Z",
+      "metric_values": {
+       "accounts_receivable": null,
+       "cash_and_cash_equivalents": null,
+       "created_at": "2026-05-17T17:12:58.659044",
+       "current_assets": null,
+       "current_liabilities": null,
+       "fiscal_period": "2026-Q1",
+       "frequency": "quarterly",
+       "inventory": null,
+       "kd_imputed": true,
+       "kd_source": "statutory_deadline",
+       "knowledge_date": "2026-05-15",
+       "period_end_date": "2026-03-31",
+       "report_date": "2026-03-31",
+       "source": "mops_official",
+       "source_name": "mops_official",
+       "symbol": "2330",
+       "total_assets": 8660949685.0,
+       "total_equity": 5932388921.0,
+       "total_liabilities": 2728560764.0,
+       "updated_at": "2026-05-17T17:12:58.659044"
+      },
+      "not_investment_advice": true,
+      "period": "2026Q1",
+      "period_type": "quarterly",
+      "restatement_warning": {
+       "has_restatement": false,
+       "previous_version_ref": null,
+       "reason": null
+      },
+      "safe_usage_notes": [
+       "not_investment_advice",
+       "official_public_first_policy",
+       "period_semantics_explicit",
+       "raw_full_body_storage_forbidden"
+      ],
+      "source_lineage": {
+       "provider": "mops_official",
+       "source_role": "official_mops_balance_sheet"
+      },
+      "statement_family": "balance_sheet",
+      "ticker": "2330"
+     },
+     "inventory": null,
+     "kd_imputed": true,
+     "kd_source": "statutory_deadline",
+     "knowledge_date": "2026-05-15",
+     "period_end_date": "2026-03-31",
+     "period_type": "quarterly",
+     "report_date": "2026-03-31",
+     "source": "mops_official",
+     "source_name": "mops_official",
+     "symbol": "2330",
+     "ticker": "2330",
+     "total_assets": 8660949685.0,
+     "total_equity": 5932388921.0,
+     "total_liabilities": 2728560764.0,
+     "updated_at": "2026-05-17T17:12:58.659044"
+    },
+    {
+     "accounts_receivable": null,
+     "cash_and_cash_equivalents": null,
+     "created_at": "2026-07-04T18:13:02.632865",
+     "current_assets": null,
+     "current_liabilities": null,
+     "fiscal_period": "2026-Q1",
+     "fiscal_quarter": 1,
+     "fiscal_year": 2026,
+     "frequency": "quarterly",
+     "fundamentals_context": {
+      "available_tools_or_endpoints": [
+       {
+        "name": "balance_sheet",
+        "path": "/v2/datasets/balance-sheet"
+       },
+       {
+        "name": "balance_sheet",
+        "path": "/v2/datasets/financials"
+       }
+      ],
+      "coverage_window": {
+       "coverage_confidence": "medium",
+       "max_period": null,
+       "min_period": null,
+       "row_count": 0
+      },
+      "data_gaps": [],
+      "generated_at": "2026-08-12T06:23:21Z",
+      "metric_values": {
+       "accounts_receivable": null,
+       "cash_and_cash_equivalents": null,
+       "created_at": "2026-07-04T18:13:02.632865",
+       "current_assets": null,
+       "current_liabilities": null,
+       "fiscal_period": "2026-Q1",
+       "frequency": "quarterly",
+       "inventory": null,
+       "kd_imputed": true,
+       "kd_source": "statutory_deadline",
+       "knowledge_date": "2026-05-15",
+       "period_end_date": "2026-03-31",
+       "report_date": "2026-05-15",
+       "source": "mops_t163sb05",
+       "source_name": "mops_t163sb05",
+       "symbol": "2330",
+       "total_assets": 8660949685.0,
+       "total_equity": 5932388921.0,
+       "total_liabilities": 2728560764.0,
+       "updated_at": "2026-07-04T18:13:02.632865"
+      },
+      "not_investment_advice": true,
+      "period": "2026Q1",
+      "period_type": "quarterly",
+      "restatement_warning": {
+       "has_restatement": false,
+       "previous_version_ref": null,
+       "reason": null
+      },
+      "safe_usage_notes": [
+       "not_investment_advice",
+       "official_public_first_policy",
+       "period_semantics_explicit",
+       "raw_full_body_storage_forbidden"
+      ],
+      "source_lineage": {
+       "provider": "mops_t163sb05",
+       "source_role": "official_mops_balance_sheet"
+      },
+      "statement_family": "balance_sheet",
+      "ticker": "2330"
+     },
+     "inventory": null,
+     "kd_imputed": true,
+     "kd_source": "statutory_deadline",
+     "knowledge_date": "2026-05-15",
+     "period_end_date": "2026-03-31",
+     "period_type": "quarterly",
+     "report_date": "2026-05-15",
+     "source": "mops_t163sb05",
+     "source_name": "mops_t163sb05",
+     "symbol": "2330",
+     "ticker": "2330",
+     "total_assets": 8660949685.0,
+     "total_equity": 5932388921.0,
+     "total_liabilities": 2728560764.0,
+     "updated_at": "2026-07-04T18:13:02.632865"
+    },
+    {
+     "accounts_receivable": null,
+     "cash_and_cash_equivalents": null,
+     "created_at": "2026-07-04T18:13:02.632865",
+     "current_assets": null,
+     "current_liabilities": null,
+     "fiscal_period": "2025-Q4",
+     "fiscal_quarter": 4,
+     "fiscal_year": 2025,
+     "frequency": "quarterly",
+     "fundamentals_context": {
+      "available_tools_or_endpoints": [
+       {
+        "name": "balance_sheet",
+        "path": "/v2/datasets/balance-sheet"
+       },
+       {
+        "name": "balance_sheet",
+        "path": "/v2/datasets/financials"
+       }
+      ],
+      "coverage_window": {
+       "coverage_confidence": "medium",
+       "max_period": null,
+       "min_period": null,
+       "row_count": 0
+      },
+      "data_gaps": [],
+      "generated_at": "2026-08-12T06:23:21Z",
+      "metric_values": {
+       "accounts_receivable": null,
+       "cash_and_cash_equivalents": null,
+       "created_at": "2026-07-04T18:13:02.632865",
+       "current_assets": null,
+       "current_liabilities": null,
+       "fiscal_period": "2025-Q4",
+       "frequency": "quarterly",
+       "inventory": null,
+       "kd_imputed": true,
+       "kd_source": "statutory_deadline",
+       "knowledge_date": "2026-03-31",
+       "period_end_date": "2025-12-31",
+       "report_date": "2026-03-31",
+       "source": "mops_t163sb05",
+       "source_name": "mops_t163sb05",
+       "symbol": "2330",
+       "total_assets": 7933023878.0,
+       "total_equity": 5460795283.0,
+       "total_liabilities": 2472228595.0,
+       "updated_at": "2026-07-04T18:13:02.632865"
+      },
+      "not_investment_advice": true,
+      "period": "2025Q4",
+      "period_type": "quarterly",
+      "restatement_warning": {
+       "has_restatement": false,
+       "previous_version_ref": null,
+       "reason": null
+      },
+      "safe_usage_notes": [
+       "not_investment_advice",
+       "official_public_first_policy",
+       "period_semantics_explicit",
+       "raw_full_body_storage_forbidden"
+      ],
+      "source_lineage": {
+       "provider": "mops_t163sb05",
+       "source_role": "official_mops_balance_sheet"
+      },
+      "statement_family": "balance_sheet",
+      "ticker": "2330"
+     },
+     "inventory": null,
+     "kd_imputed": true,
+     "kd_source": "statutory_deadline",
+     "knowledge_date": "2026-03-31",
+     "period_end_date": "2025-12-31",
+     "period_type": "quarterly",
+     "report_date": "2026-03-31",
+     "source": "mops_t163sb05",
+     "source_name": "mops_t163sb05",
+     "symbol": "2330",
+     "ticker": "2330",
+     "total_assets": 7933023878.0,
+     "total_equity": 5460795283.0,
+     "total_liabilities": 2472228595.0,
+     "updated_at": "2026-07-04T18:13:02.632865"
+    },
+    {
+     "accounts_receivable": null,
+     "cash_and_cash_equivalents": null,
+     "created_at": "2026-05-17T17:11:15.133867",
+     "current_assets": null,
+     "current_liabilities": null,
+     "fiscal_period": "2025-Q4",
+     "fiscal_quarter": 4,
+     "fiscal_year": 2025,
+     "frequency": "quarterly",
+     "fundamentals_context": {
+      "available_tools_or_endpoints": [
+       {
+        "name": "balance_sheet",
+        "path": "/v2/datasets/balance-sheet"
+       },
+       {
+        "name": "balance_sheet",
+        "path": "/v2/datasets/financials"
+       }
+      ],
+      "coverage_window": {
+       "coverage_confidence": "medium",
+       "max_period": null,
+       "min_period": null,
+       "row_count": 0
+      },
+      "data_gaps": [],
+      "generated_at": "2026-08-12T06:23:21Z",
+      "metric_values": {
+       "accounts_receivable": null,
+       "cash_and_cash_equivalents": null,
+       "created_at": "2026-05-17T17:11:15.133867",
+       "current_assets": null,
+       "current_liabilities": null,
+       "fiscal_period": "2025-Q4",
+       "frequency": "quarterly",
+       "inventory": null,
+       "kd_imputed": true,
+       "kd_source": "statutory_deadline",
+       "knowledge_date": "2026-03-31",
+       "period_end_date": "2025-12-31",
+       "report_date": "2025-12-31",
+       "source": "mops_official",
+       "source_name": "mops_official",
+       "symbol": "2330",
+       "total_assets": 7933023878.0,
+       "total_equity": 5460795283.0,
+       "total_liabilities": 2472228595.0,
+       "updated_at": "2026-05-17T17:11:15.133867"
+      },
+      "not_investment_advice": true,
+      "period": "2025Q4",
+      "period_type": "quarterly",
+      "restatement_warning": {
+       "has_restatement": false,
+       "previous_version_ref": null,
+       "reason": null
+      },
+      "safe_usage_notes": [
+       "not_investment_advice",
+       "official_public_first_policy",
+       "period_semantics_explicit",
+       "raw_full_body_storage_forbidden"
+      ],
+      "source_lineage": {
+       "provider": "mops_official",
+       "source_role": "official_mops_balance_sheet"
+      },
+      "statement_family": "balance_sheet",
+      "ticker": "2330"
+     },
+     "inventory": null,
+     "kd_imputed": true,
+     "kd_source": "statutory_deadline",
+     "knowledge_date": "2026-03-31",
+     "period_end_date": "2025-12-31",
+     "period_type": "quarterly",
+     "report_date": "2025-12-31",
+     "source": "mops_official",
+     "source_name": "mops_official",
+     "symbol": "2330",
+     "ticker": "2330",
+     "total_assets": 7933023878.0,
+     "total_equity": 5460795283.0,
+     "total_liabilities": 2472228595.0,
+     "updated_at": "2026-05-17T17:11:15.133867"
+    },
+    {
+     "accounts_receivable": null,
+     "cash_and_cash_equivalents": null,
+     "created_at": "2026-05-17T17:09:25.827271",
+     "current_assets": null,
+     "current_liabilities": null,
+     "fiscal_period": "2025-Q3",
+     "fiscal_quarter": 3,
+     "fiscal_year": 2025,
+     "frequency": "quarterly",
+     "fundamentals_context": {
+      "available_tools_or_endpoints": [
+       {
+        "name": "balance_sheet",
+        "path": "/v2/datasets/balance-sheet"
+       },
+       {
+        "name": "balance_sheet",
+        "path": "/v2/datasets/financials"
+       }
+      ],
+      "coverage_window": {
+       "coverage_confidence": "medium",
+       "max_period": null,
+       "min_period": null,
+       "row_count": 0
+      },
+      "data_gaps": [],
+      "generated_at": "2026-08-12T06:23:21Z",
+      "metric_values": {
+       "accounts_receivable": null,
+       "cash_and_cash_equivalents": null,
+       "created_at": "2026-05-17T17:09:25.827271",
+       "current_assets": null,
+       "current_liabilities": null,
+       "fiscal_period": "2025-Q3",
+       "frequency": "quarterly",
+       "inventory": null,
+       "kd_imputed": true,
+       "kd_source": "statutory_deadline",
+       "knowledge_date": "2025-11-14",
+       "period_end_date": "2025-09-30",
+       "report_date": "2025-09-30",
+       "source": "mops_official",
+       "source_name": "mops_official",
+       "symbol": "2330",
+       "total_assets": 7354107076.0,
+       "total_equity": 5035577802.0,
+       "total_liabilities": 2318529274.0,
+       "updated_at": "2026-05-17T17:09:25.827271"
+      },
+      "not_investment_advice": true,
+      "period": "2025Q3",
+      "period_type": "quarterly",
+      "restatement_warning": {
+       "has_restatement": false,
+       "previous_version_ref": null,
+       "reason": null
+      },
+      "safe_usage_notes": [
+       "not_investment_advice",
+       "official_public_first_policy",
+       "period_semantics_explicit",
+       "raw_full_body_storage_forbidden"
+      ],
+      "source_lineage": {
+       "provider": "mops_official",
+       "source_role": "official_mops_balance_sheet"
+      },
+      "statement_family": "balance_sheet",
+      "ticker": "2330"
+     },
+     "inventory": null,
+     "kd_imputed": true,
+     "kd_source": "statutory_deadline",
+     "knowledge_date": "2025-11-14",
+     "period_end_date": "2025-09-30",
+     "period_type": "quarterly",
+     "report_date": "2025-09-30",
+     "source": "mops_official",
+     "source_name": "mops_official",
+     "symbol": "2330",
+     "ticker": "2330",
+     "total_assets": 7354107076.0,
+     "total_equity": 5035577802.0,
+     "total_liabilities": 2318529274.0,
+     "updated_at": "2026-05-17T17:09:25.827271"
+    }
+   ],
+   "status": "ok",
+   "unit": {
+    "currency": "TWD",
+    "fields": {
+     "accounts_receivable": {
+      "currency": "TWD",
+      "scale": "thousand_twd",
+      "scale_multiplier": 1000,
+      "unit_label": "仟元",
+      "verified": true
+     },
+     "cash_and_cash_equivalents": {
+      "currency": "TWD",
+      "scale": "thousand_twd",
+      "scale_multiplier": 1000,
+      "unit_label": "仟元",
+      "verified": true
+     },
+     "inventory": {
+      "currency": "TWD",
+      "reason": "no populated value exists to verify a scale against; the unit is NOT asserted",
+      "scale": "scale_unknown",
+      "scale_multiplier": null,
+      "unit_label": null,
+      "verified": false
+     },
+     "total_assets": {
+      "currency": "TWD",
+      "scale": "thousand_twd",
+      "scale_multiplier": 1000,
+      "unit_label": "仟元",
+      "verified": true
+     },
+     "total_equity": {
+      "currency": "TWD",
+      "scale": "thousand_twd",
+      "scale_multiplier": 1000,
+      "unit_label": "仟元",
+      "verified": true
+     },
+     "total_liabilities": {
+      "currency": "TWD",
+      "scale": "thousand_twd",
+      "scale_multiplier": 1000,
+      "unit_label": "仟元",
+      "verified": true
+     }
+    },
+    "note": "科目字典(§2b):單位以官方 MOPS 報表為準——三大報表金額為仟元(值 ×1000 = 元),EPS 為元/股,比率為 %。每個科目的 scale 皆以官方公布數字核對過;無法核對者標 scale_unknown,不臆測。",
+    "scale": "per_field",
+    "source_of_truth": "official_mops_statement",
+    "unverified_fields": [
+     "inventory"
+    ]
+   }
+  },
+  "status": 200
+ },
+ "route": "/v2/datasets/balance-sheet",
+ "sdk_error": null
+}
