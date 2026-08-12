@@ -1,16 +1,23 @@
 # TWMD Python SDK — 設計文件 v1
 
-**狀態**:待 director 審核(通過後才進實作)
-**日期**:2026-08-12
-**套件名**:`twmd`(備案 `twmarketdata`,PyPI 佔名由 owner 親查)
-**授權**:Apache-2.0(專利授權 + NOTICE 放商標免責)
-**對應工單**:`WORKORDER_Python_SDK_twmd_20260812.md` 里程碑 1
+**狀態**:已審核通過。里程碑 1(設計)與里程碑 2(核心 Client)完成;key-gated 項目待受限測試 key。
+**日期**:2026-08-12(命名/授權段於同日定案更新)
+**發布定案**:
+- **distribution 名 = `twmarketdata`**、**import 名 = `twmd`**、版本 **0.2.0**
+- **授權:0.1.0 維持 MIT,0.2.0 起 Apache-2.0**(owner 已確認 relicense;NOTICE 放商標免責)
+- **B 案**:續發既有的 `twmarketdata`(0.1.0 已於 2026-07-21 上線 PyPI),**0.1.0 的公開面全數保留為 deprecated alias**,既有安裝升級不會壞
+- `twmd` 這個 dist 名在 PyPI 上是空的(HTTP 404),但**刻意不採用** —— 兩個 dist 都提供 `twmd` 模組會互相覆蓋。細節與被否決的 A/C 案見 `PUBLISH_BLOCKERS.md`
+
+> 早期版本的本文件寫「套件名 `twmd`,備案 `twmarketdata`」。那是在發現 `twmarketdata` 0.1.0 已經上線 PyPI **之前**寫的,已被上面的定案取代。
+
+**對應工單**:`WORKORDER_Python_SDK_twmd_20260812.md` 里程碑 1–2;
+PIT 欄位對接 `WORKORDER_API_expose_knowledge_date_20260812.md`
 
 ---
 
 ## 0. 目的、範圍、非目標
 
-**目的**:讓 `pip install twmd` 兩行拿到 DataFrame,涵蓋 82 支可售資料集,提供 FinMind 相容層讓既有程式碼幾乎照跑,並把 point-in-time 正確性做成 SDK 的一級功能。
+**目的**:讓 `pip install twmarketdata`(import `twmd`)兩行拿到 DataFrame,涵蓋 82 支可售資料集,提供 FinMind 相容層讓既有程式碼幾乎照跑,並把 point-in-time 正確性做成 SDK 的一級功能。
 
 **範圍**:Python 客戶端。薄封裝 + 正規化 + PIT 語義 + 相容層 + 型別 + 測試 + 範例。
 
@@ -27,9 +34,9 @@
 
 | 支柱 | 可驗收條件(每條對得到一個測試) |
 |---|---|
-| ① 簡單如 FinMind | `pip install twmd` 後,兩行程式碼對 2330 拿到 DataFrame,免 API key。82 支全部有具名方法。 |
+| ① 簡單如 FinMind | `pip install twmarketdata` 後 `from twmd import Client`,兩行對 2330 拿到 DataFrame,免 API key。82 支全部有具名方法。 |
 | ② FinMind 相容層 | `mapping/finmind_map.csv` 每一列都標了級別與驗證來源;D 級一律 `NotMappedError`,測試斷言它不回空 DataFrame。 |
-| ③ 嚴謹 PIT | `as_of` 三態行為各有測試;`data_gaps` 有來源標記;截斷回應必定帶 `truncated=True`。 |
+| ③ 嚴謹 PIT | `as_of` **五態**行為各有測試(見 §6.1);`data_gaps` 有來源標記;截斷回應必定帶 `truncated=True`;`kd_imputed` 一律 surface。 |
 
 ---
 
