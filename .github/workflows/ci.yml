@@ -1,0 +1,102 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+  schedule:
+    # Daily registry-drift check. Route renames and parameter changes show up as
+    # subtly wrong requests rather than errors, so they need catching on a timer.
+    - cron: "17 3 * * *"
+
+jobs:
+  audit:
+    # Runs first and gates everything: no publish-shaped work proceeds if a
+    # credential or an unredacted cassette header made it into the tree.
+    name: Secret & package audit
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python tools/audit_public_repo.py
+
+  test:
+    name: Tests (py${{ matrix.python-version }})
+    needs: audit
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.9", "3.10", "3.11", "3.12", "3.13"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+      - run: pip install -e ".[dev]"
+      - name: Offline suite
+        run: pytest -m "not network" -q
+      - name: Import without pandas
+        # The core must not hard-depend on pandas.
+        run: |
+          pip uninstall -y pandas
+          python -c "import twmd; c = twmd.Client(); assert not twmd.pandas_available()"
+
+  types:
+    name: mypy strict
+    needs: audit
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -e ".[dev]"
+      - run: mypy twmd
+
+  generated:
+    name: Generated files are up to date
+    needs: audit
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -e ".[dev]"
+      - name: Regenerate and diff
+        # The registry, the 82 methods and the compat map are generated. If a
+        # regeneration changes them, someone hand-edited a generated file.
+        run: |
+          python tools/gen_registry.py
+          python tools/gen_methods.py
+          python tools/gen_compat_map.py
+          git diff --exit-code -- twmd/_registry.json twmd/_methods.py twmd/_methods.pyi twmd/compat/_finmind_map.json
+
+  live-free-tier:
+    name: Live free-tier smoke (no API key)
+    needs: audit
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -e ".[dev]"
+      - name: Free-tier calls against the live API
+        # Needs no secret: these datasets and the five demo symbols are open.
+        # Paced inside the test module -- fast probing trips a lasting block.
+        run: pytest -m network -q
+
+  drift:
+    name: Registry drift vs live API
+    needs: audit
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -e ".[dev]"
+      - run: python tools/check_registry_drift.py

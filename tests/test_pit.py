@@ -136,3 +136,38 @@ def test_month_grained_column_survives_a_day_grained_cutoff():
     kept = apply_as_of(rows, info=twmd.get("monthly_revenue"), as_of="2026-06-30",
                        mode="client_unsafe", meta=meta, truncated=False)
     assert [r["knowledge_date"] for r in kept] == ["2026-06"]
+
+
+# ------------------------------------------- declared column vs projected column
+def test_declared_column_resolved_through_a_verified_alias():
+    # twse_daily_price declares trade_date (the DB column) but the API projects
+    # it as `date`. Measured against the live response on 2026-08-12.
+    from twmd.pit import resolve_field
+    rows = [{"symbol": "2330", "date": "2026-08-10", "close": 2380}]
+    assert resolve_field("trade_date", rows) == "date"
+
+
+def test_period_columns_are_never_aliased_to_a_knowledge_date():
+    # monthly_revenue returns month / revenue_month. Treating either as the
+    # knowledge axis is the look-ahead this module exists to prevent.
+    from twmd.pit import resolve_field
+    rows = [{"symbol": "2330", "month": "2026-06", "revenue_month": "2026-06"}]
+    assert resolve_field("as_of_date", rows) is None
+
+
+def test_alias_makes_daily_price_as_of_actually_filter():
+    rows = [{"date": "2026-08-10"}, {"date": "2026-05-02"}]
+    meta = _meta("twse_daily_price")
+    kept = apply_as_of(rows, info=twmd.get("twse_daily_price"), as_of="2026-06-30",
+                       mode="client", meta=meta, truncated=False)
+    assert [r["date"] for r in kept] == ["2026-05-02"]
+    assert meta.as_of_applied is True and meta.as_of_field == "date"
+
+
+def test_absent_column_is_reported_as_absent_not_as_null():
+    rows = [{"symbol": "2330", "month": "2026-06"}]
+    meta = _meta()
+    with pytest.warns(PITDataMissingWarning, match="is not present in the response"):
+        kept = apply_as_of(rows, info=twmd.get("monthly_revenue"), as_of="2026-06-30",
+                           mode="client_unsafe", meta=meta, truncated=False)
+    assert kept == rows and meta.as_of_applied is False

@@ -93,7 +93,9 @@ def test_empty_key_is_a_configuration_error():
 
 
 def test_key_never_appears_in_repr():
-    r = repr(twmd.Client("sk_live_supersecret"))
+    # Deliberately not shaped like a real key: the pre-publish secret scanner
+    # flags live-key patterns wherever they appear, including in fixtures.
+    r = repr(twmd.Client("notarealkey-supersecret"))
     assert "supersecret" not in r and "***" in r
 
 

@@ -47,6 +47,36 @@ KD_SOURCE_FIELD = "kd_source"
 
 _OPT_IN = "declared_field"
 
+# The declared knowledge_time_field comes from the database schema, but the API
+# projects some columns under a different name -- twse_daily_price declares
+# `trade_date` and returns `date`. Only exact synonyms belong here: an alias that
+# is merely "close enough" would silently filter on the wrong axis, which is the
+# failure this module exists to prevent. In particular `as_of_date` is NOT
+# aliased to `month`/`revenue_month`, because a period is not a knowledge date.
+_FIELD_ALIASES = {
+    "trade_date": ("trade_date", "date"),
+    "date": ("date", "trade_date"),
+}
+
+
+def resolve_field(declared: Optional[str],
+                  rows: Sequence[Mapping[str, Any]]) -> Optional[str]:
+    """Find the declared knowledge column in the rows actually returned.
+
+    Returns None when the column is absent under any accepted name -- absent and
+    all-null are different failures and are reported differently.
+    """
+    if not declared or not rows:
+        return None
+    candidates = _FIELD_ALIASES.get(declared, (declared,))
+    present = set()
+    for row in rows[:50]:
+        present.update(row)
+    for candidate in candidates:
+        if candidate in present:
+            return candidate
+    return None
+
 
 def resolve_mode(info: DatasetInfo, as_of_policy: Optional[str]) -> str:
     """Decide, before the request, how ``as_of`` will be handled.
@@ -123,13 +153,29 @@ def apply_as_of(
             warnings.warn(note, ImputedKnowledgeDateWarning, stacklevel=3)
             meta.warnings.append(note)
     else:
-        field = info.knowledge_time_field or ""
-        if not field:
-            note = ("as_of was requested but this response carries no knowledge column, "
-                    "so no filter was applied.")
+        declared = info.knowledge_time_field or ""
+        field = resolve_field(declared, rows) or ""
+        if not declared:
+            note = ("as_of was requested but this dataset declares no knowledge column, "
+                    "so no filter was applied and these rows are NOT a point-in-time view.")
             warnings.warn(note, PITDataMissingWarning, stacklevel=3)
             meta.warnings.append(note)
             meta.as_of_applied = False
+            return rows
+
+        if not field:
+            # Absent is not the same failure as null: the column the registry
+            # expects is simply not in the projection.
+            note = (
+                "as_of was requested but the declared knowledge column %r is not present "
+                "in the response for %s (columns returned: %s). No filter was applied and "
+                "these rows are NOT a point-in-time view."
+                % (declared, info.key, ", ".join(sorted(rows[0])[:12]) if rows else "none")
+            )
+            warnings.warn(note, PITDataMissingWarning, stacklevel=3)
+            meta.warnings.append(note)
+            meta.as_of_applied = False
+            meta.as_of_field = None
             return rows
 
         usable = sum(1 for r in rows if r.get(field) is not None)

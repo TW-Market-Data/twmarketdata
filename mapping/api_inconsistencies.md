@@ -194,3 +194,26 @@ website `main` 上的 0.1.0 錯誤解析是照**前者**寫的,打現行 API 時
 1. 把 `fix/friction01-sdk-error-contract` 合併(或至少把它的錯誤碼分類搬進新 SDK 當基準,新 SDK 已這麼做)。
 2. 現行 API 與 gateway 統一成同一種錯誤形狀,二選一即可 —— 重點是**同一個產品只有一種錯誤形狀**。
 3. 現行 API 補上 `endpoint_retired` 之外的扁平/巢狀一致性,讓 client 不必兩種都解。
+
+---
+
+## M. `/v2/datasets/{key}/schema` 的欄位名 ≠ 回應實際欄位名
+
+實作 SDK 的 PIT 時發現:`twse_daily_price` 的 describe 宣告 `knowledge_time_field=trade_date`,`/schema` 端點也列出 `trade_date`,但**實際回應投影出來的欄位叫 `date`**。
+
+```
+GET /v2/datasets/twse-daily-price?symbol=2330&limit=1
+{"rows":[{"symbol":"2330","date":"2026-08-10","open":2390.0, ...}]}
+                                  ^^^^ 不是 trade_date
+```
+
+`monthly_revenue` 同樣:宣告 `as_of_date`,回應實際給的是 `month` / `revenue_month`。
+
+**影響(嚴重)**:任何照 schema/describe 做 point-in-time 對齊的下游,都會找不到知識欄位。SDK 若因此靜默不過濾,使用者會拿到一份「看起來有 as_of 其實沒有」的資料 —— 正是 PIT 差異化最不能出的錯。
+
+**SDK 對策**:
+1. 只針對**已實測確認為同義**的欄位建立別名(目前只有 `trade_date` ↔ `date`),絕不做「看起來很像」的猜測。`as_of_date` **不**對應到 `month`/`revenue_month`,因為期別不是知道日。
+2. 解析不到宣告欄位時,發 `PITDataMissingWarning` 並**明確區分「欄位不存在」與「欄位存在但全為 null」**,兩者訊息不同。
+3. 兩種情況都 `as_of_applied=False`,不假裝過濾成功。
+
+**建議**:讓 `/schema` 與 describe 反映**投影後**的欄位名(或在回應中同時保留 `trade_date` 別名)。目前的落差讓「照文件寫」必然出錯。
