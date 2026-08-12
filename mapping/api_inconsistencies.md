@@ -284,3 +284,38 @@ M 是 schema 與投影不一致;N 是 contract 與 schema+投影**兩者都**不
 `price-enhanced` 本身我無法驗證(需要 key),上述處理是依左下/左上回報做的防禦性實作,拿到測試 key 後要實測確認。
 
 **建議**:同一家族的 envelope 統一 —— `envelope` 要嘛永遠是 metadata、要嘛永遠是列容器,不要兩種都是。這跟第 F 項(列的 key 有三種)是同一件事的延伸:**光是「列在哪裡」目前就有 4 種以上的答案**。
+
+---
+
+## P. `price-enhanced` live 確認(A 項與 O 項的實例),以及「未知參數」處理的真實規則
+
+左上 live 確認兩件事,兩件都落在既有條目底下:
+
+| 確認 | 同類條目 | SDK 現況 |
+|---|---|---|
+| 列在 `body["envelope"]["data"]`,不在頂層 | **O** | 已接住(白名單容器下探,`Meta.row_key` 記為 `envelope.data`) |
+| 吃 `ticker` 不吃 `symbol`,傳 `symbol` 回 422 | **A** | 已接住(registry 記錄該 route 的實體參數為 `ticker`,SDK 對外統一 `ticker=` 再翻譯) |
+
+`price-enhanced` 是 starter tier,本 repo 無法免 key 直接驗證這兩點;registry 的 `ticker` 來自 OpenAPI 宣告(該 route 只宣告 `ticker`,沒有 `symbol`),與左上的 live 結果一致。
+
+### 順帶釐清:422 的真正成因不是「symbol 被拒絕」
+
+免 key 實測(2026-08-12):
+
+| 請求 | 結果 |
+|---|---|
+| `twse-daily-price?symbol=2330` | 200,1 列 |
+| `twse-daily-price?ticker=2330` | **422** `{"error":"validation_error","message":"symbol: Field required"}` |
+| `twse-daily-price?symbol=2330&utter_nonsense=1` | **200**,1 列 —— 未知參數被靜默忽略 |
+| `index-constituents?symbol=2330` | **200** —— 該 route 無必填參數,`symbol` 被忽略 |
+| `trading-calendar?symbol=2330` | **200** —— 同上 |
+
+OpenAPI 的必填宣告佐證:`price-enhanced` 必填 `ticker`、`twse-daily-price` 必填 `symbol`、`index-constituents` 無必填。
+
+所以真實規則是:**未知參數一律被靜默忽略;422 只在「必填參數缺席」時出現。** 傳 `symbol` 給 `price-enhanced` 之所以 422,是因為必填的 `ticker` 沒給,而不是因為 `symbol` 被拒絕。
+
+**這一點很重要,因為靜默忽略是有害的**:對**沒有必填參數**的 route(`index-constituents`、`trading-calendar` 等,82 支裡有 30 支無實體參數),傳錯參數名會**安靜地回全量資料**,看起來像是過濾過的結果。使用者不會收到任何訊號。
+
+**SDK 對策**:傳了該資料集不支援的參數一律 `UnsupportedParameterError`,在送出請求**之前**擋下。這正是「寧可報錯也不要默默忽略」那條規則要防的情境 —— server 這側目前不會告訴你。
+
+**建議**:未知查詢參數改為 422(或至少在回應的 `warnings` 裡列出被忽略的參數名),讓「打錯參數名」不再靜默地變成「查詢了全部」。
