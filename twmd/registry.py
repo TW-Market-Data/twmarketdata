@@ -136,10 +136,22 @@ class DatasetInfo:
     def runnable_without_key(self) -> bool:
         return self.free_tier_probe == "yes_rows"
 
+    @property
+    def entity_is_stock_ticker(self) -> bool:
+        """False when the route is keyed by an issuer, contract or index code.
+
+        Those routes still accept ``ticker=`` for uniformity, but passing a stock
+        code to a route keyed by ``issuer`` returns nothing rather than erroring,
+        so callers should use the native name.
+        """
+        return self.entity_param in ("ticker", "symbol")
+
     def supported_filters(self) -> List[str]:
         out = []
         if self.entity_param:
             out.append("ticker")
+            if not self.entity_is_stock_ticker:
+                out.append(self.entity_param)
         if self.start_param:
             out.append("start")
         if self.end_param:
@@ -207,6 +219,8 @@ def capabilities(dataset: str) -> Dict[str, Any]:
         "data_gaps": "server" if d.supports_data_gaps else "client_derived_or_unknown",
         "pagination": "offset" if d.supports_offset else "limit_only",
         "filters": d.supported_filters(),
+        "entity_param": d.entity_param,
+        "entity_is_stock_ticker": d.entity_is_stock_ticker,
         "free_tier_probe": d.free_tier_probe,
         "runnable_without_key": d.runnable_without_key,
         "coverage": {"min": d.coverage_min, "max": d.coverage_max},

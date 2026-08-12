@@ -1,0 +1,114 @@
+{
+ "company_news": {
+  "error": "needs an API key (not run)",
+  "ok": false
+ },
+ "convertible_bond_overview": {
+  "error": "needs an API key (not run)",
+  "ok": false
+ },
+ "etf_holdings": {
+  "error": "needs an API key (not run)",
+  "ok": false
+ },
+ "price_move_context": {
+  "error": "needs an API key (not run)",
+  "ok": false
+ },
+ "stock_delisting_lifecycle": {
+  "columns": [
+   "announcement_date",
+   "code",
+   "company_name",
+   "data_gaps",
+   "delisting_date",
+   "event_type",
+   "lineage",
+   "market",
+   "reason_summary",
+   "source_event_ref",
+   "source_family",
+   "source_provider",
+   "source_role",
+   "suspension_date"
+  ],
+  "first_row": {
+   "announcement_date": null,
+   "code": "6806",
+   "company_name": "森崴能源",
+   "data_gaps": [],
+   "delisting_date": "2026-06-23",
+   "event_type": "delisting",
+   "lineage": {
+    "endpoint": "https://openapi.twse.com.tw/v1/company/suspendListingCsvAndHtml",
+    "raw_delisting_date": "115/06/23",
+    "source_family": "twse_delisted_company_table",
+    "source_provider": "twse_official",
+    "source_role": "official_twse_delisted_company"
+   },
+   "market": "TWSE",
+   "reason_summary": null,
+   "source_event_ref": "TWSE:suspendListing|6806",
+   "source_family": "twse_delisted_company_table",
+   "source_provider": "twse_official",
+   "source_role": "official_twse_delisted_company",
+   "suspension_date": null
+  },
+  "ok": true,
+  "row_count": 3,
+  "row_key": "data"
+ },
+ "valuation_core_daily": {
+  "error": "needs an API key (not run)",
+  "ok": false
+ },
+ "warrants_reference": {
+  "columns": [
+   "data_gaps",
+   "exercise_ratio",
+   "exercise_style",
+   "expiry_date",
+   "issuer",
+   "lineage",
+   "listing_date",
+   "market",
+   "not_investment_advice",
+   "settlement_style",
+   "source_family",
+   "source_provider",
+   "source_role",
+   "strike_price",
+   "underlying_ticker",
+   "warrant_code",
+   "warrant_type"
+  ],
+  "first_row": {
+   "data_gaps": [
+    "issuer_not_provided_by_source"
+   ],
+   "exercise_ratio": null,
+   "exercise_style": null,
+   "expiry_date": "2026-06-30",
+   "issuer": null,
+   "lineage": {
+    "depth": "latest_snapshot_only",
+    "source_name": "tpex_warrant_issue"
+   },
+   "listing_date": "2025-10-01",
+   "market": "TPEx",
+   "not_investment_advice": true,
+   "settlement_style": null,
+   "source_family": "tpex_warrant_issue",
+   "source_provider": "tpex_official",
+   "source_role": "official_tpex_warrant_issue",
+   "strike_price": null,
+   "underlying_ticker": "4749",
+   "warrant_code": "700008",
+   "warrant_type": "認購"
+  },
+  "note": "sampled without a ticker filter; warrants_reference returned no rows for 2330",
+  "ok": true,
+  "row_count": 3,
+  "row_key": "data"
+ }
+}

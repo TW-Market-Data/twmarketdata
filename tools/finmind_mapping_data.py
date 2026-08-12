@@ -69,14 +69,22 @@ MAPPINGS = [
      "TWMD carries list_date/delist_date, so a delisting-aware universe is constructible."),
     ("taiwan_stock_info_with_warrant", "TaiwanStockInfoWithWarrant", "B", "security_master+warrants_reference", "medium",
      "Compat concatenates the equity master with the warrant reference table."),
-    ("taiwan_stock_info_with_warrant_summary", "TaiwanStockInfoWithWarrantSummary", "C", "warrants_reference", "low",
-     "Summary aggregation shape unconfirmed."),
+    ("taiwan_stock_info_with_warrant_summary", "TaiwanStockInfoWithWarrantSummary", "C", "warrants_reference", "medium",
+     "Confirmed against live rows 2026-08-12: per-warrant reference records "
+     "(warrant_code, warrant_type, underlying_ticker, issuer, strike_price, "
+     "exercise_ratio, exercise_style, settlement_style, expiry_date, listing_date), "
+     "NOT a pre-aggregated summary -- aggregate client-side if you need one. Note the "
+     "route is keyed by `issuer`, so filtering by underlying stock happens client-side "
+     "on underlying_ticker."),
     ("taiwan_stock_trading_date", "TaiwanStockTradingDate", "A", "trading_calendar", "high",
      "PIT note: absence of future rows means 'no evidence yet', not 'market closed'."),
     ("taiwan_stock_delisting", "TaiwanStockDelisting", "B", "stock_delisting_lifecycle", "medium",
      "TWMD models the full lifecycle (multiple stages), not a single delisting date."),
-    ("taiwan_stock_suspended", "TaiwanStockSuspended", "C", "stock_delisting_lifecycle", "low",
-     "Suspension may be one lifecycle stage; unconfirmed."),
+    ("taiwan_stock_suspended", "TaiwanStockSuspended", "C", "stock_delisting_lifecycle", "medium",
+     "Confirmed against live rows 2026-08-12: the dataset carries suspension_date, "
+     "event_type, announcement_date, delisting_date and reason_summary, so suspension "
+     "IS represented. Narrower than the source though -- these are suspensions within "
+     "the delisting lifecycle, not every trading halt."),
 
     # --------------------------------------------------------- fundamentals
     ("taiwan_stock_month_revenue", "TaiwanStockMonthRevenue", "A", "monthly_revenue", "high",

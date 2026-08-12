@@ -265,11 +265,25 @@ class Client(DatasetMethods, LegacyClientMixin):
         extra: Mapping[str, Any],
     ) -> Dict[str, Any]:
         params: Dict[str, Any] = {}
+        extra = dict(extra)
+
+        # 13 routes are keyed by something that is not a stock ticker -- cb_id,
+        # contract, index_code, issuer. Accept the route's own name as a keyword
+        # so `issuer="..."` reads correctly, rather than forcing everything
+        # through `ticker=` and silently sending a stock code as an issuer code.
+        native = info.entity_param
+        if native and native in extra:
+            if ticker is not None:
+                raise UnsupportedParameterError(
+                    info.key, "%s (already given as ticker=)" % native,
+                    info.supported_filters())
+            ticker = extra.pop(native)
 
         if ticker is not None:
             if not info.entity_param:
                 raise UnsupportedParameterError(info.key, "ticker", info.supported_filters())
-            self._check_free_tier_symbol(ticker)
+            if info.entity_is_stock_ticker:
+                self._check_free_tier_symbol(ticker)
             params[info.entity_param] = ticker
 
         if start is not None:

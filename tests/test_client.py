@@ -256,3 +256,32 @@ def test_genuine_pagination_still_completes(session):
     assert c.last_meta.row_count == 5
     assert c.last_meta.offset_ignored is False
     assert c.last_meta.truncated is False
+
+
+# --------------------------------------------- entity params that aren't tickers
+def test_native_entity_name_accepted_for_non_ticker_routes(client, session):
+    # warrants_reference is keyed by `issuer`. Forcing it through ticker= sends a
+    # stock code as an issuer code, and the API answers 0 rows without erroring.
+    client.dataset("warrants_reference", issuer="元大")
+    assert session.calls[0]["params"]["issuer"] == "元大"
+
+
+def test_capabilities_says_when_the_entity_is_not_a_stock_ticker():
+    caps = twmd.capabilities("warrants_reference")
+    assert caps["entity_param"] == "issuer"
+    assert caps["entity_is_stock_ticker"] is False
+    assert "issuer" in caps["filters"]
+
+    caps = twmd.capabilities("monthly_revenue")
+    assert caps["entity_is_stock_ticker"] is True
+
+
+def test_giving_both_names_is_an_error_not_a_silent_pick(client):
+    with pytest.raises(UnsupportedParameterError):
+        client.dataset("warrants_reference", ticker="2330", issuer="元大")
+
+
+def test_free_tier_guard_does_not_fire_on_issuer_keyed_routes(client, session):
+    # The five-demo-symbol rule is about stock tickers; an issuer code is not one.
+    client.dataset("warrants_reference", issuer="not-a-demo-symbol")
+    assert session.calls[0]["params"]["issuer"] == "not-a-demo-symbol"

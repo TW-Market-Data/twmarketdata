@@ -1,10 +1,18 @@
 # 發布前阻斷清單
 
-**狀態:不可發布。** 里程碑 2 的程式碼已完成並測試通過,但 PyPI 上已經有一個同名、同 import 名的**已發布套件**,發布前必須由 owner / director 裁決。
+**狀態:阻斷 1 已裁決(B 案),阻斷 2 仍在 —— 尚不可發布。**
+
+發布步驟見 `RELEASE_CHECKLIST.md`(owner 執行)。
 
 ---
 
-## 阻斷 1(必須裁決):`twmarketdata` 0.1.0 已經在 PyPI 上,而且 import 名就是 `twmd`
+## 阻斷 1 —— ✅ 已裁決:走 B 案(2026-08-12)
+
+**裁決結果**:續發 `twmarketdata` 0.2.0,import 名維持 `twmd`,0.1.0 的公開面全部保留為 deprecated alias(已實作於 `twmd/_legacy.py`,並有從已發布 wheel introspect 出來的測試逐項把關)。0.1.0 維持 MIT,0.2.0 起 Apache-2.0(owner 已確認 relicense)。
+
+以下保留當時的分析與被否決的 A / C 案,供日後查證。
+
+### 原始問題:`twmarketdata` 0.1.0 已經在 PyPI 上,而且 import 名就是 `twmd`
 
 實測(2026-08-12):
 
@@ -48,11 +56,21 @@ GET https://pypi.org/pypi/twmd/json  →  HTTP 404   (twmd 這個名字沒被佔
 
 **我的建議:B**。理由:`twmarketdata` 已有 PyPI 頁面、下載數與 README badge(GEO 資產已經在累積),換名等於重來;而 0.1.0 的公開面很小(6 個方法 + 一個 access 模組),做成 alias 成本低。授權則照 director 裁決走 Apache-2.0 —— 但這是**不可逆的公開動作**,需要 owner 明確再點一次頭,不能由我代決。
 
-**在此裁決前,本 repo 的 `pyproject.toml` 不得用於 `twine upload`。**
+**已採 B 案。** `pyproject.toml` 頂端的 banner 仍在,要等阻斷 2 清空、`RELEASE_CHECKLIST.md` 第 1 節全綠後才由 owner 移除。
 
 ---
 
-## 阻斷 2(等 key):key-gated 項目
+## 阻斷 2(仍在,等受限測試 key):key-gated 項目
+
+**harness 已備妥,key 一到就是一條命令**:
+
+```bash
+export TWMD_API_KEY=<受限 key>          # 在 owner 自己的 shell
+python tools/record_cassettes.py                       # 錄 cassette,自動 redact + 稽核
+python tools/verify_low_confidence.py --all            # 驗未驗證映射,產出證據報告
+python examples/03_backtest_ready_fundamentals.py      # 跑完拿掉 pending 標記
+python examples/04_chips_and_derivatives.py
+```
 
 | 項目 | 卡在 |
 |---|---|

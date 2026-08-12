@@ -702,9 +702,9 @@
    "via_get_data_only": false
   },
   "taiwan_stock_info_with_warrant_summary": {
-   "confidence": "low",
+   "confidence": "medium",
    "dataset_enum": "TaiwanStockInfoWithWarrantSummary",
-   "note": "Summary aggregation shape unconfirmed.",
+   "note": "Confirmed against live rows 2026-08-12: per-warrant reference records (warrant_code, warrant_type, underlying_ticker, issuer, strike_price, exercise_ratio, exercise_style, settlement_style, expiry_date, listing_date), NOT a pre-aggregated summary -- aggregate client-side if you need one. Note the route is keyed by `issuer`, so filtering by underlying stock happens client-side on underlying_ticker.",
    "tier": "C",
    "twmd": [
     "warrants_reference"
@@ -928,9 +928,9 @@
    "via_get_data_only": false
   },
   "taiwan_stock_suspended": {
-   "confidence": "low",
+   "confidence": "medium",
    "dataset_enum": "TaiwanStockSuspended",
-   "note": "Suspension may be one lifecycle stage; unconfirmed.",
+   "note": "Confirmed against live rows 2026-08-12: the dataset carries suspension_date, event_type, announcement_date, delisting_date and reason_summary, so suspension IS represented. Narrower than the source though -- these are suspensions within the delisting lifecycle, not every trading halt.",
    "tier": "C",
    "twmd": [
     "stock_delisting_lifecycle"
