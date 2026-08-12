@@ -47,7 +47,11 @@ Source = "https://github.com/twmarketdata/twmd-python-sdk"
 packages = ["twmd", "twmd.compat"]
 
 [tool.setuptools.package-data]
+# Per-package: a key only covers its own package, so twmd.compat needs its own
+# entry. Without it the wheel omits _finmind_map.json and
+# `from twmd.compat import finmind` raises FileNotFoundError on import.
 twmd = ["py.typed", "_registry.json", "*.pyi"]
+"twmd.compat" = ["*.json"]
 
 [tool.mypy]
 python_version = "3.9"
