@@ -117,6 +117,48 @@ Truncation is flagged because only 9 of 82 routes support `offset`. On those 9 t
 
 ---
 
+## Command line
+
+Installing the package also installs `twmd`:
+
+```bash
+pip install twmarketdata
+
+twmd datasets --free-only            # what answers with no key
+twmd describe monthly_revenue        # grain, filters, and its as_of semantics
+twmd coverage twse_daily_price       # the window we actually cover
+twmd get monthly_revenue --ticker 2330 --as-of 2024-06-30 --format csv
+twmd auth status                     # which key is in use (never echoes it)
+```
+
+It is a thin shell over the same `Client` and registry this README documents — not a second
+implementation. A CLI that built its own requests would carry a second copy of the point-in-time
+rules, and two copies drift.
+
+Three things it does on purpose:
+
+1. **Omitting `--as-of` prints a warning to stderr.** You get the latest revision, including values
+   revised after the date you may be reasoning about. For a backtest that is a look-ahead leak, and
+   the response looks completely normal without the warning.
+2. **Gaps and truncation go to stderr; data goes to stdout.** So `twmd get … --format csv > out.csv`
+   gives you a clean CSV *and* you still see what was missing. (Python de-duplicates repeated
+   warnings by default; the CLI turns that off, because every gap is worth seeing.)
+3. **Exit codes are classified**: `3` auth, `4` entitlement, `5` unknown dataset, `6` rate limited,
+   `7` invalid parameter, `8` upstream. Returning `1` for everything forces you to grep error
+   strings, and error strings change.
+
+`twmd` does not pull in pandas — it uses the SDK's no-pandas path, so the install stays small.
+
+---
+
+## Agents: the MCP server
+
+If you are wiring an agent rather than writing Python, the same data is served over MCP at
+`https://mcp.twmarketdata.com/mcp` — 34 tools, plus reference resources that read with **no key at
+all**. See [TW-Market-Data/tw-market-data-mcp](https://github.com/TW-Market-Data/tw-market-data-mcp).
+
+---
+
 ## FinMind compatibility
 
 Existing FinMind-shaped code can run against TW Market Data with the call sites unchanged:
@@ -270,6 +312,17 @@ python tools/gen_compat_map.py   # → twmd/compat/_finmind_map.json
 ```
 
 Design notes and the full evidence trail live in [`DESIGN_v1.md`](DESIGN_v1.md), [`mapping/`](mapping/), and [`mapping/sources/`](mapping/sources/).
+
+---
+
+## Links
+
+- Website: <https://twmarketdata.com>
+- Pricing: <https://twmarketdata.com/en/pricing>
+- REST API (OpenAPI): <https://api.twmarketdata.com/openapi.json>
+- MCP server: <https://mcp.twmarketdata.com/mcp> ·
+  [docs & issues](https://github.com/TW-Market-Data/tw-market-data-mcp)
+- This repo: <https://github.com/TW-Market-Data/twmarketdata>
 
 ---
 
