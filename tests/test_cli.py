@@ -192,10 +192,16 @@ def test_the_exit_codes_are_distinct():
 
 
 def test_an_unknown_dataset_exits_not_found(capsys):
-    """走真的 registry —— 這條同時證明錯誤分類接到了既有的例外階層。"""
+    """走真的 registry —— 這條同時證明錯誤分類接到了既有的例外階層。
+
+    ⚠️ 釘的是**行為**(exit code + 指名那個資料集 + 給下一步),不是某一句措辭:
+    0.4.0 把裸的 "Unknown dataset 'x'" 換成帶猜測與下一步的訊息,而比對字面的
+    斷言會因為一個正確的改善變紅。
+    """
     code, _, err = _run(capsys, ["describe", "definitely_not_a_dataset"])
     assert code == _cli.EXIT_NOT_FOUND
-    assert "Unknown dataset" in err
+    assert "definitely_not_a_dataset" in err
+    assert "twmd datasets" in err, "沒有給下一步的錯誤訊息等於死路"
 
 
 def test_an_auth_failure_tells_the_user_what_still_works(capsys, monkeypatch):
