@@ -31,10 +31,22 @@ dependencies = ["requests>=2.31.0"]
 pandas = ["pandas>=1.5"]
 dev = ["pandas>=1.5", "pytest>=7.4", "mypy>=1.8", "types-requests", "responses>=0.24"]
 
+[project.scripts]
+# 薄殼,走既有的 Client / registry —— 見 twmd/_cli.py 的模組說明。
+# ⚠️ 刻意**不**把 pandas 拉進主依賴:CLI 走 Client.dataset() 的無-pandas 路徑
+# (回純 list of dict,而警告照樣發),所以 `pip install twmarketdata` 之後
+# `twmd` 就能用,不會為了一個命令列把安裝體積變成三倍。
+twmd = "twmd._cli:main"
+
 [project.urls]
 Homepage = "https://twmarketdata.com"
 Documentation = "https://twmarketdata.com/en/docs"
-Source = "https://github.com/twmarketdata/twmd-python-sdk"
+# 修正 2026-08-25:原本指向 github.com/twmarketdata/twmd-python-sdk,而那個
+# **organisation 和 repo 都不存在**(GitHub API 對兩者皆回 404)。PyPI 專案頁
+# 會把它顯示成可點的連結,所以要評估這個 SDK 的人第一個動作就會撞到 404 ——
+# 讀起來像是這東西沒人維護。原始碼其實一直是公開的,在下面這個位址。
+Source = "https://github.com/Anthonychiu1205/twmarketdata"
+Issues = "https://github.com/Anthonychiu1205/twmarketdata/issues"
 
 [tool.setuptools]
 packages = ["twmd", "twmd.compat"]
