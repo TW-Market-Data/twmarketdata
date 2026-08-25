@@ -124,12 +124,26 @@ Installing the package also installs `twmd`:
 ```bash
 pip install twmarketdata
 
+twmd                                 # no arguments: guided menu (or the full TUI)
+twmd 2330                            # ticker shortcut: prices + revenue + what to look at next
 twmd datasets --free-only            # what answers with no key
 twmd describe monthly_revenue        # grain, filters, and its as_of semantics
 twmd coverage twse_daily_price       # the window we actually cover
 twmd get monthly_revenue --ticker 2330 --as-of 2024-06-30 --format csv
+twmd ask "台積電最近三個月的月營收"      # plain language (needs a Pro plan)
+twmd tui                             # full-screen UI  (pip install twmarketdata[cli])
 twmd auth status                     # which key is in use (never echoes it)
 ```
+
+`twmd ask` is routed to the **existing** `ask` tool on the MCP server — the CLI does no
+question parsing of its own. A CLI that guessed which dataset you meant would carry a second
+copy of that routing, and the two would drift: same question, two answers, and nobody would
+notice. Answers come back with their sources printed to stderr; if one arrives without source
+ids, it says so, because an unsourced answer and an invented one read the same.
+
+`twmd tui` and the guided menu only ever start on a real terminal. Piped, in CI, or called by
+an agent, they would take over the terminal and wait for a keypress that never comes — so those
+paths print data (or `--help`) instead.
 
 It is a thin shell over the same `Client` and registry this README documents — not a second
 implementation. A CLI that built its own requests would carry a second copy of the point-in-time

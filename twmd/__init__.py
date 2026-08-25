@@ -53,7 +53,7 @@ from .registry import (DEFAULT_BASE_URL, REGISTRY_MEASURED_ON, DatasetInfo,
                        capabilities, datasets, free_tier_symbols, get,
                        runnable_without_key)
 
-__version__ = "0.4.0"
+__version__ = "0.5.0"
 
 __all__ = [
     "__version__",

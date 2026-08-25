@@ -220,6 +220,101 @@ def _cmd_get(args: argparse.Namespace) -> int:
     return EXIT_OK
 
 
+def _known_commands() -> frozenset[str]:
+    """已註冊的子指令名。捷徑判斷要先讓路給它們。"""
+    return frozenset({"datasets", "describe", "coverage", "get", "auth", "version",
+                      "ask", "ticker", "tui"})
+
+
+def _looks_like_ticker(token: str) -> bool:
+    """`twmd 2330` 的判斷。**只認純數字/數字+字母的台股代號形狀**。
+
+    ⚠️ 刻意窄:把任何不認得的字串都當成股號,會讓一個打錯的子指令
+    (`twmd datsets`)變成「查不到這檔股票」,而使用者要找的是他打錯了指令。
+    """
+    value = str(token or "").strip().upper()
+    if not 4 <= len(value) <= 6:
+        return False
+    # 台股代號是 4–5 碼數字,ETF/特殊股別可再帶**一個**字尾字母:
+    #   2330 · 0050 · 00631L(5 碼 + L) · 2731A
+    # ⚠️ 第一版寫成「前 4 碼數字 + 其餘皆字母」,對 00631L 就錯了(第 5 碼還是數字)。
+    # 改成「拿掉最多一個字尾字母之後,剩下必須全是 4–5 碼數字」。
+    body = value[:-1] if value[-1].isalpha() else value
+    return 4 <= len(body) <= 5 and body.isdigit()
+
+
+def _cmd_ticker(args: argparse.Namespace) -> int:
+    """`twmd 2330` —— 代號捷徑:行情 + 籌碼摘要 + 下一步。"""
+    import twmd  # noqa: PLC0415
+
+    from . import _cli_ui  # noqa: PLC0415
+
+    presentation = _cli_ui.detect(fmt=args.format)
+    ticker = str(args.ticker).strip().upper()
+    api_key = args.api_key or os.getenv(_API_KEY_ENV) or None
+    if not args.as_of:
+        _err("warning: --as-of was not given, so rows are the LATEST revision. For a backtest "
+             "that is a look-ahead leak.")
+
+    # ⚠️ **機器格式只能吐一份文件。**
+    # 第一版對每個資料集各 `_emit` 一次,於是 `--format json` 送出兩個接在一起的
+    # JSON 陣列、`--format csv` 送出兩份各自帶表頭的 CSV —— 兩種都**解析不了**,
+    # 而那正是這個 CLI 的鐵則要防的事(測試就是這樣抓到的)。
+    # 所以機器格式收集完一次輸出;人看的表格才逐段印。
+    machine = args.format in ("json", "csv")
+    collected: List[Dict[str, Any]] = []
+
+    client = twmd.Client(api_key)
+    shown = 0
+    try:
+        for dataset, label in (("twse_daily_price", "日線"), ("monthly_revenue", "月營收")):
+            try:
+                with warnings.catch_warnings(record=True) as caught:
+                    warnings.simplefilter("always")
+                    result = client.dataset(dataset, ticker=ticker, limit=args.limit,
+                                            as_of=args.as_of)
+                rows = _rows_of(result)
+            except Exception as exc:  # noqa: BLE001
+                # ⚠️ 一個資料集拿不到,不該讓整個捷徑失敗 —— 其他的照出,
+                # 並**說出**哪一個沒拿到。安靜地少一段,讀起來像那段不存在。
+                _err(f"note: {dataset} unavailable ({type(exc).__name__}); "
+                     f"the sections below are what could be read.")
+                continue
+            if not rows:
+                continue
+            shown += 1
+            if machine:
+                # 每列標明它來自哪個資料集 —— 合成一份之後,少了這一欄就分不出來。
+                collected.extend({"dataset": dataset, **row} for row in rows)
+            else:
+                _emit(rows, args.format, title=f"{ticker} · {label} · {dataset}")
+            for warning in caught:
+                _err(f"note: {warning.message}")
+    finally:
+        client.close()
+
+    if machine and collected:
+        columns = list(dict.fromkeys(k for row in collected for k in row))
+        _emit(collected, args.format, columns)
+
+    if not shown:
+        _err(f"no rows for {ticker}. Free access covers these tickers: "
+             f"{', '.join(twmd.free_tier_symbols())}")
+        return EXIT_NOT_FOUND
+    _cli_ui.hint(f"\n想看什麼?\n"
+                 f"  twmd get institutional_flow --ticker {ticker}    # 三大法人籌碼\n"
+                 f"  twmd get valuation --ticker {ticker}             # 估值\n"
+                 f"  twmd describe monthly_revenue                    # 這個資料集的時間語意\n"
+                 f"  twmd ask \"{ticker} 最近的營收趨勢\"", presentation)
+    return EXIT_OK
+
+
+def _cmd_tui(_args: argparse.Namespace) -> int:
+    from . import _cli_tui  # noqa: PLC0415
+
+    return _cli_tui.run()
+
+
 def _cmd_ask(args: argparse.Namespace) -> int:
     """`twmd ask "問句"` —— **路由到既有的 MCP `ask` 工具,不在這裡編推斷邏輯。**
 
@@ -348,6 +443,15 @@ def build_parser() -> argparse.ArgumentParser:
     fetch.add_argument("--format", choices=("table", "csv", "json"), default="table")
     fetch.add_argument("--api-key", help=f"overrides ${_API_KEY_ENV}")
 
+    ticker = _add("ticker", "Everything about one ticker (also: `twmd 2330`).", _cmd_ticker)
+    ticker.add_argument("ticker")
+    ticker.add_argument("--as-of", dest="as_of")
+    ticker.add_argument("--limit", type=int, default=5)
+    ticker.add_argument("--format", choices=("table", "csv", "json"), default="table")
+    ticker.add_argument("--api-key")
+
+    _add("tui", "Full-screen terminal UI (needs the [cli] extra; real terminals only).", _cmd_tui)
+
     ask = _add("ask", "Ask in plain language; routed to the MCP `ask` tool.", _cmd_ask)
     ask.add_argument("question", nargs="+", help='e.g. twmd ask "台積電最近三個月的月營收"')
     ask.add_argument("--as-of", dest="as_of",
@@ -393,12 +497,23 @@ def _friendly(exc: BaseException, code: int, args: Any) -> bool:
 
 def main(argv: Optional[Sequence[str]] = None) -> int:
     raw = list(argv) if argv is not None else list(sys.argv[1:])
+    # `twmd 2330` 捷徑:第一個 token 長得像台股代號就當成 `twmd ticker 2330`。
+    # ⚠️ 判斷刻意窄(見 `_looks_like_ticker`)—— 把不認得的字串都當股號,會讓
+    # 一個打錯的子指令變成「查不到這檔股票」,而使用者要找的是他打錯了指令。
+    if raw and _looks_like_ticker(raw[0]) and raw[0] not in _known_commands():
+        raw = ["ticker", *raw]
     # 零參數 = 軌 A。⚠️ 只有在**真人終端機**才進互動模式:被 pipe 的無參數呼叫
     # 進了選單就會永遠等一個不會來的輸入,那是掛住,不是介面。
     if not raw:
         from . import _cli_ui  # noqa: PLC0415
 
         if _cli_ui.detect().banner:
+            # 有 textual 就進全 TUI,沒有就退回 Phase 1 的引導選單。
+            # ⚠️ 兩條路都只在真人終端機 —— 被 pipe 時上面那個 banner 判斷已經是 False。
+            from . import _cli_tui  # noqa: PLC0415
+
+            if _cli_tui.can_start()[0]:
+                return _cli_tui.run()
             from . import _cli_interactive  # noqa: PLC0415
 
             return _cli_interactive.run()
