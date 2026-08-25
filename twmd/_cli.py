@@ -220,6 +220,69 @@ def _cmd_get(args: argparse.Namespace) -> int:
     return EXIT_OK
 
 
+def _cmd_ask(args: argparse.Namespace) -> int:
+    """`twmd ask "問句"` —— **路由到既有的 MCP `ask` 工具,不在這裡編推斷邏輯。**
+
+    ⚠️ 答案品質等於既有 `ask` 路由的品質。CLI 這一層只做三件事:把問句送過去、
+    把回來的東西排版、**把來源印出來**。在這裡自己寫一套「問句 → 資料集」的猜測,
+    會和 MCP 那邊的路由分岔 —— 同一個問題兩個答案,而且沒有人會發現。
+    """
+    from . import _cli_ui, _mcp_client  # noqa: PLC0415
+
+    presentation = _cli_ui.detect(fmt=args.format)
+    api_key = args.api_key or os.getenv(_API_KEY_ENV) or None
+    question = " ".join(args.question).strip()
+    if not question:
+        _err("ask what? e.g. twmd ask \"台積電最近三個月的月營收\"")
+        return EXIT_USAGE
+
+    arguments: Dict[str, Any] = {"question": question}
+    if args.as_of:
+        arguments["as_of"] = args.as_of
+    else:
+        _err("warning: --as-of was not given, so the answer uses the LATEST revision of every "
+             "number in it. For anything you will act on historically, pin the knowledge date.")
+
+    try:
+        answer = _mcp_client.call_tool("ask", arguments, api_key=api_key)
+    except _mcp_client.McpAccessDenied as exc:
+        from . import _cli_help  # noqa: PLC0415
+
+        message, steps = _cli_help.access_message(
+            exc.kind, dataset="ask", upgrade_url="https://twmarketdata.com/en/pricing")
+        _cli_ui.error(message, presentation)
+        if exc.kind == "entitlement":
+            # ⚠️ 說清楚這是**方案**問題,而且升級不用重連(≤60 秒生效)。
+            _cli_ui.hint("  MCP querying starts at the Pro plan. Upgrade with the same email you "
+                         "signed in with — the next call picks it up automatically, within about "
+                         "a minute. You do not need to reconnect.", presentation)
+        _cli_ui.hint(_cli_help.render_next_steps(steps), presentation)
+        return EXIT_ENTITLEMENT if exc.kind == "entitlement" else EXIT_AUTH
+    except _mcp_client.McpUnavailable as exc:
+        _err(f"error: {exc}")
+        return EXIT_UPSTREAM
+
+    rows = answer.get("rows") or answer.get("data") or []
+    if isinstance(rows, list) and rows and isinstance(rows[0], dict):
+        _emit(rows, args.format, title=question[:70])
+    elif args.format == "json":
+        print(json.dumps(answer, ensure_ascii=False, default=str, indent=2))
+    else:
+        # 沒有表格資料時就把答案本身印出來 —— 而它仍然走 stdout,因為那是使用者要的東西。
+        print(str(answer.get("answer") or answer.get("text") or
+                  json.dumps(answer, ensure_ascii=False, default=str)))
+
+    # ⚠️ **來源一定印。** 一個沒有來源的答案,和一個編出來的答案在讀者眼裡一樣。
+    sources = answer.get("sources") or answer.get("citations") or answer.get("query_ids") or []
+    if sources:
+        _err("sources:")
+        for source in (sources if isinstance(sources, list) else [sources]):
+            _err(f"  - {source if isinstance(source, str) else json.dumps(source, ensure_ascii=False)}")
+    else:
+        _err("note: this answer came back without source ids — treat it as unsourced.")
+    return EXIT_OK
+
+
 def _cmd_auth(args: argparse.Namespace) -> int:
     import twmd
 
@@ -284,6 +347,13 @@ def build_parser() -> argparse.ArgumentParser:
     fetch.add_argument("--limit", type=int)
     fetch.add_argument("--format", choices=("table", "csv", "json"), default="table")
     fetch.add_argument("--api-key", help=f"overrides ${_API_KEY_ENV}")
+
+    ask = _add("ask", "Ask in plain language; routed to the MCP `ask` tool.", _cmd_ask)
+    ask.add_argument("question", nargs="+", help='e.g. twmd ask "台積電最近三個月的月營收"')
+    ask.add_argument("--as-of", dest="as_of",
+                     help="knowledge cutoff YYYY-MM-DD; omit and you get the latest revision")
+    ask.add_argument("--format", choices=("table", "csv", "json"), default="table")
+    ask.add_argument("--api-key", help=f"overrides ${_API_KEY_ENV}")
 
     auth = _add("auth", "Show which API key is in use and what works without one.", _cmd_auth)
     auth.add_argument("--api-key")
