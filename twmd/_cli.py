@@ -80,7 +80,14 @@ def _exit_code_for(exc: BaseException) -> int:
 
 # --------------------------------------------------------------------------- 輸出
 
-def _emit(rows: Sequence[Dict[str, Any]], fmt: str, columns: Optional[List[str]] = None) -> None:
+def _emit(rows: Sequence[Dict[str, Any]], fmt: str, columns: Optional[List[str]] = None,
+          *, title: str = "", subtitle: str = "") -> None:
+    """把列印出來。
+
+    ⚠️ **機器格式的兩條分支放在最前面,而且在任何呈現判斷之前。**
+    json/csv 的位元組不該因為「今天有沒有終端機」而不同 —— 呈現層一旦能影響
+    這兩條路,某個人的 pipeline 就會在他改用 `| tee` 的那天壞掉。
+    """
     if fmt == "json":
         print(json.dumps(list(rows), ensure_ascii=False, default=str, indent=2))
         return
@@ -94,6 +101,13 @@ def _emit(rows: Sequence[Dict[str, Any]], fmt: str, columns: Optional[List[str]]
         return
     if not rows:
         _err("(no rows)")
+        return
+    # 到這裡才輪到「好看」。彩色表格印得出來就用它,印不出來(沒 TTY / 沒裝 rich /
+    # NO_COLOR)就落到下面原本那段純文字 —— 兩條路的**資料**完全一樣。
+    from . import _cli_ui  # noqa: PLC0415
+
+    if _cli_ui.print_table(list(rows), names, _cli_ui.detect(fmt=fmt),
+                           title=title, subtitle=subtitle):
         return
     widths = {n: max(len(str(n)), *(len(str(r.get(n, ""))) for r in rows)) for n in names}
     print("  ".join(str(n).ljust(widths[n]) for n in names))
@@ -183,7 +197,15 @@ def _cmd_get(args: argparse.Namespace) -> int:
                 args.dataset, ticker=args.ticker, start=args.start, end=args.end,
                 as_of=args.as_of, limit=args.limit)
         rows = _rows_of(result)
-        _emit(rows, args.format)
+        info = twmd.get(args.dataset)
+        coverage = " → ".join(x for x in (info.coverage_min, info.coverage_max) if x)
+        # 標題帶資料集名;涵蓋/as_of/verify 交給下面那一行來源註記,不重複印兩次。
+        _emit(rows, args.format, title=f"{args.dataset}  {info.name_zh or ''}".strip())
+        from . import _cli_ui  # noqa: PLC0415
+
+        _cli_ui.print_provenance(_cli_ui.detect(fmt=args.format), dataset=args.dataset,
+                                 as_of=args.as_of, coverage=coverage,
+                                 verify_url="https://api.twmarketdata.com/v2/proof/checkpoints")
         # 警告走 stderr —— 這樣 `twmd get ... --format csv > out.csv` 的資料是乾淨的,
         # 而使用者**仍然看得到**缺口。兩者都不能犧牲。
         for warning in caught:
@@ -270,9 +292,51 @@ def build_parser() -> argparse.ArgumentParser:
     return parser
 
 
+def _friendly(exc: BaseException, code: int, args: Any) -> bool:
+    """把例外翻成「發生什麼事 + 下一步」。回 True 表示已經講完了。
+
+    ⚠️ 只在**真人終端機**上加工。被 pipe 的時候 stderr 也維持素的一行 ——
+    有人把 stderr 一起收進日誌,而彩色標記在日誌裡是噪音。
+    """
+    from . import _cli_help, _cli_ui  # noqa: PLC0415
+
+    presentation = _cli_ui.detect(fmt=getattr(args, "format", None))
+    dataset = str(getattr(args, "dataset", "") or "")
+
+    if code == EXIT_NOT_FOUND and dataset:
+        import twmd  # noqa: PLC0415
+
+        message, steps = _cli_help.unknown_dataset_message(dataset, twmd.datasets())
+    elif code == EXIT_AUTH:
+        message, steps = _cli_help.access_message("auth")
+    elif code == EXIT_ENTITLEMENT:
+        message, steps = _cli_help.access_message(
+            "entitlement", dataset=dataset,
+            upgrade_url="https://twmarketdata.com/en/pricing")
+    else:
+        return False
+
+    _cli_ui.error(message, presentation)
+    _cli_ui.hint(_cli_help.render_next_steps(steps), presentation)
+    return True
+
+
 def main(argv: Optional[Sequence[str]] = None) -> int:
+    raw = list(argv) if argv is not None else list(sys.argv[1:])
+    # 零參數 = 軌 A。⚠️ 只有在**真人終端機**才進互動模式:被 pipe 的無參數呼叫
+    # 進了選單就會永遠等一個不會來的輸入,那是掛住,不是介面。
+    if not raw:
+        from . import _cli_ui  # noqa: PLC0415
+
+        if _cli_ui.detect().banner:
+            from . import _cli_interactive  # noqa: PLC0415
+
+            return _cli_interactive.run()
+        build_parser().print_help()
+        return EXIT_USAGE
+
     parser = build_parser()
-    args = parser.parse_args(list(argv) if argv is not None else None)
+    args = parser.parse_args(raw)
     try:
         return int(args.handler(args))
     except KeyboardInterrupt:
@@ -280,6 +344,8 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
         return EXIT_ERROR
     except Exception as exc:  # noqa: BLE001 — 這是最外層;分類之後回對應的 code
         code = _exit_code_for(exc)
+        if _friendly(exc, code, args):
+            return code
         _err(f"error: {exc}")
         if code == EXIT_AUTH:
             _err(f"hint: set ${_API_KEY_ENV}, or run `twmd datasets --free-only` for the "
