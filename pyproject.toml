@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "twmarketdata"
-version = "0.2.1"
+version = "0.3.0"
 description = "Official Python SDK for TW Market Data (TWMD) — Taiwan market data with point-in-time correctness and surfaced data gaps"
 readme = "README.md"
 requires-python = ">=3.9"
@@ -44,9 +44,10 @@ Documentation = "https://twmarketdata.com/en/docs"
 # 修正 2026-08-25:原本指向 github.com/twmarketdata/twmd-python-sdk,而那個
 # **organisation 和 repo 都不存在**(GitHub API 對兩者皆回 404)。PyPI 專案頁
 # 會把它顯示成可點的連結,所以要評估這個 SDK 的人第一個動作就會撞到 404 ——
-# 讀起來像是這東西沒人維護。原始碼其實一直是公開的,在下面這個位址。
-Source = "https://github.com/Anthonychiu1205/twmarketdata"
-Issues = "https://github.com/Anthonychiu1205/twmarketdata/issues"
+# 讀起來像是這東西沒人維護。正確位址是下面這個(owner 2026-08-25 轉到的公開 org)。
+Source = "https://github.com/TW-Market-Data/twmarketdata"
+Issues = "https://github.com/TW-Market-Data/twmarketdata/issues"
+Changelog = "https://github.com/TW-Market-Data/twmarketdata/blob/main/CHANGELOG.md"
 
 [tool.setuptools]
 packages = ["twmd", "twmd.compat"]
