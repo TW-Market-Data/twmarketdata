@@ -1,5 +1,45 @@
 # Changelog
 
+## 0.3.0 — 2026-08-25
+
+新增一個命令列工具。SDK 的行為完全沒變 —— 沒有破壞性變更。
+
+### Added
+
+- **`twmd` 命令列**(`pip install twmarketdata` 之後就有):
+  `datasets` / `describe` / `coverage` / `get` / `auth` / `version`。
+
+      twmd datasets --free-only
+      twmd describe monthly_revenue
+      twmd get monthly_revenue --ticker 2330 --as-of 2024-06-30 --format csv
+
+  它是既有 `Client` 與 registry 的**薄殼** —— 取數、分頁、PIT 過濾、缺口與
+  錯誤分類全部走同一份程式碼。自己組 HTTP 請求的 CLI 會複製一份 PIT 語意,
+  而兩份語意遲早會分歧;分歧那天兩邊看起來都正常。
+
+  三件刻意的行為:
+
+  1. **省略 `--as-of` 會在 stderr 講明**拿到的是最新修訂值 —— 對回測那是
+     未來函數,而回應是 200,看起來完全正常。
+  2. **缺口與截斷走 stderr,資料走 stdout。** 所以
+     `twmd get … --format csv > out.csv` 的檔案是乾淨的 CSV,而你仍然看得到
+     少了什麼。(SDK 用 `warnings` 表達這些,而 Python 預設同一個警告只印一次
+     —— CLI 關掉了那個去重。)
+  3. **exit code 分類**:3 auth、4 entitlement、5 unknown dataset、
+     6 rate limited、7 invalid parameter、8 upstream。全部回 1 等於逼你去
+     grep 錯誤訊息字串,而訊息是會改的。
+
+  ⚠️ CLI **不需要 pandas**。它走 `Client.dataset()` 的無-pandas 路徑,所以
+  安裝體積不變。
+
+### Fixed
+
+- **`project_urls` 的 Source 指向一個不存在的位址。**
+  舊值 `github.com/twmarketdata/twmd-python-sdk` 的 organisation 和 repo
+  都不存在(GitHub API 對兩者皆回 404),而 PyPI 專案頁把它顯示成可點的連結
+  —— 要評估這個 SDK 的人第一個動作就會撞到 404。現在指向
+  `github.com/TW-Market-Data/twmarketdata`。
+
 ## 0.2.1 — 2026-08-12
 
 Recording-only release: the same client, verified against a much wider slice of

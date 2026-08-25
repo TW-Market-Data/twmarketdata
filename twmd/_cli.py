@@ -1,0 +1,291 @@
+"""`twmd` —— SDK 的命令列外殼。
+
+## 這是薄殼,不是第二個 client
+
+取數、分頁、PIT 過濾、缺口、錯誤分類**全部**走既有的 `twmd.Client` 與 registry。
+⚠️ 一個自己組 HTTP 請求的 CLI 會複製一份 PIT 語意,而兩份 PIT 語意遲早會分歧 ——
+分歧的那天,CLI 的回測結果和 SDK 的不一樣,而兩邊看起來都正常。
+
+## 三件不能省的事
+
+1. **省略 `--as-of` 要在 stderr 講一句。** 終端機使用者不會讀 docstring,而
+   「拿到的是最新修訂值」正是未來函數進到回測的那條路。
+2. **缺口與截斷要印出來。** SDK 用 `warnings` 表達這些(PITDataMissingWarning、
+   TruncatedResultWarning …),而 Python 預設**同一個警告只印一次**、
+   而且它們不會出現在 stdout 的資料裡。CLI 若不接住,`--format csv` 導進檔案的人
+   永遠看不到 —— 而「安靜地少幾列」和完整資料長得一模一樣。
+3. **exit code 要分類。** 額度不足 / 權限不足 / 找不到資料集是三種不同的 shell 處置,
+   全部回 1 等於逼使用者去 grep 錯誤訊息字串。
+
+## 為什麼不需要 pandas
+
+`Client.dataset()` 在沒有 pandas 時回**純 list of dict**(`frame.to_frame` 的
+fallback),而警告照樣發 —— 所以 CLI 兩樣都拿得到,不必把 pandas 變成必裝。
+⚠️ 反過來說**不能**用 `raw=True`:那條路在 `_build_meta` 之前就 return 了,
+PIT 警告一個都不會發。
+"""
+
+from __future__ import annotations
+
+import argparse
+import json
+import os
+import sys
+import warnings
+from typing import Any, Callable, Dict, List, Optional, Sequence
+
+from . import __version__
+
+#: exit code。**分類是重點** —— 讓 shell 有得判,不用 grep 訊息字串。
+EXIT_OK = 0
+EXIT_ERROR = 1          # 沒歸類到的例外
+EXIT_USAGE = 2          # argparse 自己用這個
+EXIT_AUTH = 3           # 沒金鑰 / 金鑰無效
+EXIT_ENTITLEMENT = 4    # 方案不夠 / 點數不足
+EXIT_NOT_FOUND = 5      # 沒有這個資料集
+EXIT_RATE_LIMITED = 6   # 被限流
+EXIT_VALIDATION = 7     # 參數不合法 / 這個資料集不吃這個參數
+EXIT_UPSTREAM = 8       # 我們這端出錯或連不上
+
+_API_KEY_ENV = "TWMD_API_KEY"
+
+
+def _err(message: str) -> None:
+    print(message, file=sys.stderr)
+
+
+def _exit_code_for(exc: BaseException) -> int:
+    """把具名例外對映到 exit code。**用既有的例外階層,不自己判字串。**"""
+    from . import errors
+
+    # ⚠️ **順序是由窄到寬,而且必須是。**
+    # `TierRequiredError` 和 `InsufficientCreditsError` 都**繼承自 `TwmdAuthError`**,
+    # 所以把 auth 那條放前面會把它們一起吃掉 —— 於是「沒有金鑰」和「方案不夠 /
+    # 點數不足」回同一個 code,而那是兩種完全不同的處置:一個去設環境變數,
+    # 一個去升級方案。`DatasetNotFoundError` / `ValidationError` 對
+    # `TwmdRequestError` 也是同樣的關係。
+    mapping = (
+        ((errors.TierRequiredError, errors.InsufficientCreditsError), EXIT_ENTITLEMENT),
+        ((errors.MissingApiKeyError, errors.InvalidApiKeyError, errors.TwmdAuthError), EXIT_AUTH),
+        ((errors.DatasetNotFoundError,), EXIT_NOT_FOUND),
+        ((errors.RateLimitedError,), EXIT_RATE_LIMITED),
+        ((errors.UnsupportedParameterError, errors.ValidationError), EXIT_VALIDATION),
+        ((errors.TwmdServerError, errors.TwmdRequestError), EXIT_UPSTREAM),
+    )
+    for types, code in mapping:
+        if isinstance(exc, types):
+            return code
+    return EXIT_ERROR
+
+
+# --------------------------------------------------------------------------- 輸出
+
+def _emit(rows: Sequence[Dict[str, Any]], fmt: str, columns: Optional[List[str]] = None) -> None:
+    if fmt == "json":
+        print(json.dumps(list(rows), ensure_ascii=False, default=str, indent=2))
+        return
+    names = list(columns or (list(rows[0].keys()) if rows else []))
+    if fmt == "csv":
+        import csv  # noqa: PLC0415
+
+        writer = csv.DictWriter(sys.stdout, fieldnames=names, extrasaction="ignore")
+        writer.writeheader()
+        writer.writerows(rows)
+        return
+    if not rows:
+        _err("(no rows)")
+        return
+    widths = {n: max(len(str(n)), *(len(str(r.get(n, ""))) for r in rows)) for n in names}
+    print("  ".join(str(n).ljust(widths[n]) for n in names))
+    print("  ".join("-" * widths[n] for n in names))
+    for row in rows:
+        print("  ".join(str(row.get(n, "")).ljust(widths[n]) for n in names))
+
+
+def _rows_of(result: Any) -> List[Dict[str, Any]]:
+    """`Client.dataset()` 有 pandas 時回 DataFrame,沒有時回 list —— 兩種都接。"""
+    if hasattr(result, "to_dict") and hasattr(result, "columns"):
+        return list(result.to_dict("records"))
+    return [dict(r) for r in (result or [])]
+
+
+# --------------------------------------------------------------------------- 子指令
+
+def _cmd_datasets(args: argparse.Namespace) -> int:
+    import twmd
+
+    keys = twmd.datasets()
+    free = set(twmd.runnable_without_key())
+    rows = []
+    for key in keys:
+        info = twmd.get(key)
+        if args.category and str(info.category or "") != args.category:
+            continue
+        if args.free_only and key not in free:
+            continue
+        rows.append({"dataset": key, "name_zh": info.name_zh or "",
+                     "category": info.category or "",
+                     "tier": twmd.access_tier(key),
+                     "key_free": "yes" if key in free else "no"})
+    _emit(rows, args.format, ["dataset", "name_zh", "category", "tier", "key_free"])
+    _err(f"{len(rows)} datasets. 'key_free=yes' runs without an API key.")
+    return EXIT_OK
+
+
+def _cmd_describe(args: argparse.Namespace) -> int:
+    import twmd
+
+    caps = twmd.capabilities(args.dataset)
+    if args.format == "json":
+        print(json.dumps(caps, ensure_ascii=False, indent=2, default=str))
+        return EXIT_OK
+    for key, value in caps.items():
+        if value in (None, "", [], {}):
+            continue
+        print(f"{key:<24}{value}")
+    # ⚠️ 這一行是這個子指令存在的理由 —— 一個 agent/人在取數**之前**就該知道
+    # 這個資料集的 as_of 語意,而不是拿到 200 之後才發現它不是 PIT 安全的。
+    print(f"\n{'how to read as_of':<24}{caps.get('as_of_note') or caps.get('as_of') or '(not stated)'}")
+    return EXIT_OK
+
+
+def _cmd_coverage(args: argparse.Namespace) -> int:
+    import twmd
+
+    info = twmd.get(args.dataset)
+    rows = [{"dataset": args.dataset,
+             "coverage_start": info.coverage_min or "(unmeasured)",
+             "coverage_end": info.coverage_max or "(unmeasured)",
+             "point_in_time_safe": info.point_in_time_safe}]
+    _emit(rows, args.format, list(rows[0].keys()))
+    # 「沒有這筆資料」和「這段期間我們沒收」是兩件事,而空結果長得一樣。
+    _err("An empty query result inside this window means no rows matched; outside it, "
+         "it means we do not cover that period.")
+    return EXIT_OK
+
+
+def _cmd_get(args: argparse.Namespace) -> int:
+    import twmd
+
+    api_key = args.api_key or os.getenv(_API_KEY_ENV) or None
+    if not args.as_of:
+        # 不是所有資料集都吃 as_of,但**省略它的後果**對每個都一樣。
+        _err("warning: --as-of was not given, so rows are the LATEST revision, including values "
+             "revised after any date you may be reasoning about. For a backtest that is a "
+             "look-ahead leak. Pass --as-of YYYY-MM-DD to pin the knowledge date.")
+
+    client = twmd.Client(api_key)
+    try:
+        with warnings.catch_warnings(record=True) as caught:
+            # ⚠️ "always":Python 預設同一個警告只印一次,而每一列缺口都值得被看到。
+            warnings.simplefilter("always")
+            result = client.dataset(
+                args.dataset, ticker=args.ticker, start=args.start, end=args.end,
+                as_of=args.as_of, limit=args.limit)
+        rows = _rows_of(result)
+        _emit(rows, args.format)
+        # 警告走 stderr —— 這樣 `twmd get ... --format csv > out.csv` 的資料是乾淨的,
+        # 而使用者**仍然看得到**缺口。兩者都不能犧牲。
+        for warning in caught:
+            _err(f"note: {warning.message}")
+        meta = getattr(result, "meta", None)
+        if meta is not None and getattr(meta, "as_of_applied", None):
+            _err(f"note: as_of applied on '{meta.knowledge_time_field}' "
+                 f"({meta.as_of_mode}).")
+        _err(f"{len(rows)} rows.")
+    finally:
+        client.close()
+    return EXIT_OK
+
+
+def _cmd_auth(args: argparse.Namespace) -> int:
+    import twmd
+
+    key = args.api_key or os.getenv(_API_KEY_ENV) or ""
+    source = ("--api-key" if args.api_key else (f"${_API_KEY_ENV}" if key else "(none)"))
+    # ⚠️ 只講前綴與長度,絕不回顯金鑰 —— `auth status` 是最容易被貼進工單的輸出。
+    shown = f"{key[:8]}…({len(key)} chars)" if key else "(not set)"
+    print(f"{'api key source':<24}{source}")
+    print(f"{'api key':<24}{shown}")
+    print(f"{'base url':<24}{twmd.DEFAULT_BASE_URL}")
+    print(f"{'key-free datasets':<24}{len(twmd.runnable_without_key())}")
+    print(f"{'free-tier tickers':<24}{', '.join(twmd.free_tier_symbols())}")
+    if not key:
+        _err(f"No API key. Set ${_API_KEY_ENV} or pass --api-key. Key-free datasets and the "
+             f"free-tier tickers above still work without one.")
+    return EXIT_OK
+
+
+def _cmd_version(_args: argparse.Namespace) -> int:
+    print(__version__)
+    return EXIT_OK
+
+
+# --------------------------------------------------------------------------- parser
+
+def build_parser() -> argparse.ArgumentParser:
+    parser = argparse.ArgumentParser(
+        prog="twmd",
+        description="TWMD (TW Market Data) — Taiwan market data with point-in-time correctness.",
+        epilog=("Exit codes: 0 ok, 2 usage, 3 auth, 4 entitlement, 5 unknown dataset, "
+                "6 rate limited, 7 invalid parameter, 8 upstream, 1 other."))
+    parser.add_argument("--version", action="version", version=__version__)
+    subs = parser.add_subparsers(dest="command", required=True)
+
+    def _add(name: str, help_text: str, handler: Callable[[argparse.Namespace], int]):
+        sub = subs.add_parser(name, help=help_text, description=help_text)
+        sub.set_defaults(handler=handler)
+        return sub
+
+    listing = _add("datasets", "List available datasets.", _cmd_datasets)
+    listing.add_argument("--category", help="filter by category, e.g. chip / fundamental / price")
+    listing.add_argument("--free-only", action="store_true",
+                         help="only datasets that work without an API key")
+    listing.add_argument("--format", choices=("table", "csv", "json"), default="table")
+
+    describe = _add("describe", "Show a dataset's parameters and its as_of semantics.",
+                    _cmd_describe)
+    describe.add_argument("dataset")
+    describe.add_argument("--format", choices=("table", "json"), default="table")
+
+    coverage = _add("coverage", "Show a dataset's coverage window.", _cmd_coverage)
+    coverage.add_argument("dataset")
+    coverage.add_argument("--format", choices=("table", "csv", "json"), default="table")
+
+    fetch = _add("get", "Fetch rows from a dataset.", _cmd_get)
+    fetch.add_argument("dataset")
+    fetch.add_argument("--ticker")
+    fetch.add_argument("--start")
+    fetch.add_argument("--end")
+    fetch.add_argument("--as-of", dest="as_of",
+                       help="knowledge cutoff YYYY-MM-DD. Omit and you get the latest revision.")
+    fetch.add_argument("--limit", type=int)
+    fetch.add_argument("--format", choices=("table", "csv", "json"), default="table")
+    fetch.add_argument("--api-key", help=f"overrides ${_API_KEY_ENV}")
+
+    auth = _add("auth", "Show which API key is in use and what works without one.", _cmd_auth)
+    auth.add_argument("--api-key")
+
+    _add("version", "Print the SDK version.", _cmd_version)
+    return parser
+
+
+def main(argv: Optional[Sequence[str]] = None) -> int:
+    parser = build_parser()
+    args = parser.parse_args(list(argv) if argv is not None else None)
+    try:
+        return int(args.handler(args))
+    except KeyboardInterrupt:
+        _err("interrupted")
+        return EXIT_ERROR
+    except Exception as exc:  # noqa: BLE001 — 這是最外層;分類之後回對應的 code
+        code = _exit_code_for(exc)
+        _err(f"error: {exc}")
+        if code == EXIT_AUTH:
+            _err(f"hint: set ${_API_KEY_ENV}, or run `twmd datasets --free-only` for the "
+                 f"datasets that need no key.")
+        return code
+
+
+if __name__ == "__main__":  # pragma: no cover
+    raise SystemExit(main())
