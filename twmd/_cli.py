@@ -451,6 +451,18 @@ def _cmd_auth(args: argparse.Namespace) -> int:
     return EXIT_OK
 
 
+def _cmd_schema(args: argparse.Namespace) -> int:
+    """A3 —— 這支 CLI 的機器可讀自述。
+
+    ⚠️ schema 從**真的那個 parser** 長出來(見 `agent_schema`),所以加旗標時
+    它會自己跟上 —— 手寫一份 schema 會漂,而漂掉時兩邊都不會變紅。
+    """
+    from .agent_schema import agent_schema, render      # noqa: PLC0415
+
+    print(render(agent_schema(build_parser()), args.format))
+    return EXIT_OK
+
+
 def _cmd_version(_args: argparse.Namespace) -> int:
     print(__version__)
     return EXIT_OK
@@ -524,6 +536,10 @@ def build_parser() -> argparse.ArgumentParser:
     auth.add_argument("--api-key")
 
     _add("version", "Print the SDK version.", _cmd_version)
+    schema = _add("schema", "Describe this CLI itself, for an agent to read.", _cmd_schema)
+    schema.add_argument("--format", choices=("table", "json"), default="json",
+                        help="default is json: this command exists to be PARSED, not read")
+
     return parser
 
 
