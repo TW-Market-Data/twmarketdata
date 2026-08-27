@@ -53,7 +53,29 @@ from .registry import (DEFAULT_BASE_URL, REGISTRY_MEASURED_ON, DatasetInfo,
                        capabilities, datasets, free_tier_symbols, get,
                        runnable_without_key)
 
-__version__ = "0.5.0"
+def _installed_version() -> str:
+    """版本的**單一真相源**:已安裝套件的 metadata(也就是 pyproject 的 version)。
+
+    ⚠️ 這裡原本是一個硬編碼字串,而它**必然**會和 pyproject 漂移 —— 而且已經漂了:
+    發 v0.6.0 時 pyproject 更新了,這一行沒有,於是 `twmd --version` 對外說 0.5.0
+    而使用者裝到的是 0.6.0。
+
+    版本漂移的症狀特別惡劣:回報 bug 的人會附上 `twmd --version` 的輸出,
+    而那個數字是**錯的** —— 於是查的人去看一個他根本沒在跑的版本的程式碼。
+
+    ⚠️ 從原始碼樹直接跑(沒有 pip install)時 metadata 不存在。那時候回
+    `0.0.0+unknown` 而**不是**猜一個版本號:一個猜出來的版本號和真的長得一樣,
+    而它會被貼進工單裡。
+    """
+    from importlib import metadata  # noqa: PLC0415
+
+    try:
+        return metadata.version("twmarketdata")
+    except Exception:  # noqa: BLE001 - PackageNotFoundError 以及任何 metadata 損壞
+        return "0.0.0+unknown"
+
+
+__version__ = _installed_version()
 
 __all__ = [
     "__version__",
