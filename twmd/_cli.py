@@ -80,6 +80,41 @@ def _exit_code_for(exc: BaseException) -> int:
 
 # --------------------------------------------------------------------------- 輸出
 
+def _write_parquet(rows, meta, *, out: Optional[str], dataset: str = "",
+                   columns: Optional[List[str]] = None) -> int:
+    """把列寫成 Parquet 檔,**PIT metadata 嵌進 schema**。
+
+    ⚠️ **一定要有 --out。** Parquet 是二進位:寫進 stdout 會弄壞終端機,而且
+    管線接收端拿到的是一段沒有長度前綴的位元組流 —— 那不是「不方便」,是壞的。
+    所以缺 --out 是 usage error,不是預設寫到某個猜出來的檔名。
+    """
+    from .agent_contract import EXIT_CODES  # noqa: PLC0415
+
+    if not out:
+        _err("error: --format parquet needs --out FILE. Parquet is binary; writing it to stdout "
+             "would corrupt a terminal and give a pipe an unframed byte stream.")
+        return EXIT_CODES["usage"]
+    try:
+        from .engines import engine_available, missing_engine_hint, to_arrow  # noqa: PLC0415
+    except ImportError as exc:  # pragma: no cover - engines 是本套件的一部分
+        _err(f"error: {exc}")
+        return EXIT_CODES["error"]
+    if not engine_available("arrow"):
+        _err(f"error: {missing_engine_hint('arrow')}")
+        return EXIT_CODES["error"]
+
+    import pyarrow.parquet as pq  # noqa: PLC0415
+
+    table = to_arrow(list(rows), meta, columns=columns, dataset=dataset)
+    pq.write_table(table, out, compression="zstd")
+    # ⚠️ 這一行走 **stderr**:stdout 在機器格式下是資料的位置,而這裡的資料
+    # 已經在檔案裡了。把「寫好了」印進 stdout,會讓一個 `> file.txt` 的呼叫端
+    # 拿到一句人話而不是空的。
+    _err(f"wrote {table.num_rows} rows to {out} (parquet, zstd; point-in-time metadata is in "
+         f"the Arrow schema — read it back with pyarrow.parquet.read_table(...).schema.metadata)")
+    return EXIT_CODES["ok"]
+
+
 def _emit(rows: Sequence[Dict[str, Any]], fmt: str, columns: Optional[List[str]] = None,
           *, title: str = "", subtitle: str = "") -> None:
     """把列印出來。
@@ -91,6 +126,15 @@ def _emit(rows: Sequence[Dict[str, Any]], fmt: str, columns: Optional[List[str]]
     if fmt == "json":
         print(json.dumps(list(rows), ensure_ascii=False, default=str, indent=2))
         return
+    if fmt == "parquet":
+        # ⚠️ **不會走到這裡。** parquet 由呼叫端在拿到 meta 之後自己處理
+        # (見 _write_parquet):它需要 Meta 才能把 PIT 嵌進 schema,而 _emit
+        # 拿不到 meta。留這個分支是為了讓「忘了接」變成一個明確的錯誤,
+        # 而不是靜靜印出一張表。
+        raise RuntimeError(
+            "parquet must be written by _write_parquet(), which has the Meta needed to embed "
+            "point-in-time metadata into the Arrow schema. Reaching _emit() with fmt=parquet "
+            "means a command was wired to parquet without that step.")
     names = list(columns or (list(rows[0].keys()) if rows else []))
     if fmt == "csv":
         import csv  # noqa: PLC0415
@@ -182,6 +226,11 @@ def _cmd_get(args: argparse.Namespace) -> int:
     import twmd
 
     api_key = args.api_key or os.getenv(_API_KEY_ENV) or None
+    # ⚠️ **在取資料之前**檢查 --out。放在 fetch 之後的話,一個忘了 --out 的呼叫
+    # 會先花掉一次 API 請求(以及使用者的額度)才告訴他參數不對 ——
+    # 而那個請求的結果會被直接丟掉。
+    if args.format == "parquet" and not getattr(args, "out", None):
+        return _write_parquet([], None, out=None, dataset=args.dataset)
     if not args.as_of:
         # 不是所有資料集都吃 as_of,但**省略它的後果**對每個都一樣。
         _err("warning: --as-of was not given, so rows are the LATEST revision, including values "
@@ -199,6 +248,12 @@ def _cmd_get(args: argparse.Namespace) -> int:
         rows = _rows_of(result)
         info = twmd.get(args.dataset)
         coverage = " → ".join(x for x in (info.coverage_min, info.coverage_max) if x)
+        if args.format == "parquet":
+            # ⚠️ 在 _emit 之前分流:parquet 需要 Meta 才能把 PIT 嵌進 schema,
+            # 而 _emit 只拿得到列。走錯路的話 metadata 會靜靜不見。
+            return _write_parquet(rows, getattr(client, "last_meta", None),
+                                  out=getattr(args, "out", None), dataset=args.dataset,
+                                  columns=info.columns or None)
         # 標題帶資料集名;涵蓋/as_of/verify 交給下面那一行來源註記,不重複印兩次。
         _emit(rows, args.format, title=f"{args.dataset}  {info.name_zh or ''}".strip())
         from . import _cli_ui  # noqa: PLC0415
@@ -440,14 +495,20 @@ def build_parser() -> argparse.ArgumentParser:
     fetch.add_argument("--as-of", dest="as_of",
                        help="knowledge cutoff YYYY-MM-DD. Omit and you get the latest revision.")
     fetch.add_argument("--limit", type=int)
-    fetch.add_argument("--format", choices=("table", "csv", "json"), default="table")
+    # ⚠️ parquet 只給**真的在取資料**的指令。目錄查詢(datasets/describe/
+    # coverage)給了只會多一個沒人用卻要維護的分支。
+    fetch.add_argument("--format", choices=("table", "csv", "json", "parquet"),
+                       default="table")
+    fetch.add_argument("--out", help="parquet 的輸出檔路徑。⚠️ --format parquet 必填 ——\n                       parquet 是二進位,寫進 stdout 會弄壞終端機、也管線不了。")
     fetch.add_argument("--api-key", help=f"overrides ${_API_KEY_ENV}")
 
     ticker = _add("ticker", "Everything about one ticker (also: `twmd 2330`).", _cmd_ticker)
     ticker.add_argument("ticker")
     ticker.add_argument("--as-of", dest="as_of")
     ticker.add_argument("--limit", type=int, default=5)
-    ticker.add_argument("--format", choices=("table", "csv", "json"), default="table")
+    ticker.add_argument("--format", choices=("table", "csv", "json", "parquet"),
+                        default="table")
+    ticker.add_argument("--out", help="parquet 的輸出檔路徑(--format parquet 必填)")
     ticker.add_argument("--api-key")
 
     _add("tui", "Full-screen terminal UI (needs the [cli] extra; real terminals only).", _cmd_tui)

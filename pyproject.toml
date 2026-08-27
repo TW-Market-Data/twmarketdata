@@ -29,10 +29,16 @@ dependencies = ["requests>=2.31.0"]
 
 [project.optional-dependencies]
 pandas = ["pandas>=1.5"]
+# E1:另外兩個引擎。⚠️ 刻意是 **extras** 而不是主依賴 —— polars 和 pyarrow
+# 加起來比核心大好幾倍,而一個只想拿 CSV 的人不該為了別人的 DataFrame 付那個體積。
+polars = ["polars>=1.0"]
+arrow = ["pyarrow>=14.0"]
+# E2 的 `--format parquet` 只需要 pyarrow(它自己就寫得了 Parquet)。
+parquet = ["pyarrow>=14.0"]
 # UI 套件是**可選**的。核心 `import twmd` 只靠 requests —— 一個只想取數的人
 # 不該為了別人的彩色表格被迫裝 rich/questionary。沒裝時 CLI 退回純文字,不是壞掉。
 cli = ["rich>=13.0", "questionary>=2.0", "textual>=0.60"]
-dev = ["pandas>=1.5", "rich>=13.0", "questionary>=2.0", "textual>=0.60", "pytest>=7.4", "mypy>=1.8", "types-requests", "responses>=0.24"]
+dev = ["pandas>=1.5", "polars>=1.0", "pyarrow>=14.0", "rich>=13.0", "questionary>=2.0", "textual>=0.60", "pytest>=7.4", "mypy>=1.8", "types-requests", "responses>=0.24"]
 
 [project.scripts]
 # 薄殼,走既有的 Client / registry —— 見 twmd/_cli.py 的模組說明。
