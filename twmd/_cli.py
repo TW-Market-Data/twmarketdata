@@ -495,6 +495,15 @@ def _friendly(exc: BaseException, code: int, args: Any) -> bool:
     return True
 
 
+def _emit_machine_error(fmt, code: int, exc: BaseException) -> None:
+    """機器格式下把錯誤信封印到 **stdout**。人類格式什麼都不做。"""
+    from .agent_contract import render_error  # noqa: PLC0415
+
+    payload = render_error(fmt, exit_code=code, message=str(exc))
+    if payload is not None:
+        print(payload)
+
+
 def main(argv: Optional[Sequence[str]] = None) -> int:
     raw = list(argv) if argv is not None else list(sys.argv[1:])
     # `twmd 2330` 捷徑:第一個 token 長得像台股代號就當成 `twmd ticker 2330`。
@@ -529,6 +538,17 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
         return EXIT_ERROR
     except Exception as exc:  # noqa: BLE001 — 這是最外層;分類之後回對應的 code
         code = _exit_code_for(exc)
+        # ⚠️ **機器格式下,失敗也要在 stdout 給一份可解析的東西。**
+        #
+        # 0.5.0 實測:`twmd get no-such-dataset --format json` 的 stdout 是**空的**,
+        # 於是 agent 的 `json.loads(stdout)` 直接炸,唯一的機器訊號只有 exit code,
+        # 而「為什麼失敗」只有人看得懂的散文、還在 stderr。
+        #
+        # 一個只在順利時可解析的介面,不是一個介面。
+        #
+        # 印在 stdout 而不是 stderr:對 agent 而言,錯誤**就是**這次呼叫的結果。
+        # 人類格式一個字都不變(render_error 對非機器格式回 None)。
+        _emit_machine_error(getattr(args, "format", None), code, exc)
         if _friendly(exc, code, args):
             return code
         _err(f"error: {exc}")
