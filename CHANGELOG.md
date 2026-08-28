@@ -1,5 +1,88 @@
 # Changelog
 
+## 0.6.2 — 未發布
+
+### Added
+
+- **`twmd schema`** —— 這支 CLI 的機器可讀自述(預設 `--format json`)。
+
+  `datasets` 說有哪些資料集,`describe` 說**一個資料集**的參數與 as_of 語意,
+  而**沒有任何一支說這個工具本身**有哪些指令、吃什麼參數、回哪些 exit code。
+  agent 目前只能去 parse `--help` 的人類文字,而排版一改猜法就壞 ——
+  壞的方式還是安靜的:參數解析出空值,不會報錯。
+
+  ⚠️ **沒有手寫第二份 schema。** 它走 `build_parser()` 的 argparse 結構把參數
+  **讀出來**。手寫的那份會漂,而漂掉時 CLI 和 schema **兩邊都不會變紅** ——
+  照著一份過期說明組出來的指令,錯得無聲無息。測試臨時往 parser 塞一個旗標,
+  要求 schema 看得到它。
+
+  ⚠️ **沒有 `point_in_time_safe` 布林。** PIT 對不對取決於這次呼叫有沒有給
+  `--as-of`,以及那個資料集的知識時間欄位 —— 那是 per-dataset 的事實,
+  `describe` 已經在回。一個工具層的布林只會**蓋掉**它。給的是機制加上省略的後果。
+
+  ⚠️ **`read_only` 是算出來的**,不是宣告的。一個寫死的 `true` 在有人加了寫入
+  指令的那天不會改變 —— 而那正是它唯一該改變的那天。
+
+  預設 `json` 而不是人類表格:這支指令的讀者是程式。不需要 API key ——
+  自述是**接上去之前**要讀的東西。
+
+---
+
+> ⚠️ 以下 **0.6.0 / 0.6.1 兩則是事後補記的**。它們發版時沒有寫 changelog,
+> 也沒有打 tag,所以內容是 2026-08-28 從 **PyPI 上已發布的 sdist** 逐檔比對
+> 重建的 —— 不是憑記憶寫的。逐檔差異列在每一則的開頭。
+
+## 0.6.1 — 2026-08-27
+
+> 重建依據:相對 0.6.0 新增 `twmd/agent_contract.py`、`twmd/engines.py`;
+> 內容改動 `twmd/__init__.py`、`twmd/_cli.py`。
+
+### Added
+
+- **`twmd/agent_contract.py`** —— agent 輸出契約。exit code 逐一凍結成數值、
+  機器格式下的錯誤信封、以及 CSV **刻意不給**信封的理由。
+
+  ⚠️ 重新編號 exit code **不會讓任何測試變紅**,也不會讓任何人的腳本報錯 ——
+  它只會讓別人腳本裡的 `if rc == 4:` 開始指向別的意思。所以是逐一釘住數值。
+
+  ⚠️ CSV 失敗時 stdout 刻意留空:一列 CSV 錯誤和一列資料長得一模一樣,
+  消費端的 `csv.reader` 沒有辦法分辨 —— 那比空的 stdout 危險得多。
+
+- **`twmd/engines.py`** —— `to_polars()` / `to_arrow()`,以及 `--format parquet`。
+
+  ⚠️ `to_polars()` 回**兩個值** `(frame, pit)`:Polars 沒有 `attrs` 這種使用者層
+  掛載點,硬塞 PIT 會變成一個**假欄位**,而假欄位會被聚合、被 join、被寫進輸出。
+
+  ⚠️ `to_arrow()` 把 PIT 嵌進 **Arrow schema**,所以它跟著檔案離開這個行程。
+  實測(pandas 2.3.3)`.attrs` 撐得過 parquet 往返與 groupby/concat,**但 merge
+  會掉** —— 而合併資料集正是回測管線最常做的事,掉了之後那份 DataFrame 和一份
+  沒有 as_of 的看起來一模一樣。
+
+  ⚠️ `--format parquet` **`--out` 必填,而且在取資料之前就檢查**:parquet 是
+  二進位,寫進 stdout 會弄壞終端機;而檢查放在 fetch 之後的話,一個忘了 `--out`
+  的呼叫會先花掉一次 API 請求(以及使用者的額度)才說參數不對。
+
+### Fixed
+
+- **`twmd --version` 改讀已安裝套件的 metadata**(`twmd/__init__.py`)。
+
+  硬編碼的版本常數**必然**會漂:發 0.6.0 時 pyproject 更新了、那一行沒有,
+  於是 `--version` 對外說 0.5.0 而使用者裝到的是 0.6.0。
+
+## 0.6.0 — 2026-08-27
+
+> 重建依據:相對 0.5.0 新增 `twmd/_ask_guard.py`,無既有模組內容改動。
+
+### Added
+
+- **`twmd/_ask_guard.py`** —— `ask` 路徑的唯讀護欄與 PIT 釘選。
+
+  唯讀工具白名單、禁止的執行類名稱(`eval` / `exec` / `compile` / `__import__`),
+  以及 `pin_as_of()`:省略 `--as-of` 時**注入並回報**,而不是安靜地拿最新修訂值。
+
+  ⚠️ 知識軸判定委派給 `pit.resolve_mode`,不在這裡另寫一套 —— 兩套判定會在
+  某天對同一個資料集給不同答案。
+
 ## 0.5.0 — 2026-08-26
 
 CLI Phase 2。**SDK 的行為仍然沒有任何改變**,新增的全在命令列這一層。
