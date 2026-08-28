@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "twmarketdata"
-version = "0.6.1"
+version = "0.6.2"
 description = "Official Python SDK for TW Market Data (TWMD) — Taiwan market data with point-in-time correctness and surfaced data gaps"
 readme = "README.md"
 requires-python = ">=3.9"
