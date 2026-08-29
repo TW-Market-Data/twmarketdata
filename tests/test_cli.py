@@ -222,12 +222,24 @@ def test_an_auth_failure_tells_the_user_what_still_works(capsys, monkeypatch):
 # --------------------------------------------------------------------------- 安全
 
 def test_auth_status_never_echoes_the_key(capsys, monkeypatch):
-    """⚠️ `auth status` 是最容易被貼進工單 / issue 的輸出。"""
-    monkeypatch.setenv("TWMD_API_KEY", "sk_live_averysecretvalue123456")
+    """⚠️ `auth status` 是最容易被貼進工單 / issue 的輸出。
+
+    ⚠️ 夾具**必須**用 `sk_test_notreal` 這個被認可的前綴。原本這裡寫的是
+    `sk_live_…`,而 `tools/audit_public_repo.py` 對 `sk_live_` **刻意沒有豁免** ——
+    於是這一行讓發布前稽核長期是 FAIL,而那份稽核是「不乾淨就不發布」的閘。
+
+    ⚠️ 修夾具而不是放寬那條規則:`sk_live_` 保持成一條**無法豁免**的絆線,
+    是這裡比較強的那個安全姿態。而測試的強度沒有變 —— 遮罩是
+    `key[:8]`(見 `_cli.py:442`),不分 live/test,兩種前綴都剛好 8 個字元。
+    """
+    monkeypatch.setenv("TWMD_API_KEY", "sk_test_notrealaverysecretvalue123456")
     code, out, _ = _run(capsys, ["auth"])
     assert code == _cli.EXIT_OK
     assert "averysecretvalue" not in out
-    assert "sk_live_" in out and "chars" in out
+    # ⚠️ 前 8 個字元**會**被顯示(那是給人辨認用哪把金鑰的線索),
+    # 秘密的部分不會。這兩條斷言要一起看:少了下面那條,一個什麼都不印的
+    # 實作也會通過,而那不是遮罩,是壞掉。
+    assert "sk_test_" in out and "chars" in out
 
 
 def test_a_subclass_never_falls_into_its_parents_bucket():

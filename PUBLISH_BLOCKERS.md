@@ -1,90 +1,98 @@
 # 發布前阻斷清單
 
-**狀態:阻斷 1 已裁決(B 案),阻斷 2 仍在 —— 尚不可發布。**
+**狀態(2026-08-29 實測):阻斷 1、2 皆已解除。`0.6.2` 已在 PyPI 上。**
 
 發布步驟見 `RELEASE_CHECKLIST.md`(owner 執行)。
 
+> ⚠️ **這份文件在 2026-08-12 到 08-29 之間是錯的。** 它一直寫著「尚不可發布」,
+> 而同一段期間 repo 發出了 **8 個版本**(0.2.0 → 0.6.2)。一份說「不能發」而
+> 實際上一直在發的阻斷清單,比沒有清單更糟 —— 讀的人會以為還有東西擋著,
+> 而真正該擋的東西(見下面「現行阻斷」)沒有人在看。
+>
+> 所以這一版的每一個數字都是**當天重跑出來的**,不是抄上一版的。
+
 ---
 
-## 阻斷 1 —— ✅ 已裁決:走 B 案(2026-08-12)
-
-**裁決結果**:續發 `twmarketdata` 0.2.0,import 名維持 `twmd`,0.1.0 的公開面全部保留為 deprecated alias(已實作於 `twmd/_legacy.py`,並有從已發布 wheel introspect 出來的測試逐項把關)。0.1.0 維持 MIT,0.2.0 起 Apache-2.0(owner 已確認 relicense)。
-
-以下保留當時的分析與被否決的 A / C 案,供日後查證。
-
-### 原始問題:`twmarketdata` 0.1.0 已經在 PyPI 上,而且 import 名就是 `twmd`
-
-實測(2026-08-12):
+## 權威狀態:PyPI(2026-08-29 實測)
 
 ```
 GET https://pypi.org/pypi/twmarketdata/json
-  name        twmarketdata
-  version     0.1.0
-  license     MIT
-  uploaded    2026-07-21T11:31:00Z
-  author      TW Market Data
-  homepage    https://twmarketdata.com
-
-GET https://pypi.org/pypi/twmd/json  →  HTTP 404   (twmd 這個名字沒被佔)
+  latest    0.6.2
+  license   Apache-2.0
+  releases  0.1.0, 0.2.0, 0.2.1, 0.3.0, 0.4.0, 0.5.0, 0.6.0, 0.6.1, 0.6.2
 ```
 
-原始碼在 `/Volumes/DEV_USB/Projects/twmd-python-client`(branch `main`,3 commits),本機 site-packages 也裝著它。**這是我們自己的套件**,不是別人佔名。
+⚠️ **`CHANGELOG.md` 的 `## 0.6.2 — 未發布` 和 PyPI 對不起來。** PyPI 是權威。
+兩者之一要改 —— 這是 owner 的決定(補上發布日期,或確認那是一個誤標)。
 
-### 它跟本 repo 撞在哪
+---
 
-| | 已發布 0.1.0 | 本 repo 0.2.0 |
-|---|---|---|
-| dist 名 | `twmarketdata` | `twmarketdata` ← **同名** |
-| import 名 | `twmd` | `twmd` ← **同名** |
-| 授權 | **MIT** | **Apache-2.0** ← 變更 |
-| HTTP 套件 | **httpx** | **requests** ← 變更 |
-| 公開 API | `Client.get_dataset / get_all / iter_pages / list_datasets / is_key_free`、`access` 模組(`OPEN_DATASETS` 2 支、`SAMPLE_TICKERS`、`access_tier`、`explain`、`provenance`)、`frames.to_dataframe`、10 個 `Twmd*Error` | `Client.dataset` + 82 支具名方法、`registry`/`capabilities`、`TwmdFrame`/`Meta`、`compat.finmind`、另一組錯誤階層 |
+## 阻斷 1 —— ✅ 已解除(裁決 2026-08-12,B 案)
 
-以現況直接發 0.2.0 會造成三件事:
+續發 `twmarketdata` 0.2.0,import 名維持 `twmd`,0.1.0 的公開面全部保留為
+deprecated alias(`twmd/_legacy.py`,有從已發布 wheel introspect 出來的測試逐項把關)。
+0.1.0 維持 MIT,0.2.0 起 Apache-2.0。
 
-1. **既有使用者的程式碼會壞。** `from twmd import access`、`to_dataframe`、`TwmdAPIError`、`iter_pages`、`get_all`、`list_datasets` 在 0.2.0 都不存在。
-2. **授權從 MIT 變 Apache-2.0。** owner 持有著作權,向前變更是可以的(0.1.0 永遠維持 MIT),但這是使用者看得見的變動,要有意識地做。
-3. **相依從 httpx 換成 requests**,`transport=` 參數的型別契約(`httpx.BaseTransport`)也跟著失效。
+**已執行完畢**:PyPI 上 0.6.2 的授權欄位就是 `Apache-2.0`,`pyproject.toml` 的
+publish banner 已於 `53966fc` 移除。
 
-### 三個選項
+<details>
+<summary>當時的分析與被否決的 A / C 案(保留供查證)</summary>
+
+原始問題:`twmarketdata` 0.1.0(2026-07-21 上傳,MIT)已經在 PyPI 上,import 名
+就是 `twmd`;而 `twmd` 這個 dist 名沒被佔(404)。原始碼在
+`/Volumes/DEV_USB/Projects/twmd-python-client`。**是我們自己的套件**,不是別人佔名。
 
 | | 作法 | 代價 |
 |---|---|---|
-| **A** | 發成 **`twmd`**(PyPI 可用),`twmarketdata` 0.1.0 原封不動 | 兩個 dist 都提供 `twmd` 模組,同時安裝會互相覆蓋 —— **不建議** |
-| **B**(建議) | 續發 `twmarketdata` **0.2.0**,保留 0.1.0 全部公開 API 當 deprecated alias(`get_dataset`/`get_all`/`iter_pages`/`list_datasets`/`access`/`to_dataframe` + 錯誤名),CHANGELOG 寫明破壞性變更 | 要補一層相容 shim(約半天),但沒人被弄壞 |
-| **C** | 把本 repo 的成果**併回 `twmd-python-client`** 當 0.2.0,維持 MIT,商標免責照樣放 NOTICE(NOTICE 不是 Apache 專屬) | 少一次授權變更;但 repo 要合併,且放棄 Apache 的專利授權條款 |
+| **A** | 發成 `twmd` | 兩個 dist 都提供 `twmd` 模組,同時安裝互相覆蓋 —— 否決 |
+| **B** ✅ | 續發 `twmarketdata` 0.2.0 + deprecated alias | 補一層相容 shim,但沒人被弄壞 |
+| **C** | 併回 `twmd-python-client` 當 0.2.0,維持 MIT | 少一次授權變更;但放棄 Apache 的專利授權條款 |
 
-**我的建議:B**。理由:`twmarketdata` 已有 PyPI 頁面、下載數與 README badge(GEO 資產已經在累積),換名等於重來;而 0.1.0 的公開面很小(6 個方法 + 一個 access 模組),做成 alias 成本低。授權則照 director 裁決走 Apache-2.0 —— 但這是**不可逆的公開動作**,需要 owner 明確再點一次頭,不能由我代決。
-
-**已採 B 案。** `pyproject.toml` 頂端的 banner 仍在,要等阻斷 2 清空、`RELEASE_CHECKLIST.md` 第 1 節全綠後才由 owner 移除。
+</details>
 
 ---
 
-## 阻斷 2(仍在,等受限測試 key):key-gated 項目
+## 阻斷 2 —— ✅ 已解除(受限測試 key 已取得並用畢)
 
-**harness 已備妥,key 一到就是一條命令**:
+當時卡在「拿不到受限測試 key」的五項,**現況實測**:
 
-```bash
-export TWMD_API_KEY=<受限 key>          # 在 owner 自己的 shell
-python tools/record_cassettes.py                       # 錄 cassette,自動 redact + 稽核
-python tools/verify_low_confidence.py --all            # 驗未驗證映射,產出證據報告
-python examples/03_backtest_ready_fundamentals.py      # 跑完拿掉 pending 標記
-python examples/04_chips_and_derivatives.py
-```
+| 項目 | 當時 | 現況 |
+|---|---|---|
+| 付費層 cassette 錄製 | 卡住 | ✅ `tests/cassettes/` 有 **63 個** cassette |
+| 9 列 low 信心映射逐列驗證 | 卡住 | ✅ 於 `b4ea9ec` / `6b9258b` 完成(entitlement 修正後重錄) |
+| `client_unsafe` → `client` 升級評估 | 卡住 | ✅ 同上批次 |
+| pro / max 範例 | 卡住 | ✅ 已隨版本發布 |
+| `ResponseMeta` 四個 `X-TWMD-*` header 是否只在帶 key 時出現 | 卡住 | ✅ 已錄進 cassette |
 
-| 項目 | 卡在 |
-|---|---|
-| 付費層 cassette 錄製 | 受限測試 key |
-| 9 列 low 信心映射逐列驗證 | 受限測試 key |
-| `client_unsafe` → `client` 升級評估(`company_news`、`dividends`、`stock_delisting_lifecycle`) | 受限測試 key |
-| pro / max 範例 | 受限測試 key |
-| `ResponseMeta` 那四個 `X-TWMD-*` header 是否只在帶 key 時出現 | 受限測試 key |
-
-紀律(已定):owner 在 enterprise console 自產受限 key → 錄 cassette → 用完刪 key。cassette 進 repo 前 redact `X-API-Key` / `Authorization`,`tools/audit_public_repo.py` 在 CI 第一關擋住未遮罩者。enterprise key 不進 repo、不進 chat。
+紀律(仍然有效,下次要 key 時照走):owner 在 enterprise console 自產受限 key →
+錄 cassette → **用完刪 key**。cassette 進 repo 前 redact `X-API-Key` / `Authorization`,
+`tools/audit_public_repo.py` 在 CI 第一關擋住未遮罩者。
+⚠️ **enterprise key 不進 repo、不進 chat。**
 
 ---
 
-## 已通過的發布前檢查
+## 現行阻斷
+
+### 🔴 無 —— 目前沒有東西擋住發布
+
+### 🟡 待 owner 裁的兩件
+
+1. **`CHANGELOG.md` 的 `0.6.2 — 未發布` 與 PyPI 不一致**(見上)。
+
+2. **`tools/check_registry_drift.py` 現在跑不了** —— 實測回
+   `could not reach the API (HTTP Error 403: Forbidden); skipping drift check`。
+
+   ⚠️ 這一條值得注意的不是它失敗,是它**失敗得太安靜**:它印一行訊息然後
+   `skipping`,而不是非零退出。一個「registry 有沒有漂移」的檢查,在 API 擋住
+   我們的時候回報「跳過」—— 在 CI 上和「檢查過了,沒漂移」長得幾乎一樣。
+
+   403 最可能是免 key 的公開端點加了 Cloudflare 或 key 要求。要嘛給它一把免費
+   key,要嘛讓它在跑不到時**非零退出**。這是 owner 的選擇,我不代決。
+
+---
+
+## 發布前檢查 —— 2026-08-29 實測
 
 ```
 $ python tools/audit_public_repo.py
@@ -93,9 +101,32 @@ ok   retired base URL
 ok   package contents
 Audit clean: no credentials, no retired base URL, package ships only the client.
 
-$ python tools/check_registry_drift.py
-registry matches the live API (82 datasets checked)
-
-$ pytest -m "not network"     96 passed
-$ pytest -m network            9 passed   (真端點、免 key)
+$ pytest -q -m "not network"     401 passed,  27 deselected
+$ pytest -q -m network            11 passed,  16 skipped
 ```
+
+⚠️ 上一版寫的是 `96 passed` / `9 passed` —— 相差四倍以上。抄上一版的數字,會讓
+一份「剛驗過」的報告描述十七天前的 repo。
+
+⚠️ **那 16 個 skip 不是缺 key**,是 `TWMD_LIVE_ALL=1` 這個 opt-in 全掃開關沒開
+(`tests/test_live_free_tier.py:124`)。要全掃就設那個環境變數 —— 這是一個
+選擇,不是一個阻斷。
+
+### ⚠️ 稽核在這次更新前是 **FAIL**,而 0.6.2 已經發出去了
+
+```
+FAIL secrets (1):
+    tests/test_cli.py:226: possible live API key
+Audit failed. Nothing should be published until this is clean.
+```
+
+實際上是**誤報**:那是 `test_auth_status_never_echoes_the_key` 的合成夾具
+(`sk_live_averysecret…`),不是真金鑰。但它讓「不乾淨就不發布」這道閘長期紅著,
+而版本照發 —— 也就是說**那道閘實際上沒有在擋任何東西**。
+
+修法是換夾具,不是放寬規則:`tools/audit_public_repo.py` 對 `sk_test_notreal`
+有明確豁免、對 `sk_live_` **刻意沒有**。夾具改用被認可的前綴後稽核轉綠,
+而測試強度沒有變 —— 遮罩是 `key[:8]`(`twmd/_cli.py:442`),不分 live/test,
+兩種前綴都剛好 8 個字元。
+
+⚠️ 讓 `sk_live_` 保持成一條**無法豁免**的絆線,是這裡比較強的安全姿態。
